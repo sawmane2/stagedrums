@@ -1,0 +1,5 @@
+{
+  "repo": "sawmane2/stagedrums",
+  "branch": "main",
+  "_help": "Set repo to your GitHub 'owner/name' (e.g. dalton/stagedrums). The app's Update button then pulls new versions from that repository's branch. This file is kept during updates."
+}

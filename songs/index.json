@@ -1,0 +1,673 @@
+[
+  {
+    "id": "cream-outside-woman-blues",
+    "title": "Outside Woman Blues",
+    "artist": "Cream (Disraeli Gears, 1967)",
+    "bpm": 113,
+    "time": "4/4",
+    "groove": "baker-blues",
+    "sections": [
+      {
+        "name": "Intro (riff)",
+        "groove": "baker-toms",
+        "crash": false,
+        "fill": true,
+        "bars": [
+          "E7",
+          "E7",
+          "E7",
+          "E7"
+        ],
+        "lyrics": "Main E riff x2. Drums: toms + kick pushing the riff, fill into verse."
+      },
+      {
+        "name": "Verse 1",
+        "groove": "baker-blues",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "B7",
+          "B7",
+          "E7",
+          "E7"
+        ],
+        "lyrics": "12-bar form: riff on E7 for 8, B7 turnaround for 2, back to E7 riff for 2."
+      },
+      {
+        "name": "Verse 2",
+        "groove": "baker-blues",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "B7",
+          "B7",
+          "E7",
+          "E7"
+        ]
+      },
+      {
+        "name": "Guitar Solo",
+        "groove": "baker-ride",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "B7",
+          "B7",
+          "E7",
+          "E7"
+        ],
+        "lyrics": "Ride cymbal, open up. Same 12-bar form under the solo."
+      },
+      {
+        "name": "Verse 3",
+        "groove": "baker-blues",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "B7",
+          "B7",
+          "E7",
+          "E7"
+        ]
+      },
+      {
+        "name": "Verse 4 (reprise)",
+        "groove": "baker-blues",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "B7",
+          "B7",
+          "E7",
+          "E7"
+        ]
+      },
+      {
+        "name": "Outro (riff)",
+        "groove": "baker-toms",
+        "crash": true,
+        "fill": false,
+        "bars": [
+          "E7",
+          "E7",
+          "E7",
+          "E7 . . B7"
+        ],
+        "lyrics": "Riff out; end on the last hit together."
+      }
+    ]
+  },
+  {
+    "id": "mountain-mississippi-queen",
+    "title": "Mississippi Queen",
+    "artist": "Mountain (Climbing!, 1970)",
+    "bpm": 140,
+    "time": "4/4",
+    "groove": "laing-heavy",
+    "sections": [
+      {
+        "name": "Cowbell count-off",
+        "groove": "cowbell-count",
+        "crash": false,
+        "fill": false,
+        "bars": [
+          "N.C.",
+          "N.C."
+        ],
+        "lyrics": "Corky Laing's cowbell 8ths, 2 bars. Band enters on the riff."
+      },
+      {
+        "name": "Riff intro",
+        "groove": "laing-cowbell",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E5",
+          "E5",
+          "E5",
+          "E5"
+        ],
+        "lyrics": "Main riff in E (E5 \u2013 D5 \u2013 A5 with the bend). Cowbell keeps going."
+      },
+      {
+        "name": "Hook 1 (riff)",
+        "groove": "laing-cowbell",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5"
+        ],
+        "lyrics": "Vocal hook over the riff, 8 bars."
+      },
+      {
+        "name": "Verse 1",
+        "groove": "laing-heavy",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "A",
+          "D",
+          "A",
+          "E",
+          "A",
+          "D",
+          "A",
+          "E"
+        ],
+        "lyrics": "Chords open up: A \u2013 D \u2013 A \u2013 E, twice."
+      },
+      {
+        "name": "Hook 2 (riff)",
+        "groove": "laing-cowbell",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5"
+        ]
+      },
+      {
+        "name": "Guitar solo",
+        "groove": "laing-ride",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5"
+        ],
+        "lyrics": "Solo over the riff, 16 bars. Ride cymbal, cowbell accents on 1 and 3."
+      },
+      {
+        "name": "Verse 2",
+        "groove": "laing-heavy",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "A",
+          "D",
+          "A",
+          "E",
+          "A",
+          "D",
+          "A",
+          "E"
+        ]
+      },
+      {
+        "name": "Hook 3 (riff)",
+        "groove": "laing-cowbell",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5"
+        ]
+      },
+      {
+        "name": "Outro (riff, jam out)",
+        "groove": "laing-heavy",
+        "crash": true,
+        "fill": true,
+        "repeat": 2,
+        "bars": [
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5",
+          "E5"
+        ],
+        "lyrics": "Riff out. Loop this section to stretch the ending; last bar ends on E."
+      },
+      {
+        "name": "Ending",
+        "groove": "laing-heavy",
+        "crash": true,
+        "fill": false,
+        "bars": [
+          "E5",
+          "E5 . . N.C."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mountain-sittin-on-a-rainbow",
+    "title": "Sittin' on a Rainbow",
+    "artist": "Mountain (Climbing!, 1970)",
+    "bpm": 146,
+    "time": "4/4",
+    "groove": "laing-heavy",
+    "sections": [
+      {
+        "name": "Intro (main riff)",
+        "groove": "laing-heavy",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "A5",
+          "A5",
+          "A5",
+          "A5"
+        ],
+        "lyrics": "Main riff on A, 4 bars. Tempo is an estimate (record is 2:23) - nudge with +/- until it sits."
+      },
+      {
+        "name": "Verse 1",
+        "groove": "laing-heavy",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5"
+        ],
+        "lyrics": "Vocal over the A riff, 16 bars (two 8-bar halves)."
+      },
+      {
+        "name": "Chorus 1",
+        "groove": "rock-heavy",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "G",
+          "D",
+          "G",
+          "D",
+          "G",
+          "D",
+          "A",
+          "A"
+        ],
+        "lyrics": "G - D, G - D over the riff feel, then G - D - A back to the riff."
+      },
+      {
+        "name": "Guitar solo",
+        "groove": "laing-ride",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5"
+        ],
+        "lyrics": "Riff x2 (8 bars) on the ride."
+      },
+      {
+        "name": "Verse 2",
+        "groove": "laing-heavy",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5"
+        ]
+      },
+      {
+        "name": "Chorus 2",
+        "groove": "rock-heavy",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "G",
+          "D",
+          "G",
+          "D",
+          "G",
+          "D",
+          "A",
+          "A"
+        ]
+      },
+      {
+        "name": "Outro solo (riff, fades)",
+        "groove": "laing-ride",
+        "crash": true,
+        "fill": true,
+        "repeat": 2,
+        "bars": [
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5",
+          "A5"
+        ],
+        "lyrics": "Riff x4 to fade on the record. Loop this section live and end on a cue."
+      },
+      {
+        "name": "Ending",
+        "groove": "laing-heavy",
+        "crash": true,
+        "fill": false,
+        "bars": [
+          "A5",
+          "A5 . . N.C."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "demo-jam-g",
+    "title": "Jam in G (loop me)",
+    "artist": "Demo",
+    "bpm": 104,
+    "time": "4/4",
+    "groove": "rock",
+    "sections": [
+      {
+        "name": "Groove A",
+        "groove": "rock",
+        "repeat": 2,
+        "fill": true,
+        "bars": [
+          "G",
+          "G",
+          "C",
+          "D"
+        ]
+      },
+      {
+        "name": "Groove B",
+        "groove": "rock-16",
+        "repeat": 2,
+        "fill": true,
+        "crash": true,
+        "bars": [
+          "Em",
+          "C",
+          "G",
+          "D"
+        ]
+      },
+      {
+        "name": "Breakdown",
+        "groove": "half-time",
+        "repeat": 1,
+        "fill": true,
+        "bars": [
+          "Am",
+          "Am",
+          "C",
+          "D . . D/F#"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "demo-blues-a",
+    "title": "12-Bar Blues in A",
+    "artist": "Demo",
+    "bpm": 120,
+    "time": "4/4",
+    "groove": "shuffle",
+    "sections": [
+      {
+        "name": "Intro",
+        "groove": "hats-only",
+        "fill": true,
+        "crash": false,
+        "bars": [
+          "E7",
+          "E7"
+        ]
+      },
+      {
+        "name": "Blues",
+        "groove": "shuffle",
+        "repeat": 2,
+        "fill": true,
+        "bars": [
+          "A7",
+          "D7",
+          "A7",
+          "A7",
+          "D7",
+          "D7",
+          "A7",
+          "A7",
+          "E7",
+          "D7",
+          "A7",
+          "E7"
+        ]
+      },
+      {
+        "name": "Solo",
+        "groove": "shuffle",
+        "repeat": 2,
+        "fill": true,
+        "crash": true,
+        "bars": [
+          "A7",
+          "D7",
+          "A7",
+          "A7",
+          "D7",
+          "D7",
+          "A7",
+          "A7",
+          "E7",
+          "D7",
+          "A7",
+          "E7"
+        ]
+      },
+      {
+        "name": "Outro",
+        "groove": "shuffle",
+        "fill": false,
+        "bars": [
+          "A7",
+          "D7",
+          "A7 . . E7",
+          "A7"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "demo-ballad",
+    "title": "Ballad Sketch (6/8)",
+    "artist": "Demo",
+    "bpm": 72,
+    "time": "6/8",
+    "groove": "six-eight",
+    "sections": [
+      {
+        "name": "Intro",
+        "groove": "six-eight",
+        "crash": false,
+        "bars": [
+          "C",
+          "G/B",
+          "Am",
+          "F"
+        ]
+      },
+      {
+        "name": "Verse 1",
+        "groove": "six-eight",
+        "fill": true,
+        "bars": [
+          "C",
+          "G/B",
+          "Am",
+          "F",
+          "C",
+          "G/B",
+          "F",
+          "G"
+        ]
+      },
+      {
+        "name": "Chorus",
+        "groove": "six-eight-drive",
+        "fill": true,
+        "crash": true,
+        "bars": [
+          "F",
+          "C",
+          "G",
+          "Am",
+          "F",
+          "C",
+          "G",
+          "G"
+        ]
+      },
+      {
+        "name": "Verse 2",
+        "groove": "six-eight",
+        "fill": true,
+        "bars": [
+          "C",
+          "G/B",
+          "Am",
+          "F",
+          "C",
+          "G/B",
+          "F",
+          "G"
+        ]
+      },
+      {
+        "name": "Chorus",
+        "groove": "six-eight-drive",
+        "fill": true,
+        "crash": true,
+        "repeat": 2,
+        "bars": [
+          "F",
+          "C",
+          "G",
+          "Am",
+          "F",
+          "C",
+          "G",
+          "G"
+        ]
+      },
+      {
+        "name": "Outro",
+        "groove": "six-eight",
+        "bars": [
+          "C",
+          "G/B",
+          "Am",
+          "F",
+          "C"
+        ]
+      }
+    ]
+  }
+]

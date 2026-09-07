@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f1115">
+<title>StageDrums</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">🥁 StageDrums</div>
+  <div class="transport">
+    <button id="btnPrev" class="icon" title="Previous section">⏮</button>
+    <button id="btnPlay" class="primary big" title="Play / Stop">▶ Play</button>
+    <button id="btnNext" class="icon" title="Next section">⏭</button>
+    <label class="chk"><input type="checkbox" id="chkCountIn" checked> Count-in</label>
+    <label class="chk"><input type="checkbox" id="chkVoice" checked> Voice cues</label>
+  </div>
+  <div class="tempo">
+    <button id="tempoDown" class="icon">−</button>
+    <input id="bpm" type="number" min="40" max="240" value="120"> <span class="unit">BPM</span>
+    <button id="tempoUp" class="icon">+</button>
+  </div>
+  <div class="role">
+    <button id="btnMixer" class="icon" title="Live mixer (interface inputs)">🎚 Mixer</button>
+    <select id="roleSelect" title="Sync role">
+      <option value="solo">Solo (no sync)</option>
+      <option value="host">Host (computer → speakers)</option>
+      <option value="follower">Follower (iPad chart)</option>
+    </select>
+    <span id="syncStatus" class="pill">offline</span>
+    <button id="btnVersion" class="pill vpill" title="Version & updates">v…</button>
+  </div>
+</header>
+
+<main class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <h2>Songs</h2>
+      <button id="btnNewSong" class="small">+ Import</button>
+    </div>
+    <ul id="songList" class="songlist"></ul>
+    <div class="sidebar-foot">
+      <button id="btnEdit" class="small">Edit song JSON</button>
+      <button id="btnExport" class="small">Export</button>
+      <button id="btnDelete" class="small danger">Delete</button>
+    </div>
+    <h3>Drum mix</h3>
+    <div class="mix">
+      <label>Master <input type="range" id="volMaster" min="0" max="1" step="0.01" value="0.8"></label>
+      <label>Kick <input type="range" id="volKick" min="0" max="1.5" step="0.01" value="1"></label>
+      <label>Snare <input type="range" id="volSnare" min="0" max="1.5" step="0.01" value="0.9"></label>
+      <label>Hats <input type="range" id="volHat" min="0" max="1.5" step="0.01" value="0.6"></label>
+      <label>Cymbals <input type="range" id="volCym" min="0" max="1.5" step="0.01" value="0.7"></label>
+      <label>Toms <input type="range" id="volTom" min="0" max="1.5" step="0.01" value="0.9"></label>
+      <label>Cowbell/perc <input type="range" id="volPerc" min="0" max="1.5" step="0.01" value="0.8"></label>
+      <label>Click (in-ears) <input type="range" id="volClick" min="0" max="1.5" step="0.01" value="0"></label>
+    </div>
+    <label class="chk"><input type="checkbox" id="chkFollowerAudio"> Follower plays drums too</label>
+    <h3>MIDI</h3>
+    <div class="midi">
+      <select id="midiOut"><option value="">MIDI out: off</option></select>
+      <label class="chk"><input type="checkbox" id="chkMidiNotes" checked> Send drum notes (ch 10)</label>
+      <label class="chk"><input type="checkbox" id="chkMidiClock" checked> Send MIDI clock / start / stop</label>
+      <div class="sidebar-foot">
+        <button id="btnMidiExport" class="small">Export .mid</button>
+        <button id="btnMidiImport" class="small">Import .mid drums</button>
+        <button id="btnMidiClear" class="small">Clear imported drums</button>
+      </div>
+      <input type="file" id="midiFile" accept=".mid,.midi,audio/midi" hidden>
+      <p class="hint" id="midiInfo">Export writes drums (GM channel 10), a reference chord track, tempo and section markers for any DAW. Import a .mid with a drum track to play a real transcription instead of the grooves.</p>
+    </div>
+  </aside>
+
+  <section class="stage">
+    <div class="nowbar">
+      <div class="now-section" id="nowSection">—</div>
+      <div class="now-chord" id="nowChord">—</div>
+      <div class="now-next">Next: <span id="nextSection">—</span> <span id="nextIn"></span></div>
+      <div class="beats" id="beats"></div>
+      <div class="bar-counter" id="barCounter">Bar — / —</div>
+    </div>
+    <div class="livebar">
+      <div class="pads" id="pads"></div>
+      <div class="livectl">
+        <button id="btnHold" class="live" title="Keep repeating this section until released (L)">⟲ Hold</button>
+        <button id="btnExtra" class="live" title="Play this section one more time, then continue (+)">+1 pass</button>
+        <button id="btnGo" class="live" title="Go to the queued / next section at the next bar (Enter)">Go now ⇥</button>
+      </div>
+    </div>
+    <div class="chart" id="chart"></div>
+  </section>
+</main>
+
+<!-- Mixer panel -->
+<section id="mixerPanel" class="mixer-panel" hidden>
+  <div class="mix-head">
+    <h2>Live mixer</h2>
+    <select id="mixInput" title="Audio interface input"></select>
+    <button id="mixStart" class="primary small">Start interface</button>
+    <button id="mixStop" class="small">Stop</button>
+    <select id="mixOutput" title="Output device"></select>
+    <span id="mixStatus" class="pill">interface not open</span>
+    <label class="chk"><input type="checkbox" id="mixAuto"> Auto-start</label>
+    <button id="mixClose" class="small" style="margin-left:auto">Close ✕</button>
+  </div>
+  <p class="hint mix-hint">Open this on the <b>computer</b> at <code>http://localhost:8080</code> in Chrome or Edge (they can pick the output device and give you all interface inputs; Safari and remote addresses only give a stereo pair). Turn <b>off</b> Direct Monitor on the interface if you want to hear the processed sound. Each strip: Trim → HPF → EQ → Gate → Compressor → Reverb send → Pan → Fader. Drums run through the same master and limiter.</p>
+  <div class="mix-body">
+    <div id="strips" class="strips"></div>
+    <div class="master">
+      <div class="grp-title">Master</div>
+      <div class="meter"><div class="lvl" id="masterLvl"></div><div class="gr" id="masterGr"></div></div>
+      <label class="prm"><span>Master</span><input type="range" id="mixMaster" min="-30" max="6" step="1" value="0"><b id="mixMasterV">0 dB</b></label>
+      <div class="grp-title">Reverb</div>
+      <label class="prm"><span>Decay</span><input type="range" id="mixRevDecay" min="0.3" max="6" step="0.1" value="1.8"><b id="mixRevDecayV">1.8 s</b></label>
+      <label class="prm"><span>Tone</span><input type="range" id="mixRevTone" min="1500" max="12000" step="100" value="5000"><b id="mixRevToneV">5.0k</b></label>
+      <label class="prm"><span>Return</span><input type="range" id="mixRevReturn" min="-40" max="6" step="1" value="0"><b id="mixRevReturnV">0 dB</b></label>
+      <p class="hint">Limiter on the master is always on (−1 dB ceiling). Red on a meter = clipping range.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Update dialog -->
+<dialog id="dlgUpdate">
+  <form method="dialog" class="dlg">
+    <h2>StageDrums <span id="updLocal"></span></h2>
+    <p class="hint" id="updNotes"></p>
+    <div id="updStatus" class="hint">Checking for updates…</div>
+    <pre id="updLog" class="updlog" hidden></pre>
+    <div class="actions">
+      <button value="cancel" class="small">Close</button>
+      <button id="updCheck" type="button" class="small">Check again</button>
+      <button id="updApply" type="button" class="primary" hidden>Install update</button>
+      <button id="updReload" type="button" class="primary" hidden>Reload now</button>
+    </div>
+    <p class="hint">Updates come from the GitHub repository set in <code>update.config.json</code>. Installing pulls the new version onto this computer, restarts the server, and every connected device is told to reload. Your songs and mixer settings live in the browser and are kept.</p>
+  </form>
+</dialog>
+<div id="updBanner" class="banner" hidden><span id="updBannerText">A new version is installed.</span> <button id="updBannerReload" class="small primary">Reload</button> <button id="updBannerClose" class="small">Later</button></div>
+
+<!-- Import dialog -->
+<dialog id="dlgImport">
+  <form method="dialog" class="dlg">
+    <h2>Import a song</h2>
+    <p class="hint">Paste a chord chart (Ultimate Guitar "Chords" page copied as text) or a StageDrums song JSON. Section headers like <code>[Verse 1]</code> / <code>[Chorus]</code> are detected. Each chord line becomes bars; edit afterwards if the bar count is off.</p>
+    <div class="row">
+      <label>Title <input id="impTitle" placeholder="Song title"></label>
+      <label>Artist <input id="impArtist" placeholder="Artist"></label>
+      <label>BPM <input id="impBpm" type="number" value="120" min="40" max="240"></label>
+      <label>Time <select id="impTime"><option>4/4</option><option>3/4</option><option>6/8</option></select></label>
+      <label>Default groove <select id="impGroove"></select></label>
+    </div>
+    <textarea id="impText" rows="14" placeholder="[Intro]
+G  D  Em  C
+
+[Verse 1]
+G            D
+Here comes the sun..."></textarea>
+    <div class="actions">
+      <button value="cancel" class="small">Cancel</button>
+      <button id="btnAiPrompt" type="button" class="small">Copy AI drum prompt</button>
+      <button id="btnDoImport" value="ok" class="primary">Import</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Editor dialog -->
+<dialog id="dlgEdit">
+  <form method="dialog" class="dlg wide">
+    <h2>Edit song JSON</h2>
+    <p class="hint">Sections have <code>name</code>, <code>groove</code> (see list below), optional <code>repeat</code>, and <code>bars</code> — each bar is a string of chords, e.g. <code>"G"</code>, <code>"G D"</code> (two chords, half bar each) or <code>"Am . . G"</code> (dots hold). Instruments in grooves: K S H D C T M F R B(cowbell). Optional <code>fill: true</code> plays a fill on the last bar, <code>crash: true</code> crashes on bar 1.</p>
+    <p class="hint">Grooves: <span id="grooveList"></span></p>
+    <textarea id="editText" rows="22" spellcheck="false"></textarea>
+    <div class="actions">
+      <button value="cancel" class="small">Cancel</button>
+      <button id="btnDoSave" value="ok" class="primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Sync dialog -->
+<dialog id="dlgSync">
+  <form method="dialog" class="dlg">
+    <h2>Connect to host</h2>
+    <p class="hint">Run <code>node server.js</code> on the computer, then enter that computer's address (shown in its terminal), e.g. <code>ws://192.168.1.20:8080</code>. Both devices must be on the same Wi‑Fi (or the computer's hotspot).</p>
+    <input id="syncUrl" placeholder="ws://192.168.1.20:8080">
+    <div class="actions">
+      <button value="cancel" class="small">Cancel</button>
+      <button value="ok" class="primary">Connect</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="drums.js"></script>
+<script src="parser.js"></script>
+<script src="sync.js"></script>
+<script src="midi.js"></script>
+<script src="mixer.js"></script>
+<script src="mixer-ui.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

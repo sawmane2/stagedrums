@@ -1,0 +1,150 @@
+{
+  "id": "mountain-sittin-on-a-rainbow",
+  "title": "Sittin' on a Rainbow",
+  "artist": "Mountain (Climbing!, 1970)",
+  "bpm": 146,
+  "time": "4/4",
+  "groove": "laing-heavy",
+  "sections": [
+    {
+      "name": "Intro (main riff)",
+      "groove": "laing-heavy",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "A5",
+        "A5",
+        "A5",
+        "A5"
+      ],
+      "lyrics": "Main riff on A, 4 bars. Tempo is an estimate (record is 2:23) - nudge with +/- until it sits."
+    },
+    {
+      "name": "Verse 1",
+      "groove": "laing-heavy",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5"
+      ],
+      "lyrics": "Vocal over the A riff, 16 bars (two 8-bar halves)."
+    },
+    {
+      "name": "Chorus 1",
+      "groove": "rock-heavy",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "G",
+        "D",
+        "G",
+        "D",
+        "G",
+        "D",
+        "A",
+        "A"
+      ],
+      "lyrics": "G - D, G - D over the riff feel, then G - D - A back to the riff."
+    },
+    {
+      "name": "Guitar solo",
+      "groove": "laing-ride",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5"
+      ],
+      "lyrics": "Riff x2 (8 bars) on the ride."
+    },
+    {
+      "name": "Verse 2",
+      "groove": "laing-heavy",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5"
+      ]
+    },
+    {
+      "name": "Chorus 2",
+      "groove": "rock-heavy",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "G",
+        "D",
+        "G",
+        "D",
+        "G",
+        "D",
+        "A",
+        "A"
+      ]
+    },
+    {
+      "name": "Outro solo (riff, fades)",
+      "groove": "laing-ride",
+      "crash": true,
+      "fill": true,
+      "repeat": 2,
+      "bars": [
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5",
+        "A5"
+      ],
+      "lyrics": "Riff x4 to fade on the record. Loop this section live and end on a cue."
+    },
+    {
+      "name": "Ending",
+      "groove": "laing-heavy",
+      "crash": true,
+      "fill": false,
+      "bars": [
+        "A5",
+        "A5 . . N.C."
+      ]
+    }
+  ]
+}

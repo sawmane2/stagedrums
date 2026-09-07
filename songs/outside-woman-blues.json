@@ -1,0 +1,138 @@
+{
+  "id": "cream-outside-woman-blues",
+  "title": "Outside Woman Blues",
+  "artist": "Cream (Disraeli Gears, 1967)",
+  "bpm": 113,
+  "time": "4/4",
+  "groove": "baker-blues",
+  "sections": [
+    {
+      "name": "Intro (riff)",
+      "groove": "baker-toms",
+      "crash": false,
+      "fill": true,
+      "bars": [
+        "E7",
+        "E7",
+        "E7",
+        "E7"
+      ],
+      "lyrics": "Main E riff x2. Drums: toms + kick pushing the riff, fill into verse."
+    },
+    {
+      "name": "Verse 1",
+      "groove": "baker-blues",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "B7",
+        "B7",
+        "E7",
+        "E7"
+      ],
+      "lyrics": "12-bar form: riff on E7 for 8, B7 turnaround for 2, back to E7 riff for 2."
+    },
+    {
+      "name": "Verse 2",
+      "groove": "baker-blues",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "B7",
+        "B7",
+        "E7",
+        "E7"
+      ]
+    },
+    {
+      "name": "Guitar Solo",
+      "groove": "baker-ride",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "B7",
+        "B7",
+        "E7",
+        "E7"
+      ],
+      "lyrics": "Ride cymbal, open up. Same 12-bar form under the solo."
+    },
+    {
+      "name": "Verse 3",
+      "groove": "baker-blues",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "B7",
+        "B7",
+        "E7",
+        "E7"
+      ]
+    },
+    {
+      "name": "Verse 4 (reprise)",
+      "groove": "baker-blues",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "E7",
+        "B7",
+        "B7",
+        "E7",
+        "E7"
+      ]
+    },
+    {
+      "name": "Outro (riff)",
+      "groove": "baker-toms",
+      "crash": true,
+      "fill": false,
+      "bars": [
+        "E7",
+        "E7",
+        "E7",
+        "E7 . . B7"
+      ],
+      "lyrics": "Riff out; end on the last hit together."
+    }
+  ]
+}

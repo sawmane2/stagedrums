@@ -1,0 +1,16 @@
+{
+  "name": "stagedrums",
+  "version": "0.1.0",
+  "description": "Live backing drums + synced chord charts (PWA). Zero dependencies.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "update": "node server.js --update",
+    "release": "node release.js"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sawmane2/stagedrums.git"
+  }
+}

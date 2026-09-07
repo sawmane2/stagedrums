@@ -1,0 +1,14 @@
+{
+  "name": "StageDrums",
+  "short_name": "StageDrums",
+  "description": "Live backing drums with synced chord charts",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f1115",
+  "theme_color": "#0f1115",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
