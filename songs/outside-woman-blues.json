@@ -170,7 +170,7 @@
    "lyrics": "Hmm Hmmm Hmm"
   }
  ],
- "rev": 4,
+ "rev": 5,
  "audio": {
   "stems": {
    "drums": "local/audio/cream-outside-woman-blues/drums.mp3",
@@ -190,7 +190,7 @@
    "guitar": 1,
    "vocals": 0
   },
-  "note": "Demucs stems of the Cream recording (htdemucs_ft drums/bass/vocals, htdemucs_6s guitar); barTimes measured from the drum stem at ~112.3 BPM. local/audio/ is not in git.",
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
   "barTimes": [
    0.255,
    2.601,
@@ -261,6 +261,16 @@
    139.685,
    141.81,
    147.467
+  ],
+  "fills": [
+   15,
+   28,
+   36,
+   41,
+   45,
+   49,
+   53,
+   61
   ]
  }
 }

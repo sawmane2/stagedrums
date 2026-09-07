@@ -1,0 +1,223 @@
+{
+ "id": "cream-sunshine-of-your-love",
+ "title": "Sunshine of Your Love",
+ "artist": "Cream",
+ "bpm": 116,
+ "time": "4/4",
+ "groove": "laing-heavy",
+ "feel": "loose",
+ "rev": 1,
+ "band": {
+  "bass": "roots",
+  "keys": "off",
+  "gtr": "off"
+ },
+ "sections": [
+  {
+   "name": "Intro (riff)",
+   "groove": "laing-heavy",
+   "bars": [
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D"
+   ],
+   "crash": false
+  },
+  {
+   "name": "Verse 1",
+   "groove": "laing-heavy",
+   "bars": [
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "G",
+    "F",
+    "G",
+    "F",
+    "G",
+    "D"
+   ],
+   "fill": true
+  },
+  {
+   "name": "Riff",
+   "groove": "laing-heavy",
+   "bars": [
+    "D",
+    "A G F D",
+    "D",
+    "A G F D"
+   ]
+  },
+  {
+   "name": "Chorus 1",
+   "groove": "laing-ride",
+   "bars": [
+    "A",
+    "C G",
+    "A",
+    "C G",
+    "A",
+    "C G",
+    "A",
+    "A"
+   ],
+   "crash": true,
+   "fill": true
+  },
+  {
+   "name": "Riff 2",
+   "groove": "laing-heavy",
+   "bars": [
+    "D",
+    "A G F D"
+   ]
+  },
+  {
+   "name": "Verse 2",
+   "groove": "laing-heavy",
+   "bars": [
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "G",
+    "F",
+    "G",
+    "F",
+    "G",
+    "D"
+   ],
+   "fill": true
+  },
+  {
+   "name": "Riff 3",
+   "groove": "laing-heavy",
+   "bars": [
+    "D",
+    "A G F D",
+    "D",
+    "A G F D"
+   ]
+  },
+  {
+   "name": "Chorus 2",
+   "groove": "laing-ride",
+   "bars": [
+    "A",
+    "C G",
+    "A",
+    "C G",
+    "A",
+    "C G",
+    "A",
+    "A"
+   ],
+   "crash": true,
+   "fill": true
+  },
+  {
+   "name": "Solo (break)",
+   "groove": "laing-ride",
+   "bars": [
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D"
+   ],
+   "crash": true
+  },
+  {
+   "name": "Verse 3",
+   "groove": "laing-heavy",
+   "bars": [
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "G",
+    "F",
+    "G",
+    "F",
+    "G",
+    "D"
+   ],
+   "fill": true
+  },
+  {
+   "name": "Riff 4",
+   "groove": "laing-heavy",
+   "bars": [
+    "D",
+    "A G F D",
+    "D",
+    "A G F D"
+   ]
+  },
+  {
+   "name": "Chorus 3",
+   "groove": "laing-ride",
+   "bars": [
+    "A",
+    "C G",
+    "A",
+    "C G",
+    "A",
+    "C G",
+    "A",
+    "C G",
+    "A",
+    "C G",
+    "A",
+    "A"
+   ],
+   "crash": true,
+   "fill": true
+  },
+  {
+   "name": "Outro (riff)",
+   "groove": "laing-heavy",
+   "bars": [
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D"
+   ],
+   "fill": true
+  }
+ ]
+}

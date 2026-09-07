@@ -612,6 +612,9 @@
     box.classList.toggle('has', show); $('stemScopeRow').hidden = !show;
     const hasKit = !!(a && a.kit && Object.keys(a.kit).length);
     $('splitDrumsRow').hidden = !hasKit; $('chkSplitDrums').checked = !!(a && a.splitDrums);
+    const nFills = (a && a.fills || []).length;
+    $('loopFillsRow').hidden = !nFills; $('chkLoopFills').checked = prefs.loopFills !== false;
+    $('loopFillsCount').textContent = nFills ? `(${nFills} in this recording)` : '';
     if (!show) return;
     a.mix = a.mix || {}; a.mute = a.mute || {};
     renderStemScope();
@@ -644,6 +647,7 @@
       box.appendChild(b);
     }
   }
+  $('chkLoopFills').onchange = () => { prefs.loopFills = $('chkLoopFills').checked; savePrefs(); transport.fills = prefs.loopFills ? ((song && song.audio && song.audio.fills) || []) : []; };
   $('chkSplitDrums').onchange = () => {
     if (!song || !song.audio) return;
     song.audio.splitDrums = $('chkSplitDrums').checked; persistSongs(); broadcastSong();
@@ -688,7 +692,8 @@
       }));
       if (token !== audioLoadToken) return;
       if (!Object.keys(stems).length) throw new Error('missing');
-      transport.setAudio({ stems, mix: mixForBar(transport._pausedPos || 0), barTimes: a.barTimes, offset: a.offset || 0, gain: +$('volAudio').value, name: audioName(a) });
+      transport.setAudio({ stems, mix: mixForBar(transport._pausedPos || 0), barTimes: a.barTimes, offset: a.offset || 0,
+        gain: +$('volAudio').value, name: audioName(a), fills: prefs.loopFills === false ? [] : (a.fills || []) });
       setAudioStatus(); if (missing.length) setAudioStatus($('audioStatus').textContent + ` Missing on this computer: ${missing.join(', ')}.`);
     } catch (e) {
       setAudioStatus(`${audioName(a)} isn't on this computer — using synth drums + band. Add it with "Load audio file…" / "Load stems…" (files go in drum-daw/local/audio/).`);

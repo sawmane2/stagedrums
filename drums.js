@@ -459,6 +459,7 @@
       for (const k of Object.keys(stems)) { const g = this.ctx.createGain(); g.gain.value = mix[k] ?? 1; g.connect(this._aGain); gains[k] = g; }
       const duration = Math.max(...Object.values(stems).map(b => b.duration));
       this.audio = { stems, gains, barTimes: bt, name: a.name || '', duration, buffer: stems[Object.keys(stems)[0]] };
+      this.fills = (a.fills || []).filter(b => b >= 0 && b < total); // bars of the recording that contain a drum fill
     }
     setAudioGain(g) { if (this._aGain) this._aGain.gain.value = g; }
     /** Level of one stem (0 = off). Takes effect immediately, mid-song. */
@@ -514,21 +515,44 @@
       while (lo < hi) { const m = (lo + hi + 1) >> 1; if (bt[m] <= sec) lo = m; else hi = m - 1; }
       return lo + (sec - bt[lo]) / Math.max(0.2, bt[lo + 1] - bt[lo]);
     }
-    /** Start (or re-start at a seek) the recording at ctx time `when`, from `offset` seconds into it. */
-    _aStart(when, offset) {
-      if (this._aSrc) for (const s of this._aSrc) { try { s.stop(when); } catch (e) {} }
-      this._aSrc = [];
-      for (const [k, buffer] of Object.entries(this.audio.stems)) {
-        if (offset >= buffer.duration - 0.01) continue;
-        const src = this.ctx.createBufferSource(); src.buffer = buffer; src.connect(this.audio.gains[k]);
-        src.start(when, Math.max(0, offset)); this._aSrc.push(src);
+    /**
+     * Start (or re-start at a seek) the recording at ctx time `when`, from `offset` seconds into it.
+     * `keys` limits it to some stems — that's how a fill is spliced in: the drums jump to a bar the drummer
+     * filled while the rest of the band carries on. Every start/stop is crossfaded so seams don't click.
+     */
+    _aStart(when, offset, keys) {
+      const all = !keys;
+      keys = keys || Object.keys(this.audio.stems);
+      this._aSrc = this._aSrc || {};
+      const fade = 0.012;
+      for (const k of keys) {
+        const old = this._aSrc[k];
+        if (old) { try { old.g.gain.setValueAtTime(old.g.gain.value, Math.max(when - fade, this.ctx.currentTime)); old.g.gain.linearRampToValueAtTime(0, when + fade); old.src.stop(when + fade + 0.01); } catch (e) {} }
+        const buffer = this.audio.stems[k];
+        if (!buffer || offset >= buffer.duration - 0.01) { this._aSrc[k] = null; continue; }
+        const src = this.ctx.createBufferSource(); src.buffer = buffer;
+        const g = this.ctx.createGain();
+        g.gain.setValueAtTime(0, Math.max(when - fade, 0)); g.gain.linearRampToValueAtTime(1, when + fade);
+        src.connect(g); g.connect(this.audio.gains[k]);
+        src.start(Math.max(when, this.ctx.currentTime), Math.max(0, offset));
+        this._aSrc[k] = { src, g };
       }
-      this._aSegs.push({ ctx: when, offset });
-      if (this._aSegs.length > 4) this._aSegs.shift();
+      if (all) { this._aSegs.push({ ctx: when, offset }); if (this._aSegs.length > 4) this._aSegs.shift(); }
     }
     _aStop() {
-      if (this._aSrc) for (const s of this._aSrc) { try { s.stop(); } catch (e) {} }
+      for (const k of Object.keys(this._aSrc || {})) { const o = this._aSrc[k]; if (o) { try { o.src.stop(); } catch (e) {} } }
       this._aSrc = null; this._aSegs = [];
+    }
+    /** Stems that carry the kit — a fill splice moves these and leaves the band alone. */
+    _drumKeys() {
+      const ks = Object.keys(this.audio.stems).filter(k => /^(drums|kick|snare|toms|hats|cymbals|perc)$/.test(k));
+      return ks.length && ks.length < Object.keys(this.audio.stems).length ? ks : null;
+    }
+    /** True when the pass ends at `bar` and the transport will loop or jump instead of carrying straight on. */
+    _willTurnAround(bar) {
+      const tl = this.tl, sec = tl.sections[tl.bars[bar].section];
+      if (bar !== sec.end - 1) return false;
+      return this.hold || this.extra > 0 || !!this.queued;
     }
     /** Integer bar the transport is in (or about to enter during count-in / when stopped). */
     currentBar() {
@@ -588,7 +612,7 @@
       const firstBar = this.barSec(fromBar);
       this._anchor = { bar: fromBar, ctxTime: this.countIn ? now + firstBar : now, bpm: this.bpm, countIn: this.countIn, barSec: firstBar };
       if (this.audio) {
-        this._aSegs = []; this._aSrc = null; this._aNextBarCtx = now; this._aPrev = null; this._aSec = null;
+        this._aSegs = []; this._aSrc = null; this._aNextBarCtx = now; this._aPrev = null; this._aSec = null; this._aFill = false;
         if (!this.countIn) this._aStart(now, this.audio.barTimes[fromBar]);
         this._emitAnchor();
         this._timer = setInterval(() => this._scheduleAudio(), this.tick);
@@ -710,13 +734,22 @@
           if (this._bar < tl.total && (jumped || this._bar !== this._aPrev + 1)) this._aStart(Math.max(t, this.ctx.currentTime), bt[this._bar]);
           this._aPrev = null;
         }
-        if (this._bar >= tl.total) { if (this._aSrc) for (const s of this._aSrc) { try { s.stop(t + 0.02); } catch (e) {} } this._fire(() => this.stop(), null, t); return; }
+        if (this._bar >= tl.total) { for (const k of Object.keys(this._aSrc || {})) { const o = this._aSrc[k]; if (o) try { o.src.stop(t + 0.05); } catch (e) {} } this._fire(() => this.stop(), null, t); return; }
         const dur = this.barSec(this._bar), beat = dur / sig.beats;
         // per-section stem mix: ramp at the bar line whenever the section changes (and on the first bar / after a jump)
         const secNow = tl.bars[this._bar].section;
         if (secNow !== this._aSec) { this.applyStemMix(this._bar, t); this._aSec = secNow; }
         this._fire(this.onBar, this._bar, t);
         for (let b = 0; b < sig.beats; b++) { this.kit.click(t + b * beat, b === 0); this._fire(this.onBeat, b, t + b * beat, this._bar); }
+        // Fills: when this bar is the last of a pass that will loop, borrow a bar the drummer actually filled
+        // (from this same recording) for the kit stems only — the band keeps playing this bar as written.
+        const dk = this.fills && this.fills.length ? this._drumKeys() : null;
+        if (dk) {
+          if (this._willTurnAround(this._bar) && !this.fills.includes(this._bar)) {
+            const f = this.fills[(this._fillN = (this._fillN || 0) + 1) % this.fills.length];
+            this._aStart(t, bt[f], dk); this._aFill = true;
+          } else if (this._aFill) { this._aStart(t, bt[this._bar], dk); this._aFill = false; }
+        }
         this._anchor = { bar: this._bar, ctxTime: t, bpm: this.bpm, barSec: dur };
         this._emitAnchor(); // every bar: real recordings drift in tempo, so followers re-anchor often
         this._aPrev = this._bar; this._bar++;

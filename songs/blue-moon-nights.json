@@ -1,0 +1,180 @@
+{
+ "id": "john-fogerty-blue-moon-nights",
+ "title": "Blue Moon Nights",
+ "artist": "John Fogerty",
+ "bpm": 168,
+ "time": "4/4",
+ "groove": "train",
+ "feel": "push",
+ "swing": 0.12,
+ "rev": 1,
+ "band": {
+  "bass": "boogie",
+  "keys": "off",
+  "gtr": "off"
+ },
+ "sections": [
+  {
+   "name": "Intro",
+   "groove": "train",
+   "bars": [
+    "E",
+    "E",
+    "E",
+    "E"
+   ],
+   "crash": false
+  },
+  {
+   "name": "Verse 1",
+   "groove": "train",
+   "bars": [
+    "E",
+    "E",
+    "A",
+    "E",
+    "A",
+    "E",
+    "B7",
+    "B7",
+    "E",
+    "A",
+    "E",
+    "E",
+    "A",
+    "B7",
+    "E",
+    "E"
+   ],
+   "fill": true
+  },
+  {
+   "name": "Verse 2",
+   "groove": "train",
+   "bars": [
+    "E",
+    "A",
+    "E",
+    "E",
+    "A",
+    "E",
+    "B7",
+    "B7",
+    "E",
+    "A",
+    "E",
+    "E",
+    "A",
+    "B7",
+    "E",
+    "E"
+   ],
+   "fill": true
+  },
+  {
+   "name": "Chorus 1",
+   "groove": "train",
+   "bars": [
+    "A",
+    "A",
+    "E",
+    "E",
+    "B7",
+    "B7",
+    "E",
+    "E",
+    "A",
+    "A",
+    "E",
+    "E",
+    "B7",
+    "B7",
+    "E",
+    "E"
+   ],
+   "crash": true,
+   "fill": true
+  },
+  {
+   "name": "Solo",
+   "groove": "train",
+   "bars": [
+    "E",
+    "E",
+    "A",
+    "E",
+    "A",
+    "E",
+    "B7",
+    "B7",
+    "E",
+    "A",
+    "E",
+    "E",
+    "A",
+    "B7",
+    "E",
+    "E"
+   ],
+   "crash": true
+  },
+  {
+   "name": "Verse 3",
+   "groove": "train",
+   "bars": [
+    "E",
+    "E",
+    "A",
+    "E",
+    "A",
+    "E",
+    "B7",
+    "B7",
+    "E",
+    "A",
+    "E",
+    "E",
+    "A",
+    "B7",
+    "E",
+    "E"
+   ],
+   "fill": true
+  },
+  {
+   "name": "Chorus 2",
+   "groove": "train",
+   "bars": [
+    "A",
+    "A",
+    "E",
+    "E",
+    "B7",
+    "B7",
+    "E",
+    "E",
+    "A",
+    "A",
+    "E",
+    "E",
+    "B7",
+    "B7",
+    "E",
+    "E"
+   ],
+   "crash": true,
+   "fill": true
+  },
+  {
+   "name": "Outro",
+   "groove": "train",
+   "bars": [
+    "E",
+    "A",
+    "B7",
+    "E"
+   ],
+   "fill": true
+  }
+ ]
+}

@@ -1,6 +1,6 @@
 {
  "id": "black-keys-weight-of-love",
- "rev": 4,
+ "rev": 6,
  "title": "Weight of Love",
  "artist": "The Black Keys (Turn Blue, 2014)",
  "bpm": 76,
@@ -268,7 +268,7 @@
    "other": 1,
    "vocals": 0
   },
-  "note": "Demucs stems (htdemucs_ft for drums/bass/vocals, htdemucs_6s for guitar/piano/other); barTimes measured from the drum stem. 'kit' splits the drums into kick/snare/toms/cymbals (DrumSep) - Split drums in the Backing panel swaps them in. local/audio/ is not in git.",
+  "note": "Demucs stems (htdemucs_ft), guitar/piano split from the 6-source model's ratios, kit parts from DrumSep; barTimes and fills measured from the drum stem. local/audio/ is not in git.",
   "barTimes": [
    1.057,
    4.31,
@@ -400,6 +400,16 @@
    402.965,
    406.076,
    409.188
+  ],
+  "fills": [
+   19,
+   23,
+   35,
+   95,
+   99,
+   101,
+   103,
+   111
   ]
  }
 }

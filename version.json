@@ -1,5 +1,5 @@
 {
-  "version": "0.18.0",
+  "version": "0.19.0",
   "date": "2026-09-07",
-  "notes": "Real separation instead of masking: Demucs stems (much cleaner drums than before), per-section stem mixes that switch automatically at the bar line, Split drums into kick/snare/toms/cymbals, and Outside Woman Blues with its own stems and measured bar times."
+  "notes": "Fills into loops: a held section now turns around with a real fill lifted from the same recording, drums only, crossfaded. Two-model ensemble separation (cleaner Outside Woman Blues drums), better guitar/keys split on Weight of Love, and charts for Sunshine of Your Love, Blue Moon Nights, Harvest Moon and Lord Is It Mine."
 }

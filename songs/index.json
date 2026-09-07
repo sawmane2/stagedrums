@@ -171,7 +171,7 @@
     "lyrics": "Hmm Hmmm Hmm"
    }
   ],
-  "rev": 4,
+  "rev": 5,
   "audio": {
    "stems": {
     "drums": "local/audio/cream-outside-woman-blues/drums.mp3",
@@ -191,7 +191,7 @@
     "guitar": 1,
     "vocals": 0
    },
-   "note": "Demucs stems of the Cream recording (htdemucs_ft drums/bass/vocals, htdemucs_6s guitar); barTimes measured from the drum stem at ~112.3 BPM. local/audio/ is not in git.",
+   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
    "barTimes": [
     0.255,
     2.601,
@@ -262,6 +262,16 @@
     139.685,
     141.81,
     147.467
+   ],
+   "fills": [
+    15,
+    28,
+    36,
+    41,
+    45,
+    49,
+    53,
+    61
    ]
   }
  },
@@ -640,7 +650,7 @@
  },
  {
   "id": "black-keys-weight-of-love",
-  "rev": 4,
+  "rev": 6,
   "title": "Weight of Love",
   "artist": "The Black Keys (Turn Blue, 2014)",
   "bpm": 76,
@@ -908,7 +918,7 @@
     "other": 1,
     "vocals": 0
    },
-   "note": "Demucs stems (htdemucs_ft for drums/bass/vocals, htdemucs_6s for guitar/piano/other); barTimes measured from the drum stem. 'kit' splits the drums into kick/snare/toms/cymbals (DrumSep) - Split drums in the Backing panel swaps them in. local/audio/ is not in git.",
+   "note": "Demucs stems (htdemucs_ft), guitar/piano split from the 6-source model's ratios, kit parts from DrumSep; barTimes and fills measured from the drum stem. local/audio/ is not in git.",
    "barTimes": [
     1.057,
     4.31,
@@ -1040,8 +1050,919 @@
     402.965,
     406.076,
     409.188
+   ],
+   "fills": [
+    19,
+    23,
+    35,
+    95,
+    99,
+    101,
+    103,
+    111
    ]
   }
+ },
+ {
+  "id": "cream-sunshine-of-your-love",
+  "title": "Sunshine of Your Love",
+  "artist": "Cream",
+  "bpm": 116,
+  "time": "4/4",
+  "groove": "laing-heavy",
+  "feel": "loose",
+  "rev": 1,
+  "band": {
+   "bass": "roots",
+   "keys": "off",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro (riff)",
+    "groove": "laing-heavy",
+    "bars": [
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Verse 1",
+    "groove": "laing-heavy",
+    "bars": [
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "G",
+     "F",
+     "G",
+     "F",
+     "G",
+     "D"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Riff",
+    "groove": "laing-heavy",
+    "bars": [
+     "D",
+     "A G F D",
+     "D",
+     "A G F D"
+    ]
+   },
+   {
+    "name": "Chorus 1",
+    "groove": "laing-ride",
+    "bars": [
+     "A",
+     "C G",
+     "A",
+     "C G",
+     "A",
+     "C G",
+     "A",
+     "A"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Riff 2",
+    "groove": "laing-heavy",
+    "bars": [
+     "D",
+     "A G F D"
+    ]
+   },
+   {
+    "name": "Verse 2",
+    "groove": "laing-heavy",
+    "bars": [
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "G",
+     "F",
+     "G",
+     "F",
+     "G",
+     "D"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Riff 3",
+    "groove": "laing-heavy",
+    "bars": [
+     "D",
+     "A G F D",
+     "D",
+     "A G F D"
+    ]
+   },
+   {
+    "name": "Chorus 2",
+    "groove": "laing-ride",
+    "bars": [
+     "A",
+     "C G",
+     "A",
+     "C G",
+     "A",
+     "C G",
+     "A",
+     "A"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Solo (break)",
+    "groove": "laing-ride",
+    "bars": [
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D"
+    ],
+    "crash": true
+   },
+   {
+    "name": "Verse 3",
+    "groove": "laing-heavy",
+    "bars": [
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "G",
+     "F",
+     "G",
+     "F",
+     "G",
+     "D"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Riff 4",
+    "groove": "laing-heavy",
+    "bars": [
+     "D",
+     "A G F D",
+     "D",
+     "A G F D"
+    ]
+   },
+   {
+    "name": "Chorus 3",
+    "groove": "laing-ride",
+    "bars": [
+     "A",
+     "C G",
+     "A",
+     "C G",
+     "A",
+     "C G",
+     "A",
+     "C G",
+     "A",
+     "C G",
+     "A",
+     "A"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Outro (riff)",
+    "groove": "laing-heavy",
+    "bars": [
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D",
+     "D",
+     "A G F D"
+    ],
+    "fill": true
+   }
+  ]
+ },
+ {
+  "id": "john-fogerty-blue-moon-nights",
+  "title": "Blue Moon Nights",
+  "artist": "John Fogerty",
+  "bpm": 168,
+  "time": "4/4",
+  "groove": "train",
+  "feel": "push",
+  "swing": 0.12,
+  "rev": 1,
+  "band": {
+   "bass": "boogie",
+   "keys": "off",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro",
+    "groove": "train",
+    "bars": [
+     "E",
+     "E",
+     "E",
+     "E"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Verse 1",
+    "groove": "train",
+    "bars": [
+     "E",
+     "E",
+     "A",
+     "E",
+     "A",
+     "E",
+     "B7",
+     "B7",
+     "E",
+     "A",
+     "E",
+     "E",
+     "A",
+     "B7",
+     "E",
+     "E"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Verse 2",
+    "groove": "train",
+    "bars": [
+     "E",
+     "A",
+     "E",
+     "E",
+     "A",
+     "E",
+     "B7",
+     "B7",
+     "E",
+     "A",
+     "E",
+     "E",
+     "A",
+     "B7",
+     "E",
+     "E"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Chorus 1",
+    "groove": "train",
+    "bars": [
+     "A",
+     "A",
+     "E",
+     "E",
+     "B7",
+     "B7",
+     "E",
+     "E",
+     "A",
+     "A",
+     "E",
+     "E",
+     "B7",
+     "B7",
+     "E",
+     "E"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Solo",
+    "groove": "train",
+    "bars": [
+     "E",
+     "E",
+     "A",
+     "E",
+     "A",
+     "E",
+     "B7",
+     "B7",
+     "E",
+     "A",
+     "E",
+     "E",
+     "A",
+     "B7",
+     "E",
+     "E"
+    ],
+    "crash": true
+   },
+   {
+    "name": "Verse 3",
+    "groove": "train",
+    "bars": [
+     "E",
+     "E",
+     "A",
+     "E",
+     "A",
+     "E",
+     "B7",
+     "B7",
+     "E",
+     "A",
+     "E",
+     "E",
+     "A",
+     "B7",
+     "E",
+     "E"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Chorus 2",
+    "groove": "train",
+    "bars": [
+     "A",
+     "A",
+     "E",
+     "E",
+     "B7",
+     "B7",
+     "E",
+     "E",
+     "A",
+     "A",
+     "E",
+     "E",
+     "B7",
+     "B7",
+     "E",
+     "E"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Outro",
+    "groove": "train",
+    "bars": [
+     "E",
+     "A",
+     "B7",
+     "E"
+    ],
+    "fill": true
+   }
+  ]
+ },
+ {
+  "id": "neil-young-harvest-moon",
+  "title": "Harvest Moon",
+  "artist": "Neil Young",
+  "bpm": 116,
+  "time": "4/4",
+  "groove": "ballad",
+  "feel": "loose",
+  "rev": 1,
+  "band": {
+   "bass": "roots",
+   "keys": "off",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro",
+    "groove": "hats-only",
+    "bars": [
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Verse 1",
+    "groove": "ballad",
+    "bars": [
+     "Em7",
+     "Em7",
+     "Em7",
+     "Em7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "Em7",
+     "Em7",
+     "Em7",
+     "Em7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "G6",
+     "G6",
+     "G6",
+     "G6",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "G6",
+     "G6",
+     "G6",
+     "G6",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Chorus 1",
+    "groove": "ballad",
+    "bars": [
+     "A7sus4",
+     "A7sus4",
+     "A7",
+     "A7",
+     "A7sus4",
+     "A7sus4",
+     "A7sus4",
+     "A7sus4",
+     "A",
+     "A",
+     "A",
+     "A",
+     "D",
+     "D",
+     "D",
+     "D"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Turnaround",
+    "groove": "ballad",
+    "bars": [
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7"
+    ]
+   },
+   {
+    "name": "Verse 2",
+    "groove": "ballad",
+    "bars": [
+     "Em7",
+     "Em7",
+     "Em7",
+     "Em7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "Em7",
+     "Em7",
+     "Em7",
+     "Em7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "G6",
+     "G6",
+     "G6",
+     "G6",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "G6",
+     "G6",
+     "G6",
+     "G6",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Chorus 2",
+    "groove": "ballad",
+    "bars": [
+     "A7sus4",
+     "A7sus4",
+     "A7",
+     "A7",
+     "A7sus4",
+     "A7sus4",
+     "A7sus4",
+     "A7sus4",
+     "A",
+     "A",
+     "A",
+     "A",
+     "D",
+     "D",
+     "D",
+     "D"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Turnaround 2",
+    "groove": "ballad",
+    "bars": [
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7"
+    ]
+   },
+   {
+    "name": "Solo",
+    "groove": "ballad",
+    "bars": [
+     "G6",
+     "G6",
+     "G6",
+     "G6",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "G6",
+     "G6",
+     "G6",
+     "G6",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7"
+    ],
+    "crash": true
+   },
+   {
+    "name": "Chorus 3",
+    "groove": "ballad",
+    "bars": [
+     "A7",
+     "A7",
+     "A7",
+     "A7",
+     "A7sus4",
+     "A7sus4",
+     "A7sus4",
+     "A7sus4",
+     "A",
+     "A",
+     "A",
+     "A",
+     "D",
+     "D",
+     "D",
+     "D"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Outro",
+    "groove": "ballad",
+    "bars": [
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "D D6",
+     "Dmaj7",
+     "D"
+    ],
+    "fill": true
+   }
+  ]
+ },
+ {
+  "id": "supertramp-lord-is-it-mine",
+  "title": "Lord Is It Mine",
+  "artist": "Supertramp",
+  "bpm": 76,
+  "time": "4/4",
+  "groove": "ballad",
+  "feel": "loose",
+  "rev": 1,
+  "band": {
+   "bass": "whole",
+   "keys": "epiano",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro",
+    "groove": "silence",
+    "bars": [
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "D Dmaj7",
+     "D6 Dmaj7",
+     "D",
+     "D",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Verse 1",
+    "groove": "hats-only",
+    "bars": [
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "D Dmaj7",
+     "D6 Dmaj7",
+     "D",
+     "D",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Verse 2",
+    "groove": "ballad",
+    "bars": [
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "D Dmaj7",
+     "D6 Dmaj7",
+     "D",
+     "D",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Chorus 1",
+    "groove": "ballad",
+    "bars": [
+     "Amaj7 A",
+     "A6",
+     "D Dmaj7",
+     "D6",
+     "D6 Dmaj7",
+     "D",
+     "Aadd9 A",
+     "Amaj7",
+     "Amaj7 A",
+     "A6",
+     "D Dmaj7",
+     "D6",
+     "D6 Dmaj7",
+     "D",
+     "Aadd9 A",
+     "Amaj7 A6"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Verse 3",
+    "groove": "ballad",
+    "bars": [
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "D Dmaj7",
+     "D6 Dmaj7",
+     "D",
+     "D",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Chorus 2",
+    "groove": "ballad",
+    "bars": [
+     "Amaj7 A",
+     "A6",
+     "D Dmaj7",
+     "D6",
+     "D6 Dmaj7",
+     "D",
+     "Aadd9 A",
+     "Amaj7",
+     "Amaj7 A",
+     "A6",
+     "D Dmaj7",
+     "D6",
+     "D6 Dmaj7",
+     "D",
+     "Aadd9 A",
+     "Amaj7 A6"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Interlude",
+    "groove": "ballad",
+    "bars": [
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "D Dmaj7",
+     "D6 Dmaj7",
+     "D",
+     "D",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6"
+    ]
+   },
+   {
+    "name": "Outro",
+    "groove": "ballad",
+    "bars": [
+     "C#m",
+     "C#m",
+     "D",
+     "Dmaj7",
+     "B",
+     "B",
+     "A",
+     "C#m",
+     "D",
+     "D",
+     "E7",
+     "E7",
+     "D",
+     "D",
+     "E7",
+     "E7",
+     "D",
+     "D",
+     "E7",
+     "E7",
+     "F",
+     "Am",
+     "Dm",
+     "Aadd9 A Amaj7 A6"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Ending",
+    "groove": "ballad",
+    "bars": [
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6",
+     "Aadd9",
+     "A",
+     "Amaj7",
+     "A6"
+    ]
+   }
+  ]
  },
  {
   "id": "demo-jam-g",
