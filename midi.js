@@ -9,7 +9,7 @@
     49: 'C', 57: 'C', 55: 'C', 52: 'C', 50: 'T', 48: 'T', 47: 'M', 45: 'M', 43: 'F', 41: 'F', 56: 'B' };
   const VEL = { X: 120, x: 96, g: 40, o: 100 };
 
-  function noteFor(inst, ch) { return inst === 'H' && ch === 'o' ? GM.Ho : GM[inst]; }
+  function noteFor(inst, ch) { return inst === 'H' && ch === 'o' ? GM.Ho : inst === 'Hp' ? 44 : inst === 'Db' ? 53 : GM[inst]; }
   function velFor(ch) { return VEL[ch] || 96; }
 
   // ---------- helpers ----------
@@ -100,10 +100,18 @@
   SD.barHits = function (bar, bi, tl) {
     const sig = tl.sig; const hits = [];
     if (bar.crash) hits.push({ step: 0, inst: 'C', ch: 'x', note: GM.C, vel: 110 });
-    let pat = bar.custom || bar.groove;
-    if (!bar.custom && bar.fill) { const f = SD.FILLS[sig.sig]; pat = f[bi % f.length]; }
-    for (const inst of ['K', 'S', 'R', 'H', 'D', 'C', 'T', 'M', 'F', 'B']) {
-      const row = pat[inst]; if (!row) continue;
+    let pat = bar.custom || (bar.varIdx && bar.groove.vars ? bar.groove.vars[bar.varIdx - 1] : bar.groove);
+    if (!bar.custom && bar.fill) { const f = bar.groove.fills || SD.FILLS[sig.sig]; pat = f[(bi * 5 + (bar.section || 0) * 3) % f.length]; }
+    let mini = null;
+    if (!bar.custom && bar.mini) { const mf = bar.groove.minis || SD.MINIFILLS[sig.sig]; if (mf) mini = mf[(bi * 3) % mf.length]; }
+    for (const inst of ['K', 'S', 'R', 'H', 'Hp', 'D', 'Db', 'C', 'T', 'M', 'F', 'B']) {
+      let row = pat[inst];
+      if (mini) { // overlay the last-beat mini fill: drums the mini defines take over the last beat
+        const base = (row || '.'.repeat(sig.steps)).split(''); const mrow = mini[inst];
+        if (mrow) { for (let s = sig.steps - 4; s < sig.steps; s++) base[s] = mrow[s] || '.'; row = base.join(''); }
+        else if ('STMF'.includes(inst) && row) { for (let s = sig.steps - 4; s < sig.steps; s++) if (s % 4 !== 0) base[s] = '.'; row = base.join(''); }
+      }
+      if (!row) continue;
       for (let s = 0; s < sig.steps; s++) {
         const ch = row[s]; if (!ch || ch === '.') continue;
         hits.push({ step: s, inst, ch, note: noteFor(inst, ch), vel: velFor(ch) });

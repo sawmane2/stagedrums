@@ -76,7 +76,7 @@ UG sheets show chord *changes*, not bars, so bar counts are often off. Two ways 
 }
 ```
 
-`groove` names are in `drums.js` (`GROOVES`): rock, rock-16, rock-heavy, pop, four-floor, half-time, ballad, ballad-ride, country, shuffle, funk, reggae, bossa, punk, motown, train, hats-only, kick-only, silence, waltz, waltz-ride (3/4), six-eight, six-eight-drive (6/8), plus song-specific baker-* (Cream) and laing-* / cowbell-count (Mountain). Grooves are 16‑step strings per instrument (`K` kick, `S` snare, `H` hats, `D` ride, `C` crash, `T/M/F` toms, `R` cross‑stick, `B` cowbell) so adding your own is one line. `fill: true` plays a fill on a section's last bar; `crash: true` crashes on its first bar.
+`groove` names are in `drums.js` (`GROOVES`): rock, rock-16, rock-heavy, pop, four-floor, half-time, ballad, ballad-ride, country, shuffle, funk, reggae, bossa, punk, motown, train, hats-only, kick-only, silence, waltz, waltz-ride (3/4), six-eight, six-eight-drive (6/8), plus song-specific baker-blues / baker-busy / baker-jazz / baker-heavy / baker-ride / baker-toms (Ginger Baker) and laing-cowbell / laing-heavy / laing-ride / laing-boogie / cowbell-count (Corky Laing). Grooves are 16‑step strings per instrument (`K` kick, `S` snare, `H` hats, `D` ride, `C` crash, `T/M/F` toms, `R` cross‑stick, `B` cowbell) so adding your own is one line. `fill: true` plays a fill on a section's last bar; `crash: true` crashes on its first bar.
 
 Songs live in the browser's localStorage. Use **Export** to save a `.json` and drop it in `songs/` (and add it to `songs/index.json`) to ship it with the app.
 
@@ -89,7 +89,7 @@ Pick the kit in the sidebar (**Drum kit**):
 - **Orchestral kit (VCSL)** — the earlier concert bass drum / orchestral snare / suspended cymbal set (CC0). Kept for variety.
 - **Synth kit** — synthesized drums, no download, always available.
 
-Every sample's true onset is detected at load time so hits land exactly on the grid. To add your own kit, create `kits/<name>/kit.json` like the existing ones and list it in `kits/index.json`.
+Every sample's true onset is detected at load time so hits land exactly on the grid — and then a **feel** engine moves them off it the way a drummer does: each groove has a `feel` (`loose` = Baker‑style laid‑back snare and a little jitter; `push` = Laing‑style ahead of the beat; `tight`) and a `swing` amount, hi‑hats/ride are accented on the beat and softer between, velocities vary a few percent, fills crescendo, and grooves carry alternate bars (`vars`) that rotate every other bar plus short "mini fills" on the last beat of every 4th bar. A song or section can set `"swing"` / `"feel"` to override the groove. Turn it off with `stagedrums.transport.humanize = false` in the console if you ever want a machine. To add your own kit, create `kits/<name>/kit.json` like the existing ones and list it in `kits/index.json`.
 
 ## MIDI
 

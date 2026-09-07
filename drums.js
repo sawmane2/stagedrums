@@ -179,15 +179,18 @@
       const g = this._env(t, 0.9 * v, 0.4);
       o.connect(g); g.connect(this.bus.tom); o.start(t); o.stop(t + 0.45);
     }
-    cowbell(t, v = 1) {
+    cowbell(t, v = 1) { // modal model of a steel cowbell: inharmonic partials, fast-damped top, stick click
       const ctx = this.ctx;
-      const f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 800; f.Q.value = 1.5;
-      const g = this._env(t, 0.55 * v, 0.18);
-      f.connect(g); g.connect(this.bus.perc);
-      for (const fr of [587, 845]) {
-        const o = ctx.createOscillator(); o.type = 'square'; o.frequency.value = fr;
-        o.connect(f); o.start(t); o.stop(t + 0.2);
+      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 4200; lp.Q.value = 0.7;
+      lp.connect(this.bus.perc);
+      const partials = [[560, 1, 0.22], [845, 0.55, 0.16], [1180, 0.3, 0.1], [1650, 0.22, 0.08], [2460, 0.12, 0.06], [3300, 0.07, 0.04]];
+      for (const [fr, amp, dec] of partials) {
+        const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = fr * (1 + (Math.random() - 0.5) * 0.01);
+        const g = this._env(t, 0.5 * v * amp, dec);
+        o.connect(g); g.connect(lp); o.start(t); o.stop(t + dec + 0.05);
       }
+      const n = this._noiseSrc(t, 0.012); const nf = ctx.createBiquadFilter(); nf.type = 'bandpass'; nf.frequency.value = 2500; nf.Q.value = 1;
+      const ng = this._env(t, 0.25 * v, 0.012); n.connect(nf); nf.connect(ng); ng.connect(lp);
     }
     click(t, accent = false) {
       const ctx = this.ctx;
@@ -199,7 +202,7 @@
     /** Play one step token for an instrument letter */
     hit(inst, ch, t) {
       const v = ch === 'X' ? 1.15 : ch === 'x' ? 0.85 : ch === 'g' ? 0.35 : ch === 'o' ? 0.9 : 0.85;
-      if (this.mode === 'acoustic' && this.samples && inst !== 'B') {
+      if (this.mode === 'acoustic' && this.samples && (inst !== 'B' || this.samples.B)) {
         const vel = Math.min(1, v);
         switch (inst) {
           case 'K': return this._sample('K', vel, t, 'kick');
@@ -210,10 +213,13 @@
             this._choke(this._openHat, t); this._openHat = null; return this._sample('H', vel, t, 'hat');
           }
           case 'D': return this._sample(ch === 'X' && this.samples.Db ? 'Db' : 'D', vel, t, 'cym');
+          case 'Db': return this._sample(this.samples.Db ? 'Db' : 'D', vel, t, 'cym');
+          case 'Hp': { this._choke(this._openHat, t); this._openHat = null; return this._sample(this.samples.Hp ? 'Hp' : 'H', vel * 0.8, t, 'hat'); }
           case 'C': return this._sample('C', vel, t, 'cym');
           case 'T': return this._sample('T', vel, t, 'tom');
           case 'M': return this._sample('M', vel, t, 'tom');
           case 'F': return this._sample('F', vel, t, 'tom');
+          case 'B': return this._sample('B', vel, t, 'perc');
         }
       }
       switch (inst) {
@@ -227,6 +233,8 @@
         case 'M': return this.tom(t, v, 'mid');
         case 'F': return this.tom(t, v, 'lo');
         case 'B': return this.cowbell(t, v);
+        case 'Hp': return this.hat(t, v * 0.6, false);
+        case 'Db': return this.ride(t, v * 1.2);
       }
     }
   }
@@ -251,13 +259,60 @@
     'punk':        { sig: '4/4', desc: 'Fast punk',           K: 'x...x...x...x...', S: '..x...x...x...x.', H: 'x.x.x.x.x.x.x.x.' },
     'motown':      { sig: '4/4', desc: 'Snare on every beat', K: 'x.......x.......', S: 'x...x...x...x...', H: 'x.x.x.x.x.x.x.x.' },
     'train':       { sig: '4/4', desc: 'Brushy train beat',   K: 'x.......x.......', S: 'xgxgXgxgxgxgXgxg', H: '................' },
-    'baker-blues': { sig: '4/4', desc: 'Ginger Baker-style driving blues rock (Cream)', K: 'x..x..x.x..x.x..', S: '....x..g....x..g', H: 'x.x.x.x.x.x.x.xo' },
-    'baker-ride':  { sig: '4/4', desc: 'Same groove on the ride (solo section)', K: 'x..x..x.x..x.x..', S: '....x..g....x..g', D: 'x.x.x.x.x.x.x.x.', H: '....x.......x...' },
-    'baker-toms':  { sig: '4/4', desc: 'Tom-driven turnaround feel', K: 'x.......x.......', S: '....x.......x...', T: 'x.x.....x.x.....', F: '....x.x.....x.x.' },
-    'cowbell-count': { sig: '4/4', desc: 'Cowbell 8ths only (Mississippi Queen count-off)', B: 'X.x.x.x.X.x.x.x.' },
-    'laing-cowbell': { sig: '4/4', desc: 'Heavy rock 8ths with cowbell on top (Mountain)', K: 'x......xx.......', S: '....x.......x...', B: 'X.x.x.x.X.x.x.x.', H: '....x.......x...' },
-    'laing-heavy':   { sig: '4/4', desc: 'Heavy rock, open hats, pushing kick', K: 'x......xx.....x.', S: '....x.......x...', H: 'o.o.o.o.o.o.o.o.' },
-    'laing-ride':    { sig: '4/4', desc: 'Heavy rock on the ride w/ cowbell accents', K: 'x......xx.....x.', S: '....x.......x...', D: 'x.x.x.x.x.x.x.x.', B: 'X.......X.......' },
+    // Ginger Baker (Cream, 1967): loose, jazz-schooled, ride-heavy, kick doubled under the riff, hi-hat foot on 2 & 4,
+    // ghosted snare, tom accents. A touch of swing and laid-back snare.
+    'baker-blues': { sig: '4/4', desc: 'Ginger Baker-style blues rock (Cream) — ride, doubled kick, ghosts', swing: 0.18, feel: 'loose',
+      K: 'x.....x.x.....x.', S: '....X.g.....X..g', D: 'x.x.x.x.x.x.x.x.', Hp: '....x.......x...',
+      vars: [
+        { K: 'x.....x.x..x..x.', S: '....X.g...g.X..g', D: 'x.x.x.x.x.x.x.x.', Hp: '....x.......x...' },
+        { K: 'x.....x.x.....x.', S: '....X.......X.gg', D: 'X.x.x.x.X.x.x.x.', Hp: '....x.......x...', F: '..............x.' },
+        { K: 'x.....x.x.....x.', S: '....X.g.....X...', D: 'x.x.x.x.x.x.x.x.', Hp: '....x.......x...', T: '..............xx' },
+      ] },
+    'baker-busy':  { sig: '4/4', desc: 'Baker, second verse — busier kick, ghosts, tom answers', swing: 0.2, feel: 'loose',
+      K: 'x..x..x.x..x..x.', S: '....X.g.g...X.g.', D: 'x.x.x.x.x.x.x.x.', Hp: '....x.......x...',
+      vars: [
+        { K: 'x..x..x.x.xx..x.', S: '....X.g.....X.gg', D: 'x.x.x.x.x.x.x.x.', Hp: '....x.......x...', T: '..............x.' },
+        { K: 'x..x..x.x..x..xx', S: '....X...g.g.X...', D: 'X.x.x.x.X.x.x.x.', Hp: '....x.......x...', F: '..........x.....' },
+        { K: 'x..x..x.x..x..x.', S: '....X.g.....X...', D: 'x.x.x.x.x.x.x...', Hp: '....x.......x...', T: '............x.x.', F: '..............x.' },
+        { K: 'x..x..x.x..x..x.', S: '....X.gg....X.g.', D: 'x.x.x.x.x.x.x.x.', Hp: '....x.......x...', M: '.......x........' },
+      ] },
+    'baker-jazz':  { sig: '4/4', desc: 'Baker jazz ride (ding-ding-da-ding), hat on 2 & 4, snare comping', swing: 0.3, feel: 'loose',
+      K: 'x.......x.......', S: '....X..g..g.X...', D: 'x...x.x.x...x.x.', Hp: '....x.......x...',
+      vars: [
+        { K: 'x.....x.x.......', S: '....X...g...X.g.', D: 'x...x.x.x...x.x.', Hp: '....x.......x...', T: '......x.........' },
+        { K: 'x.......x..x....', S: '..g.X.....g.X...', D: 'X...x.x.X...x.x.', Hp: '....x.......x...', F: '..............x.' },
+        { K: 'x.......x.......', S: '....X.g...g.X.g.', D: 'x...x.x.x...x.x.', Hp: '....x.......x...', Db: '........x.......' },
+      ] },
+    'baker-heavy': { sig: '4/4', desc: 'Baker, last verse — double kick, crashing ride, toms', swing: 0.15, feel: 'loose',
+      K: 'x.xx..x.x.xx..x.', S: '....X.......X..g', D: 'X.x.X.x.X.x.X.x.', Hp: '....x.......x...',
+      vars: [
+        { K: 'x.xx..x.x.xx..xx', S: '....X.......X...', D: 'X.x.X.x.X.x.X.x.', Hp: '....x.......x...', F: '..............x.' },
+        { K: 'x.xx..x.x.xxx.x.', S: '....X.g.....X.g.', C: 'x...............', D: '..x.X.x.X.x.X.x.', Hp: '....x.......x...', T: '............x...', F: '.............x..' },
+        { K: 'x.xx..x.x.xx..x.', S: '....X.......X...', D: 'X.x.X.x.X.x.X...', Hp: '....x.......x...', T: '..............xx' },
+      ] },
+    'baker-ride':  { sig: '4/4', desc: 'Baker on the ride bell, opened up (solo)', swing: 0.18, feel: 'loose',
+      K: 'x.....x.x.....x.', S: '....X.g.....X..g', D: 'X.x.X.x.X.x.X.x.', Hp: '....x.......x...',
+      vars: [{ K: 'x.....x.x..x..x.', S: '....X.g.g...X.gg', D: 'X.x.X.x.X.x.X.x.', Hp: '....x.......x...', F: '............x...' }] },
+    'baker-toms':  { sig: '4/4', desc: 'Baker riff feel — kick and floor tom under the riff', swing: 0.18, feel: 'loose',
+      K: 'x.....x.x.....x.', S: '....X.......X...', F: 'x.x...x.x.x...x.', T: '......x.......x.', Hp: '....x.......x...',
+      vars: [{ K: 'x.....x.x.....x.', S: '....X.......X.g.', F: 'x.x...x.x.x.....', T: '......x.....x.xx', Hp: '....x.......x...' }] },
+    // Corky Laing (Mountain, 1970): big, heavy, slightly ahead of the beat, cowbell 8ths, rimshot backbeats, open hats.
+    'cowbell-count': { sig: '4/4', desc: 'Cowbell 8ths only (Mississippi Queen count-off)', feel: 'tight', B: 'X.x.x.x.X.x.x.x.' },
+    'laing-cowbell': { sig: '4/4', desc: 'Heavy rock 8ths with cowbell on top (Mountain)', feel: 'push',
+      K: 'x......xx.......', S: '....X.......X...', B: 'X.x.x.x.X.x.x.x.', Hp: '....x.......x...',
+      vars: [{ K: 'x......xx.....x.', S: '....X.......X.g.', B: 'X.x.x.x.X.x.x.x.', Hp: '....x.......x...' },
+             { K: 'x......xx.......', S: '....X.......X...', B: 'X.x.x.x.X.x.xxx.', Hp: '....x.......x...' }] },
+    'laing-heavy':   { sig: '4/4', desc: 'Heavy rock, open hats, pushing kick (Mountain verse)', feel: 'push',
+      K: 'x......xx.....x.', S: '....X.......X...', H: 'o.o.o.o.o.o.o.o.',
+      vars: [{ K: 'x......xx.x...x.', S: '....X.......X...', H: 'o.o.o.o.o.o.o.o.' },
+             { K: 'x......xx.....x.', S: '....X.....g.X..g', H: 'o.o.o.o.o.o.o.oo' }] },
+    'laing-ride':    { sig: '4/4', desc: 'Heavy rock on the ride, cowbell on 1 & 3 (solo)', feel: 'push',
+      K: 'x......xx.....x.', S: '....X.......X...', D: 'x.x.x.x.x.x.x.x.', B: 'X.......X.......',
+      vars: [{ K: 'x......xx.....x.', S: '....X.......X.g.', D: 'X.x.x.x.X.x.x.x.', B: 'X.......X.......', Db: '..............x.' }] },
+    'laing-boogie':  { sig: '4/4', desc: 'Mid-tempo heavy boogie, half-swung (Sittin\' on a Rainbow)', swing: 0.28, feel: 'push',
+      K: 'x.....x.x.....x.', S: '....X.......X...', H: 'x.x.x.x.x.x.x.o.',
+      vars: [{ K: 'x.....x.x..x..x.', S: '....X.......X.g.', H: 'x.x.x.x.x.x.x.o.' },
+             { K: 'x.....x.x.....x.', S: '....X.....g.X...', H: 'x.x.x.x.x.x.x.x.', B: '..............x.' }] },
     'hats-only':   { sig: '4/4', desc: 'Just hats (intro/breakdown)', H: 'x.x.x.x.x.x.x.x.' },
     'kick-only':   { sig: '4/4', desc: 'Kick + hats build',   K: 'x...x...x...x...', H: 'x.x.x.x.x.x.x.x.' },
     'silence':     { sig: '4/4', desc: 'Drums out' },
@@ -274,11 +329,30 @@
       { K: 'x.......x...x...', S: '....x.x.x.x.x.x.', T: '.............x..', M: '..............x.', F: '...............x', H: 'x.x.x.x.........' },
       { K: 'x...x...x...x...', S: 'x.x.x.x.xxxxxxxx', H: '................' },
       { K: 'x.......x.......', S: '....xx..........', T: '......xx........', M: '........xx......', F: '..........xxxxxx' },
+      { K: 'x...x...x...x...', S: '....X...x.x.X.xx', T: '..........x.....', F: '............x...', D: 'x.x.x.x.........' },
+      { K: 'x.......x.......', S: '....X.....xx....', T: '........xx..x...', M: '..............x.', F: '............x..x' },
+      { K: 'x.......x.....x.', S: '....X.......xxxx', H: 'x.x.x.x.x.x.....' },
     ],
     '3/4': [{ K: 'x...........', S: '....x...xxxx', T: '........x...', F: '..........x.' }],
     '6/8': [{ K: 'x.....x.....', S: '......x.xxxx', T: '........x...', F: '..........xx' }],
   };
 
+  // Ginger Baker-style fills: tom rolls, triplet-ish tumbles, double-kick under the toms, snare-tom answers
+  const BAKER_FILLS = [
+    { K: 'x.......x.....xx', S: '....X...xx......', T: '..........xx....', M: '............x...', F: '.............x..' },
+    { K: 'x.xx....x.xx....', S: '....X.x.x.......', T: '........x.x.....', M: '..........x.x...', F: '............x.xx' },
+    { K: 'x.......x.......', S: '....X.......xxx.', T: '........xxx.....', F: '...............x' },
+    { K: 'x...x...x...x.xx', S: '....X.g.X.g.X.g.', T: '.........x...x..', F: '...........x...x' },
+    { K: 'x.......x.xx..x.', S: '....X..x..x.....', T: '..........x.x...', M: '............x...', F: '..............xx' },
+    { K: 'x.......x.......', S: '....X...x.x.x.x.', F: '.........x.x.x.x' },
+  ];
+  const BAKER_MINIS = [{ S: '............x.x.', F: '.............x.x' }, { T: '............xx..', F: '..............xx' }, { S: '............X...', K: '..............xx' }, { S: '............x.xx' }];
+  for (const g of ['baker-blues', 'baker-busy', 'baker-jazz', 'baker-heavy', 'baker-ride', 'baker-toms']) { GROOVES[g].fills = BAKER_FILLS; GROOVES[g].minis = BAKER_MINIS; }
+  // short fills on the last beat of a 4-bar phrase (drummers "turn the corner" every 4 bars)
+  const MINIFILLS = {
+    '4/4': [{ S: '............x.xx' }, { S: '............xx..', T: '..............x.', F: '...............x' }, { T: '............xx..', F: '..............xx' }, { S: '............X.x.', F: '...............x' }],
+    '3/4': [{ S: '........x.xx' }], '6/8': [{ S: '.........xxx' }],
+  };
   function parseSig(sig) {
     const [n, d] = (sig || '4/4').split('/').map(Number);
     // steps per beat: 4 for quarter-note beats; 2 for 6/8 (eighth-note beats)
@@ -328,6 +402,10 @@
             chords: parseBar(b, sig.beats, prev),
             groove, grooveName: sec.groove || song.groove || 'rock',
             fill: !!sec.fill && bi === sec.bars.length - 1,
+            mini: !(sec.fill && bi === sec.bars.length - 1) && sec.bars.length >= 4 && (bi % 4 === 3),
+            varIdx: (groove.vars && bi > 0 && (bi % 2 === 1)) ? ((bi * 7 + r * 3) % (groove.vars.length + 1)) : 0, // 0 = main pattern
+            swing: sec.swing ?? song.swing ?? groove.swing ?? 0,
+            feel: sec.feel || song.feel || groove.feel || 'normal',
             custom: (sec.midi && sec.midi[bi]) || (song.midiBars && song.midiBars[bars.length]) || null,
             crash: (sec.crash !== false) && bi === 0 && r === 0 && si > 0,
             lastOfSection: bi === sec.bars.length - 1 && r === repeat - 1,
@@ -350,7 +428,7 @@
       // current section before moving on; queued = {section, now} section to go to (at section end, or next bar if now)
       this.hold = false; this.extra = 0; this.queued = null;
       this.onLive = null;  // callback when hold/extra/queued change
-      this.countIn = true; this.audible = true;
+      this.countIn = true; this.audible = true; this.humanize = true;
       this.lookahead = 0.12; this.tick = 25;
       this.onBar = null; this.onBeat = null; this.onStop = null; this.onAnchor = null;
       this._timer = null;
@@ -523,10 +601,13 @@
           }
           if (this._step === 0 || !this._barHits) this._barHits = global.StageDrums.barHits(bar, this._bar, tl);
           if (this.audible || this.midi) {
+            const stepSec = this.secPerStep();
             for (const h of (this._barHits || [])) {
               if (h.step !== this._step) continue;
-              if (this.audible) this.kit.hit(h.inst, h.ch, t);
-              if (this.midi) this.midi.note(h.inst, h.ch, t);
+              const th = this.humanize ? t + global.StageDrums.humanOffset(h, this._step, sig, bar, stepSec) : t;
+              const ch = this.humanize ? global.StageDrums.humanVel(h, this._step, sig, bar) : h.ch;
+              if (this.audible) this.kit.hit(h.inst, ch, th);
+              if (this.midi) this.midi.note(h.inst, ch, th);
             }
           }
         }
@@ -562,5 +643,39 @@
     }
   }
 
-  global.StageDrums = { DrumKit, GROOVES, FILLS, Transport, buildTimeline, parseSig, parseBar };
+  // ---------- Feel: how a real drummer places and weights hits ----------
+  const FEEL = {
+    normal: { jitter: 0.004, lay: { S: 0.004, K: 0, H: -0.002, D: 0, T: 0.003, M: 0.003, F: 0.004, C: 0.002, B: -0.001 } },
+    loose:  { jitter: 0.007, lay: { S: 0.009, K: 0.002, H: -0.002, D: 0.001, T: 0.005, M: 0.005, F: 0.006, C: 0.004, B: 0 } },
+    push:   { jitter: 0.004, lay: { S: -0.003, K: -0.004, H: -0.004, D: -0.003, T: 0, M: 0, F: 0.001, C: -0.002, B: -0.005 } },
+    tight:  { jitter: 0.0015, lay: {} },
+  };
+  function gauss() { let s = 0; for (let i = 0; i < 4; i++) s += Math.random(); return (s - 2) / 1.15; }
+  /** Timing offset (seconds) for one hit: swing + per-instrument lay-back/push + small random jitter. */
+  function humanOffset(h, step, sig, bar, stepSec) {
+    const f = FEEL[bar.feel] || FEEL.normal;
+    let off = (f.lay[h.inst] || 0) + gauss() * f.jitter;
+    const sw = bar.swing || 0;
+    if (sw > 0 && sig.stepsPerBeat === 4) {
+      const inBeat = step % 4;
+      if (inBeat === 2) off += sw * 0.667 * stepSec;        // off-beat 8th → toward the triplet
+      else if (inBeat === 1 || inBeat === 3) off += sw * 0.33 * stepSec; // 16ths lean the same way
+    }
+    if (h.step === 0 && h.inst === 'K') off -= 0.001; // downbeat kick leads slightly
+    return off;
+  }
+  /** Velocity shaping: hi-hat/ride accent on the beat, random ±, crescendo through fills. */
+  function humanVel(h, step, sig, bar) {
+    let v = h.ch === 'X' ? 1.0 : h.ch === 'g' ? 0.35 : h.ch === 'o' ? 0.9 : 0.82;
+    if ((h.inst === 'H' || h.inst === 'D' || h.inst === 'B') && h.ch !== 'X') {
+      const inBeat = step % sig.stepsPerBeat;
+      v *= inBeat === 0 ? 1.0 : inBeat === 2 ? 0.78 : 0.62;
+      if (step === 0) v *= 1.08;
+    }
+    if (bar.fill) v *= 0.75 + 0.35 * (step / sig.steps);
+    v *= 1 + gauss() * 0.06;
+    v = Math.max(0.15, Math.min(1.15, v));
+    return v >= 1.0 ? 'X' : v < 0.45 ? 'g' : v >= 0.88 && h.ch === 'o' ? 'o' : h.ch === 'o' ? 'o' : 'x';
+  }
+  global.StageDrums = { DrumKit, GROOVES, FILLS, MINIFILLS, FEEL, Transport, buildTimeline, parseSig, parseBar, humanOffset, humanVel };
 })(window);

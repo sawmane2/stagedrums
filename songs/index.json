@@ -18,7 +18,7 @@
           "E7",
           "E7"
         ],
-        "lyrics": "Main E riff x2. Drums: toms + kick pushing the riff, fill into verse."
+        "lyrics": "Main E riff x2. Kick and floor tom under the riff, hat on 2 & 4."
       },
       {
         "name": "Verse 1",
@@ -39,31 +39,11 @@
           "E7",
           "E7"
         ],
-        "lyrics": "12-bar form: riff on E7 for 8, B7 turnaround for 2, back to E7 riff for 2."
+        "lyrics": "Ride-based, doubled kick, ghost notes. 12-bar: E7 x8, B7 x2, E7 x2."
       },
       {
         "name": "Verse 2",
-        "groove": "baker-blues",
-        "crash": true,
-        "fill": true,
-        "bars": [
-          "E7",
-          "E7",
-          "E7",
-          "E7",
-          "E7",
-          "E7",
-          "E7",
-          "E7",
-          "B7",
-          "B7",
-          "E7",
-          "E7"
-        ]
-      },
-      {
-        "name": "Guitar Solo",
-        "groove": "baker-ride",
+        "groove": "baker-busy",
         "crash": true,
         "fill": true,
         "bars": [
@@ -80,11 +60,32 @@
           "E7",
           "E7"
         ],
-        "lyrics": "Ride cymbal, open up. Same 12-bar form under the solo."
+        "lyrics": "Busier: more kick, tom answers, ghosts."
+      },
+      {
+        "name": "Guitar Solo",
+        "groove": "baker-jazz",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "E7",
+          "B7",
+          "B7",
+          "E7",
+          "E7"
+        ],
+        "lyrics": "Jazz ride pattern, snare comping, swung. Baker opens up."
       },
       {
         "name": "Verse 3",
-        "groove": "baker-blues",
+        "groove": "baker-busy",
         "crash": true,
         "fill": true,
         "bars": [
@@ -104,7 +105,7 @@
       },
       {
         "name": "Verse 4 (reprise)",
-        "groove": "baker-blues",
+        "groove": "baker-heavy",
         "crash": true,
         "fill": true,
         "bars": [
@@ -120,7 +121,8 @@
           "B7",
           "E7",
           "E7"
-        ]
+        ],
+        "lyrics": "Double kick, crashing ride, tom flurries."
       },
       {
         "name": "Outro (riff)",
@@ -310,13 +312,13 @@
     "id": "mountain-sittin-on-a-rainbow",
     "title": "Sittin' on a Rainbow",
     "artist": "Mountain (Climbing!, 1970)",
-    "bpm": 146,
+    "bpm": 116,
     "time": "4/4",
     "groove": "laing-heavy",
     "sections": [
       {
         "name": "Intro (main riff)",
-        "groove": "laing-heavy",
+        "groove": "laing-boogie",
         "crash": true,
         "fill": true,
         "bars": [
@@ -325,11 +327,11 @@
           "A5",
           "A5"
         ],
-        "lyrics": "Main riff on A, 4 bars. Tempo is an estimate (record is 2:23) - nudge with +/- until it sits."
+        "lyrics": "Main riff on A, 4 bars. 116 BPM, half-swung heavy boogie."
       },
       {
         "name": "Verse 1",
-        "groove": "laing-heavy",
+        "groove": "laing-boogie",
         "crash": true,
         "fill": true,
         "bars": [
@@ -388,7 +390,7 @@
       },
       {
         "name": "Verse 2",
-        "groove": "laing-heavy",
+        "groove": "laing-boogie",
         "crash": true,
         "fill": true,
         "bars": [
@@ -431,7 +433,7 @@
         "groove": "laing-ride",
         "crash": true,
         "fill": true,
-        "repeat": 2,
+        "repeat": 1,
         "bars": [
           "A5",
           "A5",
@@ -442,11 +444,11 @@
           "A5",
           "A5"
         ],
-        "lyrics": "Riff x4 to fade on the record. Loop this section live and end on a cue."
+        "lyrics": "Riff x2 on the record then fades. Hold this section live and cue the ending."
       },
       {
         "name": "Ending",
-        "groove": "laing-heavy",
+        "groove": "laing-boogie",
         "crash": true,
         "fill": false,
         "bars": [

@@ -1,6 +1,6 @@
 {
  "name": "Rock kit (Tchimera / Vincent Sermone samples)",
- "license": "Samples recorded by Vincent \"Tchackpoum\" Sermone (Tchimera Drum Kit). Derivative kit under CC BY-SA 4.0; music made with it is CC0-free.",
+ "license": "Samples recorded by Vincent \"Tchackpoum\" Sermone (Tchimera Drum Kit). Derivative kit under CC BY-SA 4.0; music made with it is CC0-free. Cowbell: VCSL agogo bell (CC0), pitched and damped.",
  "instruments": {
   "K": {
    "gain": 1.0,
@@ -36,7 +36,7 @@
    ]
   },
   "S": {
-   "gain": 0.95,
+   "gain": 0.9,
    "layers": [
     {
      "v": 0.4,
@@ -69,7 +69,7 @@
    ]
   },
   "Sx": {
-   "gain": 0.95,
+   "gain": 1.0,
    "layers": [
     {
      "v": 0.4,
@@ -102,7 +102,7 @@
    ]
   },
   "H": {
-   "gain": 0.7,
+   "gain": 0.38,
    "layers": [
     {
      "v": 0.4,
@@ -143,7 +143,7 @@
    ]
   },
   "Ho": {
-   "gain": 0.7,
+   "gain": 0.42,
    "layers": [
     {
      "v": 0.4,
@@ -176,7 +176,7 @@
    ]
   },
   "Hp": {
-   "gain": 0.55,
+   "gain": 0.3,
    "layers": [
     {
      "v": 0.4,
@@ -209,7 +209,7 @@
    ]
   },
   "T": {
-   "gain": 0.9,
+   "gain": 0.8,
    "layers": [
     {
      "v": 0.4,
@@ -250,7 +250,7 @@
    ]
   },
   "M": {
-   "gain": 0.9,
+   "gain": 0.8,
    "layers": [
     {
      "v": 0.4,
@@ -283,7 +283,7 @@
    ]
   },
   "F": {
-   "gain": 0.95,
+   "gain": 0.85,
    "layers": [
     {
      "v": 0.4,
@@ -316,7 +316,7 @@
    ]
   },
   "C": {
-   "gain": 0.65,
+   "gain": 0.55,
    "layers": [
     {
      "v": 0.4,
@@ -353,7 +353,7 @@
    ]
   },
   "D": {
-   "gain": 0.6,
+   "gain": 0.42,
    "layers": [
     {
      "v": 0.4,
@@ -394,7 +394,7 @@
    ]
   },
   "Db": {
-   "gain": 0.6,
+   "gain": 0.45,
    "layers": [
     {
      "v": 0.4,
@@ -422,6 +422,26 @@
      "files": [
       "Db_3_0.mp3",
       "Db_3_1.mp3"
+     ]
+    }
+   ]
+  },
+  "B": {
+   "gain": 0.55,
+   "layers": [
+    {
+     "v": 0.6,
+     "files": [
+      "B_0_0.mp3",
+      "B_0_1.mp3"
+     ]
+    },
+    {
+     "v": 1.0,
+     "files": [
+      "B_1_0.mp3",
+      "B_1_1.mp3",
+      "B_1_2.mp3"
      ]
     }
    ]
