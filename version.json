@@ -1,5 +1,5 @@
 {
-  "version": "0.9.0",
+  "version": "0.10.0",
   "date": "2026-09-07",
-  "notes": "Real acoustic drum sounds: sampled kit (VCSL, CC0) with velocity layers, round-robins and hi-hat choke; synth kit kept as fallback. Updater configured for sawmane2/stagedrums."
+  "notes": "Rock kit: real close-mic'd drum samples (Supraphonic snare with rimshot accents, Premier kick, Avedis crash, Agop ride), 4 velocity layers + round robins, onset-aligned playback, vintage drum bus (tape/room/glue). Kit picker."
 }

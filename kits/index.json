@@ -1,0 +1,16 @@
+[
+ {
+  "id": "rock",
+  "name": "Rock kit (real samples)",
+  "url": "kits/rock/kit.json"
+ },
+ {
+  "id": "acoustic",
+  "name": "Orchestral kit (VCSL)",
+  "url": "kits/acoustic/kit.json"
+ },
+ {
+  "id": "synth",
+  "name": "Synth kit"
+ }
+]

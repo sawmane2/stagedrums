@@ -440,12 +440,22 @@
   if (role !== 'solo') { const u = defaultWsUrl(); if (u) connect(u); else { role = 'solo'; $('roleSelect').value = 'solo'; } }
 
   // ---------- drum kit (samples) ----------
-  $('kitSelect').value = prefs.kit || 'acoustic';
-  $('kitSelect').onchange = () => { prefs.kit = $('kitSelect').value; savePrefs(); kit.setMode(prefs.kit); $('kitStatus').textContent = kit.mode === 'acoustic' ? kit.kitName : 'Synthesized drums'; };
+  let kits = [];
+  async function loadKit(id) {
+    const k = kits.find(x => x.id === id) || kits[0];
+    if (!k || !k.url) { kit.setMode('synth'); $('kitStatus').textContent = 'Synthesized drums'; return; }
+    $('kitStatus').textContent = 'Loading ' + k.name + '…';
+    try { await kit.loadSamples(k.url); kit.setMode('acoustic'); $('kitStatus').textContent = kit.kitName; }
+    catch (e) { console.warn('kit load failed', e); kit.setMode('synth'); $('kitStatus').textContent = 'Kit unavailable — using synth'; }
+  }
+  $('kitSelect').onchange = () => { prefs.kit = $('kitSelect').value; savePrefs(); loadKit(prefs.kit); };
+  $('chkVintage').checked = prefs.vintage !== false; kit.setBus($('chkVintage').checked ? 'vintage' : 'clean');
+  $('chkVintage').onchange = () => { prefs.vintage = $('chkVintage').checked; savePrefs(); kit.setBus(prefs.vintage ? 'vintage' : 'clean'); };
   (async () => {
-    $('kitStatus').textContent = 'Loading acoustic kit…';
-    try { await kit.loadSamples('kits/acoustic/kit.json'); kit.setMode(prefs.kit || 'acoustic'); $('kitStatus').textContent = kit.mode === 'acoustic' ? kit.kitName : 'Synthesized drums'; }
-    catch (e) { console.warn('kit load failed', e); kit.setMode('synth'); $('kitStatus').textContent = 'Acoustic kit unavailable — using synth'; $('kitSelect').value = 'synth'; }
+    try { kits = await (await fetch('kits/index.json')).json(); } catch { kits = [{ id: 'synth', name: 'Synth kit' }]; }
+    $('kitSelect').innerHTML = kits.map(k => `<option value="${k.id}">${esc(k.name)}</option>`).join('');
+    const want = kits.some(k => k.id === prefs.kit) ? prefs.kit : kits[0].id;
+    $('kitSelect').value = want; loadKit(want);
   })();
 
   // ---------- version & updates ----------

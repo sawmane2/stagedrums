@@ -8,9 +8,19 @@
     constructor(ctx) {
       this.ctx = ctx;
       this.master = ctx.createGain(); this.master.gain.value = 0.8;
+      // drum bus: saturation → tone → glue compressor (+ short room in parallel)
+      this.sat = ctx.createWaveShaper(); this.sat.oversample = '2x';
+      this.tone = { low: ctx.createBiquadFilter(), mid: ctx.createBiquadFilter(), lp: ctx.createBiquadFilter() };
+      this.tone.low.type = 'lowshelf'; this.tone.low.frequency.value = 100;
+      this.tone.mid.type = 'peaking'; this.tone.mid.frequency.value = 2500; this.tone.mid.Q.value = 0.8;
+      this.tone.lp.type = 'lowpass'; this.tone.lp.frequency.value = 20000; this.tone.lp.Q.value = 0.5;
+      this.room = ctx.createConvolver(); this.roomGain = ctx.createGain(); this.roomGain.gain.value = 0;
       this.comp = ctx.createDynamicsCompressor();
       this.comp.threshold.value = -12; this.comp.ratio.value = 4; this.comp.attack.value = 0.003; this.comp.release.value = 0.15;
-      this.master.connect(this.comp); this.comp.connect(ctx.destination);
+      this.master.connect(this.sat); this.sat.connect(this.tone.low); this.tone.low.connect(this.tone.mid); this.tone.mid.connect(this.tone.lp); this.tone.lp.connect(this.comp);
+      this.master.connect(this.room); this.room.connect(this.roomGain); this.roomGain.connect(this.comp);
+      this.comp.connect(ctx.destination);
+      this.setBus('vintage');
       this.bus = {};
       for (const name of ['kick', 'snare', 'hat', 'cym', 'tom', 'perc', 'click']) {
         const g = ctx.createGain(); g.connect(this.master); this.bus[name] = g;
@@ -28,7 +38,11 @@
       await Promise.all(Object.entries(manifest.instruments).map(async ([inst, e]) => {
         const layers = await Promise.all(e.layers.map(async l => ({ v: l.v, buffers: await Promise.all(l.files.map(async f => {
           const ab = await (await fetch(base + f, { cache: 'force-cache' })).arrayBuffer();
-          return await this.ctx.decodeAudioData(ab);
+          const buffer = await this.ctx.decodeAudioData(ab);
+          // find the true onset so every hit lands exactly on the grid regardless of encoder padding
+          const ch = buffer.getChannelData(0); let pk = 0; for (let i = 0; i < ch.length; i++) { const a = Math.abs(ch[i]); if (a > pk) pk = a; }
+          let on = 0; const thr = pk * 0.03; while (on < ch.length && Math.abs(ch[on]) < thr) on++;
+          return { buffer, offset: Math.max(0, on - 8) / buffer.sampleRate };
         })) })));
         insts[inst] = { gain: e.gain ?? 1, layers };
       }));
@@ -39,11 +53,11 @@
     _sample(key, vel, t, bus) {
       const s = this.samples && this.samples[key]; if (!s) return null;
       const layer = s.layers.find(l => vel <= l.v + 1e-6) || s.layers[s.layers.length - 1];
-      const buf = layer.buffers[Math.floor(Math.random() * layer.buffers.length)];
-      const src = this.ctx.createBufferSource(); src.buffer = buf;
-      src.playbackRate.value = 1 + (Math.random() - 0.5) * 0.02; // tiny natural variation
-      const g = this.ctx.createGain(); g.gain.value = s.gain * (0.7 + 0.3 * Math.min(1, vel));
-      src.connect(g); g.connect(this.bus[bus]); src.start(t);
+      const pick = layer.buffers[Math.floor(Math.random() * layer.buffers.length)];
+      const src = this.ctx.createBufferSource(); src.buffer = pick.buffer;
+      src.playbackRate.value = 1 + (Math.random() - 0.5) * 0.015; // tiny natural variation
+      const g = this.ctx.createGain(); g.gain.value = s.gain * (0.8 + 0.2 * Math.min(1, vel)) * (1 + (Math.random() - 0.5) * 0.12);
+      src.connect(g); g.connect(this.bus[bus]); src.start(t, pick.offset);
       return { src, g };
     }
     _choke(node, t) { if (!node) return; try { node.g.gain.setTargetAtTime(0, t, 0.01); node.src.stop(t + 0.08); } catch {} }
@@ -55,6 +69,26 @@
       return buf;
     }
     setLevel(bus, v) { if (this.bus[bus]) this.bus[bus].gain.value = v; }
+    /** 'clean' = transparent; 'vintage' = tape-style saturation, darker top, a little room, glue. */
+    setBus(mode) {
+      this.busMode = mode;
+      const drive = mode === 'vintage' ? 1.6 : 1.0;
+      const n = 2048, curve = new Float32Array(n);
+      for (let i = 0; i < n; i++) { const x = (i / (n - 1)) * 2 - 1; curve[i] = Math.tanh(x * drive) / Math.tanh(drive); }
+      this.sat.curve = curve;
+      this.tone.low.gain.value = mode === 'vintage' ? 2 : 0;
+      this.tone.mid.gain.value = mode === 'vintage' ? 1.5 : 0;
+      this.tone.lp.frequency.value = mode === 'vintage' ? 11000 : 20000;
+      if (!this.room.buffer) this.room.buffer = this._roomIR(0.35);
+      this.roomGain.gain.value = mode === 'vintage' ? 0.16 : 0;
+      this.comp.threshold.value = mode === 'vintage' ? -16 : -12; this.comp.ratio.value = mode === 'vintage' ? 3 : 4;
+    }
+    _roomIR(sec) {
+      const sr = this.ctx.sampleRate, len = Math.floor(sr * sec), buf = this.ctx.createBuffer(2, len, sr);
+      for (let c = 0; c < 2; c++) { const d = buf.getChannelData(c); let lp = 0;
+        for (let i = 0; i < len; i++) { const t = i / len; const n = Math.random() * 2 - 1; lp += (n - lp) * 0.5; d[i] = lp * Math.pow(1 - t, 3) * (i < sr * 0.004 ? 0 : 1); } }
+      return buf;
+    }
     setMaster(v) { this.master.gain.value = v; }
 
     _noiseSrc(t, dur) {
@@ -169,7 +203,7 @@
         const vel = Math.min(1, v);
         switch (inst) {
           case 'K': return this._sample('K', vel, t, 'kick');
-          case 'S': return this._sample('S', vel, t, 'snare');
+          case 'S': return this._sample(ch === 'X' && this.samples.Sx ? 'Sx' : 'S', vel, t, 'snare'); // accents = rimshot
           case 'R': return this._sample('R', vel, t, 'snare');
           case 'H': {
             if (ch === 'o') { this._choke(this._openHat, t); this._openHat = this._sample('Ho', vel, t, 'hat'); return this._openHat; }

@@ -1,10 +1,10 @@
-const CACHE = 'stagedrums-v6';
-const ASSETS = ['./', './index.html', './styles.css', './app.js', './drums.js', './parser.js', './sync.js', './midi.js', './mixer.js', './mixer-ui.js', './gate-worklet.js', './manifest.json', './icon.svg', './songs/index.json', './version.json'];
+const CACHE = 'stagedrums-v7';
+const ASSETS = ['./', './index.html', './styles.css', './app.js', './drums.js', './parser.js', './sync.js', './midi.js', './mixer.js', './mixer-ui.js', './gate-worklet.js', './manifest.json', './icon.svg', './songs/index.json', './version.json', './kits/index.json'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(async c => {
     await c.addAll(ASSETS);
-    try { const kit = await (await fetch('./kits/acoustic/kit.json')).json(); const files = ['./kits/acoustic/kit.json'];
-      for (const i of Object.values(kit.instruments)) for (const l of i.layers) for (const f of l.files) files.push('./kits/acoustic/' + f);
+    try { const kit = await (await fetch('./kits/rock/kit.json')).json(); const files = ['./kits/rock/kit.json'];
+      for (const i of Object.values(kit.instruments)) for (const l of i.layers) for (const f of l.files) files.push('./kits/rock/' + f);
       await c.addAll(files); } catch {}
   }).then(() => self.skipWaiting()));
 });

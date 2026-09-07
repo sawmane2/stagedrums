@@ -82,12 +82,14 @@ Songs live in the browser's localStorage. Use **Export** to save a `.json` and d
 
 ## Drum sounds
 
-Two kits, switchable in the sidebar (**Drum kit**):
+Pick the kit in the sidebar (**Drum kit**):
 
-- **Acoustic kit (sampled)** — the default. Real recordings of a bass drum, snare (with snares on, plus cross‑stick), hi‑hat (closed / open / pedal, with open‑hat choke), two toms (the floor tom is the low tom pitched down), and two suspended cymbals for crash, ride and bell. 2–4 velocity layers and round‑robins per drum, so repeated hits don't machine‑gun. The samples are from the **Versilian Community Sample Library (CC0 — public domain)**, trimmed, EQ'd and level‑matched for a rock kit (`kits/acoustic/`, ~700 KB, cached offline).
-- **Synth kit** — the original synthesized drums; zero download, always available as a fallback.
+- **Rock kit (real samples)** — the default. A close‑mic'd rock kit: Premier kick, **Ludwig Supraphonic snare** (the classic '60s/'70s rock snare — accented hits play the rimshot), 12"/14"/18" toms, hi‑hat closed/open/pedal with choke, Istanbul Agop ride and bell, and a 20" Zildjian Avedis crashed at the edge. 4 velocity layers × 2–4 round‑robins per drum (124 samples, ~1.7 MB, cached offline). Samples recorded by Vincent "Tchackpoum" Sermone (Tchimera Drum Kit); this derivative kit is CC BY‑SA 4.0 and music made with it is free to use.
+- **Vintage bus** (checkbox) — tape‑style saturation, a darker top end, a touch of room and glue compression on the whole kit, to sit closer to late‑'60s records. Untick for a clean modern sound.
+- **Orchestral kit (VCSL)** — the earlier concert bass drum / orchestral snare / suspended cymbal set (CC0). Kept for variety.
+- **Synth kit** — synthesized drums, no download, always available.
 
-To use your own samples, make `kits/<name>/kit.json` following `kits/acoustic/kit.json` (instrument letters → velocity layers → files; MP3/WAV/AAC), and point `loadSamples()` in `app.js` at it. The cowbell is always synthesized.
+Every sample's true onset is detected at load time so hits land exactly on the grid. To add your own kit, create `kits/<name>/kit.json` like the existing ones and list it in `kits/index.json`.
 
 ## MIDI
 
