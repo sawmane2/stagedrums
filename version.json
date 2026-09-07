@@ -1,5 +1,5 @@
 {
-  "version": "0.17.0",
+  "version": "0.18.0",
   "date": "2026-09-07",
-  "notes": "Stem mixer for the backing track: per-stem faders and mutes (drums / bass / vocals / guitars & other), saved per song, live mid-song, controllable from the iPad. Load stems… saves separated files into local/audio/<song>/. Weight of Love ships as 4 stems with measured bar times."
+  "notes": "Real separation instead of masking: Demucs stems (much cleaner drums than before), per-section stem mixes that switch automatically at the bar line, Split drums into kick/snare/toms/cymbals, and Outside Woman Blues with its own stems and measured bar times."
 }

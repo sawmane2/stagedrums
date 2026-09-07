@@ -1,174 +1,266 @@
 {
-  "id": "cream-outside-woman-blues",
-  "title": "Outside Woman Blues",
-  "artist": "Cream (Disraeli Gears, 1967)",
-  "bpm": 113,
-  "time": "4/4",
-  "groove": "baker-blues",
-  "sections": [
-    {
-      "name": "Intro (riff)",
-      "groove": "baker-toms",
-      "crash": false,
-      "fill": true,
-      "bars": [
-        "E7",
-        "E7",
-        "E7",
-        "E7"
-      ],
-      "notes": "Main E riff x2. Kick and floor tom under the riff, hat on 2 & 4."
-    },
-    {
-      "name": "Verse 1",
-      "groove": "baker-blues",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "B7",
-        "B7",
-        "E7",
-        "E7"
-      ],
-      "notes": "Ride-based, doubled kick, ghost notes. 12-bar: E7 x8, B7 x2, E7 x2.",
-      "sheet": "        E\nIf you lose your money, great God, don't lose your mind\n       E\nIf you lose your money, great God, don't lose your mind\n            B7                                      E\nAnd if you lose your woman, please don't fool with mine",
-      "lyrics": "If you lose your money, great God, don't lose your mind\nIf you lose your money, great God, don't lose your mind\nAnd if you lose your woman, please don't fool with mine",
-      "sheetBars": [
-        4,
-        4,
-        4
-      ]
-    },
-    {
-      "name": "Verse 2",
-      "groove": "baker-busy",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "B7",
-        "B7",
-        "E7",
-        "E7"
-      ],
-      "notes": "Busier: more kick, tom answers, ghosts.",
-      "sheet": "          E\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n          E\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n                    B7\n'Cause women these days, they're so doggone crooked,\n                                    E\nThat they might make off 'fore day creep",
-      "lyrics": "I'm gonna buy me a bulldog, watch my lady whilst I sleep\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n'Cause women these days, they're so doggone crooked,\nThat they might make off 'fore day creep",
-      "sheetBars": [
-        4,
-        4,
-        2,
-        2
-      ]
-    },
-    {
-      "name": "Guitar Solo",
-      "groove": "baker-jazz",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "B7",
-        "B7",
-        "E7",
-        "E7"
-      ],
-      "notes": "Jazz ride pattern, snare comping, swung. Baker opens up."
-    },
-    {
-      "name": "Verse 3",
-      "groove": "baker-busy",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "B7",
-        "B7",
-        "E7",
-        "E7"
-      ],
-      "sheet": "           E\nWell, you can't watch your wife and your outside women, too\n             E\nYou know you can't watch your wife and your outside womens, too\n                  B7\nCause when you're out with your women, your wife will be at home,\n                                                              E\nCooking your food, doing your dirt, buddy what you trying to do?",
-      "lyrics": "Well, you can't watch your wife and your outside women, too\nYou know you can't watch your wife and your outside womens, too\nCause when you're out with your women, your wife will be at home,\nCooking your food, doing your dirt, buddy what you trying to do?",
-      "sheetBars": [
-        4,
-        4,
-        2,
-        2
-      ]
-    },
-    {
-      "name": "Verse 4 (reprise)",
-      "groove": "baker-heavy",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "E7",
-        "B7",
-        "B7",
-        "E7",
-        "E7"
-      ],
-      "notes": "Double kick, crashing ride, tom flurries.",
-      "sheet": "     E\nYou can't watch your wife and your outside women, too\n             E\nYou know you can't watch your wife and your outside women, too\n            B7\nWhen you're out with your women, your wife will be at home,\n                                                              E\nDoing your dirt, cooking your food, buddy what you trying to do?",
-      "lyrics": "You can't watch your wife and your outside women, too\nYou know you can't watch your wife and your outside women, too\nWhen you're out with your women, your wife will be at home,\nDoing your dirt, cooking your food, buddy what you trying to do?",
-      "sheetBars": [
-        4,
-        4,
-        2,
-        2
-      ]
-    },
-    {
-      "name": "Outro (riff)",
-      "groove": "baker-toms",
-      "crash": true,
-      "fill": false,
-      "bars": [
-        "E7",
-        "E7",
-        "E7",
-        "E7 . . B7"
-      ],
-      "notes": "Riff out; end on the last hit together.",
-      "sheet": "N.C.\nHmm Hmmm Hmm",
-      "lyrics": "Hmm Hmmm Hmm"
-    }
-  ],
-  "rev": 3
+ "id": "cream-outside-woman-blues",
+ "title": "Outside Woman Blues",
+ "artist": "Cream (Disraeli Gears, 1967)",
+ "bpm": 113,
+ "time": "4/4",
+ "groove": "baker-blues",
+ "sections": [
+  {
+   "name": "Intro (riff)",
+   "groove": "baker-toms",
+   "crash": false,
+   "fill": true,
+   "bars": [
+    "E7",
+    "E7",
+    "E7",
+    "E7"
+   ],
+   "notes": "Main E riff x2. Kick and floor tom under the riff, hat on 2 & 4."
+  },
+  {
+   "name": "Verse 1",
+   "groove": "baker-blues",
+   "crash": true,
+   "fill": true,
+   "bars": [
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "B7",
+    "B7",
+    "E7",
+    "E7"
+   ],
+   "notes": "Ride-based, doubled kick, ghost notes. 12-bar: E7 x8, B7 x2, E7 x2.",
+   "sheet": "        E\nIf you lose your money, great God, don't lose your mind\n       E\nIf you lose your money, great God, don't lose your mind\n            B7                                      E\nAnd if you lose your woman, please don't fool with mine",
+   "lyrics": "If you lose your money, great God, don't lose your mind\nIf you lose your money, great God, don't lose your mind\nAnd if you lose your woman, please don't fool with mine",
+   "sheetBars": [
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Verse 2",
+   "groove": "baker-busy",
+   "crash": true,
+   "fill": true,
+   "bars": [
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "B7",
+    "B7",
+    "E7",
+    "E7"
+   ],
+   "notes": "Busier: more kick, tom answers, ghosts.",
+   "sheet": "          E\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n          E\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n                    B7\n'Cause women these days, they're so doggone crooked,\n                                    E\nThat they might make off 'fore day creep",
+   "lyrics": "I'm gonna buy me a bulldog, watch my lady whilst I sleep\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n'Cause women these days, they're so doggone crooked,\nThat they might make off 'fore day creep",
+   "sheetBars": [
+    4,
+    4,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Guitar Solo",
+   "groove": "baker-jazz",
+   "crash": true,
+   "fill": true,
+   "bars": [
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "B7",
+    "B7",
+    "E7",
+    "E7"
+   ],
+   "notes": "Jazz ride pattern, snare comping, swung. Baker opens up."
+  },
+  {
+   "name": "Verse 3",
+   "groove": "baker-busy",
+   "crash": true,
+   "fill": true,
+   "bars": [
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "B7",
+    "B7",
+    "E7",
+    "E7"
+   ],
+   "sheet": "           E\nWell, you can't watch your wife and your outside women, too\n             E\nYou know you can't watch your wife and your outside womens, too\n                  B7\nCause when you're out with your women, your wife will be at home,\n                                                              E\nCooking your food, doing your dirt, buddy what you trying to do?",
+   "lyrics": "Well, you can't watch your wife and your outside women, too\nYou know you can't watch your wife and your outside womens, too\nCause when you're out with your women, your wife will be at home,\nCooking your food, doing your dirt, buddy what you trying to do?",
+   "sheetBars": [
+    4,
+    4,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Verse 4 (reprise)",
+   "groove": "baker-heavy",
+   "crash": true,
+   "fill": true,
+   "bars": [
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "E7",
+    "B7",
+    "B7",
+    "E7",
+    "E7"
+   ],
+   "notes": "Double kick, crashing ride, tom flurries.",
+   "sheet": "     E\nYou can't watch your wife and your outside women, too\n             E\nYou know you can't watch your wife and your outside women, too\n            B7\nWhen you're out with your women, your wife will be at home,\n                                                              E\nDoing your dirt, cooking your food, buddy what you trying to do?",
+   "lyrics": "You can't watch your wife and your outside women, too\nYou know you can't watch your wife and your outside women, too\nWhen you're out with your women, your wife will be at home,\nDoing your dirt, cooking your food, buddy what you trying to do?",
+   "sheetBars": [
+    4,
+    4,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Outro (riff)",
+   "groove": "baker-toms",
+   "crash": true,
+   "fill": false,
+   "bars": [
+    "E7",
+    "E7",
+    "E7",
+    "E7 . . B7"
+   ],
+   "notes": "Riff out; end on the last hit together.",
+   "sheet": "N.C.\nHmm Hmmm Hmm",
+   "lyrics": "Hmm Hmmm Hmm"
+  }
+ ],
+ "rev": 4,
+ "audio": {
+  "stems": {
+   "drums": "local/audio/cream-outside-woman-blues/drums.mp3",
+   "bass": "local/audio/cream-outside-woman-blues/bass.mp3",
+   "guitar": "local/audio/cream-outside-woman-blues/guitar.mp3",
+   "vocals": "local/audio/cream-outside-woman-blues/vocals.mp3"
+  },
+  "kit": {
+   "kick": "local/audio/cream-outside-woman-blues/kit/kick.mp3",
+   "snare": "local/audio/cream-outside-woman-blues/kit/snare.mp3",
+   "toms": "local/audio/cream-outside-woman-blues/kit/toms.mp3",
+   "cymbals": "local/audio/cream-outside-woman-blues/kit/cymbals.mp3"
+  },
+  "mix": {
+   "drums": 1,
+   "bass": 1,
+   "guitar": 1,
+   "vocals": 0
+  },
+  "note": "Demucs stems of the Cream recording (htdemucs_ft drums/bass/vocals, htdemucs_6s guitar); barTimes measured from the drum stem at ~112.3 BPM. local/audio/ is not in git.",
+  "barTimes": [
+   0.255,
+   2.601,
+   4.778,
+   6.896,
+   8.975,
+   11.059,
+   13.131,
+   15.285,
+   17.374,
+   19.505,
+   21.618,
+   23.76,
+   25.861,
+   27.957,
+   30.006,
+   32.131,
+   34.162,
+   36.27,
+   38.365,
+   40.513,
+   42.638,
+   44.745,
+   46.835,
+   48.971,
+   51.101,
+   53.203,
+   55.298,
+   57.4,
+   59.53,
+   61.597,
+   63.687,
+   65.776,
+   67.918,
+   70.008,
+   72.127,
+   74.205,
+   76.353,
+   78.437,
+   80.585,
+   82.709,
+   84.817,
+   86.918,
+   89.02,
+   91.167,
+   93.251,
+   95.364,
+   97.448,
+   99.567,
+   101.645,
+   103.747,
+   105.854,
+   108.025,
+   110.155,
+   112.367,
+   114.463,
+   116.576,
+   118.666,
+   120.75,
+   122.851,
+   124.976,
+   127.048,
+   129.132,
+   131.216,
+   133.341,
+   135.454,
+   137.578,
+   139.685,
+   141.81,
+   147.467
+  ]
+ }
 }

@@ -1,6 +1,6 @@
 {
  "id": "black-keys-weight-of-love",
- "rev": 3,
+ "rev": 4,
  "title": "Weight of Love",
  "artist": "The Black Keys (Turn Blue, 2014)",
  "bpm": 76,
@@ -249,16 +249,26 @@
   "stems": {
    "drums": "local/audio/black-keys-weight-of-love/drums.mp3",
    "bass": "local/audio/black-keys-weight-of-love/bass.mp3",
+   "guitar": "local/audio/black-keys-weight-of-love/guitar.mp3",
+   "piano": "local/audio/black-keys-weight-of-love/piano.mp3",
    "other": "local/audio/black-keys-weight-of-love/other.mp3",
    "vocals": "local/audio/black-keys-weight-of-love/vocals.mp3"
+  },
+  "kit": {
+   "kick": "local/audio/black-keys-weight-of-love/kit/kick.mp3",
+   "snare": "local/audio/black-keys-weight-of-love/kit/snare.mp3",
+   "toms": "local/audio/black-keys-weight-of-love/kit/toms.mp3",
+   "cymbals": "local/audio/black-keys-weight-of-love/kit/cymbals.mp3"
   },
   "mix": {
    "drums": 1,
    "bass": 1,
+   "guitar": 1,
+   "piano": 1,
    "other": 1,
    "vocals": 0
   },
-  "note": "Separated stems (Spleeter 4-stem) of the recording; barTimes measured from the drum stem. local/audio/ is not in git - add the files with 'Load stems...'.",
+  "note": "Demucs stems (htdemucs_ft for drums/bass/vocals, htdemucs_6s for guitar/piano/other); barTimes measured from the drum stem. 'kit' splits the drums into kick/snare/toms/cymbals (DrumSep) - Split drums in the Backing panel swaps them in. local/audio/ is not in git.",
   "barTimes": [
    1.057,
    4.31,

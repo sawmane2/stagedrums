@@ -462,7 +462,13 @@
     }
     setAudioGain(g) { if (this._aGain) this._aGain.gain.value = g; }
     /** Level of one stem (0 = off). Takes effect immediately, mid-song. */
-    setStemGain(name, v) { const g = this.audio && this.audio.gains[name]; if (g) g.gain.setTargetAtTime(Math.max(0, v), this.ctx.currentTime, 0.02); }
+    setStemGain(name, v, when) { const g = this.audio && this.audio.gains[name]; if (g) g.gain.setTargetAtTime(Math.max(0, v), Math.max(when || 0, this.ctx.currentTime), 0.02); }
+    /** Apply the stem levels for a bar (per-section mixes come from `stemMixFor`), ramping at time `when`. */
+    applyStemMix(bar, when) {
+      if (!this.audio || !this.stemMixFor) return;
+      const mix = this.stemMixFor(bar) || {};
+      for (const k of Object.keys(this.audio.gains)) if (mix[k] != null) this.setStemGain(k, mix[k], when);
+    }
     /** Shift every bar time by `sec` (nudge the chart against the recording). */
     nudgeAudio(sec) { if (this.audio) this.audio.barTimes = this.audio.barTimes.map(t => t + sec); }
     /** Duration of bar `b` in seconds (audio mode uses the recording's real bar lengths). */
@@ -582,7 +588,7 @@
       const firstBar = this.barSec(fromBar);
       this._anchor = { bar: fromBar, ctxTime: this.countIn ? now + firstBar : now, bpm: this.bpm, countIn: this.countIn, barSec: firstBar };
       if (this.audio) {
-        this._aSegs = []; this._aSrc = null; this._aNextBarCtx = now; this._aPrev = null;
+        this._aSegs = []; this._aSrc = null; this._aNextBarCtx = now; this._aPrev = null; this._aSec = null;
         if (!this.countIn) this._aStart(now, this.audio.barTimes[fromBar]);
         this._emitAnchor();
         this._timer = setInterval(() => this._scheduleAudio(), this.tick);
@@ -706,6 +712,9 @@
         }
         if (this._bar >= tl.total) { if (this._aSrc) for (const s of this._aSrc) { try { s.stop(t + 0.02); } catch (e) {} } this._fire(() => this.stop(), null, t); return; }
         const dur = this.barSec(this._bar), beat = dur / sig.beats;
+        // per-section stem mix: ramp at the bar line whenever the section changes (and on the first bar / after a jump)
+        const secNow = tl.bars[this._bar].section;
+        if (secNow !== this._aSec) { this.applyStemMix(this._bar, t); this._aSec = secNow; }
         this._fire(this.onBar, this._bar, t);
         for (let b = 0; b < sig.beats; b++) { this.kit.click(t + b * beat, b === 0); this._fire(this.onBeat, b, t + b * beat, this._bar); }
         this._anchor = { bar: this._bar, ctxTime: t, bpm: this.bpm, barSec: dur };

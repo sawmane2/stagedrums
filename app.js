@@ -214,6 +214,7 @@
       const se = document.querySelector(`.section[data-section="${bar.section}"]`);
       if (se) { se.classList.add('current'); if (viewMode() !== 'sheet') { const ch = $('chart'); ch.scrollTo({ top: se.offsetTop - ch.offsetTop - 8, behavior: 'smooth' }); } }
       renderLive();
+      if ($('stemScope').value === 'live') renderStemMix(); // faders follow the section that's playing
     }
     const barsLeft = sec.end - barIdx;
     $('nextIn').textContent = `in ${barsLeft} bar${barsLeft === 1 ? '' : 's'}`;
@@ -508,7 +509,10 @@
         case 'extra': addExtra(); break;
         case 'go': goNow(); break;
         case 'queue': queueSection(m.section, m.now); break;
-        case 'stem': if (song && song.audio) { const a = song.audio; a.mix = a.mix || {}; a.mute = a.mute || {}; a.mix[m.k] = m.level; a.mute[m.k] = !!m.mute; transport.setStemGain(m.k, m.mute ? 0 : m.level); persistSongs(); renderStemMix(); broadcastSong(); } break;
+        case 'stem': if (song && song.audio) { const a = song.audio; a.mix = a.mix || {}; a.mute = a.mute || {};
+            if (m.section != null) { const sc = song.sections[m.section]; if (sc) { sc.stems = sc.stems || {}; sc.stems[m.k] = m.level; } }
+            else a.mix[m.k] = m.level;
+            a.mute[m.k] = !!m.mute; applyStemsNow(); persistSongs(); renderStemMix(); broadcastSong(); } break;
       }
       return;
     }
@@ -516,8 +520,10 @@
     if (m.type === 'song') {
       const s = m.song; const i = songs.findIndex(x => x.id === s.id);
       if (i >= 0) songs[i] = s; else songs.push(s); persistSongs();
-      const noAudio = x => JSON.stringify(Object.assign({}, x, { audio: null }));
-      if (song && s.id === song.id && noAudio(s) === noAudio(song)) { song.audio = s.audio; renderStemMix(); return; } // just the stem mix changed
+      const noAudio = x => JSON.stringify(Object.assign({}, x, { audio: null, sections: x.sections.map(sc => Object.assign({}, sc, { stems: null })) }));
+      if (song && s.id === song.id && noAudio(s) === noAudio(song)) { // only the stem mix changed: keep playing, just update the faders
+        song.audio = s.audio; s.sections.forEach((sc, i) => { if (sc.stems) song.sections[i].stems = sc.stems; else delete song.sections[i].stems; });
+        renderStemMix(); return; }
       selectSong(s); return;
     }
     if (m.type === 'state') {
@@ -559,10 +565,18 @@
 
   // ---------- backing track: a real recording (e.g. the record with the vocals removed) instead of synth drums + band ----------
   const audioCache = {}; let audioLoadToken = 0;
-  const STEM_LABELS = { drums: 'Drums', bass: 'Bass', other: 'Guitars & other', guitar: 'Guitar', piano: 'Keys / piano', keys: 'Keys', vocals: 'Vocals', mix: 'Recording' };
+  const STEM_LABELS = { drums: 'Drums', bass: 'Bass', other: 'Other', guitar: 'Guitar', rhythm: 'Rhythm guitar', lead: 'Lead guitar', acoustic: 'Acoustic guitar',
+    piano: 'Piano', keys: 'Keys', organ: 'Organ', vocals: 'Vocals', backing: 'Backing vocals', mix: 'Recording',
+    kick: 'Kick', snare: 'Snare', toms: 'Toms', hats: 'Hi-hat', cymbals: 'Cymbals', perc: 'Percussion', center: 'Guitar (centre)', sides: 'Guitar (wide)' };
+  const STEM_ORDER = ['mix', 'drums', 'kick', 'snare', 'toms', 'hats', 'cymbals', 'perc', 'bass', 'guitar', 'rhythm', 'lead', 'acoustic', 'center', 'sides', 'piano', 'keys', 'organ', 'other', 'vocals', 'backing'];
+  const stemSort = (a, b) => { const i = STEM_ORDER.indexOf(a), j = STEM_ORDER.indexOf(b); return (i < 0 ? 99 : i) - (j < 0 ? 99 : j) || a.localeCompare(b); };
   const stemLabel = k => STEM_LABELS[k] || k.replace(/^\w/, c => c.toUpperCase());
   /** The files a song's audio refers to: {stemName: url}. A single file counts as one stem called "mix". */
-  function audioFiles(a) { return a ? (a.stems && Object.keys(a.stems).length ? a.stems : (a.file ? { mix: a.file } : {})) : {}; }
+  function audioFiles(a) {
+    let f = a ? (a.stems && Object.keys(a.stems).length ? a.stems : (a.file ? { mix: a.file } : {})) : {};
+    if (a && a.kit && Object.keys(a.kit).length && a.splitDrums) { f = Object.assign({}, f, a.kit); delete f.drums; } // kit parts replace the drums stem
+    const out = {}; for (const k of Object.keys(f).sort(stemSort)) out[k] = f[k]; return out; // kit parts first, vocals last
+  }
   function audioName(a) { const f = audioFiles(a); const ks = Object.keys(f); return ks.length === 1 && ks[0] === 'mix' ? f.mix.split('/').pop() : ks.length + ' stems (' + ks.map(stemLabel).join(', ') + ')'; }
   function setAudioStatus(msg) {
     if (msg) { $('audioStatus').textContent = msg; return; }
@@ -573,26 +587,89 @@
     else $('audioStatus').textContent = 'No recording for this song — using synth drums + band. Add the song with "Load audio file…", or separated stems (drums / bass / vocals / other) with "Load stems…" to mix them on stage.';
     $('bpm').disabled = !!transport.audio;
   }
-  /** Per-stem faders + mute buttons. Levels are saved with the song (audio.mix); mutes too (audio.mute). */
+  /**
+   * Per-stem faders + mute buttons. Levels live in `song.audio.mix` (whole song) and `section.stems` (per-section
+   * overrides, applied automatically at the bar line when that section starts); `song.audio.mute` is a global kill.
+   * The "Mixing" selector says which of those the faders are editing.
+   */
+  function scopeIdx() { // null = whole song; otherwise a section index
+    const v = $('stemScope').value;
+    if (v === 'song') return null;
+    if (v === 'live') return song ? tl.bars[Math.max(0, Math.min(tl.total - 1, transport.currentBar()))].section : null;
+    return +v;
+  }
+  function renderStemScope() {
+    const sel = $('stemScope'), keep = sel.value || 'song';
+    const secs = song ? song.sections : [];
+    sel.innerHTML = `<option value="song">the whole song</option><option value="live">the section playing now</option>`
+      + secs.map((sc, i) => `<option value="${i}">${esc(sc.name || 'Section ' + (i + 1))}${sc.stems && Object.keys(sc.stems).length ? ' •' : ''}</option>`).join('');
+    sel.value = [...sel.options].some(o => o.value === keep) ? keep : 'song';
+  }
   function renderStemMix() {
     const box = $('stemMix'); box.innerHTML = '';
     const a = song && song.audio, files = audioFiles(a); const keys = Object.keys(files);
     const show = keys.length > 1 || (keys.length === 1 && keys[0] !== 'mix');
-    box.classList.toggle('has', show); if (!show) return;
+    box.classList.toggle('has', show); $('stemScopeRow').hidden = !show;
+    const hasKit = !!(a && a.kit && Object.keys(a.kit).length);
+    $('splitDrumsRow').hidden = !hasKit; $('chkSplitDrums').checked = !!(a && a.splitDrums);
+    if (!show) return;
     a.mix = a.mix || {}; a.mute = a.mute || {};
+    renderStemScope();
+    const si = scopeIdx(), sec = si == null ? null : song.sections[si];
+    if (sec && !sec.stems) sec.stems = {};
     for (const k of keys) {
+      const base = a.mix[k] ?? (k === 'vocals' ? 0 : 1);
+      const lvl = sec ? (sec.stems[k] ?? base) : base;
       const row = document.createElement('div'); row.className = 'stem';
-      const lvl = a.mix[k] ?? (k === 'vocals' ? 0 : 1);
-      row.innerHTML = `<span>${esc(stemLabel(k))}</span><input type="range" min="0" max="1.5" step="0.01" value="${lvl}"><button class="small ${a.mute[k] ? 'on' : ''}" title="Mute">M</button>`;
+      const over = sec && sec.stems[k] != null;
+      row.innerHTML = `<span>${esc(stemLabel(k))}${over ? ' <b title="set for this section">•</b>' : ''}</span>`
+        + `<input type="range" min="0" max="1.5" step="0.01" value="${lvl}">`
+        + `<button class="small ${a.mute[k] ? 'on' : ''}" title="${sec ? 'Silence this stem in this section' : 'Mute everywhere'}">M</button>`;
       const range = row.querySelector('input'), mute = row.querySelector('button');
-      const apply = () => { if (role === 'follower') sendCmd({ cmd: 'stem', k, level: +range.value, mute: !!a.mute[k] }); else transport.setStemGain(k, a.mute[k] ? 0 : +range.value); };
-      range.oninput = () => { a.mix[k] = +range.value; apply(); };
-      range.onchange = () => { if (role !== 'follower') { persistSongs(); broadcastSong(); } };
-      mute.onclick = () => { a.mute[k] = !a.mute[k]; mute.classList.toggle('on', a.mute[k]); apply(); if (role !== 'follower') { persistSongs(); broadcastSong(); } };
+      const push = () => { if (role === 'follower') sendCmd({ cmd: 'stem', k, level: +range.value, mute: !!a.mute[k], section: si }); else { applyStemsNow(); persistSongs(); } };
+      range.oninput = () => { if (sec) sec.stems[k] = +range.value; else a.mix[k] = +range.value; if (role !== 'follower') applyStemsNow(); };
+      range.onchange = () => { push(); if (role !== 'follower') { broadcastSong(); renderStemMix(); } };
+      mute.onclick = () => {
+        if (sec) { sec.stems[k] = sec.stems[k] > 0 || sec.stems[k] == null ? 0 : base; }
+        else a.mute[k] = !a.mute[k];
+        if (role !== 'follower') { applyStemsNow(); persistSongs(); broadcastSong(); }
+        else sendCmd({ cmd: 'stem', k, level: sec ? sec.stems[k] : +range.value, mute: !!a.mute[k], section: si });
+        renderStemMix();
+      };
       box.appendChild(row);
     }
+    if (sec && Object.keys(sec.stems).length) {
+      const b = document.createElement('button'); b.className = 'small'; b.textContent = 'Use the song mix for ' + (sec.name || 'this section');
+      b.onclick = () => { delete sec.stems; if (role !== 'follower') { applyStemsNow(); persistSongs(); broadcastSong(); } renderStemMix(); };
+      box.appendChild(b);
+    }
   }
-  function effectiveMix(a) { const m = {}; for (const k of Object.keys(audioFiles(a))) m[k] = (a.mute && a.mute[k]) ? 0 : ((a.mix && a.mix[k]) ?? (k === 'vocals' ? 0 : 1)); return m; }
+  $('chkSplitDrums').onchange = () => {
+    if (!song || !song.audio) return;
+    song.audio.splitDrums = $('chkSplitDrums').checked; persistSongs(); broadcastSong();
+    applyBacking(); // the set of stems changed, so the buffers are reloaded
+  };
+  $('stemScope').onchange = () => { prefs.stemScope = $('stemScope').value; savePrefs(); renderStemMix(); };
+  if (prefs.stemScope) { const o = document.createElement('option'); o.value = prefs.stemScope; $('stemScope').appendChild(o); $('stemScope').value = prefs.stemScope; }
+  /** Levels for a bar: song mix, overridden by the section's own stems, with global mutes on top. */
+  function mixForBar(bar) {
+    const a = song && song.audio; if (!a) return {};
+    const sec = tl && tl.bars[bar] ? song.sections[tl.bars[bar].section] : null;
+    const m = {};
+    for (const k of Object.keys(audioFiles(a))) {
+      let v = (a.mix && a.mix[k]) ?? (k === 'vocals' ? 0 : 1);
+      if (sec && sec.stems && sec.stems[k] != null) v = sec.stems[k];
+      m[k] = (a.mute && a.mute[k]) ? 0 : v;
+    }
+    return m;
+  }
+  /** Apply the mix for wherever we are right now (used when a fader moves mid-song). */
+  function applyStemsNow() {
+    if (!transport.audio) return;
+    const m = mixForBar(transport.playing ? transport.currentBar() : (transport._pausedPos || 0));
+    for (const k of Object.keys(m)) transport.setStemGain(k, m[k]);
+  }
+  transport.stemMixFor = bar => mixForBar(bar);
   async function applyBacking() {
     const token = ++audioLoadToken;
     transport.setAudio(null);
@@ -611,7 +688,7 @@
       }));
       if (token !== audioLoadToken) return;
       if (!Object.keys(stems).length) throw new Error('missing');
-      transport.setAudio({ stems, mix: effectiveMix(a), barTimes: a.barTimes, offset: a.offset || 0, gain: +$('volAudio').value, name: audioName(a) });
+      transport.setAudio({ stems, mix: mixForBar(transport._pausedPos || 0), barTimes: a.barTimes, offset: a.offset || 0, gain: +$('volAudio').value, name: audioName(a) });
       setAudioStatus(); if (missing.length) setAudioStatus($('audioStatus').textContent + ` Missing on this computer: ${missing.join(', ')}.`);
     } catch (e) {
       setAudioStatus(`${audioName(a)} isn't on this computer — using synth drums + band. Add it with "Load audio file…" / "Load stems…" (files go in drum-daw/local/audio/).`);
@@ -628,8 +705,9 @@
   async function saveAudio(file, bytes) { try { const r = await fetch('/api/' + file.replace(/^local\//, ''), { method: 'POST', body: bytes }); return r.ok; } catch { return false; } }
   function stemNameFor(filename) {
     const n = filename.toLowerCase();
-    for (const k of ['drums', 'bass', 'vocals', 'guitar', 'piano', 'keys', 'other']) if (n.includes(k)) return k;
-    if (/drum|kit|perc/.test(n)) return 'drums'; if (/vox|vocal|voice|sing/.test(n)) return 'vocals'; if (/gtr|guit/.test(n)) return 'guitar'; if (/key|organ|synth|pad/.test(n)) return 'keys';
+    for (const k of ['kick', 'snare', 'toms', 'hats', 'cymbals', 'rhythm', 'lead', 'acoustic', 'drums', 'bass', 'vocals', 'guitar', 'piano', 'keys', 'other']) if (n.includes(k)) return k;
+    if (/bombo|bass ?drum|\bbd\b/.test(n)) return 'kick'; if (/redoblante|snr/.test(n)) return 'snare'; if (/platillos|cymbal|ride|crash/.test(n)) return 'cymbals'; if (/hi-?hat|hh/.test(n)) return 'hats';
+    if (/drum|kit/.test(n)) return 'drums'; if (/perc/.test(n)) return 'perc'; if (/vox|vocal|voice|sing/.test(n)) return 'vocals'; if (/gtr|guit/.test(n)) return 'guitar'; if (/key|organ|synth|pad/.test(n)) return 'keys';
     return filename.replace(/\.\w+$/, '').replace(/[^\w-]/g, '_').slice(0, 20);
   }
   $('audioFile').onchange = async () => {
