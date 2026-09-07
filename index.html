@@ -69,6 +69,16 @@
       <label>Click (in-ears) <input type="range" id="volClick" min="0" max="1.5" step="0.01" value="0"></label>
     </div>
     <label class="chk"><input type="checkbox" id="chkFollowerAudio"> Follower plays drums too</label>
+    <h3>Band (bass · keys · guitar)</h3>
+    <div class="mix band">
+      <label>Bass <select id="bandBass"></select></label>
+      <label>Keys <select id="bandKeys"></select></label>
+      <label>Guitar <select id="bandGtr"></select></label>
+      <label>Bass level <input type="range" id="volBass" min="0" max="1.5" step="0.01" value="0.9"></label>
+      <label>Keys level <input type="range" id="volKeys" min="0" max="1.5" step="0.01" value="0.5"></label>
+      <label>Guitar level <input type="range" id="volGtr" min="0" max="1.5" step="0.01" value="0.6"></label>
+      <p class="hint">Follows the chord chart. Saved per song; a section can override with <code>"band": {"bass": "pump", "keys": "organ", "gtr": "off"}</code> in Edit song JSON.</p>
+    </div>
     <h3>MIDI</h3>
     <div class="midi">
       <select id="midiOut"><option value="">MIDI out: off</option></select>
@@ -211,6 +221,7 @@ Here comes the sun..."></textarea>
 <script src="parser.js"></script>
 <script src="sync.js"></script>
 <script src="midi.js"></script>
+<script src="instruments.js"></script>
 <script src="mixer.js"></script>
 <script src="mixer-ui.js"></script>
 <script src="app.js"></script>

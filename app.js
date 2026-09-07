@@ -60,7 +60,7 @@
     song = s; transport.setSong(s); tl = transport.tl;
     prefs.lastSong = s.id; savePrefs();
     $('bpm').value = transport.bpm;
-    renderSongList(); renderChart(); renderBeats(); renderPads();
+    renderSongList(); renderChart(); renderBeats(); renderPads(); syncBandUI();
     updateNow(0, true);
   }
 
@@ -543,6 +543,14 @@
   });
   role = prefs.role || 'solo'; applyRoleAudio();
   if (role !== 'solo') { const u = defaultWsUrl(); if (u) connect(u); else { role = 'solo'; $('roleSelect').value = 'solo'; } }
+
+  // ---------- band (bass / keys / guitar) ----------
+  const band = new SD.Band(ctx, kit.comp); transport.band = band; // band joins after the drum saturation, before the bus compressor
+  const fillSel = (id, obj) => { $(id).innerHTML = Object.keys(obj).map(k => `<option value="${k}">${k}</option>`).join(''); };
+  fillSel('bandBass', SD.BASS_PATTERNS); fillSel('bandKeys', SD.KEYS_KINDS); fillSel('bandGtr', SD.GTR_PATTERNS);
+  function syncBandUI() { const b = Object.assign({ bass: 'off', keys: 'off', gtr: 'off' }, song && song.band || {}); $('bandBass').value = b.bass; $('bandKeys').value = b.keys; $('bandGtr').value = b.gtr; }
+  for (const [id, k] of [['bandBass', 'bass'], ['bandKeys', 'keys'], ['bandGtr', 'gtr']]) $(id).onchange = () => { if (!song) return; song.band = Object.assign({}, song.band || {}, { [k]: $(id).value }); persistSongs(); broadcastSong(); };
+  for (const [id, k] of [['volBass', 'bass'], ['volKeys', 'keys'], ['volGtr', 'gtr']]) { const el = $(id); if (prefs[id] != null) el.value = prefs[id]; band.setLevel(k, +el.value); el.oninput = () => { band.setLevel(k, +el.value); prefs[id] = +el.value; savePrefs(); }; }
 
   // ---------- drum kit (samples) ----------
   let kits = [];

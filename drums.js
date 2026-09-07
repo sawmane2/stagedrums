@@ -522,6 +522,7 @@
     }
     stop(silent) {
       if (this.midi && this.playing) this.midi.stop();
+      if (this.band) this.band.stopAll();
       this._pausedPos = this.playing ? Math.max(0, Math.floor(this.position())) : (this._pausedPos || 0);
       this.playing = false;
       if (this._timer) clearInterval(this._timer); this._timer = null;
@@ -610,6 +611,7 @@
               if (this.midi) this.midi.note(h.inst, ch, th);
             }
           }
+          if (this.band && this.audible) this.band.step(bar, this._step, t, sig, this.song, this.song.sections[bar.section] || {}, this.bpm);
         }
         if (this.midi) { // MIDI clock: 24 pulses per quarter note
           const pulses = (24 * 4 / +sig.sig.split('/')[1]) / sig.stepsPerBeat;

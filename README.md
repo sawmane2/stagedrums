@@ -91,6 +91,10 @@ Pick the kit in the sidebar (**Drum kit**):
 
 Every sample's true onset is detected at load time so hits land exactly on the grid — and then a **feel** engine moves them off it the way a drummer does: each groove has a `feel` (`loose` = Baker‑style laid‑back snare and a little jitter; `push` = Laing‑style ahead of the beat; `tight`) and a `swing` amount, hi‑hats/ride are accented on the beat and softer between, velocities vary a few percent, fills crescendo, and grooves carry alternate bars (`vars`) that rotate every other bar plus short "mini fills" on the last beat of every 4th bar. A song or section can set `"swing"` / `"feel"` to override the groove. Turn it off with `stagedrums.transport.humanize = false` in the console if you ever want a machine. To add your own kit, create `kits/<name>/kit.json` like the existing ones and list it in `kits/index.json`.
 
+## Band: bass, keys, rhythm guitar
+
+For songs where you need more than drums, the **Band** panel in the sidebar adds a chord‑following bass, keys and rhythm guitar (all synthesized, no downloads). Pick a pattern per instrument — bass: `whole`, `halves`, `roots`, `eighths`, `pump`, `boogie`, `shuffle`, `ballad`; guitar: `strum8`, `strum16`, `folk`, `stabs`, `arp`, `whole`; keys: `pad`, `organ`, `epiano` — and set levels. The choice is saved with the song, and any section can override it in Edit song JSON with `"band": {"bass": "pump", "keys": "organ", "gtr": "off"}` (e.g. drums‑only verses, full band choruses, `"off"` everywhere for songs where your live players cover those parts). The band reads the chord under every beat, including split bars like `"Em . . D"`, and joins the drums on the same master bus and limiter.
+
 ## MIDI
 
 - **Export .mid** (sidebar → MIDI) writes a Type‑1 Standard MIDI File: tempo + time signature, a marker per section, a text event per chord, a **Drums** track on channel 10 (General MIDI drum map: 36 kick, 38 snare, 42/46 hats, 51 ride, 49 crash, 50/47/43 toms, 37 cross‑stick) and a **Chords (reference)** track of block chords. Drop it into Logic/Ableton/Reaper/GarageBand and swap in any drum kit.
