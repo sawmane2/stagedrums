@@ -93,7 +93,7 @@
       sections: sections.filter(s => s.bars.length).map(s => ({
         name: s.name, groove: guessGroove(s.name, groove),
         fill: !/intro/i.test(s.name), bars: s.bars,
-        lyrics: s.lyrics.slice(0, 6).join('\n'),
+        lyrics: s.lyrics.join('\n'),
       })),
     };
     if (!song.sections.length) throw new Error('No chord lines found. Paste the chords text (not the URL) — chords like G, Am, D7 on their own lines.');
@@ -120,6 +120,7 @@ Rules:
 - Pick the closest groove per section from this list: ${grooves}.
 - Use "repeat" instead of duplicating identical bars. Use "fill": true when a section leads into a bigger one; "crash": true on big section entrances.
 - Use the song's real tempo for "bpm" and correct time signature.
+- Copy each section's lyric lines from the sheet into "lyrics" (one line per line, \n separated) so they show on the chart.
 - Return ONLY the JSON.
 
 Title: ${meta.title || ''}   Artist: ${meta.artist || ''}

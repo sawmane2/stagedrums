@@ -90,6 +90,8 @@
       <div class="now-next">Next: <span id="nextSection">—</span> <span id="nextIn"></span></div>
       <div class="beats" id="beats"></div>
       <div class="bar-counter" id="barCounter">Bar — / —</div>
+      <div class="now-lyric" id="nowLyric"></div>
+      <div class="next-lyric" id="nextLyric"></div>
     </div>
     <div class="livebar">
       <div class="pads" id="pads"></div>
@@ -179,7 +181,7 @@ Here comes the sun..."></textarea>
 <dialog id="dlgEdit">
   <form method="dialog" class="dlg wide">
     <h2>Edit song JSON</h2>
-    <p class="hint">Sections have <code>name</code>, <code>groove</code> (see list below), optional <code>repeat</code>, and <code>bars</code> — each bar is a string of chords, e.g. <code>"G"</code>, <code>"G D"</code> (two chords, half bar each) or <code>"Am . . G"</code> (dots hold). Instruments in grooves: K S H D C T M F R B(cowbell). Optional <code>fill: true</code> plays a fill on the last bar, <code>crash: true</code> crashes on bar 1.</p>
+    <p class="hint">Sections have <code>name</code>, <code>groove</code> (see list below), optional <code>repeat</code>, and <code>bars</code> — each bar is a string of chords, e.g. <code>"G"</code>, <code>"G D"</code> (two chords, half bar each) or <code>"Am . . G"</code> (dots hold). Instruments in grooves: K S H D C T M F R B(cowbell). Optional <code>fill: true</code> plays a fill on the last bar, <code>crash: true</code> crashes on bar 1. <code>lyrics</code> (one line per chart line) is spread across the section's bars and shown on stage; use <code>lyricBars</code> (an array with one entry per bar) to place lines exactly. <code>swing</code> (0–1) and <code>feel</code> (loose / push / tight) override the groove's feel.</p>
     <p class="hint">Grooves: <span id="grooveList"></span></p>
     <textarea id="editText" rows="22" spellcheck="false"></textarea>
     <div class="actions">

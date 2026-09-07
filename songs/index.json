@@ -18,7 +18,7 @@
           "E7",
           "E7"
         ],
-        "lyrics": "Main E riff x2. Kick and floor tom under the riff, hat on 2 & 4."
+        "notes": "Main E riff x2. Kick and floor tom under the riff, hat on 2 & 4."
       },
       {
         "name": "Verse 1",
@@ -39,7 +39,7 @@
           "E7",
           "E7"
         ],
-        "lyrics": "Ride-based, doubled kick, ghost notes. 12-bar: E7 x8, B7 x2, E7 x2."
+        "notes": "Ride-based, doubled kick, ghost notes. 12-bar: E7 x8, B7 x2, E7 x2."
       },
       {
         "name": "Verse 2",
@@ -60,7 +60,7 @@
           "E7",
           "E7"
         ],
-        "lyrics": "Busier: more kick, tom answers, ghosts."
+        "notes": "Busier: more kick, tom answers, ghosts."
       },
       {
         "name": "Guitar Solo",
@@ -81,7 +81,7 @@
           "E7",
           "E7"
         ],
-        "lyrics": "Jazz ride pattern, snare comping, swung. Baker opens up."
+        "notes": "Jazz ride pattern, snare comping, swung. Baker opens up."
       },
       {
         "name": "Verse 3",
@@ -122,7 +122,7 @@
           "E7",
           "E7"
         ],
-        "lyrics": "Double kick, crashing ride, tom flurries."
+        "notes": "Double kick, crashing ride, tom flurries."
       },
       {
         "name": "Outro (riff)",
@@ -135,7 +135,7 @@
           "E7",
           "E7 . . B7"
         ],
-        "lyrics": "Riff out; end on the last hit together."
+        "notes": "Riff out; end on the last hit together."
       }
     ]
   },
@@ -156,7 +156,7 @@
           "N.C.",
           "N.C."
         ],
-        "lyrics": "Corky Laing's cowbell 8ths, 2 bars. Band enters on the riff."
+        "notes": "Corky Laing's cowbell 8ths, 2 bars. Band enters on the riff."
       },
       {
         "name": "Riff intro",
@@ -169,7 +169,7 @@
           "E5",
           "E5"
         ],
-        "lyrics": "Main riff in E (E5 \u2013 D5 \u2013 A5 with the bend). Cowbell keeps going."
+        "notes": "Main riff in E (E5 \u2013 D5 \u2013 A5 with the bend). Cowbell keeps going."
       },
       {
         "name": "Hook 1 (riff)",
@@ -186,7 +186,7 @@
           "E5",
           "E5"
         ],
-        "lyrics": "Vocal hook over the riff, 8 bars."
+        "notes": "Vocal hook over the riff, 8 bars."
       },
       {
         "name": "Verse 1",
@@ -203,7 +203,7 @@
           "A",
           "E"
         ],
-        "lyrics": "Chords open up: A \u2013 D \u2013 A \u2013 E, twice."
+        "notes": "Chords open up: A \u2013 D \u2013 A \u2013 E, twice."
       },
       {
         "name": "Hook 2 (riff)",
@@ -244,7 +244,7 @@
           "E5",
           "E5"
         ],
-        "lyrics": "Solo over the riff, 16 bars. Ride cymbal, cowbell accents on 1 and 3."
+        "notes": "Solo over the riff, 16 bars. Ride cymbal, cowbell accents on 1 and 3."
       },
       {
         "name": "Verse 2",
@@ -294,7 +294,7 @@
           "E5",
           "E5"
         ],
-        "lyrics": "Riff out. Loop this section to stretch the ending; last bar ends on E."
+        "notes": "Riff out. Loop this section to stretch the ending; last bar ends on E."
       },
       {
         "name": "Ending",
@@ -327,7 +327,7 @@
           "A5",
           "A5"
         ],
-        "lyrics": "Main riff on A, 4 bars. 116 BPM, half-swung heavy boogie."
+        "notes": "Main riff on A, 4 bars. 116 BPM, half-swung heavy boogie."
       },
       {
         "name": "Verse 1",
@@ -352,7 +352,7 @@
           "A5",
           "A5"
         ],
-        "lyrics": "Vocal over the A riff, 16 bars (two 8-bar halves)."
+        "notes": "Vocal over the A riff, 16 bars (two 8-bar halves)."
       },
       {
         "name": "Chorus 1",
@@ -369,7 +369,7 @@
           "A",
           "A"
         ],
-        "lyrics": "G - D, G - D over the riff feel, then G - D - A back to the riff."
+        "notes": "G - D, G - D over the riff feel, then G - D - A back to the riff."
       },
       {
         "name": "Guitar solo",
@@ -386,7 +386,7 @@
           "A5",
           "A5"
         ],
-        "lyrics": "Riff x2 (8 bars) on the ride."
+        "notes": "Riff x2 (8 bars) on the ride."
       },
       {
         "name": "Verse 2",
@@ -444,7 +444,7 @@
           "A5",
           "A5"
         ],
-        "lyrics": "Riff x2 on the record then fades. Hold this section live and cue the ending."
+        "notes": "Riff x2 on the record then fades. Hold this section live and cue the ending."
       },
       {
         "name": "Ending",

@@ -15,7 +15,7 @@
         "N.C.",
         "N.C."
       ],
-      "lyrics": "Corky Laing's cowbell 8ths, 2 bars. Band enters on the riff."
+      "notes": "Corky Laing's cowbell 8ths, 2 bars. Band enters on the riff."
     },
     {
       "name": "Riff intro",
@@ -28,7 +28,7 @@
         "E5",
         "E5"
       ],
-      "lyrics": "Main riff in E (E5 \u2013 D5 \u2013 A5 with the bend). Cowbell keeps going."
+      "notes": "Main riff in E (E5 \u2013 D5 \u2013 A5 with the bend). Cowbell keeps going."
     },
     {
       "name": "Hook 1 (riff)",
@@ -45,7 +45,7 @@
         "E5",
         "E5"
       ],
-      "lyrics": "Vocal hook over the riff, 8 bars."
+      "notes": "Vocal hook over the riff, 8 bars."
     },
     {
       "name": "Verse 1",
@@ -62,7 +62,7 @@
         "A",
         "E"
       ],
-      "lyrics": "Chords open up: A \u2013 D \u2013 A \u2013 E, twice."
+      "notes": "Chords open up: A \u2013 D \u2013 A \u2013 E, twice."
     },
     {
       "name": "Hook 2 (riff)",
@@ -103,7 +103,7 @@
         "E5",
         "E5"
       ],
-      "lyrics": "Solo over the riff, 16 bars. Ride cymbal, cowbell accents on 1 and 3."
+      "notes": "Solo over the riff, 16 bars. Ride cymbal, cowbell accents on 1 and 3."
     },
     {
       "name": "Verse 2",
@@ -153,7 +153,7 @@
         "E5",
         "E5"
       ],
-      "lyrics": "Riff out. Loop this section to stretch the ending; last bar ends on E."
+      "notes": "Riff out. Loop this section to stretch the ending; last bar ends on E."
     },
     {
       "name": "Ending",

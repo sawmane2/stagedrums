@@ -77,13 +77,32 @@
         bars.appendChild(el);
       }
       div.appendChild(bars);
-      if (sec.lyrics) { const ly = document.createElement('div'); ly.className = 'lyric'; ly.textContent = sec.lyrics; div.appendChild(ly); }
+      if (secDef.notes) { const nt = document.createElement('div'); nt.className = 'notes'; nt.textContent = secDef.notes; div.appendChild(nt); }
+      if (secDef.lyrics) { const ly = document.createElement('div'); ly.className = 'lyric'; ly.textContent = secDef.lyrics; div.appendChild(ly); }
       chart.appendChild(div);
     });
   }
   function renderBeats() {
     const b = $('beats'); b.innerHTML = '';
     for (let i = 0; i < tl.sig.beats; i++) { const d = document.createElement('div'); d.className = 'beat' + (i === 0 ? ' one' : ''); b.appendChild(d); }
+  }
+
+  /** Lines of a section's lyrics mapped to bars: an explicit per-bar array ("lyricBars"), or lines spread evenly across the section. */
+  function lyricForBar(barIdx) {
+    const bar = tl.bars[barIdx]; if (!bar) return ['', ''];
+    const secDef = song.sections[bar.section]; const sec = tl.sections[bar.section];
+    let lines = Array.isArray(secDef.lyricBars) ? secDef.lyricBars : null;
+    if (!lines) {
+      const raw = String(secDef.lyrics || '').split('\n').map(s => s.trim()).filter(Boolean);
+      if (!raw.length) return ['', ''];
+      lines = new Array(secDef.bars.length).fill('');
+      raw.forEach((l, i) => { const b = Math.min(secDef.bars.length - 1, Math.floor(i * secDef.bars.length / raw.length)); lines[b] = lines[b] ? lines[b] + ' / ' + l : l; });
+    }
+    const bi = bar.barInSection;
+    let cur = ''; for (let i = bi; i >= 0; i--) if (lines[i]) { cur = lines[i]; break; }
+    let next = ''; for (let i = bi + 1; i < lines.length; i++) if (lines[i]) { next = lines[i]; break; }
+    if (!next) { const ns = song.sections[bar.section + 1]; if (ns && ns.lyrics) next = String(ns.lyrics).split('\n').map(s => s.trim()).filter(Boolean)[0] || ''; }
+    return [cur, next];
   }
 
   // Called every animation frame while playing, and on jumps
@@ -120,6 +139,9 @@
     const barsLeft = sec.end - barIdx;
     $('nextIn').textContent = `in ${barsLeft} bar${barsLeft === 1 ? '' : 's'}`;
     $('barCounter').textContent = `Bar ${barIdx + 1} / ${tl.total}  ·  ${sec.name} ${bar.barInSection + 1}/${sec.count}`;
+    const [lyr, lyrNext] = lyricForBar(barIdx);
+    if ($('nowLyric').textContent !== lyr) $('nowLyric').textContent = lyr;
+    if ($('nextLyric').textContent !== lyrNext) $('nextLyric').textContent = lyrNext;
     // bar highlighting
     const el = document.querySelector(`.bar[data-bar="${barIdx}"]`);
     if (el !== currentBarEl || force) {

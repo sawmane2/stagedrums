@@ -17,7 +17,7 @@
         "A5",
         "A5"
       ],
-      "lyrics": "Main riff on A, 4 bars. 116 BPM, half-swung heavy boogie."
+      "notes": "Main riff on A, 4 bars. 116 BPM, half-swung heavy boogie."
     },
     {
       "name": "Verse 1",
@@ -42,7 +42,7 @@
         "A5",
         "A5"
       ],
-      "lyrics": "Vocal over the A riff, 16 bars (two 8-bar halves)."
+      "notes": "Vocal over the A riff, 16 bars (two 8-bar halves)."
     },
     {
       "name": "Chorus 1",
@@ -59,7 +59,7 @@
         "A",
         "A"
       ],
-      "lyrics": "G - D, G - D over the riff feel, then G - D - A back to the riff."
+      "notes": "G - D, G - D over the riff feel, then G - D - A back to the riff."
     },
     {
       "name": "Guitar solo",
@@ -76,7 +76,7 @@
         "A5",
         "A5"
       ],
-      "lyrics": "Riff x2 (8 bars) on the ride."
+      "notes": "Riff x2 (8 bars) on the ride."
     },
     {
       "name": "Verse 2",
@@ -134,7 +134,7 @@
         "A5",
         "A5"
       ],
-      "lyrics": "Riff x2 on the record then fades. Hold this section live and cue the ending."
+      "notes": "Riff x2 on the record then fades. Hold this section live and cue the ending."
     },
     {
       "name": "Ending",

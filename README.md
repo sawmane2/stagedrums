@@ -56,7 +56,7 @@ Sync design: the server is the shared clock. The host publishes a *transport anc
 
 ## Getting songs in
 
-**Paste from Ultimate Guitar.** Open the *Chords* version of a song, select the chord/lyric text and copy it, then **+ Import** and paste. `[Verse]`/`[Chorus]` headers become sections; every chord on a chord line becomes one bar; `| G D | Em C |` is honoured as explicit bars; `x2` repeats a line. Lyrics under each section are kept for reference. Set the BPM and default groove in the dialog.
+**Paste from Ultimate Guitar.** Open the *Chords* version of a song, select the chord/lyric text and copy it, then **+ Import** and paste. `[Verse]`/`[Chorus]` headers become sections; every chord on a chord line becomes one bar; `| G D | Em C |` is honoured as explicit bars; `x2` repeats a line. Lyric lines under each section are kept and shown on stage: the current line appears large under the chord display with the next line dimmed beneath it, spread across the section's bars (or placed exactly with a per-bar `lyricBars` array in the song JSON). Set the BPM and default groove in the dialog.
 
 UG sheets show chord *changes*, not bars, so bar counts are often off. Two ways to fix that:
 

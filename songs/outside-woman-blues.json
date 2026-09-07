@@ -17,7 +17,7 @@
         "E7",
         "E7"
       ],
-      "lyrics": "Main E riff x2. Kick and floor tom under the riff, hat on 2 & 4."
+      "notes": "Main E riff x2. Kick and floor tom under the riff, hat on 2 & 4."
     },
     {
       "name": "Verse 1",
@@ -38,7 +38,7 @@
         "E7",
         "E7"
       ],
-      "lyrics": "Ride-based, doubled kick, ghost notes. 12-bar: E7 x8, B7 x2, E7 x2."
+      "notes": "Ride-based, doubled kick, ghost notes. 12-bar: E7 x8, B7 x2, E7 x2."
     },
     {
       "name": "Verse 2",
@@ -59,7 +59,7 @@
         "E7",
         "E7"
       ],
-      "lyrics": "Busier: more kick, tom answers, ghosts."
+      "notes": "Busier: more kick, tom answers, ghosts."
     },
     {
       "name": "Guitar Solo",
@@ -80,7 +80,7 @@
         "E7",
         "E7"
       ],
-      "lyrics": "Jazz ride pattern, snare comping, swung. Baker opens up."
+      "notes": "Jazz ride pattern, snare comping, swung. Baker opens up."
     },
     {
       "name": "Verse 3",
@@ -121,7 +121,7 @@
         "E7",
         "E7"
       ],
-      "lyrics": "Double kick, crashing ride, tom flurries."
+      "notes": "Double kick, crashing ride, tom flurries."
     },
     {
       "name": "Outro (riff)",
@@ -134,7 +134,7 @@
         "E7",
         "E7 . . B7"
       ],
-      "lyrics": "Riff out; end on the last hit together."
+      "notes": "Riff out; end on the last hit together."
     }
   ]
 }
