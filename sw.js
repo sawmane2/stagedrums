@@ -1,7 +1,12 @@
-const CACHE = 'stagedrums-v5';
+const CACHE = 'stagedrums-v6';
 const ASSETS = ['./', './index.html', './styles.css', './app.js', './drums.js', './parser.js', './sync.js', './midi.js', './mixer.js', './mixer-ui.js', './gate-worklet.js', './manifest.json', './icon.svg', './songs/index.json', './version.json'];
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then(async c => {
+    await c.addAll(ASSETS);
+    try { const kit = await (await fetch('./kits/acoustic/kit.json')).json(); const files = ['./kits/acoustic/kit.json'];
+      for (const i of Object.values(kit.instruments)) for (const l of i.layers) for (const f of l.files) files.push('./kits/acoustic/' + f);
+      await c.addAll(files); } catch {}
+  }).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));

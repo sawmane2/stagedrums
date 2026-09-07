@@ -52,6 +52,12 @@
       <button id="btnExport" class="small">Export</button>
       <button id="btnDelete" class="small danger">Delete</button>
     </div>
+    <h3>Drum kit</h3>
+    <select id="kitSelect" title="Drum sound">
+      <option value="acoustic">Acoustic kit (sampled)</option>
+      <option value="synth">Synth kit</option>
+    </select>
+    <span id="kitStatus" class="hint"></span>
     <h3>Drum mix</h3>
     <div class="mix">
       <label>Master <input type="range" id="volMaster" min="0" max="1" step="0.01" value="0.8"></label>

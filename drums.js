@@ -17,7 +17,36 @@
       }
       this.bus.click.gain.value = 0;
       this.noise = this._makeNoise();
+      this.samples = null; this.mode = 'synth'; this.kitName = 'Synth';
+      this._openHat = null;
     }
+    /** Load a sampled kit (kits/<name>/kit.json). Falls back to synth if anything fails. */
+    async loadSamples(url) {
+      const base = url.replace(/[^/]*$/, '');
+      const manifest = await (await fetch(url, { cache: 'force-cache' })).json();
+      const insts = {};
+      await Promise.all(Object.entries(manifest.instruments).map(async ([inst, e]) => {
+        const layers = await Promise.all(e.layers.map(async l => ({ v: l.v, buffers: await Promise.all(l.files.map(async f => {
+          const ab = await (await fetch(base + f, { cache: 'force-cache' })).arrayBuffer();
+          return await this.ctx.decodeAudioData(ab);
+        })) })));
+        insts[inst] = { gain: e.gain ?? 1, layers };
+      }));
+      this.samples = insts; this.kitName = manifest.name || 'Sampled'; this.mode = 'acoustic';
+      return manifest;
+    }
+    setMode(m) { this.mode = (m === 'acoustic' && this.samples) ? 'acoustic' : 'synth'; }
+    _sample(key, vel, t, bus) {
+      const s = this.samples && this.samples[key]; if (!s) return null;
+      const layer = s.layers.find(l => vel <= l.v + 1e-6) || s.layers[s.layers.length - 1];
+      const buf = layer.buffers[Math.floor(Math.random() * layer.buffers.length)];
+      const src = this.ctx.createBufferSource(); src.buffer = buf;
+      src.playbackRate.value = 1 + (Math.random() - 0.5) * 0.02; // tiny natural variation
+      const g = this.ctx.createGain(); g.gain.value = s.gain * (0.7 + 0.3 * Math.min(1, vel));
+      src.connect(g); g.connect(this.bus[bus]); src.start(t);
+      return { src, g };
+    }
+    _choke(node, t) { if (!node) return; try { node.g.gain.setTargetAtTime(0, t, 0.01); node.src.stop(t + 0.08); } catch {} }
     _makeNoise() {
       const len = this.ctx.sampleRate * 2;
       const buf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
@@ -136,6 +165,23 @@
     /** Play one step token for an instrument letter */
     hit(inst, ch, t) {
       const v = ch === 'X' ? 1.15 : ch === 'x' ? 0.85 : ch === 'g' ? 0.35 : ch === 'o' ? 0.9 : 0.85;
+      if (this.mode === 'acoustic' && this.samples && inst !== 'B') {
+        const vel = Math.min(1, v);
+        switch (inst) {
+          case 'K': return this._sample('K', vel, t, 'kick');
+          case 'S': return this._sample('S', vel, t, 'snare');
+          case 'R': return this._sample('R', vel, t, 'snare');
+          case 'H': {
+            if (ch === 'o') { this._choke(this._openHat, t); this._openHat = this._sample('Ho', vel, t, 'hat'); return this._openHat; }
+            this._choke(this._openHat, t); this._openHat = null; return this._sample('H', vel, t, 'hat');
+          }
+          case 'D': return this._sample(ch === 'X' && this.samples.Db ? 'Db' : 'D', vel, t, 'cym');
+          case 'C': return this._sample('C', vel, t, 'cym');
+          case 'T': return this._sample('T', vel, t, 'tom');
+          case 'M': return this._sample('M', vel, t, 'tom');
+          case 'F': return this._sample('F', vel, t, 'tom');
+        }
+      }
       switch (inst) {
         case 'K': return this.kick(t, v);
         case 'S': return ch === 'g' ? this.ghost(t) : this.snare(t, v);
@@ -427,7 +473,7 @@
         const t = this._nextStepTime;
         if (this._bar < 0) {
           // count-in bar: clicks on beats, always audible through master (not click bus)
-          if (this._step % sig.stepsPerBeat === 0 && this.audible) this.kit.hat(t, this._step === 0 ? 1.1 : 0.7);
+          if (this._step % sig.stepsPerBeat === 0 && this.audible) this.kit.hit('H', this._step === 0 ? 'X' : 'x', t);
           if (this._step % sig.stepsPerBeat === 0) this.kit.click(t, this._step === 0);
           if (this._step === 0) this._fire(this.onBar, this._bar, t);
           if (this._step % sig.stepsPerBeat === 0) this._fire(this.onBeat, this._step / sig.stepsPerBeat, t, this._bar);

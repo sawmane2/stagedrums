@@ -80,6 +80,15 @@ UG sheets show chord *changes*, not bars, so bar counts are often off. Two ways 
 
 Songs live in the browser's localStorage. Use **Export** to save a `.json` and drop it in `songs/` (and add it to `songs/index.json`) to ship it with the app.
 
+## Drum sounds
+
+Two kits, switchable in the sidebar (**Drum kit**):
+
+- **Acoustic kit (sampled)** — the default. Real recordings of a bass drum, snare (with snares on, plus cross‑stick), hi‑hat (closed / open / pedal, with open‑hat choke), two toms (the floor tom is the low tom pitched down), and two suspended cymbals for crash, ride and bell. 2–4 velocity layers and round‑robins per drum, so repeated hits don't machine‑gun. The samples are from the **Versilian Community Sample Library (CC0 — public domain)**, trimmed, EQ'd and level‑matched for a rock kit (`kits/acoustic/`, ~700 KB, cached offline).
+- **Synth kit** — the original synthesized drums; zero download, always available as a fallback.
+
+To use your own samples, make `kits/<name>/kit.json` following `kits/acoustic/kit.json` (instrument letters → velocity layers → files; MP3/WAV/AAC), and point `loadSamples()` in `app.js` at it. The cowbell is always synthesized.
+
 ## MIDI
 
 - **Export .mid** (sidebar → MIDI) writes a Type‑1 Standard MIDI File: tempo + time signature, a marker per section, a text event per chord, a **Drums** track on channel 10 (General MIDI drum map: 36 kick, 38 snare, 42/46 hats, 51 ride, 49 crash, 50/47/43 toms, 37 cross‑stick) and a **Chords (reference)** track of block chords. Drop it into Logic/Ableton/Reaper/GarageBand and swap in any drum kit.

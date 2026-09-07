@@ -439,6 +439,15 @@
   role = prefs.role || 'solo'; applyRoleAudio();
   if (role !== 'solo') { const u = defaultWsUrl(); if (u) connect(u); else { role = 'solo'; $('roleSelect').value = 'solo'; } }
 
+  // ---------- drum kit (samples) ----------
+  $('kitSelect').value = prefs.kit || 'acoustic';
+  $('kitSelect').onchange = () => { prefs.kit = $('kitSelect').value; savePrefs(); kit.setMode(prefs.kit); $('kitStatus').textContent = kit.mode === 'acoustic' ? kit.kitName : 'Synthesized drums'; };
+  (async () => {
+    $('kitStatus').textContent = 'Loading acoustic kit…';
+    try { await kit.loadSamples('kits/acoustic/kit.json'); kit.setMode(prefs.kit || 'acoustic'); $('kitStatus').textContent = kit.mode === 'acoustic' ? kit.kitName : 'Synthesized drums'; }
+    catch (e) { console.warn('kit load failed', e); kit.setMode('synth'); $('kitStatus').textContent = 'Acoustic kit unavailable — using synth'; $('kitSelect').value = 'synth'; }
+  })();
+
   // ---------- version & updates ----------
   let localVersion = null, hasServer = false, updateInfo = null;
   async function loadVersion() {

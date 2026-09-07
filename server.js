@@ -25,7 +25,7 @@ if (process.argv.includes('--update')) {
 }
 const ROOT = __dirname;
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
-  '.svg': 'image/svg+xml', '.png': 'image/png', '.webmanifest': 'application/manifest+json' };
+  '.svg': 'image/svg+xml', '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.png': 'image/png', '.webmanifest': 'application/manifest+json' };
 
 function isLocal(req) { const a = req.socket.remoteAddress || ''; return /^(::1|127\.0\.0\.1|::ffff:127\.0\.0\.1)$/.test(a); }
 function json(res, code, obj) { res.writeHead(code, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(obj)); }

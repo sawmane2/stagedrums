@@ -1,5 +1,5 @@
 {
-  "version": "0.8.0",
+  "version": "0.9.0",
   "date": "2026-09-07",
-  "notes": "Built-in updater: check GitHub for new versions, install with one click, all devices reload. Live mixer, Prime-style section pads, MIDI, three songs."
+  "notes": "Real acoustic drum sounds: sampled kit (VCSL, CC0) with velocity layers, round-robins and hi-hat choke; synth kit kept as fallback. Updater configured for sawmane2/stagedrums."
 }
