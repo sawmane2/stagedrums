@@ -39,7 +39,7 @@
     const lines = text.replace(/\r/g, '').split('\n');
     const sections = [];
     let cur = null;
-    const HEADER_RE = /^\s*\[?\s*((?:pre-?)?(?:intro|verse|chorus|bridge|solo|outro|interlude|instrumental|break|tag|ending|coda|refrain|hook|turnaround)\s*\d*[^\]\n]*?)\s*\]?\s*:?\s*$/i;
+    const HEADER_RE = /^\s*\[?\s*((?:pre-?)?(?:intro|verse|chorus|bridge|solo|lead|outro|interlude|instrumental|break|tag|ending|coda|refrain|hook|turnaround|main riff|riff)\s*\d*[^\]\n]*?)\s*\]?\s*:?\s*$/i;
 
     const push = (name) => { cur = { name: name.trim(), bars: [], lyrics: [], sheet: [] }; sections.push(cur); };
 

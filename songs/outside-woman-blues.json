@@ -38,7 +38,14 @@
         "E7",
         "E7"
       ],
-      "notes": "Ride-based, doubled kick, ghost notes. 12-bar: E7 x8, B7 x2, E7 x2."
+      "notes": "Ride-based, doubled kick, ghost notes. 12-bar: E7 x8, B7 x2, E7 x2.",
+      "sheet": "        E\nIf you lose your money, great God, don't lose your mind\n       E\nIf you lose your money, great God, don't lose your mind\n            B7                                      E\nAnd if you lose your woman, please don't fool with mine",
+      "lyrics": "If you lose your money, great God, don't lose your mind\nIf you lose your money, great God, don't lose your mind\nAnd if you lose your woman, please don't fool with mine",
+      "sheetBars": [
+        4,
+        4,
+        4
+      ]
     },
     {
       "name": "Verse 2",
@@ -59,7 +66,15 @@
         "E7",
         "E7"
       ],
-      "notes": "Busier: more kick, tom answers, ghosts."
+      "notes": "Busier: more kick, tom answers, ghosts.",
+      "sheet": "          E\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n          E\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n                    B7\n'Cause women these days, they're so doggone crooked,\n                                    E\nThat they might make off 'fore day creep",
+      "lyrics": "I'm gonna buy me a bulldog, watch my lady whilst I sleep\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n'Cause women these days, they're so doggone crooked,\nThat they might make off 'fore day creep",
+      "sheetBars": [
+        4,
+        4,
+        2,
+        2
+      ]
     },
     {
       "name": "Guitar Solo",
@@ -100,6 +115,14 @@
         "B7",
         "E7",
         "E7"
+      ],
+      "sheet": "           E\nWell, you can't watch your wife and your outside women, too\n             E\nYou know you can't watch your wife and your outside womens, too\n                  B7\nCause when you're out with your women, your wife will be at home,\n                                                              E\nCooking your food, doing your dirt, buddy what you trying to do?",
+      "lyrics": "Well, you can't watch your wife and your outside women, too\nYou know you can't watch your wife and your outside womens, too\nCause when you're out with your women, your wife will be at home,\nCooking your food, doing your dirt, buddy what you trying to do?",
+      "sheetBars": [
+        4,
+        4,
+        2,
+        2
       ]
     },
     {
@@ -121,7 +144,15 @@
         "E7",
         "E7"
       ],
-      "notes": "Double kick, crashing ride, tom flurries."
+      "notes": "Double kick, crashing ride, tom flurries.",
+      "sheet": "     E\nYou can't watch your wife and your outside women, too\n             E\nYou know you can't watch your wife and your outside women, too\n            B7\nWhen you're out with your women, your wife will be at home,\n                                                              E\nDoing your dirt, cooking your food, buddy what you trying to do?",
+      "lyrics": "You can't watch your wife and your outside women, too\nYou know you can't watch your wife and your outside women, too\nWhen you're out with your women, your wife will be at home,\nDoing your dirt, cooking your food, buddy what you trying to do?",
+      "sheetBars": [
+        4,
+        4,
+        2,
+        2
+      ]
     },
     {
       "name": "Outro (riff)",
@@ -134,7 +165,10 @@
         "E7",
         "E7 . . B7"
       ],
-      "notes": "Riff out; end on the last hit together."
+      "notes": "Riff out; end on the last hit together.",
+      "sheet": "N.C.\nHmm Hmmm Hmm",
+      "lyrics": "Hmm Hmmm Hmm"
     }
-  ]
+  ],
+  "rev": 3
 }

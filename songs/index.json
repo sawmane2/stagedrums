@@ -39,7 +39,14 @@
           "E7",
           "E7"
         ],
-        "notes": "Ride-based, doubled kick, ghost notes. 12-bar: E7 x8, B7 x2, E7 x2."
+        "notes": "Ride-based, doubled kick, ghost notes. 12-bar: E7 x8, B7 x2, E7 x2.",
+        "sheet": "        E\nIf you lose your money, great God, don't lose your mind\n       E\nIf you lose your money, great God, don't lose your mind\n            B7                                      E\nAnd if you lose your woman, please don't fool with mine",
+        "lyrics": "If you lose your money, great God, don't lose your mind\nIf you lose your money, great God, don't lose your mind\nAnd if you lose your woman, please don't fool with mine",
+        "sheetBars": [
+          4,
+          4,
+          4
+        ]
       },
       {
         "name": "Verse 2",
@@ -60,7 +67,15 @@
           "E7",
           "E7"
         ],
-        "notes": "Busier: more kick, tom answers, ghosts."
+        "notes": "Busier: more kick, tom answers, ghosts.",
+        "sheet": "          E\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n          E\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n                    B7\n'Cause women these days, they're so doggone crooked,\n                                    E\nThat they might make off 'fore day creep",
+        "lyrics": "I'm gonna buy me a bulldog, watch my lady whilst I sleep\nI'm gonna buy me a bulldog, watch my lady whilst I sleep\n'Cause women these days, they're so doggone crooked,\nThat they might make off 'fore day creep",
+        "sheetBars": [
+          4,
+          4,
+          2,
+          2
+        ]
       },
       {
         "name": "Guitar Solo",
@@ -101,6 +116,14 @@
           "B7",
           "E7",
           "E7"
+        ],
+        "sheet": "           E\nWell, you can't watch your wife and your outside women, too\n             E\nYou know you can't watch your wife and your outside womens, too\n                  B7\nCause when you're out with your women, your wife will be at home,\n                                                              E\nCooking your food, doing your dirt, buddy what you trying to do?",
+        "lyrics": "Well, you can't watch your wife and your outside women, too\nYou know you can't watch your wife and your outside womens, too\nCause when you're out with your women, your wife will be at home,\nCooking your food, doing your dirt, buddy what you trying to do?",
+        "sheetBars": [
+          4,
+          4,
+          2,
+          2
         ]
       },
       {
@@ -122,7 +145,15 @@
           "E7",
           "E7"
         ],
-        "notes": "Double kick, crashing ride, tom flurries."
+        "notes": "Double kick, crashing ride, tom flurries.",
+        "sheet": "     E\nYou can't watch your wife and your outside women, too\n             E\nYou know you can't watch your wife and your outside women, too\n            B7\nWhen you're out with your women, your wife will be at home,\n                                                              E\nDoing your dirt, cooking your food, buddy what you trying to do?",
+        "lyrics": "You can't watch your wife and your outside women, too\nYou know you can't watch your wife and your outside women, too\nWhen you're out with your women, your wife will be at home,\nDoing your dirt, cooking your food, buddy what you trying to do?",
+        "sheetBars": [
+          4,
+          4,
+          2,
+          2
+        ]
       },
       {
         "name": "Outro (riff)",
@@ -135,9 +166,12 @@
           "E7",
           "E7 . . B7"
         ],
-        "notes": "Riff out; end on the last hit together."
+        "notes": "Riff out; end on the last hit together.",
+        "sheet": "N.C.\nHmm Hmmm Hmm",
+        "lyrics": "Hmm Hmmm Hmm"
       }
-    ]
+    ],
+    "rev": 3
   },
   {
     "id": "mountain-mississippi-queen",
@@ -156,157 +190,176 @@
           "N.C.",
           "N.C."
         ],
-        "notes": "Corky Laing's cowbell 8ths, 2 bars. Band enters on the riff."
+        "notes": "Cowbell 8ths, 2 bars. Band enters on the riff."
       },
       {
-        "name": "Riff intro",
+        "name": "Main Riff",
         "groove": "laing-cowbell",
         "crash": true,
         "fill": true,
         "bars": [
-          "E5",
-          "E5",
-          "E5",
-          "E5"
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A"
         ],
-        "notes": "Main riff in E (E5 \u2013 D5 \u2013 A5 with the bend). Cowbell keeps going."
-      },
-      {
-        "name": "Hook 1 (riff)",
-        "groove": "laing-cowbell",
-        "crash": true,
-        "fill": true,
-        "bars": [
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5"
-        ],
-        "notes": "Vocal hook over the riff, 8 bars."
+        "notes": "E riff, turning B - A at the end of every 2 bars. Cowbell keeps going."
       },
       {
         "name": "Verse 1",
-        "groove": "laing-heavy",
-        "crash": true,
-        "fill": true,
-        "bars": [
-          "A",
-          "D",
-          "A",
-          "E",
-          "A",
-          "D",
-          "A",
-          "E"
-        ],
-        "notes": "Chords open up: A \u2013 D \u2013 A \u2013 E, twice."
-      },
-      {
-        "name": "Hook 2 (riff)",
         "groove": "laing-cowbell",
         "crash": true,
         "fill": true,
         "bars": [
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5"
+          "E",
+          "E",
+          "E",
+          "E",
+          "A",
+          "A",
+          "E",
+          "E",
+          "B",
+          "A",
+          "E",
+          "E",
+          "B",
+          "A"
+        ],
+        "sheetBars": [
+          4,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "notes": "Riff under the hook (4 bars), then A / E / B-A / E / B-A."
+      },
+      {
+        "name": "Riff",
+        "groove": "laing-cowbell",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "E",
+          "B A",
+          "E",
+          "B A"
         ]
       },
       {
-        "name": "Guitar solo",
+        "name": "Guitar Solo",
         "groove": "laing-ride",
         "crash": true,
         "fill": true,
         "bars": [
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5"
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A"
         ],
-        "notes": "Solo over the riff, 16 bars. Ride cymbal, cowbell accents on 1 and 3."
+        "notes": "24 bars over the riff. Ride, cowbell on 1 and 3."
       },
       {
         "name": "Verse 2",
-        "groove": "laing-heavy",
-        "crash": true,
-        "fill": true,
-        "bars": [
-          "A",
-          "D",
-          "A",
-          "E",
-          "A",
-          "D",
-          "A",
-          "E"
-        ]
-      },
-      {
-        "name": "Hook 3 (riff)",
         "groove": "laing-cowbell",
         "crash": true,
         "fill": true,
         "bars": [
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5"
-        ]
+          "E",
+          "E",
+          "E",
+          "E",
+          "A",
+          "A",
+          "E",
+          "E",
+          "B",
+          "A",
+          "E",
+          "E",
+          "B",
+          "A",
+          "B",
+          "A",
+          "E",
+          "E",
+          "B",
+          "A"
+        ],
+        "sheetBars": [
+          4,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "notes": "Verse 2 then the dancer reprise (B-A / E / B-A)."
       },
       {
-        "name": "Outro (riff, jam out)",
+        "name": "Riff (out)",
         "groove": "laing-heavy",
         "crash": true,
         "fill": true,
-        "repeat": 2,
         "bars": [
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5",
-          "E5"
-        ],
-        "notes": "Riff out. Loop this section to stretch the ending; last bar ends on E."
+          "E",
+          "B A",
+          "E",
+          "B A"
+        ]
       },
       {
-        "name": "Ending",
+        "name": "Outro",
         "groove": "laing-heavy",
         "crash": true,
         "fill": false,
         "bars": [
-          "E5",
-          "E5 . . N.C."
-        ]
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "B A",
+          "E",
+          "E . . N.C."
+        ],
+        "notes": "Ohhh... Mississippi Queen. Hold the riff as long as you like, then cue the last bar."
       }
-    ]
+    ],
+    "rev": 3
   },
   {
     "id": "mountain-sittin-on-a-rainbow",
@@ -327,7 +380,7 @@
           "A5",
           "A5"
         ],
-        "notes": "Main riff on A, 4 bars. 116 BPM, half-swung heavy boogie."
+        "notes": "Main riff x2 (116 BPM, half-swung boogie)."
       },
       {
         "name": "Verse 1",
@@ -335,44 +388,45 @@
         "crash": true,
         "fill": true,
         "bars": [
+          "A",
+          "A",
           "A5",
           "A5",
-          "A5",
-          "A5",
-          "A5",
-          "A5",
-          "A5",
-          "A5",
-          "A5",
-          "A5",
-          "A5",
-          "A5",
-          "A5",
-          "A5",
+          "A",
+          "A",
           "A5",
           "A5"
         ],
-        "notes": "Vocal over the A riff, 16 bars (two 8-bar halves)."
+        "sheetBars": [
+          4,
+          4
+        ],
+        "notes": "A for the line, main riff answers (A5 = riff)."
       },
       {
-        "name": "Chorus 1",
-        "groove": "rock-heavy",
+        "name": "Chorus",
+        "groove": "laing-heavy",
         "crash": true,
         "fill": true,
         "bars": [
-          "G",
-          "D",
-          "G",
-          "D",
-          "G",
-          "D",
+          "G D",
+          "G D",
+          "A5",
+          "A5",
+          "G D",
           "A",
+          "G D",
           "A"
         ],
-        "notes": "G - D, G - D over the riff feel, then G - D - A back to the riff."
+        "sheetBars": [
+          4,
+          2,
+          2
+        ],
+        "notes": "G-D G-D then riff; G-D A; G-D A."
       },
       {
-        "name": "Guitar solo",
+        "name": "Lead",
         "groove": "laing-ride",
         "crash": true,
         "fill": true,
@@ -384,9 +438,24 @@
           "A5",
           "A5",
           "A5",
+          "A5",
+          "A5",
           "A5"
         ],
-        "notes": "Riff x2 (8 bars) on the ride."
+        "notes": "Lead over the riff, 10 bars."
+      },
+      {
+        "name": "Riff",
+        "groove": "laing-boogie",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "A5",
+          "A5",
+          "A5",
+          "A5"
+        ],
+        "notes": "Main riff x2."
       },
       {
         "name": "Verse 2",
@@ -394,12 +463,47 @@
         "crash": true,
         "fill": true,
         "bars": [
+          "A",
+          "A",
           "A5",
           "A5",
+          "A",
+          "A",
+          "A5",
+          "A5"
+        ],
+        "sheetBars": [
+          4,
+          4
+        ]
+      },
+      {
+        "name": "Chorus",
+        "groove": "laing-heavy",
+        "crash": true,
+        "fill": true,
+        "bars": [
+          "G D",
+          "G D",
           "A5",
           "A5",
-          "A5",
-          "A5",
+          "G D",
+          "A",
+          "G D",
+          "A"
+        ],
+        "sheetBars": [
+          4,
+          2,
+          2
+        ]
+      },
+      {
+        "name": "Lead 2",
+        "groove": "laing-ride",
+        "crash": true,
+        "fill": true,
+        "bars": [
           "A5",
           "A5",
           "A5",
@@ -413,27 +517,10 @@
         ]
       },
       {
-        "name": "Chorus 2",
-        "groove": "rock-heavy",
+        "name": "Outro (riff, fades)",
+        "groove": "laing-heavy",
         "crash": true,
         "fill": true,
-        "bars": [
-          "G",
-          "D",
-          "G",
-          "D",
-          "G",
-          "D",
-          "A",
-          "A"
-        ]
-      },
-      {
-        "name": "Outro solo (riff, fades)",
-        "groove": "laing-ride",
-        "crash": true,
-        "fill": true,
-        "repeat": 1,
         "bars": [
           "A5",
           "A5",
@@ -444,11 +531,11 @@
           "A5",
           "A5"
         ],
-        "notes": "Riff x2 on the record then fades. Hold this section live and cue the ending."
+        "notes": "Main riff x4 to fade on the record. Hold live, then cue the ending."
       },
       {
         "name": "Ending",
-        "groove": "laing-boogie",
+        "groove": "laing-heavy",
         "crash": true,
         "fill": false,
         "bars": [
@@ -456,7 +543,8 @@
           "A5 . . N.C."
         ]
       }
-    ]
+    ],
+    "rev": 3
   },
   {
     "id": "demo-jam-g",
@@ -503,7 +591,8 @@
           "D . . D/F#"
         ]
       }
-    ]
+    ],
+    "rev": 3
   },
   {
     "id": "demo-blues-a",
@@ -575,7 +664,8 @@
           "A7"
         ]
       }
-    ]
+    ],
+    "rev": 3
   },
   {
     "id": "demo-ballad",
@@ -670,6 +760,7 @@
           "C"
         ]
       }
-    ]
+    ],
+    "rev": 3
   }
 ]

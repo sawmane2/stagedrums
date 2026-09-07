@@ -15,155 +15,174 @@
         "N.C.",
         "N.C."
       ],
-      "notes": "Corky Laing's cowbell 8ths, 2 bars. Band enters on the riff."
+      "notes": "Cowbell 8ths, 2 bars. Band enters on the riff."
     },
     {
-      "name": "Riff intro",
+      "name": "Main Riff",
       "groove": "laing-cowbell",
       "crash": true,
       "fill": true,
       "bars": [
-        "E5",
-        "E5",
-        "E5",
-        "E5"
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A"
       ],
-      "notes": "Main riff in E (E5 \u2013 D5 \u2013 A5 with the bend). Cowbell keeps going."
-    },
-    {
-      "name": "Hook 1 (riff)",
-      "groove": "laing-cowbell",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5"
-      ],
-      "notes": "Vocal hook over the riff, 8 bars."
+      "notes": "E riff, turning B - A at the end of every 2 bars. Cowbell keeps going."
     },
     {
       "name": "Verse 1",
-      "groove": "laing-heavy",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "A",
-        "D",
-        "A",
-        "E",
-        "A",
-        "D",
-        "A",
-        "E"
-      ],
-      "notes": "Chords open up: A \u2013 D \u2013 A \u2013 E, twice."
-    },
-    {
-      "name": "Hook 2 (riff)",
       "groove": "laing-cowbell",
       "crash": true,
       "fill": true,
       "bars": [
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5"
+        "E",
+        "E",
+        "E",
+        "E",
+        "A",
+        "A",
+        "E",
+        "E",
+        "B",
+        "A",
+        "E",
+        "E",
+        "B",
+        "A"
+      ],
+      "sheetBars": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "notes": "Riff under the hook (4 bars), then A / E / B-A / E / B-A."
+    },
+    {
+      "name": "Riff",
+      "groove": "laing-cowbell",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "E",
+        "B A",
+        "E",
+        "B A"
       ]
     },
     {
-      "name": "Guitar solo",
+      "name": "Guitar Solo",
       "groove": "laing-ride",
       "crash": true,
       "fill": true,
       "bars": [
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5"
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A"
       ],
-      "notes": "Solo over the riff, 16 bars. Ride cymbal, cowbell accents on 1 and 3."
+      "notes": "24 bars over the riff. Ride, cowbell on 1 and 3."
     },
     {
       "name": "Verse 2",
-      "groove": "laing-heavy",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "A",
-        "D",
-        "A",
-        "E",
-        "A",
-        "D",
-        "A",
-        "E"
-      ]
-    },
-    {
-      "name": "Hook 3 (riff)",
       "groove": "laing-cowbell",
       "crash": true,
       "fill": true,
       "bars": [
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5"
-      ]
+        "E",
+        "E",
+        "E",
+        "E",
+        "A",
+        "A",
+        "E",
+        "E",
+        "B",
+        "A",
+        "E",
+        "E",
+        "B",
+        "A",
+        "B",
+        "A",
+        "E",
+        "E",
+        "B",
+        "A"
+      ],
+      "sheetBars": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "notes": "Verse 2 then the dancer reprise (B-A / E / B-A)."
     },
     {
-      "name": "Outro (riff, jam out)",
+      "name": "Riff (out)",
       "groove": "laing-heavy",
       "crash": true,
       "fill": true,
-      "repeat": 2,
       "bars": [
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5",
-        "E5"
-      ],
-      "notes": "Riff out. Loop this section to stretch the ending; last bar ends on E."
+        "E",
+        "B A",
+        "E",
+        "B A"
+      ]
     },
     {
-      "name": "Ending",
+      "name": "Outro",
       "groove": "laing-heavy",
       "crash": true,
       "fill": false,
       "bars": [
-        "E5",
-        "E5 . . N.C."
-      ]
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "B A",
+        "E",
+        "E . . N.C."
+      ],
+      "notes": "Ohhh... Mississippi Queen. Hold the riff as long as you like, then cue the last bar."
     }
-  ]
+  ],
+  "rev": 3
 }

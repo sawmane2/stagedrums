@@ -24,11 +24,22 @@
   // ---------- songs ----------
   async function loadSongs() {
     const local = JSON.parse(localStorage.getItem(LS_SONGS) || 'null');
-    if (local && local.length) songs = local;
-    else {
-      try { songs = await (await fetch('songs/index.json')).json(); } catch { songs = []; }
-      persistSongs();
-    }
+    let shipped = []; try { shipped = await (await fetch('songs/index.json', { cache: 'no-store' })).json(); } catch {}
+    if (local && local.length) {
+      songs = local;
+      // an update may ship a newer revision of a built-in song: take it, but keep any lyrics/sheet the user attached
+      for (const sh of shipped) {
+        const i = songs.findIndex(s => s.id === sh.id);
+        if (i < 0) { songs.push(sh); continue; }
+        if ((sh.rev || 0) > (songs[i].rev || 0)) {
+          const old = songs[i]; const merged = JSON.parse(JSON.stringify(sh));
+          merged.sections.forEach((sec, k) => { const o = old.sections.find(x => x.name === sec.name) || old.sections[k];
+            if (o) { if (o.sheet && !sec.sheet) sec.sheet = o.sheet; if (o.lyrics && !sec.lyrics) sec.lyrics = o.lyrics; } });
+          songs[i] = merged;
+        }
+      }
+    } else songs = shipped;
+    persistSongs();
     renderSongList();
     const lastId = prefs.lastSong;
     selectSong(songs.find(s => s.id === lastId) || songs[0]);
@@ -74,12 +85,16 @@
     // map tokens → bars: sequential when the token count equals the bar count, else proportional per chord line
     const chordLines = lines.filter(l => l.tokens.length); const nTok = chordLines.reduce((n, l) => n + l.tokens.length, 0);
     const perRepeat = secDef.bars.length;
-    if (nTok === perRepeat) { let b = 0; for (const l of chordLines) for (const t of l.tokens) t.bar = sec.start + b++; }
+    if (Array.isArray(secDef.sheetBars) && secDef.sheetBars.length === chordLines.length) { // explicit bars per chord line
+      let start = 0;
+      chordLines.forEach((l, li) => { const lb = secDef.sheetBars[li]; const n = l.tokens.length, base = Math.floor(lb / n), rem = lb - base * n; let b = start;
+        l.tokens.forEach((t, i) => { t.bar = sec.start + Math.min(perRepeat - 1, n > lb ? start + Math.floor(i * lb / n) : b); b += base + (i === 0 ? rem : 0); }); start += lb; });
+    } else if (nTok === perRepeat) { let b = 0; for (const l of chordLines) for (const t of l.tokens) t.bar = sec.start + b++; }
     else {
       const per = perRepeat / Math.max(1, chordLines.length); let start = 0;
       chordLines.forEach((l, li) => { const lb = Math.round((li + 1) * per) - Math.round(li * per);
         const n = l.tokens.length, base = Math.floor(lb / n), rem = lb - base * n; let b = start;
-        l.tokens.forEach((t, i) => { t.bar = sec.start + Math.min(perRepeat - 1, b); b += base + (i === 0 ? rem : 0); });
+        l.tokens.forEach((t, i) => { t.bar = sec.start + Math.min(perRepeat - 1, n > lb ? start + Math.floor(i * lb / n) : b); b += base + (i === 0 ? rem : 0); });
         start += lb; });
     }
     return lines;

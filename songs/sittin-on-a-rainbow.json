@@ -17,7 +17,7 @@
         "A5",
         "A5"
       ],
-      "notes": "Main riff on A, 4 bars. 116 BPM, half-swung heavy boogie."
+      "notes": "Main riff x2 (116 BPM, half-swung boogie)."
     },
     {
       "name": "Verse 1",
@@ -25,44 +25,45 @@
       "crash": true,
       "fill": true,
       "bars": [
+        "A",
+        "A",
         "A5",
         "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
+        "A",
+        "A",
         "A5",
         "A5"
       ],
-      "notes": "Vocal over the A riff, 16 bars (two 8-bar halves)."
+      "sheetBars": [
+        4,
+        4
+      ],
+      "notes": "A for the line, main riff answers (A5 = riff)."
     },
     {
-      "name": "Chorus 1",
-      "groove": "rock-heavy",
+      "name": "Chorus",
+      "groove": "laing-heavy",
       "crash": true,
       "fill": true,
       "bars": [
-        "G",
-        "D",
-        "G",
-        "D",
-        "G",
-        "D",
+        "G D",
+        "G D",
+        "A5",
+        "A5",
+        "G D",
         "A",
+        "G D",
         "A"
       ],
-      "notes": "G - D, G - D over the riff feel, then G - D - A back to the riff."
+      "sheetBars": [
+        4,
+        2,
+        2
+      ],
+      "notes": "G-D G-D then riff; G-D A; G-D A."
     },
     {
-      "name": "Guitar solo",
+      "name": "Lead",
       "groove": "laing-ride",
       "crash": true,
       "fill": true,
@@ -74,9 +75,24 @@
         "A5",
         "A5",
         "A5",
+        "A5",
+        "A5",
         "A5"
       ],
-      "notes": "Riff x2 (8 bars) on the ride."
+      "notes": "Lead over the riff, 10 bars."
+    },
+    {
+      "name": "Riff",
+      "groove": "laing-boogie",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "A5",
+        "A5",
+        "A5",
+        "A5"
+      ],
+      "notes": "Main riff x2."
     },
     {
       "name": "Verse 2",
@@ -84,12 +100,47 @@
       "crash": true,
       "fill": true,
       "bars": [
+        "A",
+        "A",
         "A5",
         "A5",
+        "A",
+        "A",
+        "A5",
+        "A5"
+      ],
+      "sheetBars": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Chorus",
+      "groove": "laing-heavy",
+      "crash": true,
+      "fill": true,
+      "bars": [
+        "G D",
+        "G D",
         "A5",
         "A5",
-        "A5",
-        "A5",
+        "G D",
+        "A",
+        "G D",
+        "A"
+      ],
+      "sheetBars": [
+        4,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "Lead 2",
+      "groove": "laing-ride",
+      "crash": true,
+      "fill": true,
+      "bars": [
         "A5",
         "A5",
         "A5",
@@ -103,27 +154,10 @@
       ]
     },
     {
-      "name": "Chorus 2",
-      "groove": "rock-heavy",
+      "name": "Outro (riff, fades)",
+      "groove": "laing-heavy",
       "crash": true,
       "fill": true,
-      "bars": [
-        "G",
-        "D",
-        "G",
-        "D",
-        "G",
-        "D",
-        "A",
-        "A"
-      ]
-    },
-    {
-      "name": "Outro solo (riff, fades)",
-      "groove": "laing-ride",
-      "crash": true,
-      "fill": true,
-      "repeat": 1,
       "bars": [
         "A5",
         "A5",
@@ -134,11 +168,11 @@
         "A5",
         "A5"
       ],
-      "notes": "Riff x2 on the record then fades. Hold this section live and cue the ending."
+      "notes": "Main riff x4 to fade on the record. Hold live, then cue the ending."
     },
     {
       "name": "Ending",
-      "groove": "laing-boogie",
+      "groove": "laing-heavy",
       "crash": true,
       "fill": false,
       "bars": [
@@ -146,5 +180,6 @@
         "A5 . . N.C."
       ]
     }
-  ]
+  ],
+  "rev": 3
 }
