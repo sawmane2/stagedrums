@@ -2,11 +2,11 @@
  "id": "cream-sunshine-of-your-love",
  "title": "Sunshine of Your Love",
  "artist": "Cream",
- "bpm": 116,
+ "bpm": 117,
  "time": "4/4",
  "groove": "laing-heavy",
  "feel": "loose",
- "rev": 1,
+ "rev": 3,
  "band": {
   "bass": "roots",
   "keys": "off",
@@ -43,8 +43,6 @@
     "G",
     "F",
     "G",
-    "F",
-    "G",
     "D"
    ],
    "fill": true
@@ -76,11 +74,10 @@
    "fill": true
   },
   {
-   "name": "Riff 2",
+   "name": "Link",
    "groove": "laing-heavy",
    "bars": [
-    "D",
-    "A G F D"
+    "D"
    ]
   },
   {
@@ -95,8 +92,8 @@
     "A G F D",
     "D",
     "A G F D",
-    "G",
-    "F",
+    "D",
+    "A G F D",
     "G",
     "F",
     "G",
@@ -105,13 +102,12 @@
    "fill": true
   },
   {
-   "name": "Riff 3",
+   "name": "Riff 2",
    "groove": "laing-heavy",
    "bars": [
     "D",
     "A G F D",
-    "D",
-    "A G F D"
+    "D"
    ]
   },
   {
@@ -131,7 +127,7 @@
    "fill": true
   },
   {
-   "name": "Solo (break)",
+   "name": "Solo",
    "groove": "laing-ride",
    "bars": [
     "D",
@@ -149,9 +145,21 @@
     "D",
     "A G F D",
     "D",
-    "A G F D"
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D",
+    "A G F D",
+    "D"
    ],
-   "crash": true
+   "crash": true,
+   "fill": true
   },
   {
    "name": "Verse 3",
@@ -165,8 +173,8 @@
     "A G F D",
     "D",
     "A G F D",
-    "G",
-    "F",
+    "D",
+    "A G F D",
     "G",
     "F",
     "G",
@@ -175,13 +183,12 @@
    "fill": true
   },
   {
-   "name": "Riff 4",
+   "name": "Riff 3",
    "groove": "laing-heavy",
    "bars": [
     "D",
     "A G F D",
-    "D",
-    "A G F D"
+    "D"
    ]
   },
   {
@@ -199,6 +206,7 @@
     "A",
     "C G",
     "A",
+    "C G",
     "A"
    ],
    "crash": true,
@@ -213,11 +221,164 @@
     "D",
     "A G F D",
     "D",
-    "A G F D",
-    "D",
     "A G F D"
    ],
    "fill": true
   }
- ]
+ ],
+ "audio": {
+  "barTimes": [
+   0.627,
+   2.74,
+   4.574,
+   6.711,
+   8.771,
+   10.873,
+   12.963,
+   15.058,
+   17.125,
+   19.197,
+   21.269,
+   23.348,
+   25.437,
+   27.498,
+   29.565,
+   31.631,
+   33.675,
+   35.759,
+   37.808,
+   39.892,
+   41.958,
+   44.042,
+   46.109,
+   48.193,
+   50.265,
+   52.349,
+   54.48,
+   56.57,
+   58.758,
+   60.749,
+   62.874,
+   64.906,
+   66.955,
+   69.068,
+   71.158,
+   73.236,
+   75.343,
+   77.415,
+   79.505,
+   81.589,
+   83.679,
+   85.757,
+   87.795,
+   89.89,
+   91.974,
+   94.052,
+   96.084,
+   98.18,
+   100.275,
+   102.377,
+   104.461,
+   106.551,
+   108.698,
+   110.701,
+   112.907,
+   114.956,
+   117.005,
+   119.055,
+   121.086,
+   123.193,
+   125.318,
+   127.373,
+   129.434,
+   131.489,
+   133.555,
+   135.616,
+   137.671,
+   139.743,
+   141.822,
+   143.882,
+   145.897,
+   147.963,
+   150.076,
+   152.137,
+   154.186,
+   156.241,
+   158.337,
+   160.392,
+   162.464,
+   164.519,
+   166.574,
+   168.676,
+   170.707,
+   172.82,
+   174.957,
+   177.029,
+   179.136,
+   181.209,
+   183.293,
+   185.388,
+   187.46,
+   189.556,
+   191.628,
+   193.707,
+   195.762,
+   197.857,
+   199.959,
+   202.037,
+   204.063,
+   206.17,
+   208.242,
+   210.303,
+   212.37,
+   214.489,
+   216.573,
+   218.674,
+   220.758,
+   222.819,
+   224.903,
+   226.998,
+   229.082,
+   231.149,
+   233.25,
+   235.328,
+   237.389,
+   239.514,
+   241.522,
+   243.548,
+   245.528,
+   247.531,
+   249.539,
+   251.565
+  ],
+  "fills": [
+   34,
+   41,
+   57,
+   69,
+   76,
+   97,
+   115,
+   117
+  ],
+  "stems": {
+   "drums": "local/audio/cream-sunshine-of-your-love/drums.mp3",
+   "bass": "local/audio/cream-sunshine-of-your-love/bass.mp3",
+   "guitar": "local/audio/cream-sunshine-of-your-love/guitar.mp3",
+   "vocals": "local/audio/cream-sunshine-of-your-love/vocals.mp3"
+  },
+  "kit": {
+   "kick": "local/audio/cream-sunshine-of-your-love/kit/kick.mp3",
+   "snare": "local/audio/cream-sunshine-of-your-love/kit/snare.mp3",
+   "toms": "local/audio/cream-sunshine-of-your-love/kit/toms.mp3",
+   "cymbals": "local/audio/cream-sunshine-of-your-love/kit/cymbals.mp3"
+  },
+  "mix": {
+   "drums": 1,
+   "bass": 1,
+   "guitar": 1,
+   "vocals": 0
+  },
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+ }
 }

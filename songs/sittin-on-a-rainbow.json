@@ -1,185 +1,262 @@
 {
-  "id": "mountain-sittin-on-a-rainbow",
-  "title": "Sittin' on a Rainbow",
-  "artist": "Mountain (Climbing!, 1970)",
-  "bpm": 116,
-  "time": "4/4",
-  "groove": "laing-heavy",
-  "sections": [
-    {
-      "name": "Intro (main riff)",
-      "groove": "laing-boogie",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "A5",
-        "A5",
-        "A5",
-        "A5"
-      ],
-      "notes": "Main riff x2 (116 BPM, half-swung boogie)."
-    },
-    {
-      "name": "Verse 1",
-      "groove": "laing-boogie",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "A",
-        "A",
-        "A5",
-        "A5",
-        "A",
-        "A",
-        "A5",
-        "A5"
-      ],
-      "sheetBars": [
-        4,
-        4
-      ],
-      "notes": "A for the line, main riff answers (A5 = riff)."
-    },
-    {
-      "name": "Chorus",
-      "groove": "laing-heavy",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "G D",
-        "G D",
-        "A5",
-        "A5",
-        "G D",
-        "A",
-        "G D",
-        "A"
-      ],
-      "sheetBars": [
-        4,
-        2,
-        2
-      ],
-      "notes": "G-D G-D then riff; G-D A; G-D A."
-    },
-    {
-      "name": "Lead",
-      "groove": "laing-ride",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5"
-      ],
-      "notes": "Lead over the riff, 10 bars."
-    },
-    {
-      "name": "Riff",
-      "groove": "laing-boogie",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "A5",
-        "A5",
-        "A5",
-        "A5"
-      ],
-      "notes": "Main riff x2."
-    },
-    {
-      "name": "Verse 2",
-      "groove": "laing-boogie",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "A",
-        "A",
-        "A5",
-        "A5",
-        "A",
-        "A",
-        "A5",
-        "A5"
-      ],
-      "sheetBars": [
-        4,
-        4
-      ]
-    },
-    {
-      "name": "Chorus",
-      "groove": "laing-heavy",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "G D",
-        "G D",
-        "A5",
-        "A5",
-        "G D",
-        "A",
-        "G D",
-        "A"
-      ],
-      "sheetBars": [
-        4,
-        2,
-        2
-      ]
-    },
-    {
-      "name": "Lead 2",
-      "groove": "laing-ride",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5"
-      ]
-    },
-    {
-      "name": "Outro (riff, fades)",
-      "groove": "laing-heavy",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5",
-        "A5"
-      ],
-      "notes": "Main riff x4 to fade on the record. Hold live, then cue the ending."
-    },
-    {
-      "name": "Ending",
-      "groove": "laing-heavy",
-      "crash": true,
-      "fill": false,
-      "bars": [
-        "A5",
-        "A5 . . N.C."
-      ]
-    }
+ "id": "mountain-sittin-on-a-rainbow",
+ "title": "Sittin' on a Rainbow",
+ "artist": "Mountain (Climbing!, 1970)",
+ "bpm": 116,
+ "time": "4/4",
+ "groove": "laing-heavy",
+ "sections": [
+  {
+   "name": "Intro (main riff)",
+   "groove": "laing-heavy",
+   "bars": [
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5"
+   ],
+   "crash": false
+  },
+  {
+   "name": "Verse 1",
+   "groove": "laing-heavy",
+   "bars": [
+    "A",
+    "A",
+    "A5",
+    "A5",
+    "A",
+    "A",
+    "A5",
+    "A5"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Chorus 1",
+   "groove": "laing-ride",
+   "bars": [
+    "G D",
+    "G D",
+    "A5",
+    "A5",
+    "G D",
+    "A",
+    "G D",
+    "A",
+    "A"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    4,
+    3,
+    2
+   ]
+  },
+  {
+   "name": "Lead",
+   "groove": "hats-only",
+   "bars": [
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5"
+   ]
+  },
+  {
+   "name": "Riff",
+   "groove": "laing-heavy",
+   "bars": [
+    "A5",
+    "A5",
+    "A5",
+    "A5"
+   ],
+   "fill": true
+  },
+  {
+   "name": "Verse 2",
+   "groove": "laing-heavy",
+   "bars": [
+    "A",
+    "A",
+    "A5",
+    "A5",
+    "A",
+    "A",
+    "A5",
+    "A5"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Chorus 2",
+   "groove": "laing-ride",
+   "bars": [
+    "G D",
+    "G D",
+    "A5",
+    "A5",
+    "G D",
+    "A",
+    "G D",
+    "A",
+    "A"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    4,
+    3,
+    2
+   ]
+  },
+  {
+   "name": "Lead 2",
+   "groove": "hats-only",
+   "bars": [
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5"
+   ]
+  },
+  {
+   "name": "Outro (riff, fades)",
+   "groove": "laing-heavy",
+   "bars": [
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5",
+    "A5"
+   ],
+   "fill": true
+  }
+ ],
+ "rev": 5,
+ "audio": {
+  "barTimes": [
+   1.091,
+   3.036,
+   4.981,
+   6.943,
+   8.934,
+   10.902,
+   12.893,
+   14.925,
+   16.927,
+   18.947,
+   20.944,
+   22.994,
+   25.054,
+   27.098,
+   29.141,
+   31.19,
+   33.222,
+   35.248,
+   37.291,
+   39.364,
+   41.395,
+   43.462,
+   45.581,
+   47.595,
+   49.72,
+   51.844,
+   53.923,
+   56.036,
+   58.12,
+   60.233,
+   62.346,
+   64.383,
+   66.444,
+   68.516,
+   70.577,
+   72.632,
+   74.704,
+   76.765,
+   78.814,
+   80.887,
+   82.982,
+   85.06,
+   87.121,
+   89.176,
+   91.278,
+   93.344,
+   95.399,
+   97.454,
+   99.538,
+   101.605,
+   103.712,
+   105.674,
+   107.584,
+   109.703,
+   111.816,
+   113.9,
+   115.943,
+   118.039,
+   120.111,
+   122.149,
+   124.175,
+   126.253,
+   128.325,
+   130.374,
+   132.441,
+   134.502,
+   136.574,
+   138.67
   ],
-  "rev": 3
+  "fills": [
+   2,
+   4,
+   12,
+   16,
+   31,
+   33,
+   41,
+   65
+  ],
+  "stems": {
+   "drums": "local/audio/mountain-sittin-on-a-rainbow/drums.mp3",
+   "bass": "local/audio/mountain-sittin-on-a-rainbow/bass.mp3",
+   "guitar": "local/audio/mountain-sittin-on-a-rainbow/guitar.mp3",
+   "other": "local/audio/mountain-sittin-on-a-rainbow/other.mp3",
+   "vocals": "local/audio/mountain-sittin-on-a-rainbow/vocals.mp3"
+  },
+  "kit": {
+   "kick": "local/audio/mountain-sittin-on-a-rainbow/kit/kick.mp3",
+   "snare": "local/audio/mountain-sittin-on-a-rainbow/kit/snare.mp3",
+   "toms": "local/audio/mountain-sittin-on-a-rainbow/kit/toms.mp3",
+   "cymbals": "local/audio/mountain-sittin-on-a-rainbow/kit/cymbals.mp3"
+  },
+  "mix": {
+   "drums": 1,
+   "bass": 1,
+   "guitar": 1,
+   "other": 1,
+   "vocals": 0
+  },
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+ }
 }

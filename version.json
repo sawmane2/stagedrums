@@ -1,5 +1,5 @@
 {
-  "version": "0.19.0",
+  "version": "0.20.0",
   "date": "2026-09-07",
-  "notes": "Fills into loops: a held section now turns around with a real fill lifted from the same recording, drums only, crossfaded. Two-model ensemble separation (cleaner Outside Woman Blues drums), better guitar/keys split on Weight of Love, and charts for Sunshine of Your Love, Blue Moon Nights, Harvest Moon and Lord Is It Mine."
+  "notes": "Five more songs playing from their own recordings: Sunshine of Your Love, Sittin' on a Rainbow, Harvest Moon, Lord Is It Mine and Blue Moon Nights - each charted against the take itself (measured tempo, real bar lines, section boundaries read from where the vocal enters), with stems, kit split and the drummer's own fills."
 }

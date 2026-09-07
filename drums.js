@@ -443,7 +443,7 @@
     setAudio(a) {
       if (this.playing) this.stop();
       if (this._aGain) { try { this._aGain.disconnect(); } catch (e) {} }
-      this.audio = null; this._aGain = null;
+      this.audio = null; this._aGain = null; this.fills = [];
       // one buffer (`buffer`) or several stems (`stems: {drums: AudioBuffer, bass: …}`) played in lock-step, each with its own level
       const stems = a && (a.stems || (a.buffer ? { mix: a.buffer } : null));
       if (!stems || !Object.keys(stems).length) return;
