@@ -434,7 +434,7 @@
       this._timer = null;
       this._anchor = null; // {bar, ctxTime, bpm}
     }
-    setSong(song) { this.song = song; this.tl = buildTimeline(song); this.bpm = song.bpm || 120; this.setAudio(null); }
+    setSong(song) { this.song = song; this.tl = buildTimeline(song); this.bpm = song.bpm || 120; if (this.audio) this.setAudio(null); }
     /**
      * Audio backing mode: play a real recording (an AudioBuffer, e.g. the song with the vocals removed) instead of
      * synthesized drums + band. `barTimes` = seconds into the recording where each bar starts (total+1 entries,
@@ -444,7 +444,9 @@
       if (this.playing) this.stop();
       if (this._aGain) { try { this._aGain.disconnect(); } catch (e) {} }
       this.audio = null; this._aGain = null;
-      if (!a || !a.buffer) return;
+      // one buffer (`buffer`) or several stems (`stems: {drums: AudioBuffer, bass: …}`) played in lock-step, each with its own level
+      const stems = a && (a.stems || (a.buffer ? { mix: a.buffer } : null));
+      if (!stems || !Object.keys(stems).length) return;
       const total = this.tl ? this.tl.total : 0;
       let bt = (a.barTimes || []).map(Number);
       if (bt.length < total + 1) { // fill from bpm grid after the last known bar time
@@ -453,9 +455,14 @@
         while (bt.length < total + 1) { last += spb; bt.push(last); }
       }
       this._aGain = this.ctx.createGain(); this._aGain.gain.value = a.gain ?? 1; this._aGain.connect(this.ctx.destination);
-      this.audio = { buffer: a.buffer, barTimes: bt, name: a.name || '' };
+      const gains = {}; const mix = a.mix || {};
+      for (const k of Object.keys(stems)) { const g = this.ctx.createGain(); g.gain.value = mix[k] ?? 1; g.connect(this._aGain); gains[k] = g; }
+      const duration = Math.max(...Object.values(stems).map(b => b.duration));
+      this.audio = { stems, gains, barTimes: bt, name: a.name || '', duration, buffer: stems[Object.keys(stems)[0]] };
     }
     setAudioGain(g) { if (this._aGain) this._aGain.gain.value = g; }
+    /** Level of one stem (0 = off). Takes effect immediately, mid-song. */
+    setStemGain(name, v) { const g = this.audio && this.audio.gains[name]; if (g) g.gain.setTargetAtTime(Math.max(0, v), this.ctx.currentTime, 0.02); }
     /** Shift every bar time by `sec` (nudge the chart against the recording). */
     nudgeAudio(sec) { if (this.audio) this.audio.barTimes = this.audio.barTimes.map(t => t + sec); }
     /** Duration of bar `b` in seconds (audio mode uses the recording's real bar lengths). */
@@ -503,14 +510,18 @@
     }
     /** Start (or re-start at a seek) the recording at ctx time `when`, from `offset` seconds into it. */
     _aStart(when, offset) {
-      if (this._aSrc) { try { this._aSrc.stop(when); } catch (e) {} }
-      const src = this.ctx.createBufferSource(); src.buffer = this.audio.buffer; src.connect(this._aGain);
-      src.start(when, Math.max(0, Math.min(this.audio.buffer.duration - 0.01, offset)));
-      this._aSrc = src; this._aSegs.push({ ctx: when, offset });
+      if (this._aSrc) for (const s of this._aSrc) { try { s.stop(when); } catch (e) {} }
+      this._aSrc = [];
+      for (const [k, buffer] of Object.entries(this.audio.stems)) {
+        if (offset >= buffer.duration - 0.01) continue;
+        const src = this.ctx.createBufferSource(); src.buffer = buffer; src.connect(this.audio.gains[k]);
+        src.start(when, Math.max(0, offset)); this._aSrc.push(src);
+      }
+      this._aSegs.push({ ctx: when, offset });
       if (this._aSegs.length > 4) this._aSegs.shift();
     }
     _aStop() {
-      if (this._aSrc) { try { this._aSrc.stop(); } catch (e) {} }
+      if (this._aSrc) for (const s of this._aSrc) { try { s.stop(); } catch (e) {} }
       this._aSrc = null; this._aSegs = [];
     }
     /** Integer bar the transport is in (or about to enter during count-in / when stopped). */
@@ -693,7 +704,7 @@
           if (this._bar < tl.total && (jumped || this._bar !== this._aPrev + 1)) this._aStart(Math.max(t, this.ctx.currentTime), bt[this._bar]);
           this._aPrev = null;
         }
-        if (this._bar >= tl.total) { if (this._aSrc) { try { this._aSrc.stop(t + 0.02); } catch (e) {} } this._fire(() => this.stop(), null, t); return; }
+        if (this._bar >= tl.total) { if (this._aSrc) for (const s of this._aSrc) { try { s.stop(t + 0.02); } catch (e) {} } this._fire(() => this.stop(), null, t); return; }
         const dur = this.barSec(this._bar), beat = dur / sig.beats;
         this._fire(this.onBar, this._bar, t);
         for (let b = 0; b < sig.beats; b++) { this.kit.click(t + b * beat, b === 0); this._fire(this.onBeat, b, t + b * beat, this._bar); }

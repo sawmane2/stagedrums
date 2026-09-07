@@ -51,17 +51,18 @@ async function api(req, res, p) {
   }
   // Backing-track audio lives in local/audio/ (not in git). List: GET /api/audio  Save: POST /api/audio/<songId>.<ext> (raw body)
   if (p === '/api/audio') {
-    const dir = path.join(ROOT, 'local', 'audio');
-    const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => /\.(mp3|wav|m4a|ogg|flac)$/i.test(f)) : [];
-    return json(res, 200, { files: files.map(f => 'local/audio/' + f), canUpload: isLocal(req) });
+    const dir = path.join(ROOT, 'local', 'audio'); const files = [];
+    const walk = (d, rel) => { if (!fs.existsSync(d)) return; for (const f of fs.readdirSync(d)) { const st = fs.statSync(path.join(d, f)); if (st.isDirectory()) walk(path.join(d, f), rel + f + '/'); else if (/\.(mp3|wav|m4a|ogg|flac)$/i.test(f)) files.push(rel + f); } };
+    walk(dir, 'local/audio/');
+    return json(res, 200, { files, canUpload: isLocal(req) });
   }
-  const m = p.match(/^\/api\/audio\/([\w.-]+\.(mp3|wav|m4a|ogg|flac))$/i);
+  const m = p.match(/^\/api\/audio\/((?:[\w-]+\/)?[\w.-]+\.(mp3|wav|m4a|ogg|flac))$/i); // <songId>.mp3 or <songId>/<stem>.mp3
   if (m && req.method === 'POST') {
     if (!isLocal(req)) return json(res, 403, { error: 'Audio files can only be added from the computer running the server.' });
-    const dir = path.join(ROOT, 'local', 'audio'); fs.mkdirSync(dir, { recursive: true });
+    const dir = path.join(ROOT, 'local', 'audio', path.dirname(m[1])); fs.mkdirSync(dir, { recursive: true });
     const chunks = []; let size = 0;
     req.on('data', c => { size += c.length; if (size > 300 * 1024 * 1024) req.destroy(); else chunks.push(c); });
-    req.on('end', () => { fs.writeFileSync(path.join(dir, m[1]), Buffer.concat(chunks)); json(res, 200, { file: 'local/audio/' + m[1], bytes: size }); });
+    req.on('end', () => { fs.writeFileSync(path.join(dir, path.basename(m[1])), Buffer.concat(chunks)); json(res, 200, { file: 'local/audio/' + m[1], bytes: size }); });
     return;
   }
   json(res, 404, { error: 'unknown api' });

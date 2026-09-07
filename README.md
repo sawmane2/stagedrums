@@ -82,14 +82,14 @@ Songs live in the browser's localStorage. Use **Export** to save a `.json` and d
 
 ## Backing track from the real recording
 
-Synthesized drums and band never sound like the record. The **Backing track** panel plays a real audio file instead — ideally the original recording with the vocals (and whatever you play yourself) removed by a stem separator — while the chart, section cues, in‑ear click, Hold / +1 pass / Go now and the iPad followers all keep working. The recording is the clock: bar lines follow its real timing, jumps happen at bar lines by seeking, and the drum kit and band are muted automatically.
+Synthesized drums and band never sound like the record. The **Backing track** panel plays real audio instead — the original recording split into **stems** (drums, bass, vocals, guitars & other) by a stem separator — while the chart, section cues, in‑ear click, Hold / +1 pass / Go now and the iPad followers all keep working. The recording is the clock: bar lines follow its real timing, jumps happen at bar lines by seeking, and the drum kit and band are muted automatically.
 
-- **Load audio file…** on the host computer: the file is saved to `local/audio/<song-id>.<ext>` (not in git, so updates never touch it) and remembered for that song. The chart is laid over the song's BPM grid from the first sound; use **◂ 50ms / 50ms ▸** to nudge if the chords change a little early or late.
-- Songs can ship exact bar times: `"audio": {"file": "local/audio/x.mp3", "barTimes": [1.05, 4.31, …]}` (one entry per bar plus the end). Weight of Love ships with bar times measured from its drum stem — just add the file.
-- **Source** switches back to **Synth drums + band** for jamming or when the recording isn't on this computer.
-- Followers (iPad) don't need the file — the host plays it and announces every bar line.
+- **Stem mixer** — one fader and a mute per stem, so you can kill the vocals, drop the guitar you're playing yourself, push the drums up, etc. Levels are saved with the song, change live mid‑song, and the iPad can move them too (the host applies them).
+- **Load stems…** on the host computer: pick the separated files together (named like `drums.wav`, `bass.mp3`, `vocals…`, `other…`/`guitar…`); they're saved to `local/audio/<song-id>/` (not in git, so updates never touch them). **Load audio file…** takes a single ready‑made mix instead.
+- Timing: the chart is laid over the song's BPM grid from the first sound; use **◂ 50ms / 50ms ▸** to nudge if chords change a little early or late. Songs can ship exact bar times: `"audio": {"stems": {"drums": "local/audio/x/drums.mp3", …}, "mix": {"vocals": 0}, "barTimes": [1.05, 4.31, …]}` (one entry per bar plus the end). Weight of Love ships with bar times measured from its drum stem — just add the stems.
+- **Source** switches back to **Synth drums + band** for jamming or when the recording isn't on this computer. Followers (iPad) don't need the files — the host plays them and announces every bar line.
 
-Making the file: any stem separator works (Spleeter, Demucs, Moises, LALAL.AI, Logic's Stem Splitter). Keep drums + bass + other, drop vocals, export MP3/WAV. For a lead‑guitar‑and‑vocals set you may also want the guitar stem lowered.
+Making stems: Spleeter / Demucs (free), Moises, LALAL.AI, Logic Pro's Stem Splitter, RipX… 4 stems (vocals, drums, bass, other) is the common split; "other" holds guitars and keys together unless the tool offers a guitar stem (Demucs 6‑stem does).
 
 ## Drum sounds
 

@@ -1,5 +1,5 @@
 {
-  "version": "0.16.0",
+  "version": "0.17.0",
   "date": "2026-09-07",
-  "notes": "Backing track mode: play the real recording (vocals removed) instead of synth drums + band - the chart, cues, Hold/+1/Go and iPad followers follow the recording's real bar lines. Load audio file per song (kept in local/audio/), nudge, level. Weight of Love ships with measured bar times."
+  "notes": "Stem mixer for the backing track: per-stem faders and mutes (drums / bass / vocals / guitars & other), saved per song, live mid-song, controllable from the iPad. Load stems… saves separated files into local/audio/<song>/. Weight of Love ships as 4 stems with measured bar times."
 }

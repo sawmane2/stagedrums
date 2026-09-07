@@ -170,3 +170,10 @@ button.live.armed { background: var(--green); color: #000; border-color: var(--g
 .chd.on { background: var(--accent); color: #000; border-color: var(--accent); box-shadow: 0 0 12px rgba(255,176,32,.5); }
 .sl.now .sl-tx { color: #fff; font-weight: 600; }
 @media (min-width: 900px) { .sheet { font-size: 1.25rem; } }
+/* backing-track stems */
+.stems { margin: 4px 0; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; display: none; }
+.stems.has { display: block; }
+.stems .stem { display: grid; grid-template-columns: 1fr 110px 34px; align-items: center; gap: 6px; margin: 3px 0; font-size: .85rem; color: var(--muted); }
+.stems .stem input[type=range] { width: 110px; }
+.stems .stem button { padding: 1px 0; font-size: .75rem; }
+.stems .stem button.on { background: var(--danger); color: #fff; border-color: var(--danger); }
