@@ -48,6 +48,7 @@
     </div>
     <ul id="songList" class="songlist"></ul>
     <div class="sidebar-foot">
+      <button id="btnView" class="small">View: Sheet</button>
       <button id="btnEdit" class="small">Edit song JSON</button>
       <button id="btnExport" class="small">Export</button>
       <button id="btnDelete" class="small danger">Delete</button>
@@ -162,7 +163,9 @@
       <label>BPM <input id="impBpm" type="number" value="120" min="40" max="240"></label>
       <label>Time <select id="impTime"><option>4/4</option><option>3/4</option><option>6/8</option></select></label>
       <label>Default groove <select id="impGroove"></select></label>
+      <label>Bars per chord line <select id="impBarsPerLine"><option value="0">auto (1 per chord)</option><option value="2">2</option><option value="4" selected>4</option><option value="8">8</option></select></label>
     </div>
+    <label class="chk"><input type="checkbox" id="impAttach"> Attach lyrics/chords to the <b>selected song</b> instead (keeps its bars and drum grooves)</label>
     <textarea id="impText" rows="14" placeholder="[Intro]
 G  D  Em  C
 

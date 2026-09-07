@@ -1,5 +1,5 @@
 {
-  "version": "0.12.0",
+  "version": "0.13.0",
   "date": "2026-09-07",
-  "notes": "Lyrics on stage: current line large under the chord, next line dimmed; importer keeps all lyric lines; section notes shown separately."
+  "notes": "Sheet view: chords over lyrics like a chords page, current chord and line highlighted; attach lyrics/chords to an existing song; bars-per-line import option."
 }

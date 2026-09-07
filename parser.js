@@ -41,7 +41,7 @@
     let cur = null;
     const HEADER_RE = /^\s*\[?\s*((?:pre-?)?(?:intro|verse|chorus|bridge|solo|outro|interlude|instrumental|break|tag|ending|coda|refrain|hook|turnaround)\s*\d*[^\]\n]*?)\s*\]?\s*:?\s*$/i;
 
-    const push = (name) => { cur = { name: name.trim(), bars: [], lyrics: [] }; sections.push(cur); };
+    const push = (name) => { cur = { name: name.trim(), bars: [], lyrics: [], sheet: [] }; sections.push(cur); };
 
     for (let raw of lines) {
       const line = raw.replace(/\t/g, '    ');
@@ -59,6 +59,16 @@
       }
       if (isChordLine(trimmed)) {
         if (!cur) push('Verse 1');
+        cur.sheet.push(line.replace(/\s+$/, ''));
+        if (opts.barsPerLine > 0) { // fixed bars per chord line: chords placed by column, holds fill the rest
+          const n = opts.barsPerLine, toks = [];
+          const re = /\S+/g; let mm; while ((mm = re.exec(line))) if (!/^\(?x\d\)?$/i.test(mm[0])) toks.push({ col: mm.index, name: mm[0] });
+          // chords in a line split its bars evenly (blues lines change on the half-line); first chord gets any remainder
+          const bars = new Array(n).fill(toks[0] ? toks[0].name : '—');
+          if (toks.length > 1) { const per = Math.floor(n / toks.length), rem = n - per * toks.length;
+            let b = 0; toks.forEach((t, i) => { const len = per + (i === 0 ? rem : 0); for (let k = 0; k < len && b < n; k++, b++) bars[b] = t.name; }); }
+          cur.bars.push(...bars); continue;
+        }
         let l = trimmed;
         let rep = 1; const m = l.match(/\(?x(\d)\)?\s*$/i); if (m) { rep = +m[1]; l = l.slice(0, m.index).trim(); }
         let bars;
@@ -80,7 +90,7 @@
         }
         for (let r = 0; r < rep; r++) cur.bars.push(...bars);
       } else {
-        if (cur) cur.lyrics.push(trimmed);
+        if (cur) { cur.lyrics.push(trimmed); cur.sheet.push(line.replace(/\s+$/, '')); }
       }
     }
 
@@ -93,7 +103,7 @@
       sections: sections.filter(s => s.bars.length).map(s => ({
         name: s.name, groove: guessGroove(s.name, groove),
         fill: !/intro/i.test(s.name), bars: s.bars,
-        lyrics: s.lyrics.join('\n'),
+        lyrics: s.lyrics.join('\n'), sheet: s.sheet.join('\n'),
       })),
     };
     if (!song.sections.length) throw new Error('No chord lines found. Paste the chords text (not the URL) — chords like G, Am, D7 on their own lines.');
@@ -129,6 +139,21 @@ CHORD SHEET:
 ${text}`;
   }
 
+  /** Attach a pasted sheet's lyrics/chord lines to an existing song's sections (keeps bars & grooves). */
+  function attachSheet(song, text) {
+    const parsed = parseChordSheet(text, { barsPerLine: 4 });
+    const norm = s => String(s).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
+    const used = new Set(); let attached = 0;
+    const secs = song.sections;
+    for (const ps of parsed.sections) {
+      let target = secs.find((s, i) => !used.has(i) && norm(s.name) === norm(ps.name));
+      if (!target) target = secs.find((s, i) => !used.has(i) && !/intro|outro|solo|instrumental|count/i.test(s.name) && !s.sheet);
+      if (!target) continue;
+      used.add(secs.indexOf(target)); target.sheet = ps.sheet; target.lyrics = ps.lyrics; attached++;
+    }
+    return attached;
+  }
+  global.StageDrums.attachSheet = attachSheet;
   global.StageDrums.parseChordSheet = parseChordSheet;
   global.StageDrums.aiPrompt = aiPrompt;
   global.StageDrums.isChordLine = isChordLine;

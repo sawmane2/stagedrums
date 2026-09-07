@@ -55,8 +55,69 @@
 
   // ---------- chart ----------
   function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+  // ---------- sheet view (chords over lyrics, like a UG chords page) ----------
+  function hasSheet() { return !!(song && song.sections.some(s => s.sheet)); }
+  function viewMode() { return prefs.view === 'grid' || !hasSheet() ? 'grid' : 'sheet'; }
+  /** Build sheet lines for a section with each chord token mapped to a timeline bar index. */
+  function sheetLines(secIdx) {
+    const secDef = song.sections[secIdx], sec = tl.sections[secIdx];
+    const raw = String(secDef.sheet || '').split('\n');
+    const lines = []; // {chordLine, text, tokens:[{col,name}]}
+    for (let i = 0; i < raw.length; i++) {
+      const l = raw[i]; if (!l.trim()) continue;
+      if (SD.isChordLine(l.trim())) {
+        const tokens = []; const re = /\S+/g; let m; while ((m = re.exec(l))) if (!/^\(?x\d\)?$/i.test(m[0])) tokens.push({ col: m.index, name: m[0] });
+        const next = raw[i + 1]; const hasText = next != null && next.trim() && !SD.isChordLine(next.trim());
+        lines.push({ chordLine: l, text: hasText ? next : '', tokens }); if (hasText) i++;
+      } else lines.push({ chordLine: '', text: l, tokens: [] });
+    }
+    // map tokens → bars: sequential when the token count equals the bar count, else proportional per chord line
+    const chordLines = lines.filter(l => l.tokens.length); const nTok = chordLines.reduce((n, l) => n + l.tokens.length, 0);
+    const perRepeat = secDef.bars.length;
+    if (nTok === perRepeat) { let b = 0; for (const l of chordLines) for (const t of l.tokens) t.bar = sec.start + b++; }
+    else {
+      const per = perRepeat / Math.max(1, chordLines.length); let start = 0;
+      chordLines.forEach((l, li) => { const lb = Math.round((li + 1) * per) - Math.round(li * per);
+        const n = l.tokens.length, base = Math.floor(lb / n), rem = lb - base * n; let b = start;
+        l.tokens.forEach((t, i) => { t.bar = sec.start + Math.min(perRepeat - 1, b); b += base + (i === 0 ? rem : 0); });
+        start += lb; });
+    }
+    return lines;
+  }
+  function renderSheetSection(sec, div) {
+    const lines = sheetLines(sec.index);
+    const wrap = document.createElement('div'); wrap.className = 'sheet';
+    for (const l of lines) {
+      const row = document.createElement('div'); row.className = 'sl';
+      if (l.tokens.length) {
+        const ch = document.createElement('div'); ch.className = 'sl-ch'; let pos = 0;
+        for (const t of l.tokens) {
+          ch.appendChild(document.createTextNode(l.chordLine.slice(pos, t.col)));
+          const b = document.createElement('span'); b.className = 'chd'; b.textContent = t.name; b.dataset.bar = t.bar; b.onclick = () => transport.playing ? queueSection(tl.bars[t.bar].section, false) : jumpTo(t.bar);
+          ch.appendChild(b); pos = t.col + t.name.length;
+        }
+        row.appendChild(ch);
+        row.dataset.from = Math.min(...l.tokens.map(t => t.bar));
+      }
+      const tx = document.createElement('div'); tx.className = 'sl-tx'; tx.textContent = l.text || ' '; row.appendChild(tx);
+      wrap.appendChild(row);
+    }
+    div.appendChild(wrap);
+  }
+  function updateSheetHighlight(barIdx) {
+    if (viewMode() !== 'sheet') return;
+    const secIdx = tl.bars[barIdx].section; const secEl = document.querySelector(`.section[data-section="${secIdx}"]`); if (!secEl) return;
+    // active chord token = last token whose bar <= current (within this section)
+    let best = null; secEl.querySelectorAll('.chd').forEach(c => { const b = +c.dataset.bar; if (b <= barIdx && (!best || b >= +best.dataset.bar)) best = c; });
+    document.querySelectorAll('.chd.on').forEach(c => { if (c !== best) c.classList.remove('on'); });
+    document.querySelectorAll('.sl.now').forEach(r => r.classList.remove('now'));
+    if (best) { best.classList.add('on'); const row = best.closest('.sl'); if (row) { row.classList.add('now'); const ch = $('chart'); const top = row.offsetTop - ch.offsetTop; if (top < ch.scrollTop + 60 || top > ch.scrollTop + ch.clientHeight - 140) ch.scrollTo({ top: top - ch.clientHeight * 0.35, behavior: 'smooth' }); } }
+  }
+  $('btnView').onclick = () => { prefs.view = viewMode() === 'sheet' ? 'grid' : 'sheet'; savePrefs(); renderChart(); updateNow(transport.currentBar(), true); };
+
   function renderChart() {
     const chart = $('chart'); chart.innerHTML = '';
+    $('btnView').textContent = viewMode() === 'sheet' ? 'View: Sheet' : 'View: Grid'; $('btnView').hidden = !hasSheet();
     tl.sections.forEach(sec => {
       const secDef = song.sections[sec.index];
       const div = document.createElement('div'); div.className = 'section'; div.dataset.section = sec.index;
@@ -65,6 +126,7 @@
         <span class="meta">${sec.count} bars${rep} · ${esc(secDef.groove || song.groove || 'rock')}</span>
         <span class="jump">tap to jump</span></div>`;
       div.querySelector('.section-head').onclick = () => transport.playing ? queueSection(sec.index, false) : jumpTo(sec.start);
+      if (viewMode() === 'sheet' && secDef.sheet) { renderSheetSection(sec, div); if (secDef.notes) { const nt = document.createElement('div'); nt.className = 'notes'; nt.textContent = secDef.notes; div.appendChild(nt); } chart.appendChild(div); return; }
       const bars = document.createElement('div'); bars.className = 'bars';
       bars.style.gridTemplateColumns = `repeat(${Math.min(4, Math.max(2, secDef.bars.length >= 4 ? 4 : secDef.bars.length))}, 1fr)`;
       for (let i = sec.start; i < sec.end; i++) {
@@ -133,7 +195,7 @@
       $('nowSection').textContent = sec.name;
       document.querySelectorAll('.section.current').forEach(e => e.classList.remove('current'));
       const se = document.querySelector(`.section[data-section="${bar.section}"]`);
-      if (se) { se.classList.add('current'); const ch = $('chart'); ch.scrollTo({ top: se.offsetTop - ch.offsetTop - 8, behavior: 'smooth' }); }
+      if (se) { se.classList.add('current'); if (viewMode() !== 'sheet') { const ch = $('chart'); ch.scrollTo({ top: se.offsetTop - ch.offsetTop - 8, behavior: 'smooth' }); } }
       renderLive();
     }
     const barsLeft = sec.end - barIdx;
@@ -150,6 +212,7 @@
       for (let i = 0; i < barIdx; i++) { const d = document.querySelector(`.bar[data-bar="${i}"]`); if (d && tl.bars[i].section === bar.section) d.classList.add('done'); }
       if (currentBarEl) currentBarEl.querySelectorAll('.chord.on').forEach(c => c.classList.remove('on'));
       currentBarEl = el; if (el) el.classList.add('now');
+      updateSheetHighlight(barIdx);
     }
     if (el) el.querySelectorAll('.chord').forEach((c, i) => c.classList.toggle('on', bar.chords[i] === chord));
   }
@@ -310,9 +373,14 @@
     if ($('dlgImport').returnValue !== 'ok') return;
     const text = $('impText').value.trim(); if (!text) return;
     try {
+      if ($('impAttach').checked && song) {
+        const n = SD.attachSheet(song, text); persistSongs(); prefs.view = 'sheet'; savePrefs(); selectSong(song); broadcastSong();
+        $('impText').value = ''; alert(n ? `Attached lyrics and chords to ${n} section${n === 1 ? '' : 's'} of "${song.title}".` : 'No sections matched — check the [Verse]/[Chorus] headers.');
+        return;
+      }
       let s;
       if (text.startsWith('{')) { s = JSON.parse(text); s.id = s.id || 'song-' + Date.now().toString(36); }
-      else s = SD.parseChordSheet(text, { title: $('impTitle').value, artist: $('impArtist').value, bpm: +$('impBpm').value, time: $('impTime').value, groove: $('impGroove').value });
+      else s = SD.parseChordSheet(text, { title: $('impTitle').value, artist: $('impArtist').value, bpm: +$('impBpm').value, time: $('impTime').value, groove: $('impGroove').value, barsPerLine: +$('impBarsPerLine').value });
       if ($('impTitle').value) s.title = $('impTitle').value;
       if ($('impArtist').value) s.artist = $('impArtist').value;
       songs.push(s); persistSongs(); transport.stop(); selectSong(s); broadcastSong();
