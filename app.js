@@ -35,6 +35,7 @@
           const old = songs[i]; const merged = JSON.parse(JSON.stringify(sh));
           merged.sections.forEach((sec, k) => { const o = old.sections.find(x => x.name === sec.name) || old.sections[k];
             if (o) { if (o.sheet && !sec.sheet) sec.sheet = o.sheet; if (o.lyrics && !sec.lyrics) sec.lyrics = o.lyrics; } });
+          if (old.audio && !merged.audio) merged.audio = old.audio; // keep a recording the user attached
           songs[i] = merged;
         }
       }
@@ -62,6 +63,7 @@
     $('bpm').value = transport.bpm;
     renderSongList(); renderChart(); renderBeats(); renderPads(); syncBandUI();
     updateNow(0, true);
+    applyBacking();
   }
 
   // ---------- chart ----------
@@ -491,7 +493,7 @@
   transport.onAnchor = (st) => {
     if (role !== 'host') return;
     lastState = { type: 'state', songId: song && song.id, playing: st.playing, bpm: st.bpm, hold: st.hold, extra: st.extra, queued: st.queued, pausedPos: st.pausedPos,
-      anchorBar: st.anchorBar, anchorServerMs: sync ? SD.ctxToServer(ctx, sync, st.anchorCtxTime) : 0, countIn: st.countIn };
+      anchorBar: st.anchorBar, anchorServerMs: sync ? SD.ctxToServer(ctx, sync, st.anchorCtxTime) : 0, countIn: st.countIn, barSec: st.barSec, audio: st.audio };
     if (sync && sync.connected) sync.send(lastState);
   };
   function onSyncMessage(m) {
@@ -529,7 +531,7 @@
   $('roleSelect').value = prefs.role || 'solo';
   $('roleSelect').onchange = () => {
     role = $('roleSelect').value; prefs.role = role; savePrefs(); applyRoleAudio();
-    transport.stop(true); setPlayUI();
+    transport.stop(true); setPlayUI(); applyBacking();
     if (role === 'solo') { connect(null); return; }
     const url = defaultWsUrl();
     if (url && role === 'host') { connect(url); return; }
@@ -551,6 +553,71 @@
   function syncBandUI() { const b = Object.assign({ bass: 'off', keys: 'off', gtr: 'off' }, song && song.band || {}); $('bandBass').value = b.bass; $('bandKeys').value = b.keys; $('bandGtr').value = b.gtr; }
   for (const [id, k] of [['bandBass', 'bass'], ['bandKeys', 'keys'], ['bandGtr', 'gtr']]) $(id).onchange = () => { if (!song) return; song.band = Object.assign({}, song.band || {}, { [k]: $(id).value }); persistSongs(); broadcastSong(); };
   for (const [id, k] of [['volBass', 'bass'], ['volKeys', 'keys'], ['volGtr', 'gtr']]) { const el = $(id); if (prefs[id] != null) el.value = prefs[id]; band.setLevel(k, +el.value); el.oninput = () => { band.setLevel(k, +el.value); prefs[id] = +el.value; savePrefs(); }; }
+
+  // ---------- backing track: a real recording (e.g. the record with the vocals removed) instead of synth drums + band ----------
+  const audioCache = {}; let audioLoadToken = 0;
+  function setAudioStatus(msg) {
+    if (msg) { $('audioStatus').textContent = msg; return; }
+    const a = song && song.audio;
+    if (transport.audio) { const d = transport.audio.buffer.duration; $('audioStatus').textContent = `Playing ${a.file.split('/').pop()} (${Math.floor(d / 60)}:${String(Math.round(d % 60)).padStart(2, '0')}). Chart follows the recording; drums & band are muted.`; }
+    else if (a && a.file && (prefs.backing || 'audio') !== 'audio') $('audioStatus').textContent = 'Synth drums + band (a recording is available — switch Source to use it).';
+    else if (role === 'follower') $('audioStatus').textContent = 'Follower: the host plays the recording.';
+    else $('audioStatus').textContent = 'No recording for this song — using synth drums + band. Drop in the song (ideally with the vocals removed) with "Load audio file…".';
+    $('bpm').disabled = !!transport.audio;
+  }
+  async function applyBacking() {
+    const token = ++audioLoadToken;
+    transport.setAudio(null);
+    $('backingMode').value = prefs.backing || 'audio';
+    const a = song && song.audio;
+    if (!a || !a.file || role === 'follower' || (prefs.backing || 'audio') !== 'audio') { setAudioStatus(); return; }
+    setAudioStatus('Loading recording…');
+    try {
+      let buf = audioCache[a.file];
+      if (!buf) { const r = await fetch(a.file); if (!r.ok) throw new Error('missing'); buf = await ctx.decodeAudioData(await r.arrayBuffer()); audioCache[a.file] = buf; }
+      if (token !== audioLoadToken) return;
+      transport.setAudio({ buffer: buf, barTimes: a.barTimes, offset: a.offset || 0, gain: +$('volAudio').value, name: a.file });
+      setAudioStatus();
+    } catch (e) {
+      setAudioStatus(`${a.file.split('/').pop()} isn't on this computer — using synth drums + band. Add it with "Load audio file…" (it goes in drum-daw/local/audio/).`);
+    }
+  }
+  $('backingMode').onchange = () => { prefs.backing = $('backingMode').value; savePrefs(); transport.stop(true); setPlayUI(); applyBacking(); };
+  if (prefs.volAudio != null) $('volAudio').value = prefs.volAudio;
+  $('volAudio').oninput = () => { prefs.volAudio = +$('volAudio').value; savePrefs(); transport.setAudioGain(prefs.volAudio); };
+  $('btnAudioLoad').onclick = () => { if (!song) return; if (role === 'follower') return alert('Load the recording on the host computer (it plays the audio).'); $('audioFile').click(); };
+  $('audioFile').onchange = async () => {
+    const f = $('audioFile').files[0]; $('audioFile').value = ''; if (!f || !song) return;
+    const ext = (f.name.match(/\.(\w+)$/) || [, 'mp3'])[1].toLowerCase();
+    const name = song.id.replace(/[^\w-]/g, '_') + '.' + ext, file = 'local/audio/' + name;
+    setAudioStatus('Reading ' + f.name + '…');
+    try {
+      const bytes = await f.arrayBuffer();
+      const buf = await ctx.decodeAudioData(bytes.slice(0));
+      // first onset = where the music starts; the chart is laid on the song's bpm grid from there (nudge to taste)
+      const ch = buf.getChannelData(0); let pk = 0; for (let i = 0; i < ch.length; i += 4) pk = Math.max(pk, Math.abs(ch[i]));
+      let on = 0; while (on < ch.length && Math.abs(ch[on]) < pk * 0.08) on++;
+      const keep = song.audio && song.audio.barTimes && song.audio.file === file; // re-loading the same file keeps hand-fitted bar times
+      song.audio = Object.assign({}, song.audio || {}, { file, offset: keep ? song.audio.offset : on / buf.sampleRate });
+      if (!keep) delete song.audio.barTimes;
+      audioCache[file] = buf;
+      let saved = false;
+      try { const r = await fetch('/api/' + file.replace(/^local\//, ''), { method: 'POST', body: bytes }); saved = r.ok; } catch {}
+      persistSongs(); broadcastSong(); prefs.backing = 'audio'; savePrefs();
+      await applyBacking();
+      if (!saved) setAudioStatus($('audioStatus').textContent + ' (Not saved: run the app from its own server on this computer to keep it for next time.)');
+    } catch (e) { setAudioStatus('Could not read that file: ' + e.message); }
+  };
+  function nudgeAudio(d) {
+    if (!song || !song.audio) return;
+    song.audio.offset = +((song.audio.offset || 0) + d).toFixed(3);
+    if (song.audio.barTimes) song.audio.barTimes = song.audio.barTimes.map(t => +(t + d).toFixed(3));
+    transport.nudgeAudio(d); persistSongs(); broadcastSong();
+    setAudioStatus(`Chart moved ${d > 0 ? 'later' : 'earlier'} by ${Math.round(Math.abs(d) * 1000)} ms (offset ${song.audio.offset.toFixed(3)} s).`);
+  }
+  $('btnAudioNudgeL').onclick = () => nudgeAudio(-0.05);
+  $('btnAudioNudgeR').onclick = () => nudgeAudio(0.05);
+  $('btnAudioClear').onclick = () => { if (!song || !song.audio) return; if (!confirm('Remove the recording from this song? (The file stays in local/audio/.)')) return; delete song.audio; persistSongs(); broadcastSong(); applyBacking(); };
 
   // ---------- drum kit (samples) ----------
   let kits = [];

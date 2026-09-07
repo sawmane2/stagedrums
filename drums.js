@@ -434,9 +434,38 @@
       this._timer = null;
       this._anchor = null; // {bar, ctxTime, bpm}
     }
-    setSong(song) { this.song = song; this.tl = buildTimeline(song); this.bpm = song.bpm || 120; }
+    setSong(song) { this.song = song; this.tl = buildTimeline(song); this.bpm = song.bpm || 120; this.setAudio(null); }
+    /**
+     * Audio backing mode: play a real recording (an AudioBuffer, e.g. the song with the vocals removed) instead of
+     * synthesized drums + band. `barTimes` = seconds into the recording where each bar starts (total+1 entries,
+     * the last one is the end). The chart, cues, hold/+1/queue and follower sync all keep working; jumps seek.
+     */
+    setAudio(a) {
+      if (this.playing) this.stop();
+      if (this._aGain) { try { this._aGain.disconnect(); } catch (e) {} }
+      this.audio = null; this._aGain = null;
+      if (!a || !a.buffer) return;
+      const total = this.tl ? this.tl.total : 0;
+      let bt = (a.barTimes || []).map(Number);
+      if (bt.length < total + 1) { // fill from bpm grid after the last known bar time
+        const spb = this.secPerBar(); let last = bt.length ? bt[bt.length - 1] : (a.offset || 0);
+        if (!bt.length) bt.push(last);
+        while (bt.length < total + 1) { last += spb; bt.push(last); }
+      }
+      this._aGain = this.ctx.createGain(); this._aGain.gain.value = a.gain ?? 1; this._aGain.connect(this.ctx.destination);
+      this.audio = { buffer: a.buffer, barTimes: bt, name: a.name || '' };
+    }
+    setAudioGain(g) { if (this._aGain) this._aGain.gain.value = g; }
+    /** Shift every bar time by `sec` (nudge the chart against the recording). */
+    nudgeAudio(sec) { if (this.audio) this.audio.barTimes = this.audio.barTimes.map(t => t + sec); }
+    /** Duration of bar `b` in seconds (audio mode uses the recording's real bar lengths). */
+    barSec(b) {
+      if (this.audio) { const bt = this.audio.barTimes; b = Math.max(0, Math.min(bt.length - 2, b)); return Math.max(0.2, bt[b + 1] - bt[b]); }
+      return this.secPerBar();
+    }
     setBpm(bpm) {
       bpm = Math.min(240, Math.max(40, bpm));
+      if (this.audio) { this.bpm = bpm; return; } // tempo is the recording's in audio mode
       if (this.playing) {
         // re-anchor at current position so position stays continuous
         const pos = this.position();
@@ -454,16 +483,41 @@
       if (!this.playing || !this._anchor) return this._pausedPos || 0;
       const t = ctxTime ?? this.ctx.currentTime;
       const a = this._anchor;
-      if (a.countIn && t < a.ctxTime) return (t - a.ctxTime) / this.secPerBar(); // negative: count-in progress (-1..0)
-      let pos = a.bar + (t - a.ctxTime) / this.secPerBar();
+      const barSec = a.barSec || this.secPerBar();
+      if (a.countIn && t < a.ctxTime) return (t - a.ctxTime) / barSec; // negative: count-in progress (-1..0)
+      if (this.audio && this._aSegs && this._aSegs.length) {
+        // map ctx time → recording time (via the playing segment) → fractional bar (via barTimes)
+        let seg = this._aSegs[0]; for (const s of this._aSegs) if (s.ctx <= t) seg = s;
+        if (t < seg.ctx) return Math.max(-1, (t - seg.ctx) / barSec); // still counting in
+        return Math.min(this.tl.total, this._barAt(seg.offset + (t - seg.ctx)));
+      }
+      let pos = a.bar + (t - a.ctxTime) / barSec;
       if (this.tl && pos >= this.tl.total) pos = this.tl.total;
       return pos;
+    }
+    /** Fractional bar at a time in the recording (audio mode). */
+    _barAt(sec) {
+      const bt = this.audio.barTimes; let lo = 0, hi = bt.length - 2;
+      while (lo < hi) { const m = (lo + hi + 1) >> 1; if (bt[m] <= sec) lo = m; else hi = m - 1; }
+      return lo + (sec - bt[lo]) / Math.max(0.2, bt[lo + 1] - bt[lo]);
+    }
+    /** Start (or re-start at a seek) the recording at ctx time `when`, from `offset` seconds into it. */
+    _aStart(when, offset) {
+      if (this._aSrc) { try { this._aSrc.stop(when); } catch (e) {} }
+      const src = this.ctx.createBufferSource(); src.buffer = this.audio.buffer; src.connect(this._aGain);
+      src.start(when, Math.max(0, Math.min(this.audio.buffer.duration - 0.01, offset)));
+      this._aSrc = src; this._aSegs.push({ ctx: when, offset });
+      if (this._aSegs.length > 4) this._aSegs.shift();
+    }
+    _aStop() {
+      if (this._aSrc) { try { this._aSrc.stop(); } catch (e) {} }
+      this._aSrc = null; this._aSegs = [];
     }
     /** Integer bar the transport is in (or about to enter during count-in / when stopped). */
     currentBar() {
       if (!this.playing) return this._pausedPos || 0;
       const p = this.position();
-      return p < 0 ? this._anchor.bar : Math.min(this.tl.total - 1, Math.floor(p));
+      return p < 0 ? (this._countFrom ?? this._anchor.bar) : Math.min(this.tl.total - 1, Math.floor(p));
     }
     sectionOf(bar) { const b = this.tl.bars[Math.max(0, Math.min(this.tl.total - 1, bar))]; return b ? b.section : 0; }
     /** Which section will play after the given one, given hold/extra/queued. */
@@ -514,7 +568,16 @@
       this._bar = this.countIn ? -1 : fromBar; this._step = 0;
       this._nextStepTime = now;
       this._countFrom = fromBar; this._barHits = null; this.queued = null;
-      this._anchor = { bar: fromBar, ctxTime: this.countIn ? now + this.secPerBar() : now, bpm: this.bpm, countIn: this.countIn };
+      const firstBar = this.barSec(fromBar);
+      this._anchor = { bar: fromBar, ctxTime: this.countIn ? now + firstBar : now, bpm: this.bpm, countIn: this.countIn, barSec: firstBar };
+      if (this.audio) {
+        this._aSegs = []; this._aSrc = null; this._aNextBarCtx = now; this._aPrev = null;
+        if (!this.countIn) this._aStart(now, this.audio.barTimes[fromBar]);
+        this._emitAnchor();
+        this._timer = setInterval(() => this._scheduleAudio(), this.tick);
+        this._scheduleAudio();
+        return;
+      }
       this._emitAnchor();
       if (this.midi) this.midi.start(this.countIn ? now + this.secPerBar() : now);
       this._timer = setInterval(() => this._schedule(), this.tick);
@@ -524,7 +587,8 @@
       if (this.midi && this.playing) this.midi.stop();
       if (this.band) this.band.stopAll();
       this._pausedPos = this.playing ? Math.max(0, Math.floor(this.position())) : (this._pausedPos || 0);
-      this.playing = false;
+      if (this.audio) this._aStop();
+      this.playing = false; this._follow = false;
       if (this._timer) clearInterval(this._timer); this._timer = null;
       if (!silent && this.onStop) this.onStop();
       if (!silent) this._emitAnchor();
@@ -540,6 +604,7 @@
       this.bpm = state.bpm || this.bpm;
       if (!state.playing) {
         if (this.playing) { this.playing = false; clearInterval(this._timer); this._timer = null; }
+        this._follow = false;
         this._pausedPos = state.pausedPos || 0;
         if (this.onBar) this.onBar(this._pausedPos);
         return;
@@ -548,8 +613,28 @@
       const now = this.ctx.currentTime;
       const stepSec = this.secPerStep();
       const countIn = !!state.countIn && anchorCtxTime > now;
-      this._anchor = { bar: state.anchorBar, ctxTime: anchorCtxTime, bpm: this.bpm, countIn: !!state.countIn };
+      const prevAnchor = this._anchor;
+      this._anchor = { bar: state.anchorBar, ctxTime: anchorCtxTime, bpm: this.bpm, countIn: !!state.countIn, barSec: state.barSec };
       this._countFrom = state.anchorBar;
+      if (state.audio) { // host plays a recording: follow its per-bar anchors (variable bar lengths, jumps at bar lines)
+        const barSec = state.barSec || this.secPerBar(), beatSec = barSec / sig.beats;
+        this._fAnch = (this._fAnch || []).filter(a => a.ctx > now && !(a.bar === state.anchorBar && Math.abs(a.ctx - anchorCtxTime) < 0.02));
+        if (this._follow && this.playing && this._timer && anchorCtxTime > now - beatSec / 2) {
+          // already running: the host announces each bar (and every jump) ahead of time — queue it, the loop re-seats on it
+          this._fAnch.push({ bar: state.anchorBar, ctx: anchorCtxTime, barSec }); this._fAnch.sort((a, b) => a.ctx - b.ctx);
+          if (anchorCtxTime > now) this._anchor = prevAnchor; // position() keeps reading from the bar we are actually in
+          return;
+        }
+        const start = countIn ? anchorCtxTime - barSec : anchorCtxTime;
+        let beatsAhead = Math.max(0, Math.ceil((now - start) / beatSec));
+        this._fNext = start + beatsAhead * beatSec; this._fBarSec = barSec;
+        if (countIn) { if (beatsAhead < sig.beats) { this._fBar = -1; this._fBeat = beatsAhead; } else { this._fBar = state.anchorBar; this._fBeat = beatsAhead - sig.beats; } }
+        else { this._fBar = state.anchorBar + Math.floor(beatsAhead / sig.beats); this._fBeat = beatsAhead % sig.beats; }
+        if (!this._follow || !this._timer) { if (this._timer) clearInterval(this._timer); this._timer = setInterval(() => this._scheduleFollow(), this.tick); }
+        this._follow = true; this.playing = true;
+        return;
+      }
+      if (this._follow) { this._follow = false; if (this._timer) { clearInterval(this._timer); this._timer = null; } }
       let bar, step;
       if (countIn) {
         const startCtx = anchorCtxTime - this.secPerBar();
@@ -576,8 +661,69 @@
         anchorBar: this._anchor ? this._anchor.bar : (this._pausedPos || 0),
         anchorCtxTime: this._anchor ? this._anchor.ctxTime : this.ctx.currentTime,
         countIn: !!(this._anchor && this._anchor.countIn),
+        barSec: this._anchor && this._anchor.barSec ? this._anchor.barSec : undefined,
+        audio: !!this.audio || undefined,
         pausedPos: this._pausedPos || 0,
       });
+    }
+
+    /** Audio-mode scheduler: the recording is the clock; we fire bar/beat events, count-in clicks and seeks ahead of time. */
+    _scheduleAudio() {
+      const tl = this.tl, sig = tl.sig, bt = this.audio.barTimes;
+      // schedule a little further ahead than followers do, so our per-bar anchors reach them before they place that bar
+      while (this._aNextBarCtx < this.ctx.currentTime + this.lookahead + 0.1) {
+        const t = this._aNextBarCtx;
+        if (this._bar < 0) { // count-in: one bar of clicks at the tempo of the first bar
+          const dur = this.barSec(this._countFrom), beat = dur / sig.beats;
+          for (let b = 0; b < sig.beats; b++) {
+            if (this.audible) this.kit.hit('H', b === 0 ? 'X' : 'x', t + b * beat);
+            this.kit.click(t + b * beat, b === 0);
+            this._fire(this.onBeat, b, t + b * beat, -1);
+          }
+          this._fire(this.onBar, -1, t);
+          this._bar = this._countFrom; this._aNextBarCtx = t + dur;
+          this._aStart(t + dur, bt[this._countFrom]);
+          continue;
+        }
+        // a bar line is about to pass (within lookahead): decide NOW what starts there, so Hold / +1 / Go / queue
+        // pressed anywhere in the previous bar still land on this bar line
+        if (this._aPrev != null) {
+          this._nextStepTime = t;
+          const jumped = this._resolveBoundary(this._aPrev);
+          if (this._bar < tl.total && (jumped || this._bar !== this._aPrev + 1)) this._aStart(Math.max(t, this.ctx.currentTime), bt[this._bar]);
+          this._aPrev = null;
+        }
+        if (this._bar >= tl.total) { if (this._aSrc) { try { this._aSrc.stop(t + 0.02); } catch (e) {} } this._fire(() => this.stop(), null, t); return; }
+        const dur = this.barSec(this._bar), beat = dur / sig.beats;
+        this._fire(this.onBar, this._bar, t);
+        for (let b = 0; b < sig.beats; b++) { this.kit.click(t + b * beat, b === 0); this._fire(this.onBeat, b, t + b * beat, this._bar); }
+        this._anchor = { bar: this._bar, ctxTime: t, bpm: this.bpm, barSec: dur };
+        this._emitAnchor(); // every bar: real recordings drift in tempo, so followers re-anchor often
+        this._aPrev = this._bar; this._bar++;
+        this._aNextBarCtx = t + dur;
+      }
+    }
+    /** Follower in audio mode: no drums here (the host plays the recording); just track bars/beats from the anchor. */
+    _scheduleFollow() {
+      const now = this.ctx.currentTime, sig = this.tl.sig;
+      while (this._fNext < now + 0.05) { // short lookahead: give the host's anchors time to arrive first
+        let t = this._fNext, bar = this._fBar, beat = this._fBeat;
+        const beatSec = (this._fBarSec || this.secPerBar()) / sig.beats;
+        // a host anchor due around this beat re-seats us (exact bar line, new bar length, or a jump to another section)
+        const pa = this._fAnch && this._fAnch[0];
+        if (pa && pa.ctx <= t + beatSec / 2) {
+          this._fAnch.shift();
+          if (pa.ctx < t - beatSec / 2) continue; // stale duplicate
+          bar = pa.bar; beat = 0; t = Math.max(pa.ctx, now); this._fBarSec = pa.barSec;
+          this._anchor = { bar, ctxTime: pa.ctx, bpm: this.bpm, barSec: pa.barSec };
+        }
+        if (bar >= this.tl.total) { this._fire(() => this.stop(), null, t); return; }
+        if (beat === 0) this._fire(this.onBar, bar, t);
+        this.kit.click(t, beat === 0); this._fire(this.onBeat, beat, t, bar);
+        beat++; if (beat >= sig.beats) { beat = 0; bar = bar < 0 ? this._countFrom : bar + 1; }
+        this._fBar = bar; this._fBeat = beat;
+        this._fNext = t + (this._fBarSec || this.secPerBar()) / sig.beats;
+      }
     }
 
     _schedule() {

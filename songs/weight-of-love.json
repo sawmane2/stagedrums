@@ -1,248 +1,384 @@
 {
-  "id": "black-keys-weight-of-love",
-  "rev": 1,
-  "title": "Weight of Love",
-  "artist": "The Black Keys (Turn Blue, 2014)",
-  "bpm": 76,
-  "time": "4/4",
-  "groove": "ballad",
-  "feel": "loose",
-  "band": {
+ "id": "black-keys-weight-of-love",
+ "rev": 2,
+ "title": "Weight of Love",
+ "artist": "The Black Keys (Turn Blue, 2014)",
+ "bpm": 76,
+ "time": "4/4",
+ "groove": "ballad",
+ "feel": "loose",
+ "band": {
+  "bass": "roots",
+  "keys": "pad",
+  "gtr": "strum8"
+ },
+ "sections": [
+  {
+   "name": "Intro (acoustic)",
+   "groove": "silence",
+   "crash": false,
+   "fill": false,
+   "bars": [
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A"
+   ],
+   "band": {
+    "bass": "off",
+    "keys": "off",
+    "gtr": "arp"
+   },
+   "notes": "Acoustic arpeggio, Em - A, no drums. ~0:00-0:38"
+  },
+  {
+   "name": "Lead intro",
+   "groove": "ballad-ride",
+   "crash": true,
+   "fill": true,
+   "bars": [
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A"
+   ],
+   "band": {
+    "bass": "ballad",
+    "keys": "organ",
+    "gtr": "strum8"
+   },
+   "notes": "Band in, lead guitar over Em - A. ~0:38-1:32"
+  },
+  {
+   "name": "Verse 1",
+   "groove": "ballad",
+   "crash": true,
+   "fill": true,
+   "bars": [
+    "Em",
+    "G",
+    "D",
+    "C",
+    "Em",
+    "G",
+    "D",
+    "Am",
+    "Em",
+    "Em",
+    "D",
+    "Am",
+    "Em",
+    "Em",
+    "Bm",
+    "C"
+   ],
+   "band": {
     "bass": "roots",
     "keys": "pad",
-    "gtr": "strum8"
+    "gtr": "folk"
+   },
+   "notes": "~1:32-2:24. Chords auto-detected from the recording - check against your ears."
   },
-  "sections": [
-    {
-      "name": "Intro (acoustic)",
-      "groove": "silence",
-      "crash": false,
-      "fill": false,
-      "bars": [
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A"
-      ],
-      "band": {
-        "bass": "off",
-        "keys": "off",
-        "gtr": "arp"
-      },
-      "notes": "Acoustic arpeggio, Em - A, no drums. ~0:00-0:38"
-    },
-    {
-      "name": "Lead intro",
-      "groove": "ballad-ride",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A"
-      ],
-      "band": {
-        "bass": "ballad",
-        "keys": "organ",
-        "gtr": "strum8"
-      },
-      "notes": "Band in, lead guitar over Em - A. ~0:38-1:32"
-    },
-    {
-      "name": "Verse 1",
-      "groove": "ballad",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "Em",
-        "G",
-        "D",
-        "C",
-        "Em",
-        "G",
-        "D",
-        "Am",
-        "Em",
-        "Em",
-        "D",
-        "Am",
-        "Em",
-        "Em",
-        "Bm",
-        "C"
-      ],
-      "band": {
-        "bass": "roots",
-        "keys": "pad",
-        "gtr": "folk"
-      },
-      "notes": "~1:32-2:24. Chords auto-detected from the recording - check against your ears."
-    },
-    {
-      "name": "Chorus 1",
-      "groove": "rock",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "Em",
-        "D",
-        "A",
-        "Em",
-        "Em",
-        "D",
-        "C",
-        "Em",
-        "Em",
-        "D",
-        "A",
-        "Em"
-      ],
-      "band": {
-        "bass": "pump",
-        "keys": "organ",
-        "gtr": "strum8"
-      },
-      "notes": "~2:24-3:00"
-    },
-    {
-      "name": "Solo",
-      "groove": "rock",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A"
-      ],
-      "band": {
-        "bass": "pump",
-        "keys": "organ",
-        "gtr": "strum8"
-      },
-      "notes": "Lead over Em - A. ~3:00-3:38"
-    },
-    {
-      "name": "Verse 2",
-      "groove": "ballad",
-      "crash": true,
-      "fill": true,
-      "bars": [
-        "Em",
-        "G",
-        "D",
-        "Am",
-        "Em",
-        "G",
-        "D",
-        "C",
-        "Am",
-        "Em",
-        "D",
-        "Am"
-      ],
-      "band": {
-        "bass": "roots",
-        "keys": "pad",
-        "gtr": "folk"
-      },
-      "notes": "~3:38-4:16"
-    },
-    {
-      "name": "Chorus / outro solo",
-      "groove": "rock",
-      "crash": true,
-      "fill": true,
-      "repeat": 4,
-      "bars": [
-        "Em",
-        "D",
-        "A",
-        "Em",
-        "Em",
-        "D",
-        "C",
-        "Em"
-      ],
-      "band": {
-        "bass": "pump",
-        "keys": "organ",
-        "gtr": "strum8"
-      },
-      "notes": "8-bar cycle x4 (~4:16-6:00). Hold it as long as the solo needs."
-    },
-    {
-      "name": "Outro",
-      "groove": "hats-only",
-      "crash": false,
-      "fill": false,
-      "bars": [
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A",
-        "Em",
-        "A"
-      ],
-      "band": {
-        "bass": "whole",
-        "keys": "pad",
-        "gtr": "arp"
-      },
-      "notes": "Drops back to the acoustic figure and fades. ~6:00-6:50"
-    },
-    {
-      "name": "Ending",
-      "groove": "silence",
-      "crash": false,
-      "fill": false,
-      "bars": [
-        "Em . . N.C."
-      ],
-      "band": {
-        "bass": "whole",
-        "keys": "off",
-        "gtr": "whole"
-      }
-    }
-  ]
+  {
+   "name": "Chorus 1",
+   "groove": "rock",
+   "crash": true,
+   "fill": true,
+   "bars": [
+    "Em",
+    "D",
+    "A",
+    "Em",
+    "Em",
+    "D",
+    "C",
+    "Em",
+    "Em",
+    "D",
+    "A",
+    "Em"
+   ],
+   "band": {
+    "bass": "pump",
+    "keys": "organ",
+    "gtr": "strum8"
+   },
+   "notes": "~2:24-3:00"
+  },
+  {
+   "name": "Solo",
+   "groove": "rock",
+   "crash": true,
+   "fill": true,
+   "bars": [
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A"
+   ],
+   "band": {
+    "bass": "pump",
+    "keys": "organ",
+    "gtr": "strum8"
+   },
+   "notes": "Lead over Em - A. ~3:00-3:38"
+  },
+  {
+   "name": "Verse 2",
+   "groove": "ballad",
+   "crash": true,
+   "fill": true,
+   "bars": [
+    "Em",
+    "G",
+    "D",
+    "Am",
+    "Em",
+    "G",
+    "D",
+    "C",
+    "Am",
+    "Em",
+    "D",
+    "Am"
+   ],
+   "band": {
+    "bass": "roots",
+    "keys": "pad",
+    "gtr": "folk"
+   },
+   "notes": "~3:38-4:16"
+  },
+  {
+   "name": "Chorus / outro solo",
+   "groove": "rock",
+   "crash": true,
+   "fill": true,
+   "repeat": 4,
+   "bars": [
+    "Em",
+    "D",
+    "A",
+    "Em",
+    "Em",
+    "D",
+    "C",
+    "Em"
+   ],
+   "band": {
+    "bass": "pump",
+    "keys": "organ",
+    "gtr": "strum8"
+   },
+   "notes": "8-bar cycle x4 (~4:16-6:00). Hold it as long as the solo needs."
+  },
+  {
+   "name": "Outro",
+   "groove": "hats-only",
+   "crash": false,
+   "fill": false,
+   "bars": [
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A",
+    "Em",
+    "A"
+   ],
+   "band": {
+    "bass": "whole",
+    "keys": "pad",
+    "gtr": "arp"
+   },
+   "notes": "Drops back to the acoustic figure and fades. ~6:00-6:50"
+  },
+  {
+   "name": "Ending",
+   "groove": "silence",
+   "crash": false,
+   "fill": false,
+   "bars": [
+    "Em . . N.C."
+   ],
+   "band": {
+    "bass": "whole",
+    "keys": "off",
+    "gtr": "whole"
+   }
+  }
+ ],
+ "audio": {
+  "file": "local/audio/black-keys-weight-of-love.mp3",
+  "barTimes": [
+   1.057,
+   4.31,
+   7.532,
+   10.812,
+   14.036,
+   17.29,
+   20.518,
+   23.737,
+   27.04,
+   30.29,
+   33.541,
+   36.792,
+   40.025,
+   43.288,
+   46.504,
+   49.784,
+   53.046,
+   56.308,
+   59.524,
+   62.775,
+   66.038,
+   69.306,
+   72.469,
+   75.784,
+   79.041,
+   82.274,
+   85.496,
+   88.799,
+   92.061,
+   95.271,
+   98.476,
+   101.64,
+   104.751,
+   107.857,
+   110.968,
+   114.074,
+   117.156,
+   120.262,
+   123.362,
+   126.467,
+   129.573,
+   132.667,
+   135.779,
+   138.89,
+   141.984,
+   145.09,
+   148.213,
+   151.284,
+   154.395,
+   157.478,
+   160.572,
+   163.689,
+   166.789,
+   169.912,
+   173.012,
+   176.123,
+   179.287,
+   182.515,
+   185.765,
+   189.045,
+   192.284,
+   195.553,
+   198.763,
+   202.043,
+   205.288,
+   208.556,
+   211.795,
+   215.023,
+   218.285,
+   221.373,
+   224.334,
+   227.538,
+   230.626,
+   233.726,
+   236.832,
+   239.949,
+   243.043,
+   246.166,
+   249.272,
+   252.349,
+   255.46,
+   258.554,
+   261.648,
+   264.771,
+   267.848,
+   270.959,
+   274.071,
+   277.177,
+   280.271,
+   283.388,
+   286.482,
+   289.593,
+   292.688,
+   295.799,
+   298.887,
+   301.999,
+   305.07,
+   308.187,
+   311.304,
+   314.375,
+   317.498,
+   320.575,
+   323.698,
+   326.815,
+   329.909,
+   333.021,
+   336.109,
+   339.226,
+   342.32,
+   345.403,
+   348.508,
+   351.614,
+   354.696,
+   357.895,
+   361.006,
+   364.106,
+   367.316,
+   370.471,
+   373.65,
+   376.837,
+   380.105,
+   383.303,
+   386.548,
+   389.849,
+   393.114,
+   396.46,
+   399.801,
+   402.965,
+   406.076,
+   409.188
+  ],
+  "note": "Bar start times (s) in the recording, from beat tracking of the drum stem. local/audio/ is not in git — add the file with 'Load audio file…'."
+ }
 }

@@ -80,6 +80,17 @@ UG sheets show chord *changes*, not bars, so bar counts are often off. Two ways 
 
 Songs live in the browser's localStorage. Use **Export** to save a `.json` and drop it in `songs/` (and add it to `songs/index.json`) to ship it with the app.
 
+## Backing track from the real recording
+
+Synthesized drums and band never sound like the record. The **Backing track** panel plays a real audio file instead — ideally the original recording with the vocals (and whatever you play yourself) removed by a stem separator — while the chart, section cues, in‑ear click, Hold / +1 pass / Go now and the iPad followers all keep working. The recording is the clock: bar lines follow its real timing, jumps happen at bar lines by seeking, and the drum kit and band are muted automatically.
+
+- **Load audio file…** on the host computer: the file is saved to `local/audio/<song-id>.<ext>` (not in git, so updates never touch it) and remembered for that song. The chart is laid over the song's BPM grid from the first sound; use **◂ 50ms / 50ms ▸** to nudge if the chords change a little early or late.
+- Songs can ship exact bar times: `"audio": {"file": "local/audio/x.mp3", "barTimes": [1.05, 4.31, …]}` (one entry per bar plus the end). Weight of Love ships with bar times measured from its drum stem — just add the file.
+- **Source** switches back to **Synth drums + band** for jamming or when the recording isn't on this computer.
+- Followers (iPad) don't need the file — the host plays it and announces every bar line.
+
+Making the file: any stem separator works (Spleeter, Demucs, Moises, LALAL.AI, Logic's Stem Splitter). Keep drums + bass + other, drop vocals, export MP3/WAV. For a lead‑guitar‑and‑vocals set you may also want the guitar stem lowered.
+
 ## Drum sounds
 
 Pick the kit in the sidebar (**Drum kit**):
