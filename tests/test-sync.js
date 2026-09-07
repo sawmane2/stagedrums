@@ -1,0 +1,31 @@
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--autoplay-policy=no-user-gesture-required'] });
+  const mk = async () => { const p = await browser.newPage(); p.on('pageerror', e => console.log('PAGEERROR', e.message)); p.on('console', m => { if (m.type() === 'error') console.log('console.error', m.text()); }); await p.goto('http://localhost:8099/?t=' + Date.now()); await p.waitForTimeout(1200); return p; };
+  const host = await mk(), fol = await mk();
+  await host.evaluate(() => { const li = [...document.querySelectorAll('#songList li')].find(l => /Weight/.test(l.textContent)); li.click(); });
+  await host.waitForFunction(() => window.stagedrums.transport.audio, null, { timeout: 30000 });
+  await host.evaluate(() => { const s = document.getElementById('roleSelect'); s.value = 'host'; s.dispatchEvent(new Event('change')); });
+  await fol.evaluate(() => { const s = document.getElementById('roleSelect'); s.value = 'follower'; s.dispatchEvent(new Event('change')); const d = document.getElementById('dlgSync'); if (d.open) d.close('ok'); else { document.getElementById('syncUrl').value = 'ws://localhost:8099'; } });
+  await host.waitForTimeout(2500);
+  console.log('host status', await host.evaluate(() => document.getElementById('syncStatus').textContent));
+  console.log('fol status', await fol.evaluate(() => document.getElementById('syncStatus').textContent), await fol.evaluate(() => window.stagedrums.song && window.stagedrums.song.title), await fol.evaluate(() => document.getElementById('audioStatus').textContent));
+  await fol.evaluate(() => { const t = window.stagedrums.transport; window.__bars = []; const ob = t.onBar; t.onBar = (b, x) => { window.__bars.push([b, +performance.now().toFixed(0)]); ob && ob(b, x); }; });
+  await host.evaluate(() => { const t = window.stagedrums.transport; window.__bars = []; const ob = t.onBar; t.onBar = (b, x) => { window.__bars.push([b, +performance.now().toFixed(0)]); ob && ob(b, x); }; });
+  await host.evaluate(() => { window.stagedrums.transport._pausedPos = 12; document.getElementById('btnPlay').click(); });
+  await host.waitForTimeout(8000);
+  const h = await host.evaluate(() => ({ pos: window.stagedrums.transport.position(), bars: window.__bars, now: performance.now() }));
+  const f = await fol.evaluate(() => ({ pos: window.stagedrums.transport.position(), bars: window.__bars, now: performance.now(), playing: window.stagedrums.transport.playing, follow: window.stagedrums.transport._follow, sec: document.getElementById('nowSection') && document.getElementById('nowSection').textContent }));
+  console.log('host', JSON.stringify(h)); console.log('fol ', JSON.stringify(f));
+  // follower sends "go" → host jumps at next bar; follower should follow
+  await fol.evaluate(() => document.getElementById('btnGo').click());
+  await host.waitForTimeout(300);
+  console.log('host queued after go', await host.evaluate(() => JSON.stringify([window.stagedrums.transport.queued, window.stagedrums.transport.currentBar(), window.stagedrums.transport.tl.sections.map(s=>[s.name,s.start])])));
+  await host.waitForTimeout(4200);
+  console.log('after go host', await host.evaluate(() => [window.stagedrums.transport.currentBar(), window.__bars.slice(-3)]));
+  console.log('after go fol ', await fol.evaluate(() => [window.stagedrums.transport.currentBar(), window.__bars.slice(-3)]));
+  await host.evaluate(() => document.getElementById('btnPlay').click());
+  await host.waitForTimeout(500);
+  console.log('stopped fol playing?', await fol.evaluate(() => window.stagedrums.transport.playing));
+  await browser.close();
+})().catch(e => { console.error('TEST FAILED', e); process.exit(1); });

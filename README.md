@@ -21,9 +21,14 @@ drum-daw/
 ├── start.command / start.bat / update.command / update.bat   double-click helpers
 ├── sw.js           service worker (offline / installable)
 ├── manifest.json   PWA manifest
+├── tools/          separation + analysis pipeline (prepare_song, grid, map, find_fills, split_other)
+├── tests/          Playwright browser tests (see tests/README.md)
+├── docs/           implementation plans
 ├── songs/index.json  demo songs (loaded on first run)
 └── styles.css
 ```
+
+**Planned work:** [`docs/PLAN-live-features.md`](docs/PLAN-live-features.md) — per-stem effect chains and presets, live key change, tap tempo, per-song fade-outs, foot-pedal mapping and the private cue feed, written up against the code as it stands. **Tests:** [`tests/`](tests/).
 
 ## Quick start
 

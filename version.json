@@ -1,5 +1,5 @@
 {
-  "version": "0.20.0",
+  "version": "0.21.0",
   "date": "2026-09-07",
-  "notes": "Five more songs playing from their own recordings: Sunshine of Your Love, Sittin' on a Rainbow, Harvest Moon, Lord Is It Mine and Blue Moon Nights - each charted against the take itself (measured tempo, real bar lines, section boundaries read from where the vocal enters), with stems, kit split and the drummer's own fills."
+  "notes": "Implementation plan for the next round of live features (effects and presets, key change, tap tempo, fade-outs, foot pedal, cue feed), the browser test harness, and the separation pipeline tools checked in."
 }
