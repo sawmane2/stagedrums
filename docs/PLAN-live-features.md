@@ -391,6 +391,13 @@ real-time pitch shifter, and garbage collection from allocating in a hot path.
 
 ## 10. Suggested build order
 
+> **Status (v0.23.0):** §1a, §1c, §1d, §2, §3, §4, §5, §6 and §7 are built and covered by `tests/`. One
+> design change from the text below: instead of shifting stems independently, the worker does a *guided*
+> pass — the WSOLA offsets are recorded on the sum of all stems and replayed for each one (a ~6-line
+> modification to the vendored SoundTouch), which keeps the stems sample-aligned; measured, an
+> unguided per-stem shift drifted kick against bass by up to ~7 ms. Still open: §1b FLAC encoding, recorded
+> cue words (§7 option b), and everything in §12.
+
 Each step is releasable on its own and testable before the next.
 
 1. **§1a + §1b + §1c** — sample rate, encoder flag, FX insertion point. No user-visible change; everything
@@ -411,3 +418,35 @@ Each step is releasable on its own and testable before the next.
   holding; probably yes for songs with effects, not for everything.
 - **How far the key change has to go** (§3) — ±2 semitones is safe with the simple approach; beyond ±3
   wants the much larger formant-preserving build.
+
+---
+
+## 12. Pending items from the broader brainstorm (scoped, not yet scheduled)
+
+These were listed as "still pending" in the notes. Scoping them here so the picture is complete; none of
+them block §1–§7.
+
+**Switchable convolution reverb impulse responses.** The `verb` effect in §2 should take an `ir` name.
+Ship a small set of *generated* IRs (`room`, `plate`, `hall`, `spring`) built the way `mixer.js` already
+synthesises its room IR (shaped noise with a decay curve) so nothing has to be downloaded, plus support
+for user-supplied `.wav` IRs dropped into `local/ir/`. Cost: a convolver is the most expensive node in the
+graph (~2–4 % per second of IR); share **one** convolver per IR across stems via a send bus rather than
+one per stem, exactly like a mixing console does.
+
+**Drum "punch" enhancer with a master intensity slider.** Transient shaping on the kit stems (or the
+kick/snare parts when split): a `DynamicsCompressorNode` with fast attack and a parallel dry path gives
+sustain control; for attack emphasis use the classic two-envelope-follower difference in an
+`AudioWorklet` (~30 lines), plus a tilt EQ. One knob scales attack gain, sustain reduction and EQ
+together. Fits the §2 registry as type `punch`; when the kit is split, apply to `kick` and `snare` only.
+
+**Live pitch correction with adjustable retune speed.** This is the one item that is genuinely
+real-time DSP, and it belongs on the **live mic through `mixer.js`**, not on a stem (the recorded singers
+are already in tune). Pitch detection (YIN/McLeod) + PSOLA or phase-vocoder shift in an `AudioWorklet`,
+snapping to the song's key (which §3 already tracks) with a `retune` time constant. Budget ~5–8 % of the
+audio thread on an M2 at 44.1 kHz and ~20 ms of added latency, which is at the edge of what a singer
+tolerates in in-ears. Build last, behind a flag, and evaluate on stage like tap tempo. If it proves too
+heavy or too laggy, a hardware unit on the mic path is the honest fallback.
+
+**Song browser search.** Already discussed in an earlier session; the sidebar list has no filter box
+today. A title/artist/tag text filter is ~20 lines in `renderSongList()` — do it whenever the list gets
+long enough to want it.

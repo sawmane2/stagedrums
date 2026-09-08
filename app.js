@@ -6,7 +6,11 @@
   const LS_SONGS = 'stagedrums.songs', LS_PREFS = 'stagedrums.prefs';
 
   // ---------- audio ----------
-  const ctx = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: 'interactive' });
+  // 44.1 kHz on purpose: the stems are 44.1 kHz files, and decodeAudioData resamples everything to the
+  // context rate — matching it means no resampling at all. 'interactive' stays because the mic mixer shares this context.
+  let ctx;
+  try { ctx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 44100, latencyHint: 'interactive' }); }
+  catch (e) { ctx = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: 'interactive' }); }
   const kit = new SD.DrumKit(ctx);
   const transport = new SD.Transport(kit);
   const unlock = () => { if (ctx.state === 'suspended') ctx.resume(); };
@@ -36,6 +40,7 @@
           merged.sections.forEach((sec, k) => { const o = old.sections.find(x => x.name === sec.name) || old.sections[k];
             if (o) { if (o.sheet && !sec.sheet) sec.sheet = o.sheet; if (o.lyrics && !sec.lyrics) sec.lyrics = o.lyrics; } });
           if (old.audio && !merged.audio) merged.audio = old.audio; // keep a recording the user attached
+          else if (old.audio && merged.audio) for (const k of ['fx', 'key', 'fade', 'mix', 'mute', 'splitDrums']) if (old.audio[k] != null && merged.audio[k] == null) merged.audio[k] = old.audio[k];
           songs[i] = merged;
         }
       }
@@ -46,6 +51,9 @@
     selectSong(songs.find(s => s.id === lastId) || songs[0]);
   }
   function persistSongs() { localStorage.setItem(LS_SONGS, JSON.stringify(songs)); }
+  /** Chord as shown on stage: transposed when the song is playing in a different key than it was charted in. */
+  const keySemis = () => (song && song.audio && song.audio.key && song.audio.key.semitones) || 0;
+  const disp = name => keySemis() ? SD.transposeLine(name, keySemis()) : name;
   function renderSongList() {
     const ul = $('songList'); ul.innerHTML = '';
     for (const s of songs) {
@@ -110,7 +118,7 @@
         const ch = document.createElement('div'); ch.className = 'sl-ch'; let pos = 0;
         for (const t of l.tokens) {
           ch.appendChild(document.createTextNode(l.chordLine.slice(pos, t.col)));
-          const b = document.createElement('span'); b.className = 'chd'; b.textContent = t.name; b.dataset.bar = t.bar; b.onclick = () => transport.playing ? queueSection(tl.bars[t.bar].section, false) : jumpTo(t.bar);
+          const b = document.createElement('span'); b.className = 'chd'; b.textContent = disp(t.name); b.dataset.bar = t.bar; b.onclick = () => transport.playing ? queueSection(tl.bars[t.bar].section, false) : jumpTo(t.bar);
           ch.appendChild(b); pos = t.col + t.name.length;
         }
         row.appendChild(ch);
@@ -150,7 +158,7 @@
         const b = tl.bars[i];
         const el = document.createElement('div'); el.className = 'bar' + (b.custom ? ' midi-bar' : ''); el.dataset.bar = i;
         el.innerHTML = `<span class="num">${b.barInSection + 1}${b.repeat ? `·${b.repeat + 1}` : ''}</span>` +
-          b.chords.map((c, ci) => `<span class="chord" data-ci="${ci}">${esc(c.name)}</span>`).join('') +
+          b.chords.map((c, ci) => `<span class="chord" data-ci="${ci}">${esc(disp(c.name))}</span>`).join('') +
           (b.fill ? '<span class="fill">fill</span>' : '');
         el.onclick = () => jumpTo(i);
         bars.appendChild(el);
@@ -191,7 +199,7 @@
     if (pos < 0) { // count-in
       $('nowSection').textContent = 'Count-in'; currentSectionIdx = -1;
       const first = tl.bars[Math.floor(transport._countFrom || 0)];
-      $('nowChord').textContent = first ? first.chords[0].name : '—';
+      $('nowChord').textContent = first ? disp(first.chords[0].name) : '—';
       const beat = Math.floor((pos + 1) * beatsPerBar);
       setBeat(beat);
       $('barCounter').textContent = `Bar — / ${tl.total}`;
@@ -205,7 +213,7 @@
     // current chord within bar
     let chord = bar.chords[0];
     for (const c of bar.chords) if (beatInBar >= c.at - 1e-6) chord = c;
-    $('nowChord').textContent = chord.name;
+    $('nowChord').textContent = disp(chord.name);
     const sec = tl.sections[bar.section];
     if (bar.section !== currentSectionIdx || force) {
       currentSectionIdx = bar.section;
@@ -250,7 +258,8 @@
   function speak(text) {
     if (!prefs.voice || !('speechSynthesis' in window)) return;
     speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text); u.rate = 1.15; u.volume = 1;
+    const u = new SpeechSynthesisUtterance(text); u.rate = 1.15; u.volume = prefs.cueVoice ?? 1;
+    if (u.volume <= 0.001) return;
     speechSynthesis.speak(u);
   }
   transport.onBar = (barIdx) => {
@@ -353,6 +362,39 @@
   $('bpm').onchange = () => setBpm(+$('bpm').value);
   $('tempoDown').onclick = () => setBpm(transport.bpm - 2);
   $('tempoUp').onclick = () => setBpm(transport.bpm + 2);
+  // ---------- foot pedal (a Bluetooth HID pedal is a keyboard; map its two keys) ----------
+  const pedal = { learning: null, last: { L: 0, R: 0 } };
+  function nextSong() {
+    if (!songs.length) return;
+    const i = song ? songs.findIndex(x => x.id === song.id) : -1;
+    const s = songs[(i + 1) % songs.length];
+    if (role === 'follower') return sendCmd({ cmd: 'song', id: s.id });
+    transport.stop(); selectSong(s); broadcastSong(); setPlayUI();
+  }
+  function renderPedal() {
+    $('pedalKeyL').textContent = prefs.pedalL || '—'; $('pedalKeyR').textContent = prefs.pedalR || '—';
+    $('pedalLearnL').classList.toggle('learning', pedal.learning === 'L'); $('pedalLearnR').classList.toggle('learning', pedal.learning === 'R');
+    $('pedalLearnL').textContent = pedal.learning === 'L' ? 'Tap pedal…' : 'Learn'; $('pedalLearnR').textContent = pedal.learning === 'R' ? 'Tap pedal…' : 'Learn';
+  }
+  $('pedalLearnL').onclick = () => { pedal.learning = pedal.learning === 'L' ? null : 'L'; renderPedal(); };
+  $('pedalLearnR').onclick = () => { pedal.learning = pedal.learning === 'R' ? null : 'R'; renderPedal(); };
+  renderPedal();
+  window.addEventListener('keydown', e => {
+    if (pedal.learning) { // capture the key this pedal button sends
+      e.preventDefault(); e.stopPropagation();
+      if (pedal.learning === 'L') prefs.pedalL = e.code; else prefs.pedalR = e.code;
+      pedal.learning = null; savePrefs(); renderPedal(); return;
+    }
+    const side = e.code && e.code === prefs.pedalL ? 'L' : e.code && e.code === prefs.pedalR ? 'R' : null;
+    if (!side) return;
+    if (e.target.matches('input,textarea,select') || document.querySelector('dialog[open]')) return;
+    e.preventDefault(); e.stopPropagation();
+    if (e.repeat) return; // a held pedal must not machine-gun
+    const t = Date.now(); if (t - pedal.last[side] < 250) return; pedal.last[side] = t;
+    const el = $(side === 'L' ? 'pedalKeyL' : 'pedalKeyR'); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 300);
+    if (side === 'L') setHold(!transport.hold); else nextSong();
+  }, true);
+
   document.addEventListener('keydown', e => {
     if (e.target.matches('input,textarea,select')) return;
     if (e.code === 'Space') { e.preventDefault(); play(); }
@@ -374,6 +416,13 @@
     kit.setLevel(bus, +el.value);
     el.oninput = () => { kit.setLevel(bus, +el.value); prefs[id] = +el.value; savePrefs(); };
   }
+  // cue panel: the click slider here and the one in Drum mix are the same control
+  $('cueClick').value = $('volClick').value;
+  $('cueClick').oninput = () => { $('volClick').value = $('cueClick').value; $('volClick').dispatchEvent(new Event('input')); };
+  $('volClick').addEventListener('input', () => { $('cueClick').value = $('volClick').value; });
+  if (prefs.cueVoice != null) $('cueVoice').value = prefs.cueVoice;
+  $('cueVoice').oninput = () => { prefs.cueVoice = +$('cueVoice').value; savePrefs(); };
+  $('cueMaster').oninput = () => { sendCmd({ cmd: 'master', value: +$('cueMaster').value }); };
   if (prefs.volMaster != null) $('volMaster').value = prefs.volMaster;
   kit.setMaster(+$('volMaster').value);
   $('volMaster').oninput = () => { kit.setMaster(+$('volMaster').value); prefs.volMaster = +$('volMaster').value; savePrefs(); };
@@ -476,7 +525,7 @@
       return (location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host;
     return prefs.syncUrl || '';
   }
-  function applyRoleAudio() { transport.audible = role !== 'follower' || prefs.followerAudio; }
+  function applyRoleAudio() { transport.audible = role !== 'follower' || prefs.followerAudio; $('cueMasterRow').hidden = role !== 'follower'; }
   function connect(url) {
     if (sync) sync.close(); sync = null;
     if (!url) { setSyncStatus('offline'); return; }
@@ -494,7 +543,7 @@
   transport.onAnchor = (st) => {
     if (role !== 'host') return;
     lastState = { type: 'state', songId: song && song.id, playing: st.playing, bpm: st.bpm, hold: st.hold, extra: st.extra, queued: st.queued, pausedPos: st.pausedPos,
-      anchorBar: st.anchorBar, anchorServerMs: sync ? SD.ctxToServer(ctx, sync, st.anchorCtxTime) : 0, countIn: st.countIn, barSec: st.barSec, audio: st.audio };
+      anchorBar: st.anchorBar, anchorServerMs: sync ? SD.ctxToServer(ctx, sync, st.anchorCtxTime) : 0, countIn: st.countIn, barSec: st.barSec, audio: st.audio, master: +$('volAudio').value };
     if (sync && sync.connected) sync.send(lastState);
   };
   function onSyncMessage(m) {
@@ -509,6 +558,11 @@
         case 'extra': addExtra(); break;
         case 'go': goNow(); break;
         case 'queue': queueSection(m.section, m.now); break;
+        case 'key': if (song && song.audio) setKey(+m.semitones || 0); break;
+        case 'tempo': if (song && song.audio) setTempo(+m.ratio || 1); break;
+        case 'master': { const v = Math.max(0, Math.min(1.5, +m.value || 0)); $('volAudio').value = v; $('volAudio').dispatchEvent(new Event('input')); break; }
+        case 'song': { const s = songs.find(x => x.id === m.id); if (s) { transport.stop(); selectSong(s); broadcastSong(); setPlayUI(); } break; }
+        case 'fx': if (song && song.audio) { song.audio.fx = song.audio.fx || {}; if (m.fx) song.audio.fx[m.stem] = m.fx; else delete song.audio.fx[m.stem]; transport.setStemFX(m.stem, m.fx || null); persistSongs(); renderStemMix(); broadcastSong(); } break;
         case 'stem': if (song && song.audio) { const a = song.audio; a.mix = a.mix || {}; a.mute = a.mute || {};
             if (m.section != null) { const sc = song.sections[m.section]; if (sc) { sc.stems = sc.stems || {}; sc.stems[m.k] = m.level; } }
             else a.mix[m.k] = m.level;
@@ -520,16 +574,17 @@
     if (m.type === 'song') {
       const s = m.song; const i = songs.findIndex(x => x.id === s.id);
       if (i >= 0) songs[i] = s; else songs.push(s); persistSongs();
-      const noAudio = x => JSON.stringify(Object.assign({}, x, { audio: null, sections: x.sections.map(sc => Object.assign({}, sc, { stems: null })) }));
+      const noAudio = x => JSON.stringify(Object.assign({}, x, { audio: x.audio ? { key: x.audio.key, tempo: x.audio.tempo } : null, sections: x.sections.map(sc => Object.assign({}, sc, { stems: null })) }));
       if (song && s.id === song.id && noAudio(s) === noAudio(song)) { // only the stem mix changed: keep playing, just update the faders
         song.audio = s.audio; s.sections.forEach((sc, i) => { if (sc.stems) song.sections[i].stems = sc.stems; else delete song.sections[i].stems; });
-        renderStemMix(); return; }
+        renderStemMix(); if ($('dlgFx').open) renderFx(); return; }
       selectSong(s); return;
     }
     if (m.type === 'state') {
       if (song && m.songId && m.songId !== song.id) { const s = songs.find(x => x.id === m.songId); if (s) selectSong(s); }
       if (!tl) return;
       transport.syncTo(m, SD.serverToCtx(ctx, sync, m.anchorServerMs));
+      if (m.master != null && document.activeElement !== $('cueMaster')) $('cueMaster').value = m.master;
       $('bpm').value = transport.bpm; setPlayUI(); renderLive();
       if (!m.playing) { updateNow(m.pausedPos || 0, true); setBeat(-1); }
       else requestWake();
@@ -565,6 +620,7 @@
 
   // ---------- backing track: a real recording (e.g. the record with the vocals removed) instead of synth drums + band ----------
   const audioCache = {}; let audioLoadToken = 0;
+  const shifter = new SD.Shifter(); let shiftCache = null; // one alternate key/tempo render at a time
   const STEM_LABELS = { drums: 'Drums', bass: 'Bass', other: 'Other', guitar: 'Guitar', rhythm: 'Rhythm guitar', lead: 'Lead guitar', acoustic: 'Acoustic guitar',
     piano: 'Piano', keys: 'Keys', organ: 'Organ', vocals: 'Vocals', backing: 'Backing vocals', mix: 'Recording',
     kick: 'Kick', snare: 'Snare', toms: 'Toms', hats: 'Hi-hat', cymbals: 'Cymbals', perc: 'Percussion', center: 'Guitar (centre)', sides: 'Guitar (wide)' };
@@ -581,7 +637,8 @@
   function setAudioStatus(msg) {
     if (msg) { $('audioStatus').textContent = msg; return; }
     const a = song && song.audio, has = Object.keys(audioFiles(a)).length > 0;
-    if (transport.audio) { const d = transport.audio.duration; $('audioStatus').textContent = `Playing ${audioName(a)} (${Math.floor(d / 60)}:${String(Math.round(d % 60)).padStart(2, '0')}). Chart follows the recording; drums & band are muted.`; }
+    if (transport.audio) { const d = transport.audio.duration, ks = keySemis(), tr = (a.tempo && a.tempo.ratio) || 1;
+      $('audioStatus').textContent = `Playing ${audioName(a)} (${Math.floor(d / 60)}:${String(Math.round(d % 60)).padStart(2, '0')})${ks ? ` in a different key (${ks > 0 ? '+' : ''}${ks} semitones)` : ''}${Math.abs(tr - 1) > 1e-4 ? ` at ×${tr.toFixed(3)} tempo` : ''}. Chart follows the recording; drums & band are muted.`; }
     else if (has && (prefs.backing || 'audio') !== 'audio') $('audioStatus').textContent = 'Synth drums + band (a recording is available — switch Source to use it).';
     else if (role === 'follower') $('audioStatus').textContent = 'Follower: the host plays the recording.';
     else $('audioStatus').textContent = 'No recording for this song — using synth drums + band. Add the song with "Load audio file…", or separated stems (drums / bass / vocals / other) with "Load stems…" to mix them on stage.';
@@ -609,9 +666,10 @@
     const box = $('stemMix'); box.innerHTML = '';
     const a = song && song.audio, files = audioFiles(a); const keys = Object.keys(files);
     const show = keys.length > 1 || (keys.length === 1 && keys[0] !== 'mix');
-    box.classList.toggle('has', show); $('stemScopeRow').hidden = !show;
+    box.classList.toggle('has', show); $('stemScopeRow').hidden = !show; renderKeyUI();
     const hasKit = !!(a && a.kit && Object.keys(a.kit).length);
     $('splitDrumsRow').hidden = !hasKit; $('chkSplitDrums').checked = !!(a && a.splitDrums);
+    $('fadeOut').value = (a && a.fade && a.fade.out) || 0;
     const nFills = (a && a.fills || []).length;
     $('loopFillsRow').hidden = !nFills; $('chkLoopFills').checked = prefs.loopFills !== false;
     $('loopFillsCount').textContent = nFills ? `(${nFills} in this recording)` : '';
@@ -625,10 +683,13 @@
       const lvl = sec ? (sec.stems[k] ?? base) : base;
       const row = document.createElement('div'); row.className = 'stem';
       const over = sec && sec.stems[k] != null;
+      const fxOn = SD.FX && SD.FX.active(a.fx && a.fx[k]);
       row.innerHTML = `<span>${esc(stemLabel(k))}${over ? ' <b title="set for this section">•</b>' : ''}</span>`
         + `<input type="range" min="0" max="1.5" step="0.01" value="${lvl}">`
-        + `<button class="small ${a.mute[k] ? 'on' : ''}" title="${sec ? 'Silence this stem in this section' : 'Mute everywhere'}">M</button>`;
-      const range = row.querySelector('input'), mute = row.querySelector('button');
+        + `<button class="small ${a.mute[k] ? 'on' : ''}" title="${sec ? 'Silence this stem in this section' : 'Mute everywhere'}">M</button>`
+        + `<button class="small fxbtn ${fxOn ? 'on' : ''}" title="Effects on this stem">fx</button>`;
+      const range = row.querySelector('input'), mute = row.querySelector('button'), fxb = row.querySelector('.fxbtn');
+      fxb.onclick = () => openFx(k);
       const push = () => { if (role === 'follower') sendCmd({ cmd: 'stem', k, level: +range.value, mute: !!a.mute[k], section: si }); else { applyStemsNow(); persistSongs(); } };
       range.oninput = () => { if (sec) sec.stems[k] = +range.value; else a.mix[k] = +range.value; if (role !== 'follower') applyStemsNow(); };
       range.onchange = () => { push(); if (role !== 'follower') { broadcastSong(); renderStemMix(); } };
@@ -647,6 +708,7 @@
       box.appendChild(b);
     }
   }
+  $('fadeOut').onchange = () => { if (!song || !song.audio) return; const v = Math.max(0, Math.min(30, +$('fadeOut').value || 0)); song.audio.fade = v ? { out: v } : undefined; if (!v) delete song.audio.fade; transport.fadeOut = v; persistSongs(); broadcastSong(); };
   $('chkLoopFills').onchange = () => { prefs.loopFills = $('chkLoopFills').checked; savePrefs(); transport.fills = prefs.loopFills ? ((song && song.audio && song.audio.fills) || []) : []; };
   $('chkSplitDrums').onchange = () => {
     if (!song || !song.audio) return;
@@ -692,8 +754,24 @@
       }));
       if (token !== audioLoadToken) return;
       if (!Object.keys(stems).length) throw new Error('missing');
-      transport.setAudio({ stems, mix: mixForBar(transport._pausedPos || 0), barTimes: a.barTimes, offset: a.offset || 0,
-        gain: +$('volAudio').value, name: audioName(a), fills: prefs.loopFills === false ? [] : (a.fills || []) });
+      // key change / tempo change: rendered offline once per (song, semitones, ratio), then the buffers are swapped
+      let useStems = stems, barTimes = a.barTimes;
+      const kt = { semitones: (a.key && a.key.semitones) || 0, tempo: (a.tempo && a.tempo.ratio) || 1 };
+      if (kt.semitones || Math.abs(kt.tempo - 1) > 1e-4) {
+        const same = shiftCache && shiftCache.songId === song.id && shiftCache.semitones === kt.semitones && Math.abs(shiftCache.tempo - kt.tempo) < 1e-4
+          && Object.keys(stems).every(k => shiftCache.src[k] === stems[k]);
+        if (!same) {
+          shiftCache = null; // free the previous render before making another (these buffers are big)
+          const rendered = await shifter.render(ctx, stems, kt, (done, total, name) => setAudioStatus(`Rendering ${kt.semitones ? (kt.semitones > 0 ? '+' : '') + kt.semitones + ' semitones' : ''}${kt.semitones && kt.tempo !== 1 ? ', ' : ''}${kt.tempo !== 1 ? 'tempo ×' + kt.tempo.toFixed(3) : ''}… ${Math.min(total, Math.floor(done))} of ${total} stems`));
+          if (token !== audioLoadToken) return;
+          shiftCache = { songId: song.id, semitones: kt.semitones, tempo: kt.tempo, src: stems, stems: rendered };
+        }
+        useStems = shiftCache.stems;
+        if (barTimes && Math.abs(kt.tempo - 1) > 1e-4) barTimes = barTimes.map(t => t / kt.tempo);
+      }
+      transport.setAudio({ stems: useStems, mix: mixForBar(transport._pausedPos || 0), barTimes, offset: (a.offset || 0) / kt.tempo,
+        gain: +$('volAudio').value, name: audioName(a), fills: prefs.loopFills === false ? [] : (a.fills || []), fadeOut: a.fade && a.fade.out || 0 });
+      applyAllFx();
       setAudioStatus(); if (missing.length) setAudioStatus($('audioStatus').textContent + ` Missing on this computer: ${missing.join(', ')}.`);
     } catch (e) {
       setAudioStatus(`${audioName(a)} isn't on this computer — using synth drums + band. Add it with "Load audio file…" / "Load stems…" (files go in drum-daw/local/audio/).`);
@@ -763,6 +841,112 @@
   $('btnAudioNudgeL').onclick = () => nudgeAudio(-0.05);
   $('btnAudioNudgeR').onclick = () => nudgeAudio(0.05);
   $('btnAudioClear').onclick = () => { if (!song || !song.audio) return; if (!confirm('Remove the recording from this song? (The files stay in local/audio/.)')) return; delete song.audio; persistSongs(); broadcastSong(); applyBacking(); };
+
+  // ---------- key change (offline re-render of every stem) ----------
+  $('keyShift').innerHTML = [-6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6].map(n => `<option value="${n}">${n === 0 ? 'as recorded' : (n > 0 ? '+' : '') + n + (Math.abs(n) === 1 ? ' semitone' : ' semitones')}</option>`).join('');
+  function renderKeyUI() {
+    const a = song && song.audio, has = !!(a && Object.keys(audioFiles(a)).length);
+    $('keyRow').hidden = !has; $('tapToggleRow').hidden = !has; $('tempoRow').hidden = !has || !prefs.tapTempo; $('chkTapTempo').checked = !!prefs.tapTempo;
+    if (!has) return;
+    const ks = keySemis(); $('keyShift').value = String(ks);
+    $('keyStatus').textContent = Math.abs(ks) > 3 ? 'big shifts start to sound stretched — ±2 is safe' : '';
+    renderTapUI();
+  }
+  $('keyShift').onchange = () => {
+    if (!song || !song.audio) return;
+    const n = +$('keyShift').value;
+    if (role === 'follower') return sendCmd({ cmd: 'key', semitones: n });
+    setKey(n);
+  };
+  function setKey(n) {
+    song.audio.key = n ? { semitones: n } : undefined; if (!n) delete song.audio.key;
+    persistSongs(); broadcastSong(); transport.stop(true); setPlayUI();
+    renderChart(); updateNow(transport._pausedPos || 0, true); applyBacking();
+  }
+  // ---------- tap tempo (experimental): same engine, time instead of pitch; bar times scale with it ----------
+  const tap = { times: [] };
+  function songBpm() { const bt = song && song.audio && song.audio.barTimes; if (!bt || bt.length < 3 || !tl) return song ? song.bpm : 120; const per = (bt[bt.length - 1] - bt[0]) / (bt.length - 1); return 60 * tl.sig.beats / per; }
+  function renderTapUI() {
+    const a = song && song.audio, r = (a && a.tempo && a.tempo.ratio) || 1;
+    $('btnTapReset').hidden = Math.abs(r - 1) < 1e-4; $('btnTapApply').hidden = !tap.pending;
+    if (tap.pending) $('tapInfo').textContent = `${tap.pending.bpm.toFixed(1)} BPM → ×${tap.pending.ratio.toFixed(3)} of the record's ${songBpm().toFixed(1)}`;
+    else $('tapInfo').textContent = Math.abs(r - 1) < 1e-4 ? `tap along to set tonight's tempo (record: ${songBpm().toFixed(1)} BPM)` : `playing at ×${r.toFixed(3)} = ${(songBpm() * r).toFixed(1)} BPM`;
+  }
+  $('chkTapTempo').onchange = () => { prefs.tapTempo = $('chkTapTempo').checked; savePrefs(); renderKeyUI(); };
+  $('btnTap').onclick = () => {
+    const t = performance.now(); if (tap.times.length && t - tap.times[tap.times.length - 1] > 2500) tap.times = [];
+    tap.times.push(t); if (tap.times.length < 4) { $('tapInfo').textContent = `${tap.times.length}…`; $('btnTapApply').hidden = true; return; }
+    const d = tap.times.slice(-8).map((x, i, arr) => i ? x - arr[i - 1] : null).filter(Boolean).sort((a, b) => a - b);
+    const med = d[Math.floor(d.length / 2)], good = d.filter(x => Math.abs(x - med) / med < 0.3);
+    const bpm = 60000 / (good.reduce((s, x) => s + x, 0) / good.length);
+    let ratio = bpm / songBpm(); const clamped = Math.max(0.88, Math.min(1.12, ratio));
+    tap.pending = { bpm: songBpm() * clamped, ratio: clamped, raw: bpm };
+    renderTapUI(); if (clamped !== ratio) $('tapInfo').textContent += ' (limited to ±12 %)';
+  };
+  $('btnTapApply').onclick = () => { if (!song || !song.audio || !tap.pending) return; setTempo(tap.pending.ratio); tap.pending = null; tap.times = []; };
+  $('btnTapReset').onclick = () => { if (!song || !song.audio) return; setTempo(1); tap.pending = null; tap.times = []; };
+  function setTempo(r) {
+    if (role === 'follower') return sendCmd({ cmd: 'tempo', ratio: r });
+    if (Math.abs(r - 1) < 1e-4) delete song.audio.tempo; else song.audio.tempo = { ratio: +r.toFixed(4) };
+    persistSongs(); broadcastSong(); transport.stop(true); setPlayUI(); applyBacking();
+  }
+
+  // ---------- stem effects (effects.js) ----------
+  function applyAllFx() {
+    if (!transport.audio || !song || !song.audio) return;
+    const fx = song.audio.fx || {};
+    for (const k of Object.keys(transport.audio.gains)) transport.setStemFX(k, fx[k] || null);
+  }
+  /** Set a stem's chain: apply locally (host/solo) or ask the host (follower); persist; refresh rows. */
+  function setFx(stem, spec) {
+    if (!song || !song.audio) return;
+    if (role === 'follower') { sendCmd({ cmd: 'fx', stem, fx: spec }); return; }
+    song.audio.fx = song.audio.fx || {};
+    if (spec) song.audio.fx[stem] = spec; else delete song.audio.fx[stem];
+    transport.setStemFX(stem, spec); persistSongs(); broadcastSong(); renderStemMix();
+  }
+  let fxStem = null;
+  function fxSpec() { const a = song && song.audio; return (a && a.fx && a.fx[fxStem]) ? JSON.parse(JSON.stringify(a.fx[fxStem])) : { enabled: true, intensity: 0.75, chain: [] }; }
+  function openFx(stem) {
+    fxStem = stem; $('fxStemName').textContent = stemLabel(stem);
+    $('fxPreset').innerHTML = '<option value="">choose…</option>' + Object.entries(SD.FX.PRESETS).map(([id, p]) => `<option value="${id}">${esc(p.label)}</option>`).join('');
+    $('fxAdd').innerHTML = '<option value="">effect…</option>' + Object.entries(SD.FX.TYPES).map(([id, t]) => `<option value="${id}">${esc(t.label)}</option>`).join('');
+    renderFx(); $('dlgFx').showModal();
+  }
+  function renderFx() {
+    const spec = fxSpec();
+    $('fxEnabled').checked = spec.enabled !== false; $('fxIntensity').value = spec.intensity ?? 0.75; $('fxIntensityVal').textContent = Math.round(($('fxIntensity').value) * 100) + '%';
+    const box = $('fxChain'); box.innerHTML = '';
+    spec.chain.forEach((e, i) => {
+      const T = SD.FX.TYPES[e.type]; if (!T) return;
+      const div = document.createElement('div'); div.className = 'fxeff';
+      div.innerHTML = `<div class="fxtitle"><span>${i + 1}. ${esc(T.label)}</span><span><button type="button" class="small" data-up title="Move earlier">▲</button> <button type="button" class="small" data-down title="Move later">▼</button> <button type="button" class="small danger" data-del>remove</button></span></div><div class="fxparams"></div>`;
+      const params = div.querySelector('.fxparams');
+      for (const [key, [min, max, label]] of Object.entries(T.params)) {
+        const v = e[key] ?? T.defaults[key]; const step = (max - min) > 50 ? 1 : (max - min) > 5 ? 0.1 : 0.001;
+        const l = document.createElement('label'); l.innerHTML = `<span>${esc(label)}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${v}"><b>${fmt(v)}</b>`;
+        const r = l.querySelector('input');
+        r.oninput = () => { const sp = fxSpec(); sp.chain[i][key] = +r.value; l.querySelector('b').textContent = fmt(+r.value); setFxLive(sp); };
+        r.onchange = () => { const sp = fxSpec(); sp.chain[i][key] = +r.value; setFx(fxStem, sp); };
+        params.appendChild(l);
+      }
+      div.querySelector('[data-del]').onclick = () => { const sp = fxSpec(); sp.chain.splice(i, 1); setFx(fxStem, sp); renderFx(); };
+      div.querySelector('[data-up]').onclick = () => { if (!i) return; const sp = fxSpec(); [sp.chain[i - 1], sp.chain[i]] = [sp.chain[i], sp.chain[i - 1]]; setFx(fxStem, sp); renderFx(); };
+      div.querySelector('[data-down]').onclick = () => { const sp = fxSpec(); if (i >= sp.chain.length - 1) return; [sp.chain[i + 1], sp.chain[i]] = [sp.chain[i], sp.chain[i + 1]]; setFx(fxStem, sp); renderFx(); };
+      box.appendChild(div);
+    });
+    if (!spec.chain.length) box.innerHTML = '<p class="hint">No effects on this stem yet — pick a preset or add one.</p>';
+  }
+  const fmt = v => Math.abs(v) >= 100 ? Math.round(v) : Math.abs(v) >= 1 ? (+v).toFixed(1) : (+v).toFixed(3).replace(/0+$/, '').replace(/\.$/, '');
+  /** Live preview while a slider is dragged: apply without persisting/broadcasting every pixel. */
+  function setFxLive(sp) { if (role === 'follower') return; song.audio.fx = song.audio.fx || {}; song.audio.fx[fxStem] = sp; transport.setStemFX(fxStem, sp); }
+  $('fxEnabled').onchange = () => { const sp = fxSpec(); sp.enabled = $('fxEnabled').checked; setFx(fxStem, sp); };
+  $('fxIntensity').oninput = () => { const sp = fxSpec(); sp.intensity = +$('fxIntensity').value; $('fxIntensityVal').textContent = Math.round(sp.intensity * 100) + '%'; setFxLive(sp); };
+  $('fxIntensity').onchange = () => { const sp = fxSpec(); sp.intensity = +$('fxIntensity').value; setFx(fxStem, sp); };
+  $('fxPreset').onchange = () => { const p = SD.FX.PRESETS[$('fxPreset').value]; if (!p) return; setFx(fxStem, { enabled: true, intensity: p.intensity, chain: JSON.parse(JSON.stringify(p.chain)) }); $('fxPreset').value = ''; renderFx(); };
+  $('fxAdd').onchange = () => { const t = $('fxAdd').value; if (!t) return; const sp = fxSpec(); sp.chain.push(Object.assign({ type: t }, SD.FX.TYPES[t].defaults)); setFx(fxStem, sp); $('fxAdd').value = ''; renderFx(); };
+  $('fxClear').onclick = () => { setFx(fxStem, null); renderFx(); };
+  $('dlgFx').addEventListener('close', () => { renderStemMix(); });
 
   // ---------- drum kit (samples) ----------
   let kits = [];

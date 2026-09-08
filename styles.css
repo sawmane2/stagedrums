@@ -177,3 +177,25 @@ button.live.armed { background: var(--green); color: #000; border-color: var(--g
 .stems .stem input[type=range] { width: 110px; }
 .stems .stem button { padding: 1px 0; font-size: .75rem; }
 .stems .stem button.on { background: var(--danger); color: #fff; border-color: var(--danger); }
+
+/* stem effects */
+.stems .stem { grid-template-columns: 1fr 100px 30px 30px; }
+.stems .stem button.fxbtn.on { background: var(--accent); color: #111; border-color: var(--accent); }
+.fxhead { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 6px 0 10px; font-size: .9rem; color: var(--muted); }
+.fxint input[type=range] { width: 160px; vertical-align: middle; }
+.fxchain { display: flex; flex-direction: column; gap: 8px; }
+.fxeff { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--panel); }
+.fxeff .fxtitle { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-weight: 600; }
+.fxeff .fxtitle span.small { font-weight: 400; color: var(--muted); font-size: .8rem; }
+.fxeff .fxparams { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 4px 14px; }
+.fxeff .fxparams label { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: .82rem; color: var(--muted); }
+.fxeff .fxparams input[type=range] { width: 110px; }
+
+/* foot pedal */
+.pedal .pedalrow { display: grid; grid-template-columns: 1fr auto 64px; align-items: center; gap: 8px; font-size: .85rem; color: var(--muted); margin: 4px 0; }
+.pedal code { text-align: center; padding: 3px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); }
+.pedal code.flash { border-color: var(--accent); color: var(--accent); }
+.pedal button.learning { background: var(--accent); color: #111; border-color: var(--accent); }
+
+.taprow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 4px 0; font-size: .85rem; }
+#btnTap:active { background: var(--accent); color: #111; }

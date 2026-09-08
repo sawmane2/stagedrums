@@ -6,7 +6,9 @@ Live backing drums for a band with no drummer, plus chord charts that follow the
 drum-daw/
 ├── index.html      app shell
 ├── app.js          UI, song library, chart tracking, voice cues, host/follower roles
-├── drums.js        synthesized drum kit, groove library, transport/scheduler
+├── drums.js        synthesized drum kit, groove library, transport/scheduler (+ audio backing mode)
+├── effects.js      per-stem effect chains and presets
+├── pitch.js        key change / tap tempo (offline render via keyshift-worker.js + vendor/soundtouch.js), chord transposition
 ├── parser.js       Ultimate Guitar chord-sheet → song JSON, AI prompt generator
 ├── sync.js         WebSocket sync client + clock offset estimation
 ├── midi.js         .mid export/import (SMF) + live Web MIDI out with MIDI clock
@@ -103,6 +105,18 @@ Synthesized drums never sound like the record, so the **Backing track** panel pl
 
 **Source** switches back to **Synth drums + band** for jamming or when the recording isn't on this computer. Followers (iPad) never need the files.
 
+**Effects on a stem.** Every stem row has an **fx** button: pick a preset (*Radio fuzz vocal*, *Telephone*, *Warm vocal*, *Crunch guitar*, *Room reverb*, *Glue compressor*) or build a chain from drive/fuzz (4× oversampled), radio band-pass, three-band EQ, compressor and reverb. One **intensity** knob scales every effect toward "off" together, so a preset can be dialled back on the night without editing it; at zero the chain is disconnected and costs nothing. Chains sit pre-fader, save with the song (`audio.fx`), load with it, and the iPad can edit them too. The audio context runs at **44.1 kHz** so the stems never get resampled — set the interface to 44.1 kHz as well and nothing in the path converts.
+
+**Key change.** *Key* in the Backing panel moves the whole song up or down by semitones, and the chart moves with it (E7 becomes Eb7 on the iPad, slash chords included). Nothing runs in real time: every stem is re-rendered offline in a worker (SoundTouchJS, a few seconds per song) and the buffers are swapped, so the audio thread does no extra work on stage. The stems are processed as one *guided* pass — the time-domain joins are decided on the whole band and replayed for each stem — so kick and bass stay sample-aligned instead of drifting by the several milliseconds a naive per-stem shift produces. ±2 semitones is transparent; past ±3 you start to hear the stretch, since this is time-stretch + resample rather than true formant preservation. One alternate render is kept in memory at a time.
+
+**Tap tempo (experimental).** Tick *Tap tempo* and tap the button four times: the same engine time-stretches every stem to tonight's tempo (limited to ±12 %), the bar lines are rescaled by the same ratio, and *Original* puts it all back. Only while stopped — never mid-song — so it can't upset sync. Evaluate it at a rehearsal before trusting it live.
+
+**Fade-out.** *Fade out the last N s* in the Backing panel ramps the backing down over the end of songs whose recording fades; any Hold / +1 / jump cancels it, so a held last chorus never fades under you.
+
+**Foot pedal.** A two-button Bluetooth pedal is a keyboard. *Foot pedal → Learn*, tap the button, done: left toggles Hold on the current section, right moves to the next song (from the iPad too — it asks the host). Single taps only; holding a button does nothing extra.
+
+**Cues (in-ears).** On the iPad, click and voice cues play through whatever the iPad is plugged into, never the PA, with their own levels; the follower also gets a slider for the backing level on the computer.
+
 ## Drum sounds
 
 Pick the kit in the sidebar (**Drum kit**):
@@ -137,6 +151,10 @@ Click **🎚 Mixer** in the top bar on the **computer**, open at `http://localho
 - Settings persist; **Auto‑start** re‑opens the interface on launch after the first tap.
 
 Things to know: browsers add latency (typically 10–25 ms in Chrome on macOS/Windows with an interface's ASIO/Core Audio driver, more on Windows without ASIO) — fine for guitars and keys, noticeable for a singer's own monitoring. Turn the interface's **Direct Monitor** off to hear the processed sound, or leave it on and use the mixer only for the PA feed. Chrome exposes all interface inputs on macOS; on Windows it may only expose the first stereo pair — the status line shows how many it got. Safari and any non‑`localhost` address give a stereo pair only, so the mixer belongs on the host computer.
+
+## Credits
+
+Drum kit samples: Vincent "Tchackpoum" Sermone (Tchimera Drum Kit, CC BY‑SA 4.0) and VCSL (CC0). Pitch/tempo: [SoundTouchJS](https://github.com/cutterbl/SoundTouchJS) (Olli Parviainen, Ryan Berdeen, Jakub Fiala, Steve Blades; LGPL‑2.1), vendored in `vendor/` with one documented modification (guided WSOLA offsets in `Stretch.process()`); the license is alongside it. Stem separation offline: Demucs (Meta), DrumSep.
 
 ## Roadmap
 

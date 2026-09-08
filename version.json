@@ -1,5 +1,5 @@
 {
-  "version": "0.21.0",
-  "date": "2026-09-07",
-  "notes": "Implementation plan for the next round of live features (effects and presets, key change, tap tempo, fade-outs, foot pedal, cue feed), the browser test harness, and the separation pipeline tools checked in."
+  "version": "0.23.0",
+  "date": "2026-09-08",
+  "notes": "Live key change: every stem re-rendered offline through one guided pass so the band stays sample-aligned, chart transposes with it. Tap tempo (experimental) with rescaled bar lines and one-click reset."
 }

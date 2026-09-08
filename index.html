@@ -60,6 +60,13 @@
       <label id="stemScopeRow" hidden>Mixing <select id="stemScope"></select></label>
       <label class="chk" id="splitDrumsRow" hidden><input type="checkbox" id="chkSplitDrums"> Split drums into kick / snare / toms / cymbals</label>
       <label class="chk" id="loopFillsRow" hidden><input type="checkbox" id="chkLoopFills" checked> Fill into loops — borrow a real fill from this recording <span id="loopFillsCount" class="hint"></span></label>
+      <label id="keyRow" hidden>Key <select id="keyShift"></select> <span id="keyStatus" class="hint"></span></label>
+      <label class="chk" id="tapToggleRow" hidden><input type="checkbox" id="chkTapTempo"> Tap tempo (experimental)</label>
+      <div id="tempoRow" class="taprow" hidden>
+        <button id="btnTap" class="small">Tap ×4</button> <span id="tapInfo" class="hint">tap along to set tonight's tempo</span>
+        <button id="btnTapApply" class="small primary" hidden>Apply</button> <button id="btnTapReset" class="small" hidden>Original</button>
+      </div>
+      <label id="fadeRow">Fade out the last <input type="number" id="fadeOut" min="0" max="30" step="1" value="0" style="width:52px"> s</label>
       <div id="stemMix" class="stems"></div>
       <div class="sidebar-foot">
         <button id="btnAudioLoad" class="small">Load audio file…</button>
@@ -97,6 +104,19 @@
       <label>Keys level <input type="range" id="volKeys" min="0" max="1.5" step="0.01" value="0.5"></label>
       <label>Guitar level <input type="range" id="volGtr" min="0" max="1.5" step="0.01" value="0.6"></label>
       <p class="hint">Follows the chord chart. Saved per song; a section can override with <code>"band": {"bass": "pump", "keys": "organ", "gtr": "off"}</code> in Edit song JSON.</p>
+    </div>
+    <h3>Cues (in-ears)</h3>
+    <div class="mix cues">
+      <label>Click <input type="range" id="cueClick" min="0" max="1.5" step="0.01" value="0"></label>
+      <label>Voice cues <input type="range" id="cueVoice" min="0" max="1" step="0.01" value="1"></label>
+      <label id="cueMasterRow" hidden>Backing on the computer <input type="range" id="cueMaster" min="0" max="1.5" step="0.01" value="1"></label>
+      <p class="hint">On the iPad these play through whatever the iPad is plugged into — in-ears or a small monitor — never the PA. The click is Web Audio and mixes here; voice cues use the device's speech engine, which has its own volume and cannot be routed elsewhere.</p>
+    </div>
+    <h3>Foot pedal</h3>
+    <div class="pedal">
+      <div class="pedalrow"><span>Left · loop this section</span><button id="pedalLearnL" class="small">Learn</button><code id="pedalKeyL">—</code></div>
+      <div class="pedalrow"><span>Right · next song</span><button id="pedalLearnR" class="small">Learn</button><code id="pedalKeyR">—</code></div>
+      <p class="hint" id="pedalHint">A Bluetooth pedal is just a keyboard: press Learn, then tap the pedal button. Single taps only; holding a button does nothing extra.</p>
     </div>
     <h3>MIDI</h3>
     <div class="midi">
@@ -223,6 +243,25 @@ Here comes the sun..."></textarea>
   </form>
 </dialog>
 
+<!-- Stem effects dialog -->
+<dialog id="dlgFx">
+  <form method="dialog" class="dlg wide fxdlg">
+    <h2>Effects · <span id="fxStemName"></span></h2>
+    <div class="fxhead">
+      <label class="chk"><input type="checkbox" id="fxEnabled"> On</label>
+      <label class="fxint">Intensity <input type="range" id="fxIntensity" min="0" max="1" step="0.01" value="0.75"> <span id="fxIntensityVal">75%</span></label>
+      <label>Preset <select id="fxPreset"><option value="">choose…</option></select></label>
+      <label>Add <select id="fxAdd"><option value="">effect…</option></select></label>
+    </div>
+    <div id="fxChain" class="fxchain"></div>
+    <p class="hint">Saved with the song and loaded with it. The intensity knob scales every effect toward "off" together, so a preset can be dialled back without editing it. Order matters: filters before the drive keep the low end clean.</p>
+    <div class="actions">
+      <button id="fxClear" type="button" class="small danger">Remove all</button>
+      <button value="ok" class="primary">Done</button>
+    </div>
+  </form>
+</dialog>
+
 <!-- Sync dialog -->
 <dialog id="dlgSync">
   <form method="dialog" class="dlg">
@@ -237,6 +276,8 @@ Here comes the sun..."></textarea>
 </dialog>
 
 <script src="drums.js"></script>
+<script src="effects.js"></script>
+<script src="pitch.js"></script>
 <script src="parser.js"></script>
 <script src="sync.js"></script>
 <script src="midi.js"></script>

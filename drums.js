@@ -443,6 +443,7 @@
     setAudio(a) {
       if (this.playing) this.stop();
       if (this._aGain) { try { this._aGain.disconnect(); } catch (e) {} }
+      if (this.audio && this.audio.fx) for (const c of Object.values(this.audio.fx)) { try { c.dispose(); } catch (e) {} }
       this.audio = null; this._aGain = null; this.fills = [];
       // one buffer (`buffer`) or several stems (`stems: {drums: AudioBuffer, bass: …}`) played in lock-step, each with its own level
       const stems = a && (a.stems || (a.buffer ? { mix: a.buffer } : null));
@@ -454,14 +455,38 @@
         if (!bt.length) bt.push(last);
         while (bt.length < total + 1) { last += spb; bt.push(last); }
       }
-      this._aGain = this.ctx.createGain(); this._aGain.gain.value = a.gain ?? 1; this._aGain.connect(this.ctx.destination);
-      const gains = {}; const mix = a.mix || {};
-      for (const k of Object.keys(stems)) { const g = this.ctx.createGain(); g.gain.value = mix[k] ?? 1; g.connect(this._aGain); gains[k] = g; }
+      this._aGain = this.ctx.createGain(); this._aLevel = a.gain ?? 1; this._aGain.gain.value = this._aLevel; this._aGain.connect(this.ctx.destination);
+      this.fadeOut = +(a.fadeOut || 0); this._fading = false;
+      const gains = {}, fxIn = {}; const mix = a.mix || {};
+      for (const k of Object.keys(stems)) {
+        const g = this.ctx.createGain(); g.gain.value = mix[k] ?? 1; g.connect(this._aGain); gains[k] = g;
+        const i = this.ctx.createGain(); i.connect(g); fxIn[k] = i; // effect chains are inserted between fxIn and the fader (pre-fader)
+      }
       const duration = Math.max(...Object.values(stems).map(b => b.duration));
-      this.audio = { stems, gains, barTimes: bt, name: a.name || '', duration, buffer: stems[Object.keys(stems)[0]] };
+      this.audio = { stems, gains, fxIn, fx: {}, barTimes: bt, name: a.name || '', duration, buffer: stems[Object.keys(stems)[0]] };
       this.fills = (a.fills || []).filter(b => b >= 0 && b < total); // bars of the recording that contain a drum fill
     }
-    setAudioGain(g) { if (this._aGain) this._aGain.gain.value = g; }
+    setAudioGain(g) { this._aLevel = g; if (this._aGain && !this._fading) this._aGain.gain.value = g; }
+    /**
+     * Put an effect chain on one stem (spec = {enabled, intensity, chain:[{type,…}]}, or null to clear).
+     * Rebuilds the nodes only when the chain's shape changes; otherwise just moves parameters. Bypass = the
+     * stem's fxIn wired straight to its fader, with the chain disconnected so it costs nothing.
+     */
+    setStemFX(stem, spec) {
+      const a = this.audio; if (!a || !a.fxIn[stem] || !global.StageDrums.FX) return;
+      const FX = global.StageDrums.FX, inp = a.fxIn[stem], fader = a.gains[stem];
+      const cur = a.fx[stem];
+      if (!FX.active(spec)) {
+        if (cur) { cur.dispose(); delete a.fx[stem]; }
+        try { inp.disconnect(); } catch (e) {} inp.connect(fader); return;
+      }
+      if (cur && cur.shape === FX.shapeOf(spec)) { cur.update(spec); return; }
+      if (cur) cur.dispose();
+      const chain = FX.build(this.ctx, spec);
+      try { inp.disconnect(); } catch (e) {}
+      inp.connect(chain.input); chain.output.connect(fader);
+      a.fx[stem] = chain;
+    }
     /** Level of one stem (0 = off). Takes effect immediately, mid-song. */
     setStemGain(name, v, when) { const g = this.audio && this.audio.gains[name]; if (g) g.gain.setTargetAtTime(Math.max(0, v), Math.max(when || 0, this.ctx.currentTime), 0.02); }
     /** Apply the stem levels for a bar (per-section mixes come from `stemMixFor`), ramping at time `when`. */
@@ -522,6 +547,7 @@
      */
     _aStart(when, offset, keys) {
       const all = !keys;
+      if (all && this._fading) { const g = this._aGain.gain; g.cancelScheduledValues(when); g.setValueAtTime(g.value, when); g.linearRampToValueAtTime(this._aLevel, when + 0.05); this._fading = false; }
       keys = keys || Object.keys(this.audio.stems);
       this._aSrc = this._aSrc || {};
       const fade = 0.012;
@@ -533,7 +559,7 @@
         const src = this.ctx.createBufferSource(); src.buffer = buffer;
         const g = this.ctx.createGain();
         g.gain.setValueAtTime(0, Math.max(when - fade, 0)); g.gain.linearRampToValueAtTime(1, when + fade);
-        src.connect(g); g.connect(this.audio.gains[k]);
+        src.connect(g); g.connect(this.audio.fxIn[k]);
         src.start(Math.max(when, this.ctx.currentTime), Math.max(0, offset));
         this._aSrc[k] = { src, g };
       }
@@ -612,7 +638,7 @@
       const firstBar = this.barSec(fromBar);
       this._anchor = { bar: fromBar, ctxTime: this.countIn ? now + firstBar : now, bpm: this.bpm, countIn: this.countIn, barSec: firstBar };
       if (this.audio) {
-        this._aSegs = []; this._aSrc = null; this._aNextBarCtx = now; this._aPrev = null; this._aSec = null; this._aFill = false;
+        this._aSegs = []; this._aSrc = null; this._aNextBarCtx = now; this._aPrev = null; this._aSec = null; this._aFill = false; this._fading = false;
         if (!this.countIn) this._aStart(now, this.audio.barTimes[fromBar]);
         this._emitAnchor();
         this._timer = setInterval(() => this._scheduleAudio(), this.tick);
@@ -628,7 +654,7 @@
       if (this.midi && this.playing) this.midi.stop();
       if (this.band) this.band.stopAll();
       this._pausedPos = this.playing ? Math.max(0, Math.floor(this.position())) : (this._pausedPos || 0);
-      if (this.audio) this._aStop();
+      if (this.audio) { this._aStop(); if (this._fading) { const g = this._aGain.gain; g.cancelScheduledValues(0); g.value = this._aLevel; this._fading = false; } }
       this.playing = false; this._follow = false;
       if (this._timer) clearInterval(this._timer); this._timer = null;
       if (!silent && this.onStop) this.onStop();
@@ -736,6 +762,15 @@
         }
         if (this._bar >= tl.total) { for (const k of Object.keys(this._aSrc || {})) { const o = this._aSrc[k]; if (o) try { o.src.stop(t + 0.05); } catch (e) {} } this._fire(() => this.stop(), null, t); return; }
         const dur = this.barSec(this._bar), beat = dur / sig.beats;
+        // per-song fade-out: once the end of the recording is within `fadeOut` seconds and nothing will loop or jump,
+        // ramp the backing level down so a studio fade doesn't end in a hard cut
+        if (this.fadeOut > 0) {
+          const end = bt[tl.total], startsFade = end - bt[this._bar] <= this.fadeOut + 0.01;
+          if (startsFade && !this._willTurnAround(this._bar) && !this._fading) {
+            const g = this._aGain.gain; g.cancelScheduledValues(t); g.setValueAtTime(this._aLevel, t); g.linearRampToValueAtTime(0.0005, t + (end - bt[this._bar]));
+            this._fading = true;
+          }
+        }
         // per-section stem mix: ramp at the bar line whenever the section changes (and on the first bar / after a jump)
         const secNow = tl.bars[this._bar].section;
         if (secNow !== this._aSec) { this.applyStemMix(this._bar, t); this._aSec = secNow; }
