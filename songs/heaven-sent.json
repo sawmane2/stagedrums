@@ -1,0 +1,217 @@
+{
+ "id": "steeldrivers-heaven-sent",
+ "title": "Heaven Sent",
+ "artist": "The SteelDrivers",
+ "bpm": 112,
+ "time": "4/4",
+ "groove": "train",
+ "feel": "push",
+ "rev": 1,
+ "band": {
+  "bass": "roots",
+  "keys": "off",
+  "gtr": "off"
+ },
+ "sections": [
+  {
+   "name": "Intro",
+   "groove": "train",
+   "bars": [
+    "G D",
+    "Am",
+    "G D",
+    "Am"
+   ],
+   "crash": false
+  },
+  {
+   "name": "Chorus 1",
+   "groove": "train",
+   "bars": [
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Verse 1",
+   "groove": "train",
+   "bars": [
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Chorus 2",
+   "groove": "train",
+   "bars": [
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Verse 2",
+   "groove": "train",
+   "bars": [
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Solo",
+   "groove": "train",
+   "bars": [
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am"
+   ],
+   "crash": true,
+   "fill": true
+  },
+  {
+   "name": "Chorus 3",
+   "groove": "train",
+   "bars": [
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Verse 3",
+   "groove": "train",
+   "bars": [
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Chorus 4",
+   "groove": "train",
+   "bars": [
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Chorus 5 (out)",
+   "groove": "train",
+   "bars": [
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am",
+    "G D",
+    "Am"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  }
+ ]
+}

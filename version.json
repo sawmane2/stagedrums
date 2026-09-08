@@ -1,5 +1,5 @@
 {
-  "version": "0.24.0",
+  "version": "0.25.0",
   "date": "2026-09-08",
-  "notes": "Real-time vocal pitch correction on the mic (formant-preserving, natural retune), drum punch transient shaper, room/plate/hall/spring reverbs plus your own IR files, FLAC stems, memory cap and engine-health line, song search and drag-to-order setlist. New song: I Loved Another Woman."
+  "notes": "iPad control: tap a song on the iPad and the computer loads it; sidebar scrolls vertically only; Paste lyrics button puts words on the chart. Stems re-encoded VBR/mono (library 450 MB -> 177 MB), kit parts loaded only when split. Songs: The Prowl, Mississippi Queen, Need Your Love So Bad, This Ol' Cowboy fitted to their recordings; Ten Cent Pistol, White Horse, Heaven Sent, Holding Out For A Hero, Trick To Happy, Less Than Love, Cowpoke charted."
 }

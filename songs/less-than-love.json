@@ -1,0 +1,255 @@
+{
+ "id": "less-than-love",
+ "title": "Less Than Love",
+ "artist": "",
+ "bpm": 96,
+ "time": "4/4",
+ "groove": "ballad",
+ "feel": "loose",
+ "rev": 1,
+ "band": {
+  "bass": "roots",
+  "keys": "off",
+  "gtr": "off"
+ },
+ "sections": [
+  {
+   "name": "Verse 1",
+   "groove": "ballad",
+   "bars": [
+    "Bm",
+    "G D",
+    "B5",
+    "Emdim G",
+    "G D",
+    "E7",
+    "A7",
+    "A7",
+    "Bm",
+    "G D",
+    "B5",
+    "Emdim G",
+    "G D",
+    "E7",
+    "A7",
+    "A7"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Chorus 1",
+   "groove": "ballad",
+   "bars": [
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G Dmaj7",
+    "G Dmaj7",
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G Dmaj7",
+    "G Dmaj7"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    4,
+    2,
+    2,
+    4
+   ]
+  },
+  {
+   "name": "Verse 2",
+   "groove": "ballad",
+   "bars": [
+    "Bm",
+    "G D",
+    "B5",
+    "Emdim G",
+    "G D",
+    "E7",
+    "A7",
+    "A7",
+    "Bm",
+    "G D",
+    "B5",
+    "Emdim G",
+    "G D",
+    "E7",
+    "A7",
+    "A7"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Chorus 2",
+   "groove": "ballad",
+   "bars": [
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G Dmaj7",
+    "G Dmaj7",
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G Dmaj7",
+    "G Dmaj7",
+    "G",
+    "Dmaj7"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    4,
+    2,
+    2,
+    4,
+    2
+   ]
+  },
+  {
+   "name": "Bridge",
+   "groove": "ballad-ride",
+   "bars": [
+    "F#m",
+    "B",
+    "F#m",
+    "B",
+    "D7",
+    "D7",
+    "D7",
+    "A"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Verse 3",
+   "groove": "ballad",
+   "bars": [
+    "Bm",
+    "G D",
+    "B5",
+    "Emdim G",
+    "G D",
+    "E7",
+    "A7",
+    "A7",
+    "Bm",
+    "G D",
+    "B5",
+    "Emdim G",
+    "G D",
+    "E7",
+    "A7",
+    "A7"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Chorus 3",
+   "groove": "ballad",
+   "bars": [
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G Dmaj7",
+    "G Dmaj7",
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G Dmaj7",
+    "G Dmaj7",
+    "G",
+    "Dmaj7"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    4,
+    2,
+    2,
+    4,
+    2
+   ]
+  },
+  {
+   "name": "Outro",
+   "groove": "ballad",
+   "bars": [
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7",
+    "G",
+    "Dmaj7"
+   ],
+   "fill": true
+  }
+ ]
+}

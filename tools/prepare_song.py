@@ -9,10 +9,11 @@ Pipeline (all local, all free):
                 ratios only (Wiener-style), so the guitar split inherits the good model's quality.
   3. KIT        DrumSep the ensemble drums into kick / snare / toms / cymbals (they sum back to it).
   4. GRID       beat-track the drum stem for bar times, and score every bar for "the drummer filled here".
-  5. ENCODE     write MP3s into the app's local/audio/<song-id>/ and update the song JSON.
+  5. ENCODE     VBR MP3 (mono where the stem is mono) into local/audio/<song-id>/, and update the song JSON.
+                The four kit parts replace the drums stem rather than adding to it.
 
 usage: prepare_song.py <song-json> <work-dir> [name] [--format flac|mp3-320|mp3-160]
-       --format flac (default) is lossless — the stems are the quality floor, not the effects.
+       --format mp3-320 (default) matches the quality of the sources we get; flac is lossless but ~4x the size.
        work-dir holds  ens/htdemucs_ft/<n>/  ens/hdemucs_mmi/<n>/  out/htdemucs_6s/<n>/  (from demucs)
 """
 import sys, os, re, json, subprocess, glob, numpy as np, soundfile as sf
@@ -44,14 +45,24 @@ def ensemble(work, name, out):
 def run(cmd):
     print('  $', ' '.join(cmd)); subprocess.run(cmd, check=True)
 
-FORMAT = 'flac'
+FORMAT = 'vbr'   # vbr (default, LAME -q:a 5 ≈ 130 kbps and far less on sparse stems) | mp3-320 | mp3-160 | flac
 def encode(src, dst):
+    """Encode one stem. Separated stems are sparse and often near-mono, so VBR plus an automatic mono fold
+    keeps them a fraction of the size of the mix they came from without touching what you hear."""
     os.makedirs(os.path.dirname(dst), exist_ok=True)
+    x, sr = sf.read(src, dtype='float32', always_2d=True)
+    mono = False
+    if x.shape[1] == 2:
+        mid, side = (x[:, 0] + x[:, 1]) / 2, (x[:, 0] - x[:, 1]) / 2
+        mono = rms_db(side) - rms_db(mid) < -22        # nothing meaningful in the sides: fold to mono
+    ch = ['-ac', '1'] if mono else []
     if FORMAT == 'flac':
         dst = re.sub(r'\.mp3$', '.flac', dst)
-        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-codec:a', 'flac', '-compression_level', '5', dst], check=True)
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src] + ch + ['-codec:a', 'flac', '-compression_level', '5', dst], check=True)
+    elif FORMAT == 'vbr':
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src] + ch + ['-codec:a', 'libmp3lame', '-q:a', '5', dst], check=True)
     else:
-        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-codec:a', 'libmp3lame', '-b:a', FORMAT.split('-')[1] + 'k', dst], check=True)
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src] + ch + ['-codec:a', 'libmp3lame', '-b:a', FORMAT.split('-')[1] + 'k', dst], check=True)
     return os.path.basename(dst)
 
 def main():
@@ -88,12 +99,13 @@ def main():
         print(f'  {p}: {db:.1f} dB')
 
     base = f'local/audio/{sid}/'
-    files = {}
-    for p, f in stems.items(): files[p] = base + encode(f, f'{ROOT}/{base}{p}.mp3')
     kit = {}
     for esp, en in DRUMSEP.items():
         f = f'{work}/ds/drumsep/drums/{esp}.wav'
         if os.path.exists(f): kit[en] = base + 'kit/' + encode(f, f'{ROOT}/{base}kit/{en}.mp3')
+    if kit: stems.pop('drums', None)   # the four kit parts add back up to the drum stem — no need to ship both
+    files = {}
+    for p, f in stems.items(): files[p] = base + encode(f, f'{ROOT}/{base}{p}.mp3')
 
     a = song.get('audio', {}) or {}
     a['stems'] = files

@@ -1,0 +1,179 @@
+{
+ "id": "colter-wall-cowpoke",
+ "title": "Cowpoke",
+ "artist": "Colter Wall",
+ "bpm": 96,
+ "time": "3/4",
+ "groove": "waltz",
+ "feel": "loose",
+ "rev": 1,
+ "band": {
+  "bass": "roots",
+  "keys": "off",
+  "gtr": "off"
+ },
+ "sections": [
+  {
+   "name": "Intro",
+   "groove": "hats-only",
+   "bars": [
+    "C",
+    "Am",
+    "C",
+    "Am",
+    "C",
+    "Am"
+   ],
+   "crash": false
+  },
+  {
+   "name": "Verse 1",
+   "groove": "waltz",
+   "bars": [
+    "C",
+    "C",
+    "F",
+    "C",
+    "F",
+    "C",
+    "F",
+    "C",
+    "C",
+    "C",
+    "F",
+    "C",
+    "F",
+    "C",
+    "Am",
+    "Am"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Bridge 1",
+   "groove": "waltz",
+   "bars": [
+    "C",
+    "Am",
+    "C",
+    "Am",
+    "C",
+    "Am",
+    "Am",
+    "Am"
+   ]
+  },
+  {
+   "name": "Verse 2",
+   "groove": "waltz",
+   "bars": [
+    "C",
+    "C",
+    "F",
+    "C",
+    "F",
+    "C",
+    "F",
+    "C",
+    "C",
+    "C",
+    "F",
+    "C",
+    "F",
+    "C",
+    "Am",
+    "Am"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Bridge 2",
+   "groove": "waltz",
+   "bars": [
+    "C",
+    "Am",
+    "C",
+    "Am",
+    "C",
+    "Am",
+    "C",
+    "F",
+    "C",
+    "F",
+    "C",
+    "Am"
+   ]
+  },
+  {
+   "name": "Verse 3",
+   "groove": "waltz",
+   "bars": [
+    "C",
+    "C",
+    "F",
+    "C",
+    "F",
+    "C",
+    "F",
+    "C",
+    "C",
+    "C",
+    "F",
+    "C",
+    "F",
+    "C",
+    "Am",
+    "Am"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Outro",
+   "groove": "waltz",
+   "bars": [
+    "C",
+    "Am",
+    "C",
+    "Am",
+    "C",
+    "Am"
+   ],
+   "fill": true
+  }
+ ],
+ "audio": {
+  "mix": {
+   "vocals": 0
+  }
+ }
+}

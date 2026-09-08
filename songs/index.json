@@ -171,7 +171,7 @@
     "lyrics": "Hmm Hmmm Hmm"
    }
   ],
-  "rev": 5,
+  "rev": 7,
   "audio": {
    "stems": {
     "drums": "local/audio/cream-outside-woman-blues/drums.mp3",
@@ -272,196 +272,314 @@
     49,
     53,
     61
-   ]
+   ],
+   "format": "vbr"
   }
  },
  {
   "id": "mountain-mississippi-queen",
   "title": "Mississippi Queen",
   "artist": "Mountain (Climbing!, 1970)",
-  "bpm": 140,
+  "bpm": 136,
   "time": "4/4",
   "groove": "laing-heavy",
   "sections": [
    {
     "name": "Cowbell count-off",
     "groove": "cowbell-count",
-    "crash": false,
-    "fill": false,
     "bars": [
      "N.C.",
      "N.C."
     ],
-    "notes": "Cowbell 8ths, 2 bars. Band enters on the riff."
+    "crash": false
    },
    {
     "name": "Main Riff",
     "groove": "laing-cowbell",
-    "crash": true,
-    "fill": true,
-    "bars": [
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A"
-    ],
-    "notes": "E riff, turning B - A at the end of every 2 bars. Cowbell keeps going."
-   },
-   {
-    "name": "Verse 1",
-    "groove": "laing-cowbell",
-    "crash": true,
-    "fill": true,
     "bars": [
      "E",
      "E",
      "E",
      "E",
-     "A",
-     "A",
-     "E",
-     "E",
-     "B",
-     "A",
      "E",
      "E",
      "B",
      "A"
     ],
+    "fill": true
+   },
+   {
+    "name": "Verse 1",
+    "groove": "laing-cowbell",
+    "bars": [
+     "E",
+     "E",
+     "E",
+     "E",
+     "E",
+     "E",
+     "E",
+     "E",
+     "A",
+     "A",
+     "A",
+     "A",
+     "E",
+     "E",
+     "E",
+     "E",
+     "B",
+     "A",
+     "E",
+     "E",
+     "B",
+     "A",
+     "B",
+     "A"
+    ],
+    "fill": true,
     "sheetBars": [
+     4,
+     4,
+     4,
      4,
      2,
      2,
-     2,
-     2,
-     2
-    ],
-    "notes": "Riff under the hook (4 bars), then A / E / B-A / E / B-A."
+     4
+    ]
    },
    {
-    "name": "Riff",
-    "groove": "laing-cowbell",
-    "crash": true,
-    "fill": true,
+    "name": "Verse 2",
+    "groove": "laing-heavy",
     "bars": [
      "E",
-     "B A",
      "E",
-     "B A"
+     "E",
+     "E",
+     "E",
+     "E",
+     "E",
+     "E",
+     "A",
+     "A",
+     "A",
+     "A",
+     "E",
+     "E",
+     "E",
+     "E",
+     "B",
+     "A",
+     "E",
+     "E",
+     "B",
+     "A",
+     "B",
+     "A"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4,
+     2,
+     2,
+     4
     ]
    },
    {
     "name": "Guitar Solo",
     "groove": "laing-ride",
-    "crash": true,
-    "fill": true,
-    "bars": [
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "B A"
-    ],
-    "notes": "24 bars over the riff. Ride, cowbell on 1 and 3."
-   },
-   {
-    "name": "Verse 2",
-    "groove": "laing-cowbell",
-    "crash": true,
-    "fill": true,
     "bars": [
      "E",
      "E",
      "E",
      "E",
+     "E",
+     "E",
+     "E",
+     "E",
+     "A",
+     "A",
      "A",
      "A",
      "E",
      "E",
      "B",
      "A",
-     "E",
-     "E",
-     "B",
-     "A",
-     "B",
-     "A",
-     "E",
-     "E",
-     "B",
-     "A"
+     "E"
     ],
-    "sheetBars": [
-     4,
-     2,
-     2,
-     2,
-     2,
-     2,
-     2,
-     2,
-     2
-    ],
-    "notes": "Verse 2 then the dancer reprise (B-A / E / B-A)."
+    "crash": true,
+    "fill": true
    },
    {
-    "name": "Riff (out)",
+    "name": "Reprise",
     "groove": "laing-heavy",
+    "bars": [
+     "B",
+     "A",
+     "E",
+     "E",
+     "B",
+     "A",
+     "E",
+     "E",
+     "E"
+    ],
     "crash": true,
     "fill": true,
-    "bars": [
-     "E",
-     "B A",
-     "E",
-     "B A"
+    "sheetBars": [
+     2,
+     2,
+     2,
+     3
     ]
    },
    {
     "name": "Outro",
-    "groove": "laing-heavy",
-    "crash": true,
-    "fill": false,
+    "groove": "laing-cowbell",
     "bars": [
      "E",
-     "B A",
      "E",
-     "B A",
      "E",
-     "B A",
      "E",
-     "B A",
-     "E",
-     "B A",
-     "E",
-     "E . . N.C."
+     "B",
+     "A",
+     "E"
     ],
-    "notes": "Ohhh... Mississippi Queen. Hold the riff as long as you like, then cue the last bar."
+    "fill": true
    }
   ],
-  "rev": 3
+  "rev": 7,
+  "audio": {
+   "barTimes": [
+    0.25,
+    1.974,
+    3.704,
+    5.393,
+    7.146,
+    8.864,
+    10.594,
+    12.295,
+    13.978,
+    15.691,
+    17.374,
+    19.058,
+    20.77,
+    22.471,
+    24.184,
+    25.896,
+    27.614,
+    29.309,
+    30.987,
+    32.676,
+    34.366,
+    36.072,
+    37.779,
+    39.48,
+    41.192,
+    42.916,
+    44.594,
+    46.312,
+    48.025,
+    49.76,
+    51.473,
+    53.18,
+    54.921,
+    56.662,
+    58.416,
+    60.134,
+    61.841,
+    63.559,
+    65.277,
+    66.995,
+    68.737,
+    70.478,
+    72.179,
+    73.915,
+    75.651,
+    77.386,
+    79.105,
+    80.823,
+    82.553,
+    84.3,
+    85.995,
+    87.696,
+    89.403,
+    91.133,
+    92.828,
+    94.557,
+    96.282,
+    98.006,
+    99.73,
+    101.431,
+    103.149,
+    104.879,
+    106.638,
+    108.368,
+    110.115,
+    111.845,
+    113.546,
+    115.281,
+    117.023,
+    118.758,
+    120.465,
+    122.195,
+    123.867,
+    125.556,
+    127.245,
+    128.946,
+    130.641,
+    132.336,
+    134.055,
+    135.79,
+    137.491,
+    139.198,
+    140.899,
+    142.605,
+    144.324,
+    146.077,
+    147.836,
+    149.583,
+    151.324,
+    153.066,
+    154.807,
+    156.549
+   ],
+   "mix": {
+    "drums": 1,
+    "bass": 1,
+    "guitar": 1,
+    "other": 1,
+    "vocals": 0
+   },
+   "fills": [
+    33,
+    50,
+    53,
+    55,
+    57,
+    81,
+    83,
+    85
+   ],
+   "stems": {
+    "drums": "local/audio/mountain-mississippi-queen/drums.mp3",
+    "bass": "local/audio/mountain-mississippi-queen/bass.mp3",
+    "guitar": "local/audio/mountain-mississippi-queen/guitar.mp3",
+    "other": "local/audio/mountain-mississippi-queen/other.mp3",
+    "vocals": "local/audio/mountain-mississippi-queen/vocals.mp3"
+   },
+   "kit": {
+    "kick": "local/audio/mountain-mississippi-queen/kit/kick.mp3",
+    "snare": "local/audio/mountain-mississippi-queen/kit/snare.mp3",
+    "toms": "local/audio/mountain-mississippi-queen/kit/toms.mp3",
+    "cymbals": "local/audio/mountain-mississippi-queen/kit/cymbals.mp3"
+   },
+   "format": "vbr",
+   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+  }
  },
  {
   "id": "mountain-sittin-on-a-rainbow",
@@ -620,7 +738,7 @@
     "fill": true
    }
   ],
-  "rev": 5,
+  "rev": 7,
   "audio": {
    "barTimes": [
     1.091,
@@ -722,12 +840,13 @@
     "other": 1,
     "vocals": 0
    },
-   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+   "format": "vbr"
   }
  },
  {
   "id": "black-keys-weight-of-love",
-  "rev": 6,
+  "rev": 8,
   "title": "Weight of Love",
   "artist": "The Black Keys (Turn Blue, 2014)",
   "bpm": 76,
@@ -1137,7 +1256,8 @@
     101,
     103,
     111
-   ]
+   ],
+   "format": "vbr"
   }
  },
  {
@@ -1148,7 +1268,7 @@
   "time": "4/4",
   "groove": "laing-heavy",
   "feel": "loose",
-  "rev": 3,
+  "rev": 5,
   "band": {
    "bass": "roots",
    "keys": "off",
@@ -1521,7 +1641,8 @@
     "guitar": 1,
     "vocals": 0
    },
-   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+   "format": "vbr"
   }
  },
  {
@@ -1533,7 +1654,7 @@
   "groove": "train",
   "feel": "push",
   "swing": 0.14,
-  "rev": 3,
+  "rev": 5,
   "band": {
    "bass": "boogie",
    "keys": "off",
@@ -1768,7 +1889,8 @@
     "guitar": 1,
     "vocals": 0
    },
-   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+   "format": "vbr"
   }
  },
  {
@@ -1779,7 +1901,7 @@
   "time": "4/4",
   "groove": "ballad",
   "feel": "loose",
-  "rev": 4,
+  "rev": 6,
   "band": {
    "bass": "roots",
    "keys": "off",
@@ -2173,7 +2295,8 @@
     "other": 1,
     "vocals": 0
    },
-   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+   "format": "vbr"
   }
  },
  {
@@ -2184,7 +2307,7 @@
   "time": "4/4",
   "groove": "ballad",
   "feel": "loose",
-  "rev": 3,
+  "rev": 5,
   "band": {
    "bass": "whole",
    "keys": "epiano",
@@ -2446,7 +2569,8 @@
     "other": 1,
     "vocals": 0
    },
-   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+   "format": "vbr"
   }
  },
  {
@@ -2458,7 +2582,7 @@
   "groove": "half-time",
   "feel": "loose",
   "swing": 0.1,
-  "rev": 4,
+  "rev": 7,
   "band": {
    "bass": "roots",
    "keys": "off",
@@ -2736,19 +2860,2544 @@
     41
    ],
    "stems": {
-    "drums": "local/audio/fleetwood-mac-i-loved-another-woman/drums.flac",
-    "bass": "local/audio/fleetwood-mac-i-loved-another-woman/bass.flac",
-    "guitar": "local/audio/fleetwood-mac-i-loved-another-woman/guitar.flac",
-    "vocals": "local/audio/fleetwood-mac-i-loved-another-woman/vocals.flac"
+    "drums": "local/audio/fleetwood-mac-i-loved-another-woman/drums.mp3",
+    "bass": "local/audio/fleetwood-mac-i-loved-another-woman/bass.mp3",
+    "guitar": "local/audio/fleetwood-mac-i-loved-another-woman/guitar.mp3",
+    "vocals": "local/audio/fleetwood-mac-i-loved-another-woman/vocals.mp3"
    },
    "kit": {
-    "kick": "local/audio/fleetwood-mac-i-loved-another-woman/kit/kick.flac",
-    "snare": "local/audio/fleetwood-mac-i-loved-another-woman/kit/snare.flac",
-    "toms": "local/audio/fleetwood-mac-i-loved-another-woman/kit/toms.flac",
-    "cymbals": "local/audio/fleetwood-mac-i-loved-another-woman/kit/cymbals.flac"
+    "kick": "local/audio/fleetwood-mac-i-loved-another-woman/kit/kick.mp3",
+    "snare": "local/audio/fleetwood-mac-i-loved-another-woman/kit/snare.mp3",
+    "toms": "local/audio/fleetwood-mac-i-loved-another-woman/kit/toms.mp3",
+    "cymbals": "local/audio/fleetwood-mac-i-loved-another-woman/kit/cymbals.mp3"
    },
    "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
-   "format": "flac"
+   "format": "vbr"
+  }
+ },
+ {
+  "id": "dan-auerbach-the-prowl",
+  "title": "The Prowl",
+  "artist": "Dan Auerbach",
+  "bpm": 86,
+  "time": "4/4",
+  "groove": "rock-heavy",
+  "feel": "loose",
+  "rev": 4,
+  "band": {
+   "bass": "roots",
+   "keys": "off",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro (drums)",
+    "groove": "rock-heavy",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Riff",
+    "groove": "rock-heavy",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Cm",
+     "D7"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Verse 1",
+    "groove": "rock-heavy",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Eb",
+     "D7",
+     "Gm",
+     "Gm",
+     "Cm",
+     "Cm",
+     "Gm",
+     "Gm"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Refrain 1",
+    "groove": "rock-heavy",
+    "bars": [
+     "Eb",
+     "Gm",
+     "Cm",
+     "Cm",
+     "Cm",
+     "Cm",
+     "D7"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     1
+    ]
+   },
+   {
+    "name": "Verse 2",
+    "groove": "rock-heavy",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Eb",
+     "D7",
+     "Gm",
+     "Gm",
+     "Cm",
+     "Cm",
+     "Gm",
+     "Gm"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Refrain 2",
+    "groove": "rock-heavy",
+    "bars": [
+     "Eb",
+     "Gm",
+     "Cm",
+     "Cm",
+     "Cm",
+     "Cm",
+     "D7"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     1
+    ]
+   },
+   {
+    "name": "Outro (no drums)",
+    "groove": "silence",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Cm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Cm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Cm",
+     "Gm"
+    ]
+   },
+   {
+    "name": "Fade out",
+    "groove": "silence",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm"
+    ]
+   }
+  ],
+  "audio": {
+   "fx": {
+    "vocals": {
+     "enabled": true,
+     "intensity": 0.75,
+     "chain": [
+      {
+       "type": "radio",
+       "low": 200,
+       "high": 4000,
+       "q": 0.9
+      },
+      {
+       "type": "drive",
+       "drive": 0.5,
+       "tone": 0.45
+      },
+      {
+       "type": "eq",
+       "low": 0,
+       "mid": 3,
+       "midF": 1400,
+       "high": 0
+      }
+     ]
+    }
+   },
+   "mix": {
+    "drums": 1,
+    "bass": 1,
+    "guitar": 1,
+    "vocals": 0
+   },
+   "fade": {
+    "out": 8
+   },
+   "barTimes": [
+    0.0,
+    2.775,
+    5.538,
+    8.133,
+    10.861,
+    13.735,
+    16.533,
+    19.336,
+    22.117,
+    24.927,
+    27.73,
+    30.54,
+    33.338,
+    36.124,
+    38.946,
+    41.72,
+    44.501,
+    47.27,
+    50.074,
+    52.866,
+    55.652,
+    58.439,
+    61.243,
+    64.046,
+    66.804,
+    69.573,
+    72.377,
+    75.151,
+    78.054,
+    80.84,
+    83.609,
+    86.372,
+    89.141,
+    91.893,
+    94.865,
+    97.773,
+    100.589,
+    103.445,
+    106.255,
+    109.099,
+    111.943,
+    114.753,
+    117.545,
+    120.378,
+    123.182,
+    125.986,
+    128.755,
+    131.68,
+    134.653,
+    137.462,
+    140.272,
+    143.029,
+    145.804,
+    148.544,
+    151.272,
+    154.024,
+    156.746,
+    159.492,
+    162.267,
+    165.03,
+    167.787,
+    170.539,
+    173.285,
+    175.967,
+    178.73,
+    181.51,
+    184.233,
+    186.961,
+    189.695,
+    192.47,
+    195.257,
+    196.38666666666666
+   ],
+   "fills": [
+    3,
+    8,
+    14,
+    19,
+    21,
+    24,
+    35,
+    43
+   ],
+   "stems": {
+    "drums": "local/audio/dan-auerbach-the-prowl/drums.mp3",
+    "bass": "local/audio/dan-auerbach-the-prowl/bass.mp3",
+    "guitar": "local/audio/dan-auerbach-the-prowl/guitar.mp3",
+    "vocals": "local/audio/dan-auerbach-the-prowl/vocals.mp3"
+   },
+   "kit": {
+    "kick": "local/audio/dan-auerbach-the-prowl/kit/kick.mp3",
+    "snare": "local/audio/dan-auerbach-the-prowl/kit/snare.mp3",
+    "toms": "local/audio/dan-auerbach-the-prowl/kit/toms.mp3",
+    "cymbals": "local/audio/dan-auerbach-the-prowl/kit/cymbals.mp3"
+   },
+   "format": "vbr",
+   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+  }
+ },
+ {
+  "id": "fleetwood-mac-need-your-love-so-bad",
+  "title": "Need Your Love So Bad",
+  "artist": "Fleetwood Mac",
+  "bpm": 75,
+  "time": "4/4",
+  "groove": "ballad",
+  "feel": "loose",
+  "swing": 0.33,
+  "rev": 3,
+  "band": {
+   "bass": "whole",
+   "keys": "organ",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro",
+    "groove": "ballad",
+    "bars": [
+     "A",
+     "A",
+     "A",
+     "A",
+     "A",
+     "A7",
+     "D",
+     "D",
+     "D#dim7",
+     "D#dim7",
+     "A",
+     "F#m",
+     "B7",
+     "E",
+     "A",
+     "E7"
+    ],
+    "crash": false,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Verse 1",
+    "groove": "ballad",
+    "bars": [
+     "A",
+     "A",
+     "A",
+     "A7",
+     "D",
+     "D",
+     "D#dim7",
+     "D#dim7",
+     "A",
+     "F#m7",
+     "B7",
+     "E7",
+     "A",
+     "D7",
+     "A",
+     "E7"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Verse 2",
+    "groove": "ballad",
+    "bars": [
+     "A",
+     "A",
+     "A",
+     "A7",
+     "D",
+     "D",
+     "D#dim7",
+     "D#dim7",
+     "A",
+     "F#m7",
+     "B7",
+     "E7",
+     "A",
+     "D7",
+     "A",
+     "A7"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Solo",
+    "groove": "ballad-ride",
+    "bars": [
+     "A",
+     "A",
+     "A",
+     "A7",
+     "D",
+     "D",
+     "D#dim7",
+     "D#dim7",
+     "A",
+     "F#m",
+     "B7",
+     "E",
+     "A",
+     "D7",
+     "A",
+     "E7"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Bridge",
+    "groove": "ballad-ride",
+    "bars": [
+     "D",
+     "D",
+     "D#dim7",
+     "D#dim7",
+     "A",
+     "E",
+     "A",
+     "A7",
+     "B",
+     "B",
+     "B",
+     "B",
+     "E",
+     "F",
+     "E",
+     "E7#5"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Verse 3",
+    "groove": "ballad",
+    "bars": [
+     "A",
+     "A",
+     "A",
+     "A7",
+     "D",
+     "D",
+     "D#dim7",
+     "D#dim7",
+     "A",
+     "F#m7",
+     "B7",
+     "E7",
+     "A",
+     "D7",
+     "A",
+     "E7"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Outro",
+    "groove": "ballad",
+    "bars": [
+     "A",
+     "A",
+     "A",
+     "A7",
+     "D",
+     "D",
+     "D#dim7",
+     "D#dim7",
+     "A",
+     "F#m",
+     "B7",
+     "E",
+     "A",
+     "D7",
+     "A",
+     "E7"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Ending",
+    "groove": "ballad",
+    "bars": [
+     "A",
+     "D7",
+     "A",
+     "E7",
+     "A",
+     "A"
+    ],
+    "fill": true
+   }
+  ],
+  "audio": {
+   "mix": {
+    "bass": 1,
+    "guitar": 1,
+    "other": 1,
+    "vocals": 0
+   },
+   "fade": {
+    "out": 10
+   },
+   "barTimes": [
+    2.74,
+    6.084,
+    9.242,
+    12.556,
+    15.743,
+    18.884,
+    22.042,
+    25.223,
+    28.357,
+    31.556,
+    34.801,
+    37.959,
+    41.134,
+    44.362,
+    47.496,
+    50.643,
+    53.818,
+    57.034,
+    60.238,
+    63.431,
+    66.566,
+    69.828,
+    73.062,
+    76.249,
+    79.464,
+    82.651,
+    85.85,
+    89.066,
+    92.323,
+    95.515,
+    98.656,
+    101.831,
+    104.972,
+    108.257,
+    111.479,
+    114.66,
+    117.87,
+    121.08,
+    124.256,
+    127.402,
+    130.548,
+    133.625,
+    136.731,
+    139.831,
+    142.896,
+    146.024,
+    149.113,
+    152.137,
+    155.243,
+    158.348,
+    161.518,
+    164.827,
+    168.025,
+    171.172,
+    174.388,
+    177.569,
+    180.773,
+    184.14,
+    187.397,
+    190.613,
+    193.834,
+    197.021,
+    200.185,
+    203.389,
+    206.588,
+    209.792,
+    213.049,
+    216.282,
+    219.417,
+    222.708,
+    225.953,
+    229.169,
+    232.426,
+    235.654,
+    238.858,
+    242.114,
+    245.377,
+    248.564,
+    251.896,
+    255.135,
+    258.363,
+    261.759,
+    265.096,
+    268.336,
+    271.586,
+    274.895,
+    278.146,
+    281.391,
+    284.561,
+    287.626,
+    290.766,
+    293.889,
+    297.064,
+    300.13,
+    303.322,
+    306.399,
+    309.621,
+    312.842,
+    316.024,
+    319.361,
+    322.676,
+    325.968,
+    329.201,
+    332.434,
+    335.737,
+    339.156,
+    342.489,
+    345.757,
+    349.002,
+    352.223,
+    355.434,
+    358.632,
+    361.779,
+    364.942,
+    368.152,
+    371.432,
+    374.619,
+    377.719,
+    380.877
+   ],
+   "fills": [
+    6,
+    10,
+    12,
+    23,
+    52,
+    66,
+    73,
+    100
+   ],
+   "stems": {
+    "bass": "local/audio/fleetwood-mac-need-your-love-so-bad/bass.mp3",
+    "guitar": "local/audio/fleetwood-mac-need-your-love-so-bad/guitar.mp3",
+    "other": "local/audio/fleetwood-mac-need-your-love-so-bad/other.mp3",
+    "vocals": "local/audio/fleetwood-mac-need-your-love-so-bad/vocals.mp3"
+   },
+   "kit": {
+    "kick": "local/audio/fleetwood-mac-need-your-love-so-bad/kit/kick.mp3",
+    "snare": "local/audio/fleetwood-mac-need-your-love-so-bad/kit/snare.mp3",
+    "toms": "local/audio/fleetwood-mac-need-your-love-so-bad/kit/toms.mp3",
+    "cymbals": "local/audio/fleetwood-mac-need-your-love-so-bad/kit/cymbals.mp3"
+   },
+   "format": "vbr",
+   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+  }
+ },
+ {
+  "id": "marshall-tucker-this-ol-cowboy",
+  "title": "This Ol' Cowboy",
+  "artist": "The Marshall Tucker Band",
+  "bpm": 112,
+  "time": "4/4",
+  "groove": "country",
+  "feel": "loose",
+  "rev": 2,
+  "band": {
+   "bass": "roots",
+   "keys": "off",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro + main riff",
+    "groove": "country",
+    "bars": [
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Verse 1",
+    "groove": "country",
+    "bars": [
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Chorus 1",
+    "groove": "country",
+    "bars": [
+     "G",
+     "G",
+     "G",
+     "G",
+     "Dmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "G",
+     "G",
+     "F#m",
+     "F#m",
+     "Em",
+     "A",
+     "Dmaj7",
+     "Gmaj7"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Verse 2",
+    "groove": "country",
+    "bars": [
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Chorus 2",
+    "groove": "country",
+    "bars": [
+     "G",
+     "G",
+     "G",
+     "G",
+     "Dmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "G",
+     "G",
+     "F#m",
+     "F#m",
+     "Em",
+     "A",
+     "Dmaj7",
+     "Gmaj7"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Solo",
+    "groove": "country",
+    "bars": [
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Verse 3",
+    "groove": "country",
+    "bars": [
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Gmaj7",
+     "Gmaj7",
+     "Dmaj7",
+     "Dmaj7"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Chorus 3",
+    "groove": "country",
+    "bars": [
+     "G",
+     "G",
+     "G",
+     "G",
+     "Dmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "G",
+     "G",
+     "F#m",
+     "F#m",
+     "Em",
+     "A",
+     "Dmaj7",
+     "Gmaj7"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Chorus 4",
+    "groove": "country",
+    "bars": [
+     "G",
+     "G",
+     "G",
+     "G",
+     "Dmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "Dmaj7",
+     "G",
+     "G",
+     "F#m",
+     "F#m",
+     "Em",
+     "A",
+     "Dmaj7",
+     "Gmaj7"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Ending",
+    "groove": "country",
+    "bars": [
+     "G",
+     "F#m",
+     "Em",
+     "A",
+     "Dmaj7"
+    ],
+    "fill": true
+   }
+  ],
+  "audio": {
+   "mix": {
+    "bass": 1,
+    "guitar": 1,
+    "piano": 1,
+    "other": 1,
+    "vocals": 0
+   },
+   "stems": {
+    "drums": "local/audio/marshall-tucker-this-ol-cowboy/drums.mp3",
+    "bass": "local/audio/marshall-tucker-this-ol-cowboy/bass.mp3",
+    "guitar": "local/audio/marshall-tucker-this-ol-cowboy/guitar.mp3",
+    "piano": "local/audio/marshall-tucker-this-ol-cowboy/piano.mp3",
+    "other": "local/audio/marshall-tucker-this-ol-cowboy/other.mp3",
+    "vocals": "local/audio/marshall-tucker-this-ol-cowboy/vocals.mp3"
+   },
+   "kit": {
+    "kick": "local/audio/marshall-tucker-this-ol-cowboy/kit/kick.mp3",
+    "snare": "local/audio/marshall-tucker-this-ol-cowboy/kit/snare.mp3",
+    "toms": "local/audio/marshall-tucker-this-ol-cowboy/kit/toms.mp3",
+    "cymbals": "local/audio/marshall-tucker-this-ol-cowboy/kit/cymbals.mp3"
+   },
+   "format": "vbr",
+   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+  }
+ },
+ {
+  "id": "black-keys-ten-cent-pistol",
+  "title": "Ten Cent Pistol",
+  "artist": "The Black Keys",
+  "bpm": 100,
+  "time": "4/4",
+  "groove": "half-time",
+  "feel": "loose",
+  "rev": 1,
+  "band": {
+   "bass": "roots",
+   "keys": "off",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro",
+    "groove": "half-time",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Verse 1",
+    "groove": "half-time",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Cm",
+     "Cm",
+     "Gm",
+     "Gm"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Chorus 1",
+    "groove": "rock-heavy",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Dm",
+     "Gm",
+     "Gm",
+     "Dm C",
+     "Gm",
+     "Gm",
+     "Gm"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     4
+    ]
+   },
+   {
+    "name": "Verse 2",
+    "groove": "rock-heavy",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Cm",
+     "Cm",
+     "Gm",
+     "Gm"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Chorus 2",
+    "groove": "rock-heavy",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Dm",
+     "Gm",
+     "Gm",
+     "Dm C",
+     "Gm"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Instrumental",
+    "groove": "rock-heavy",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "C",
+     "C",
+     "Gm",
+     "Gm",
+     "C",
+     "C",
+     "Dm",
+     "Dm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Verse 3",
+    "groove": "rock-heavy",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Cm",
+     "Cm",
+     "Gm",
+     "Gm"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Chorus 3",
+    "groove": "rock-heavy",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Dm",
+     "Gm",
+     "Gm",
+     "Dm C",
+     "Gm"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Outro",
+    "groove": "rock-heavy",
+    "bars": [
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm",
+     "Gm"
+    ],
+    "fill": true
+   }
+  ],
+  "audio": {
+   "mix": {
+    "vocals": 0
+   }
+  }
+ },
+ {
+  "id": "chris-stapleton-white-horse",
+  "title": "White Horse",
+  "artist": "Chris Stapleton",
+  "bpm": 86,
+  "time": "4/4",
+  "groove": "rock-heavy",
+  "feel": "loose",
+  "rev": 1,
+  "band": {
+   "bass": "roots",
+   "keys": "off",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro",
+    "groove": "half-time",
+    "bars": [
+     "C#m C#sus2",
+     "C#m",
+     "C#m C#sus2",
+     "C#m",
+     "C#m C#sus2",
+     "C#m",
+     "C#m C#sus2",
+     "C#m",
+     "C#m",
+     "C#m",
+     "C#m",
+     "C#m"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Verse 1",
+    "groove": "half-time",
+    "bars": [
+     "A E",
+     "B",
+     "C#m",
+     "C#m",
+     "A E",
+     "B",
+     "B",
+     "B",
+     "A E",
+     "B",
+     "C#m",
+     "C#m",
+     "A E",
+     "B",
+     "B",
+     "B"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Chorus 1",
+    "groove": "rock-heavy",
+    "bars": [
+     "C#m",
+     "C#m",
+     "B",
+     "C#5 A",
+     "E",
+     "A B",
+     "B",
+     "C#5 A",
+     "E",
+     "A E/G#",
+     "B",
+     "B",
+     "C#m",
+     "C#m"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Verse 2",
+    "groove": "rock-heavy",
+    "bars": [
+     "A E",
+     "B",
+     "C#m",
+     "C#m",
+     "A E",
+     "B",
+     "B",
+     "B",
+     "A E",
+     "B",
+     "C#m",
+     "C#m",
+     "A E",
+     "B",
+     "B",
+     "B"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Chorus 2",
+    "groove": "rock-heavy",
+    "bars": [
+     "C#m",
+     "C#m",
+     "B",
+     "C#5 A",
+     "E",
+     "A B",
+     "B",
+     "C#5 A",
+     "E",
+     "A E/G#",
+     "B",
+     "B",
+     "C#m",
+     "C#m"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Bridge (double time)",
+    "groove": "rock-16",
+    "bars": [
+     "B",
+     "C#5 A",
+     "E",
+     "A B",
+     "B",
+     "C#5 A",
+     "E",
+     "A E"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Chorus 3",
+    "groove": "rock-heavy",
+    "bars": [
+     "C#m",
+     "C#m",
+     "B",
+     "C#5 A",
+     "E",
+     "A B",
+     "B",
+     "C#5 A",
+     "E",
+     "A B",
+     "B",
+     "C#5 A",
+     "E",
+     "A B",
+     "B",
+     "C#5 A",
+     "E",
+     "A E/G#",
+     "B",
+     "B",
+     "C#m",
+     "C#m"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Ending (double time)",
+    "groove": "rock-16",
+    "bars": [
+     "B",
+     "C#5 A",
+     "E",
+     "A B",
+     "B",
+     "C#5 A",
+     "E",
+     "A E"
+    ],
+    "fill": true
+   },
+   {
+    "name": "Ending",
+    "groove": "rock-heavy",
+    "bars": [
+     "B",
+     "B",
+     "C#m"
+    ],
+    "fill": true
+   }
+  ],
+  "audio": {
+   "mix": {
+    "vocals": 0
+   }
+  }
+ },
+ {
+  "id": "steeldrivers-heaven-sent",
+  "title": "Heaven Sent",
+  "artist": "The SteelDrivers",
+  "bpm": 112,
+  "time": "4/4",
+  "groove": "train",
+  "feel": "push",
+  "rev": 1,
+  "band": {
+   "bass": "roots",
+   "keys": "off",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro",
+    "groove": "train",
+    "bars": [
+     "G D",
+     "Am",
+     "G D",
+     "Am"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Chorus 1",
+    "groove": "train",
+    "bars": [
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Verse 1",
+    "groove": "train",
+    "bars": [
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Chorus 2",
+    "groove": "train",
+    "bars": [
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Verse 2",
+    "groove": "train",
+    "bars": [
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Solo",
+    "groove": "train",
+    "bars": [
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am"
+    ],
+    "crash": true,
+    "fill": true
+   },
+   {
+    "name": "Chorus 3",
+    "groove": "train",
+    "bars": [
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Verse 3",
+    "groove": "train",
+    "bars": [
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Chorus 4",
+    "groove": "train",
+    "bars": [
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Chorus 5 (out)",
+    "groove": "train",
+    "bars": [
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am",
+     "G D",
+     "Am"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "id": "bonnie-tyler-holding-out-for-a-hero",
+  "title": "Holding Out For A Hero",
+  "artist": "Bonnie Tyler",
+  "bpm": 148,
+  "time": "4/4",
+  "groove": "four-floor",
+  "feel": "push",
+  "rev": 1,
+  "band": {
+   "bass": "eighths",
+   "keys": "pad",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro",
+    "groove": "four-floor",
+    "bars": [
+     "Am",
+     "Am",
+     "Am",
+     "Am",
+     "Am",
+     "Am",
+     "Am",
+     "Am"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Chorus 1",
+    "groove": "four-floor",
+    "bars": [
+     "Am",
+     "Am",
+     "Em",
+     "Em",
+     "F",
+     "F",
+     "C",
+     "G",
+     "Am",
+     "Am",
+     "Em",
+     "Em",
+     "F",
+     "F",
+     "C",
+     "G"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Break",
+    "groove": "four-floor",
+    "bars": [
+     "Am",
+     "Am",
+     "Am",
+     "Am"
+    ]
+   },
+   {
+    "name": "Bridge 1",
+    "groove": "four-floor",
+    "bars": [
+     "Am",
+     "Am",
+     "Am",
+     "Am",
+     "F",
+     "F",
+     "F",
+     "F",
+     "Dm",
+     "Dm",
+     "E",
+     "E",
+     "Am",
+     "Am",
+     "Am",
+     "Am"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     8
+    ]
+   },
+   {
+    "name": "Bridge 2",
+    "groove": "four-floor",
+    "bars": [
+     "Am",
+     "Am",
+     "Am",
+     "Am",
+     "F",
+     "F",
+     "F",
+     "F",
+     "Dm",
+     "Dm",
+     "E",
+     "E",
+     "Am",
+     "Am",
+     "Am",
+     "Am"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     8
+    ]
+   },
+   {
+    "name": "Build",
+    "groove": "four-floor",
+    "bars": [
+     "Cdim",
+     "Cdim",
+     "Cdim",
+     "Cdim",
+     "Esus4",
+     "Esus4",
+     "E",
+     "E"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Chorus 2",
+    "groove": "four-floor",
+    "bars": [
+     "Am",
+     "Am",
+     "Em",
+     "Em",
+     "F",
+     "F",
+     "C",
+     "G",
+     "Am",
+     "Am",
+     "Em",
+     "Em",
+     "F",
+     "F",
+     "C",
+     "G"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Chorus 3",
+    "groove": "four-floor",
+    "bars": [
+     "Am",
+     "Am",
+     "Em",
+     "Em",
+     "F",
+     "F",
+     "C",
+     "G",
+     "Am",
+     "Am",
+     "Em",
+     "Em",
+     "F",
+     "F",
+     "C",
+     "G"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "name": "Outro",
+    "groove": "four-floor",
+    "bars": [
+     "Am",
+     "Am",
+     "Am",
+     "Am",
+     "Am",
+     "Am",
+     "Am",
+     "Am"
+    ],
+    "fill": true
+   }
+  ]
+ },
+ {
+  "id": "bahamas-trick-to-happy",
+  "title": "Trick To Happy",
+  "artist": "Bahamas",
+  "bpm": 92,
+  "time": "4/4",
+  "groove": "half-time",
+  "feel": "loose",
+  "rev": 1,
+  "band": {
+   "bass": "roots",
+   "keys": "off",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro",
+    "groove": "hats-only",
+    "bars": [
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Verse 1",
+    "groove": "half-time",
+    "bars": [
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Verse 2",
+    "groove": "half-time",
+    "bars": [
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Pre-chorus",
+    "groove": "half-time",
+    "bars": [
+     "A7",
+     "A7",
+     "Em",
+     "Em"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4
+    ]
+   },
+   {
+    "name": "Chorus 1",
+    "groove": "rock",
+    "bars": [
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Interlude",
+    "groove": "half-time",
+    "bars": [
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D"
+    ]
+   },
+   {
+    "name": "Verse 3",
+    "groove": "half-time",
+    "bars": [
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Pre-chorus 2",
+    "groove": "half-time",
+    "bars": [
+     "A7",
+     "A7",
+     "Em",
+     "Em"
+    ],
+    "fill": true,
+    "sheetBars": [
+     4
+    ]
+   },
+   {
+    "name": "Chorus 2",
+    "groove": "rock",
+    "bars": [
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Tag",
+    "groove": "rock",
+    "bars": [
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Outro",
+    "groove": "rock",
+    "bars": [
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D",
+     "F#7 Bm",
+     "Em D"
+    ],
+    "fill": true
+   }
+  ]
+ },
+ {
+  "id": "less-than-love",
+  "title": "Less Than Love",
+  "artist": "",
+  "bpm": 96,
+  "time": "4/4",
+  "groove": "ballad",
+  "feel": "loose",
+  "rev": 1,
+  "band": {
+   "bass": "roots",
+   "keys": "off",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Verse 1",
+    "groove": "ballad",
+    "bars": [
+     "Bm",
+     "G D",
+     "B5",
+     "Emdim G",
+     "G D",
+     "E7",
+     "A7",
+     "A7",
+     "Bm",
+     "G D",
+     "B5",
+     "Emdim G",
+     "G D",
+     "E7",
+     "A7",
+     "A7"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Chorus 1",
+    "groove": "ballad",
+    "bars": [
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G Dmaj7",
+     "G Dmaj7",
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G Dmaj7",
+     "G Dmaj7"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     4,
+     2,
+     2,
+     4
+    ]
+   },
+   {
+    "name": "Verse 2",
+    "groove": "ballad",
+    "bars": [
+     "Bm",
+     "G D",
+     "B5",
+     "Emdim G",
+     "G D",
+     "E7",
+     "A7",
+     "A7",
+     "Bm",
+     "G D",
+     "B5",
+     "Emdim G",
+     "G D",
+     "E7",
+     "A7",
+     "A7"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Chorus 2",
+    "groove": "ballad",
+    "bars": [
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G Dmaj7",
+     "G Dmaj7",
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G Dmaj7",
+     "G Dmaj7",
+     "G",
+     "Dmaj7"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     4,
+     2,
+     2,
+     4,
+     2
+    ]
+   },
+   {
+    "name": "Bridge",
+    "groove": "ballad-ride",
+    "bars": [
+     "F#m",
+     "B",
+     "F#m",
+     "B",
+     "D7",
+     "D7",
+     "D7",
+     "A"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Verse 3",
+    "groove": "ballad",
+    "bars": [
+     "Bm",
+     "G D",
+     "B5",
+     "Emdim G",
+     "G D",
+     "E7",
+     "A7",
+     "A7",
+     "Bm",
+     "G D",
+     "B5",
+     "Emdim G",
+     "G D",
+     "E7",
+     "A7",
+     "A7"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Chorus 3",
+    "groove": "ballad",
+    "bars": [
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G Dmaj7",
+     "G Dmaj7",
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G Dmaj7",
+     "G Dmaj7",
+     "G",
+     "Dmaj7"
+    ],
+    "crash": true,
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     4,
+     2,
+     2,
+     4,
+     2
+    ]
+   },
+   {
+    "name": "Outro",
+    "groove": "ballad",
+    "bars": [
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7",
+     "G",
+     "Dmaj7"
+    ],
+    "fill": true
+   }
+  ]
+ },
+ {
+  "id": "colter-wall-cowpoke",
+  "title": "Cowpoke",
+  "artist": "Colter Wall",
+  "bpm": 96,
+  "time": "3/4",
+  "groove": "waltz",
+  "feel": "loose",
+  "rev": 1,
+  "band": {
+   "bass": "roots",
+   "keys": "off",
+   "gtr": "off"
+  },
+  "sections": [
+   {
+    "name": "Intro",
+    "groove": "hats-only",
+    "bars": [
+     "C",
+     "Am",
+     "C",
+     "Am",
+     "C",
+     "Am"
+    ],
+    "crash": false
+   },
+   {
+    "name": "Verse 1",
+    "groove": "waltz",
+    "bars": [
+     "C",
+     "C",
+     "F",
+     "C",
+     "F",
+     "C",
+     "F",
+     "C",
+     "C",
+     "C",
+     "F",
+     "C",
+     "F",
+     "C",
+     "Am",
+     "Am"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Bridge 1",
+    "groove": "waltz",
+    "bars": [
+     "C",
+     "Am",
+     "C",
+     "Am",
+     "C",
+     "Am",
+     "Am",
+     "Am"
+    ]
+   },
+   {
+    "name": "Verse 2",
+    "groove": "waltz",
+    "bars": [
+     "C",
+     "C",
+     "F",
+     "C",
+     "F",
+     "C",
+     "F",
+     "C",
+     "C",
+     "C",
+     "F",
+     "C",
+     "F",
+     "C",
+     "Am",
+     "Am"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Bridge 2",
+    "groove": "waltz",
+    "bars": [
+     "C",
+     "Am",
+     "C",
+     "Am",
+     "C",
+     "Am",
+     "C",
+     "F",
+     "C",
+     "F",
+     "C",
+     "Am"
+    ]
+   },
+   {
+    "name": "Verse 3",
+    "groove": "waltz",
+    "bars": [
+     "C",
+     "C",
+     "F",
+     "C",
+     "F",
+     "C",
+     "F",
+     "C",
+     "C",
+     "C",
+     "F",
+     "C",
+     "F",
+     "C",
+     "Am",
+     "Am"
+    ],
+    "fill": true,
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   {
+    "name": "Outro",
+    "groove": "waltz",
+    "bars": [
+     "C",
+     "Am",
+     "C",
+     "Am",
+     "C",
+     "Am"
+    ],
+    "fill": true
+   }
+  ],
+  "audio": {
+   "mix": {
+    "vocals": 0
+   }
   }
  },
  {

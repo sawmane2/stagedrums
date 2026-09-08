@@ -36,11 +36,13 @@ code { background: var(--panel2); padding: 1px 5px; border-radius: 4px; }
 
 body { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
 .layout { display: grid; grid-template-columns: 260px 1fr; flex: 1; min-height: 0; }
-.sidebar { background: var(--panel); border-right: 1px solid var(--line); padding: 12px; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
+.sidebar { background: var(--panel); border-right: 1px solid var(--line); padding: 12px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; touch-action: pan-y; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.sidebar > *, .sidebar .mix, .sidebar .midi, .sidebar .pedal, .sidebar .stems { min-width: 0; max-width: 100%; }
+.sidebar select, .sidebar input[type=range], .sidebar input[type=number], .sidebar code { max-width: 100%; }
 .sidebar h2, .sidebar h3 { margin: 6px 0 2px; font-size: .95rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
 .sidebar-head, .sidebar-foot { display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap; }
 .songlist { list-style: none; margin: 0; padding: 0; }
-.songlist li { padding: 8px 10px; border-radius: 8px; cursor: pointer; border: 1px solid transparent; }
+.songlist li { padding: 8px 10px; border-radius: 8px; cursor: pointer; border: 1px solid transparent; overflow: hidden; text-overflow: ellipsis; }
 .songlist li:hover { background: var(--panel2); }
 .songlist li.active { background: var(--panel2); border-color: var(--accent); }
 .songlist .artist { color: var(--muted); font-size: .8rem; }
@@ -90,7 +92,7 @@ dialog::backdrop { background: rgba(0,0,0,.6); }
 
 @media (max-width: 900px) {
   .layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
-  .sidebar { max-height: 34vh; border-right: 0; border-bottom: 1px solid var(--line); }
+  .sidebar { max-height: 40vh; border-right: 0; border-bottom: 1px solid var(--line); }
   .now-chord { font-size: 3rem; }
   .bars { grid-template-columns: repeat(4, 1fr); }
   .bar { font-size: 1.25rem; min-height: 54px; }
@@ -206,3 +208,11 @@ button.live.armed { background: var(--green); color: #000; border-color: var(--g
 
 .health { display: block; margin-top: 4px; font-family: ui-monospace, Menlo, monospace; font-size: .75rem; }
 .health.bad { color: var(--danger); }
+
+/* the sidebar is a narrow column: nothing in it may be wider than it is, and it scrolls vertically only */
+.sidebar .chk { white-space: normal; align-items: flex-start; }
+.sidebar .chk input { margin-top: 3px; }
+.mix label { min-width: 0; }
+.mix label > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.mix input[type=range] { max-width: 55%; }
+.health { white-space: normal; word-break: break-word; }

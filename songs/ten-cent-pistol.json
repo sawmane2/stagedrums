@@ -1,0 +1,203 @@
+{
+ "id": "black-keys-ten-cent-pistol",
+ "title": "Ten Cent Pistol",
+ "artist": "The Black Keys",
+ "bpm": 100,
+ "time": "4/4",
+ "groove": "half-time",
+ "feel": "loose",
+ "rev": 1,
+ "band": {
+  "bass": "roots",
+  "keys": "off",
+  "gtr": "off"
+ },
+ "sections": [
+  {
+   "name": "Intro",
+   "groove": "half-time",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm"
+   ],
+   "crash": false
+  },
+  {
+   "name": "Verse 1",
+   "groove": "half-time",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Cm",
+    "Cm",
+    "Gm",
+    "Gm"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Chorus 1",
+   "groove": "rock-heavy",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Dm",
+    "Gm",
+    "Gm",
+    "Dm C",
+    "Gm",
+    "Gm",
+    "Gm"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    4
+   ]
+  },
+  {
+   "name": "Verse 2",
+   "groove": "rock-heavy",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Cm",
+    "Cm",
+    "Gm",
+    "Gm"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Chorus 2",
+   "groove": "rock-heavy",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Dm",
+    "Gm",
+    "Gm",
+    "Dm C",
+    "Gm"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Instrumental",
+   "groove": "rock-heavy",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "C",
+    "C",
+    "Gm",
+    "Gm",
+    "C",
+    "C",
+    "Dm",
+    "Dm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm"
+   ],
+   "crash": true,
+   "fill": true
+  },
+  {
+   "name": "Verse 3",
+   "groove": "rock-heavy",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Cm",
+    "Cm",
+    "Gm",
+    "Gm"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Chorus 3",
+   "groove": "rock-heavy",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Dm",
+    "Gm",
+    "Gm",
+    "Dm C",
+    "Gm"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Outro",
+   "groove": "rock-heavy",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm"
+   ],
+   "fill": true
+  }
+ ],
+ "audio": {
+  "mix": {
+   "vocals": 0
+  }
+ }
+}

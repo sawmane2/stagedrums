@@ -1,0 +1,223 @@
+{
+ "id": "bonnie-tyler-holding-out-for-a-hero",
+ "title": "Holding Out For A Hero",
+ "artist": "Bonnie Tyler",
+ "bpm": 148,
+ "time": "4/4",
+ "groove": "four-floor",
+ "feel": "push",
+ "rev": 1,
+ "band": {
+  "bass": "eighths",
+  "keys": "pad",
+  "gtr": "off"
+ },
+ "sections": [
+  {
+   "name": "Intro",
+   "groove": "four-floor",
+   "bars": [
+    "Am",
+    "Am",
+    "Am",
+    "Am",
+    "Am",
+    "Am",
+    "Am",
+    "Am"
+   ],
+   "crash": false
+  },
+  {
+   "name": "Chorus 1",
+   "groove": "four-floor",
+   "bars": [
+    "Am",
+    "Am",
+    "Em",
+    "Em",
+    "F",
+    "F",
+    "C",
+    "G",
+    "Am",
+    "Am",
+    "Em",
+    "Em",
+    "F",
+    "F",
+    "C",
+    "G"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Break",
+   "groove": "four-floor",
+   "bars": [
+    "Am",
+    "Am",
+    "Am",
+    "Am"
+   ]
+  },
+  {
+   "name": "Bridge 1",
+   "groove": "four-floor",
+   "bars": [
+    "Am",
+    "Am",
+    "Am",
+    "Am",
+    "F",
+    "F",
+    "F",
+    "F",
+    "Dm",
+    "Dm",
+    "E",
+    "E",
+    "Am",
+    "Am",
+    "Am",
+    "Am"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    8
+   ]
+  },
+  {
+   "name": "Bridge 2",
+   "groove": "four-floor",
+   "bars": [
+    "Am",
+    "Am",
+    "Am",
+    "Am",
+    "F",
+    "F",
+    "F",
+    "F",
+    "Dm",
+    "Dm",
+    "E",
+    "E",
+    "Am",
+    "Am",
+    "Am",
+    "Am"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    8
+   ]
+  },
+  {
+   "name": "Build",
+   "groove": "four-floor",
+   "bars": [
+    "Cdim",
+    "Cdim",
+    "Cdim",
+    "Cdim",
+    "Esus4",
+    "Esus4",
+    "E",
+    "E"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Chorus 2",
+   "groove": "four-floor",
+   "bars": [
+    "Am",
+    "Am",
+    "Em",
+    "Em",
+    "F",
+    "F",
+    "C",
+    "G",
+    "Am",
+    "Am",
+    "Em",
+    "Em",
+    "F",
+    "F",
+    "C",
+    "G"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Chorus 3",
+   "groove": "four-floor",
+   "bars": [
+    "Am",
+    "Am",
+    "Em",
+    "Em",
+    "F",
+    "F",
+    "C",
+    "G",
+    "Am",
+    "Am",
+    "Em",
+    "Em",
+    "F",
+    "F",
+    "C",
+    "G"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Outro",
+   "groove": "four-floor",
+   "bars": [
+    "Am",
+    "Am",
+    "Am",
+    "Am",
+    "Am",
+    "Am",
+    "Am",
+    "Am"
+   ],
+   "fill": true
+  }
+ ]
+}

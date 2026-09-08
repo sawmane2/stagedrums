@@ -1,0 +1,309 @@
+{
+ "id": "dan-auerbach-the-prowl",
+ "title": "The Prowl",
+ "artist": "Dan Auerbach",
+ "bpm": 86,
+ "time": "4/4",
+ "groove": "rock-heavy",
+ "feel": "loose",
+ "rev": 4,
+ "band": {
+  "bass": "roots",
+  "keys": "off",
+  "gtr": "off"
+ },
+ "sections": [
+  {
+   "name": "Intro (drums)",
+   "groove": "rock-heavy",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm"
+   ],
+   "crash": false
+  },
+  {
+   "name": "Riff",
+   "groove": "rock-heavy",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Cm",
+    "D7"
+   ],
+   "fill": true
+  },
+  {
+   "name": "Verse 1",
+   "groove": "rock-heavy",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Eb",
+    "D7",
+    "Gm",
+    "Gm",
+    "Cm",
+    "Cm",
+    "Gm",
+    "Gm"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Refrain 1",
+   "groove": "rock-heavy",
+   "bars": [
+    "Eb",
+    "Gm",
+    "Cm",
+    "Cm",
+    "Cm",
+    "Cm",
+    "D7"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    1
+   ]
+  },
+  {
+   "name": "Verse 2",
+   "groove": "rock-heavy",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Eb",
+    "D7",
+    "Gm",
+    "Gm",
+    "Cm",
+    "Cm",
+    "Gm",
+    "Gm"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Refrain 2",
+   "groove": "rock-heavy",
+   "bars": [
+    "Eb",
+    "Gm",
+    "Cm",
+    "Cm",
+    "Cm",
+    "Cm",
+    "D7"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    1
+   ]
+  },
+  {
+   "name": "Outro (no drums)",
+   "groove": "silence",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Cm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Cm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Cm",
+    "Gm"
+   ]
+  },
+  {
+   "name": "Fade out",
+   "groove": "silence",
+   "bars": [
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm",
+    "Gm"
+   ]
+  }
+ ],
+ "audio": {
+  "fx": {
+   "vocals": {
+    "enabled": true,
+    "intensity": 0.75,
+    "chain": [
+     {
+      "type": "radio",
+      "low": 200,
+      "high": 4000,
+      "q": 0.9
+     },
+     {
+      "type": "drive",
+      "drive": 0.5,
+      "tone": 0.45
+     },
+     {
+      "type": "eq",
+      "low": 0,
+      "mid": 3,
+      "midF": 1400,
+      "high": 0
+     }
+    ]
+   }
+  },
+  "mix": {
+   "drums": 1,
+   "bass": 1,
+   "guitar": 1,
+   "vocals": 0
+  },
+  "fade": {
+   "out": 8
+  },
+  "barTimes": [
+   0.0,
+   2.775,
+   5.538,
+   8.133,
+   10.861,
+   13.735,
+   16.533,
+   19.336,
+   22.117,
+   24.927,
+   27.73,
+   30.54,
+   33.338,
+   36.124,
+   38.946,
+   41.72,
+   44.501,
+   47.27,
+   50.074,
+   52.866,
+   55.652,
+   58.439,
+   61.243,
+   64.046,
+   66.804,
+   69.573,
+   72.377,
+   75.151,
+   78.054,
+   80.84,
+   83.609,
+   86.372,
+   89.141,
+   91.893,
+   94.865,
+   97.773,
+   100.589,
+   103.445,
+   106.255,
+   109.099,
+   111.943,
+   114.753,
+   117.545,
+   120.378,
+   123.182,
+   125.986,
+   128.755,
+   131.68,
+   134.653,
+   137.462,
+   140.272,
+   143.029,
+   145.804,
+   148.544,
+   151.272,
+   154.024,
+   156.746,
+   159.492,
+   162.267,
+   165.03,
+   167.787,
+   170.539,
+   173.285,
+   175.967,
+   178.73,
+   181.51,
+   184.233,
+   186.961,
+   189.695,
+   192.47,
+   195.257,
+   196.38666666666666
+  ],
+  "fills": [
+   3,
+   8,
+   14,
+   19,
+   21,
+   24,
+   35,
+   43
+  ],
+  "stems": {
+   "drums": "local/audio/dan-auerbach-the-prowl/drums.mp3",
+   "bass": "local/audio/dan-auerbach-the-prowl/bass.mp3",
+   "guitar": "local/audio/dan-auerbach-the-prowl/guitar.mp3",
+   "vocals": "local/audio/dan-auerbach-the-prowl/vocals.mp3"
+  },
+  "kit": {
+   "kick": "local/audio/dan-auerbach-the-prowl/kit/kick.mp3",
+   "snare": "local/audio/dan-auerbach-the-prowl/kit/snare.mp3",
+   "toms": "local/audio/dan-auerbach-the-prowl/kit/toms.mp3",
+   "cymbals": "local/audio/dan-auerbach-the-prowl/kit/cymbals.mp3"
+  },
+  "format": "vbr",
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+ }
+}

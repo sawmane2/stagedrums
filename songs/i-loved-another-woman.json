@@ -7,7 +7,7 @@
  "groove": "half-time",
  "feel": "loose",
  "swing": 0.1,
- "rev": 4,
+ "rev": 7,
  "band": {
   "bass": "roots",
   "keys": "off",
@@ -285,18 +285,18 @@
    41
   ],
   "stems": {
-   "drums": "local/audio/fleetwood-mac-i-loved-another-woman/drums.flac",
-   "bass": "local/audio/fleetwood-mac-i-loved-another-woman/bass.flac",
-   "guitar": "local/audio/fleetwood-mac-i-loved-another-woman/guitar.flac",
-   "vocals": "local/audio/fleetwood-mac-i-loved-another-woman/vocals.flac"
+   "drums": "local/audio/fleetwood-mac-i-loved-another-woman/drums.mp3",
+   "bass": "local/audio/fleetwood-mac-i-loved-another-woman/bass.mp3",
+   "guitar": "local/audio/fleetwood-mac-i-loved-another-woman/guitar.mp3",
+   "vocals": "local/audio/fleetwood-mac-i-loved-another-woman/vocals.mp3"
   },
   "kit": {
-   "kick": "local/audio/fleetwood-mac-i-loved-another-woman/kit/kick.flac",
-   "snare": "local/audio/fleetwood-mac-i-loved-another-woman/kit/snare.flac",
-   "toms": "local/audio/fleetwood-mac-i-loved-another-woman/kit/toms.flac",
-   "cymbals": "local/audio/fleetwood-mac-i-loved-another-woman/kit/cymbals.flac"
+   "kick": "local/audio/fleetwood-mac-i-loved-another-woman/kit/kick.mp3",
+   "snare": "local/audio/fleetwood-mac-i-loved-another-woman/kit/snare.mp3",
+   "toms": "local/audio/fleetwood-mac-i-loved-another-woman/kit/toms.mp3",
+   "cymbals": "local/audio/fleetwood-mac-i-loved-another-woman/kit/cymbals.mp3"
   },
   "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
-  "format": "flac"
+  "format": "vbr"
  }
 }

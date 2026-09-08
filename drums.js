@@ -446,8 +446,10 @@
       if (this.audio && this.audio.fx) for (const c of Object.values(this.audio.fx)) { try { c.dispose(); } catch (e) {} }
       this.audio = null; this._aGain = null; this.fills = [];
       // one buffer (`buffer`) or several stems (`stems: {drums: AudioBuffer, bass: …}`) played in lock-step, each with its own level
-      const stems = a && (a.stems || (a.buffer ? { mix: a.buffer } : null));
-      if (!stems || !Object.keys(stems).length) return;
+      const raw = a && (a.stems || (a.buffer ? { mix: a.buffer } : null));
+      if (!raw || !Object.keys(raw).length) return;
+      const stems = {}; for (const k of Object.keys(raw)) { const v = Array.isArray(raw[k]) ? raw[k] : [raw[k]]; if (v.length && v[0]) stems[k] = v; }
+      if (!Object.keys(stems).length) return;
       const total = this.tl ? this.tl.total : 0;
       let bt = (a.barTimes || []).map(Number);
       if (bt.length < total + 1) { // fill from bpm grid after the last known bar time
@@ -462,8 +464,8 @@
         const g = this.ctx.createGain(); g.gain.value = mix[k] ?? 1; g.connect(this._aGain); gains[k] = g;
         const i = this.ctx.createGain(); i.connect(g); fxIn[k] = i; // effect chains are inserted between fxIn and the fader (pre-fader)
       }
-      const duration = Math.max(...Object.values(stems).map(b => b.duration));
-      this.audio = { stems, gains, fxIn, fx: {}, barTimes: bt, name: a.name || '', duration, buffer: stems[Object.keys(stems)[0]] };
+      const duration = Math.max(...Object.values(stems).map(v => Math.max(...v.map(b => b.duration))));
+      this.audio = { stems, gains, fxIn, fx: {}, barTimes: bt, name: a.name || '', duration, buffer: stems[Object.keys(stems)[0]][0] };
       this.fills = (a.fills || []).filter(b => b >= 0 && b < total); // bars of the recording that contain a drum fill
     }
     setAudioGain(g) { this._aLevel = g; if (this._aGain && !this._fading) this._aGain.gain.value = g; }
@@ -552,21 +554,23 @@
       this._aSrc = this._aSrc || {};
       const fade = 0.012;
       for (const k of keys) {
-        const old = this._aSrc[k];
-        if (old) { try { old.g.gain.setValueAtTime(old.g.gain.value, Math.max(when - fade, this.ctx.currentTime)); old.g.gain.linearRampToValueAtTime(0, when + fade); old.src.stop(when + fade + 0.01); } catch (e) {} }
-        const buffer = this.audio.stems[k];
-        if (!buffer || offset >= buffer.duration - 0.01) { this._aSrc[k] = null; continue; }
-        const src = this.ctx.createBufferSource(); src.buffer = buffer;
-        const g = this.ctx.createGain();
-        g.gain.setValueAtTime(0, Math.max(when - fade, 0)); g.gain.linearRampToValueAtTime(1, when + fade);
-        src.connect(g); g.connect(this.audio.fxIn[k]);
-        src.start(Math.max(when, this.ctx.currentTime), Math.max(0, offset));
-        this._aSrc[k] = { src, g };
+        for (const old of (this._aSrc[k] || [])) { try { old.g.gain.setValueAtTime(old.g.gain.value, Math.max(when - fade, this.ctx.currentTime)); old.g.gain.linearRampToValueAtTime(0, when + fade); old.src.stop(when + fade + 0.01); } catch (e) {} }
+        const started = [];
+        for (const buffer of this.audio.stems[k]) {
+          if (!buffer || offset >= buffer.duration - 0.01) continue;
+          const src = this.ctx.createBufferSource(); src.buffer = buffer;
+          const g = this.ctx.createGain();
+          g.gain.setValueAtTime(0, Math.max(when - fade, 0)); g.gain.linearRampToValueAtTime(1, when + fade);
+          src.connect(g); g.connect(this.audio.fxIn[k]);
+          src.start(Math.max(when, this.ctx.currentTime), Math.max(0, offset));
+          started.push({ src, g });
+        }
+        this._aSrc[k] = started;
       }
       if (all) { this._aSegs.push({ ctx: when, offset }); if (this._aSegs.length > 4) this._aSegs.shift(); }
     }
     _aStop() {
-      for (const k of Object.keys(this._aSrc || {})) { const o = this._aSrc[k]; if (o) { try { o.src.stop(); } catch (e) {} } }
+      for (const k of Object.keys(this._aSrc || {})) for (const o of (this._aSrc[k] || [])) { try { o.src.stop(); } catch (e) {} }
       this._aSrc = null; this._aSegs = [];
     }
     /** Stems that carry the kit — a fill splice moves these and leaves the band alone. */
@@ -760,7 +764,7 @@
           if (this._bar < tl.total && (jumped || this._bar !== this._aPrev + 1)) this._aStart(Math.max(t, this.ctx.currentTime), bt[this._bar]);
           this._aPrev = null;
         }
-        if (this._bar >= tl.total) { for (const k of Object.keys(this._aSrc || {})) { const o = this._aSrc[k]; if (o) try { o.src.stop(t + 0.05); } catch (e) {} } this._fire(() => this.stop(), null, t); return; }
+        if (this._bar >= tl.total) { for (const k of Object.keys(this._aSrc || {})) for (const o of (this._aSrc[k] || [])) { try { o.src.stop(t + 0.05); } catch (e) {} } this._fire(() => this.stop(), null, t); return; }
         const dur = this.barSec(this._bar), beat = dur / sig.beats;
         // per-song fade-out: once the end of the recording is within `fadeOut` seconds and nothing will loop or jump,
         // ramp the backing level down so a studio fade doesn't end in a hard cut

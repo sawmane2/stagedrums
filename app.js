@@ -62,7 +62,10 @@
       const li = document.createElement('li'); li.draggable = !q;
       li.innerHTML = `<div>${esc(s.title)}</div><div class="artist">${esc(s.artist || '')} · ${s.bpm} bpm · ${s.time || '4/4'}${s.audio && (s.audio.stems || s.audio.file) ? ' · ♪' : ''}</div>`;
       li.className = song && s.id === song.id ? 'active' : '';
-      li.onclick = () => { if (role === 'follower') return; transport.stop(); selectSong(s); broadcastSong(); };
+      li.onclick = () => {
+        if (role === 'follower') { sendCmd({ cmd: 'song', id: s.id }); return; } // the iPad drives the computer
+        transport.stop(); selectSong(s); broadcastSong();
+      };
       // drag to set the running order (the pedal's "next song" follows this order)
       li.ondragstart = e => { e.dataTransfer.setData('text/plain', String(idx)); li.classList.add('dragging'); };
       li.ondragend = () => li.classList.remove('dragging');
@@ -454,7 +457,14 @@
   const grooveNames = Object.keys(SD.GROOVES);
   $('impGroove').innerHTML = grooveNames.map(g => `<option value="${g}">${g} — ${SD.GROOVES[g].desc}</option>`).join('');
   $('grooveList').textContent = grooveNames.join(', ');
-  $('btnNewSong').onclick = () => { $('dlgImport').showModal(); };
+  $('btnNewSong').onclick = () => { $('impAttach').checked = false; $('impText').placeholder = 'Paste the chords text from Ultimate Guitar…'; $('dlgImport').showModal(); };
+  // "Paste lyrics" = the same dialog, pre-set to attach the words to the song you're on (the chart keeps its bars)
+  $('btnLyrics').onclick = () => {
+    if (!song) return;
+    if (role === 'follower') return alert('Paste the lyrics on the computer — it holds the song library.');
+    $('impAttach').checked = true; $('impText').placeholder = `Paste the chords-and-lyrics text for "${song.title}" — keep the [Verse 1] / [Chorus] headers.`;
+    $('dlgImport').showModal(); $('impText').focus();
+  };
   $('dlgImport').addEventListener('close', () => {
     if ($('dlgImport').returnValue !== 'ok') return;
     const text = $('impText').value.trim(); if (!text) return;
@@ -640,7 +650,7 @@
   // ---------- backing track: a real recording (e.g. the record with the vocals removed) instead of synth drums + band ----------
   // decoded stems, capped: a stereo minute at 44.1 kHz is ~21 MB, so a 5-minute 9-stem song is ~1 GB; keep ~1.2 GB max
   const audioCache = {}; let audioLoadToken = 0;
-  const CACHE_BUDGET = 1.2e9;
+  const CACHE_BUDGET = 9e8; // ~900 MB of decoded audio; Chrome on an 8 GB Air has to live in here too
   function cachePut(url, buf) { audioCache[url] = buf; cacheTrim(); }
   function cacheTrim(keep = []) {
     const size = b => b.length * b.numberOfChannels * 4;
@@ -659,10 +669,14 @@
   /** The files a song's audio refers to: {stemName: url}. A single file counts as one stem called "mix". */
   function audioFiles(a) {
     let f = a ? (a.stems && Object.keys(a.stems).length ? a.stems : (a.file ? { mix: a.file } : {})) : {};
-    if (a && a.kit && Object.keys(a.kit).length && a.splitDrums) { f = Object.assign({}, f, a.kit); delete f.drums; } // kit parts replace the drums stem
+    const kit = a && a.kit && Object.keys(a.kit).length ? a.kit : null;
+    // the kit parts are only loaded when they're being used: four buffers instead of one is four times the memory,
+    // and a seven-minute song is already most of a gigabyte decoded
+    if (kit) { f = Object.assign({}, f); if (a.splitDrums) { delete f.drums; Object.assign(f, kit); } else if (!f.drums) f.drums = Object.values(kit); }
     const out = {}; for (const k of Object.keys(f).sort(stemSort)) out[k] = f[k]; return out; // kit parts first, vocals last
   }
-  function audioName(a) { const f = audioFiles(a); const ks = Object.keys(f); return ks.length === 1 && ks[0] === 'mix' ? f.mix.split('/').pop() : ks.length + ' stems (' + ks.map(stemLabel).join(', ') + ')'; }
+  const urlsOf = v => Array.isArray(v) ? v : [v];
+  function audioName(a) { const f = audioFiles(a); const ks = Object.keys(f); return ks.length === 1 && ks[0] === 'mix' ? String(f.mix).split('/').pop() : ks.length + ' stems (' + ks.map(stemLabel).join(', ') + ')'; }
   function setAudioStatus(msg) {
     if (msg) { $('audioStatus').textContent = msg; return; }
     const a = song && song.audio, has = Object.keys(audioFiles(a)).length > 0;
@@ -773,13 +787,18 @@
     renderStemMix();
     if (!Object.keys(files).length || role === 'follower' || (prefs.backing || 'audio') !== 'audio') { setAudioStatus(); return; }
     setAudioStatus('Loading recording…');
+    cacheTrim(Object.values(files).flatMap(urlsOf)); // free the last song before decoding this one, not after
     const missing = [];
     try {
       const stems = {};
-      await Promise.all(Object.entries(files).map(async ([k, url]) => {
-        let buf = audioCache[url];
-        if (!buf) { try { const r = await fetch(url); if (!r.ok) throw new Error('missing'); buf = await ctx.decodeAudioData(await r.arrayBuffer()); cachePut(url, buf); } catch { missing.push(url.split('/').pop()); return; } }
-        stems[k] = buf;
+      await Promise.all(Object.entries(files).map(async ([k, v]) => {
+        const bufs = [];
+        for (const url of urlsOf(v)) {
+          let buf = audioCache[url];
+          if (!buf) { try { const r = await fetch(url); if (!r.ok) throw new Error('missing'); buf = await ctx.decodeAudioData(await r.arrayBuffer()); cachePut(url, buf); } catch { missing.push(url.split('/').pop()); continue; } }
+          bufs.push(buf);
+        }
+        if (bufs.length) stems[k] = bufs;
       }));
       if (token !== audioLoadToken) return;
       if (!Object.keys(stems).length) throw new Error('missing');
@@ -791,8 +810,10 @@
           && Object.keys(stems).every(k => shiftCache.src[k] === stems[k]);
         if (!same) {
           shiftCache = null; // free the previous render before making another (these buffers are big)
-          const rendered = await shifter.render(ctx, stems, kt, (done, total, name) => setAudioStatus(`Rendering ${kt.semitones ? (kt.semitones > 0 ? '+' : '') + kt.semitones + ' semitones' : ''}${kt.semitones && kt.tempo !== 1 ? ', ' : ''}${kt.tempo !== 1 ? 'tempo ×' + kt.tempo.toFixed(3) : ''}… ${Math.min(total, Math.floor(done))} of ${total} stems`));
+          const flat = {}; for (const k of Object.keys(stems)) stems[k].forEach((b, i) => flat[k + (i ? '#' + i : '')] = b);
+          const rendered0 = await shifter.render(ctx, flat, kt, (done, total, name) => setAudioStatus(`Rendering ${kt.semitones ? (kt.semitones > 0 ? '+' : '') + kt.semitones + ' semitones' : ''}${kt.semitones && kt.tempo !== 1 ? ', ' : ''}${kt.tempo !== 1 ? 'tempo ×' + kt.tempo.toFixed(3) : ''}… ${Math.min(total, Math.floor(done))} of ${total} stems`));
           if (token !== audioLoadToken) return;
+          const rendered = {}; for (const k of Object.keys(rendered0)) { const [base] = k.split('#'); (rendered[base] = rendered[base] || []).push(rendered0[k]); }
           shiftCache = { songId: song.id, semitones: kt.semitones, tempo: kt.tempo, src: stems, stems: rendered };
         }
         useStems = shiftCache.stems;

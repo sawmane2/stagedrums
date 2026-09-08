@@ -1,0 +1,298 @@
+{
+ "id": "marshall-tucker-this-ol-cowboy",
+ "title": "This Ol' Cowboy",
+ "artist": "The Marshall Tucker Band",
+ "bpm": 112,
+ "time": "4/4",
+ "groove": "country",
+ "feel": "loose",
+ "rev": 2,
+ "band": {
+  "bass": "roots",
+  "keys": "off",
+  "gtr": "off"
+ },
+ "sections": [
+  {
+   "name": "Intro + main riff",
+   "groove": "country",
+   "bars": [
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7"
+   ],
+   "crash": false
+  },
+  {
+   "name": "Verse 1",
+   "groove": "country",
+   "bars": [
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Chorus 1",
+   "groove": "country",
+   "bars": [
+    "G",
+    "G",
+    "G",
+    "G",
+    "Dmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "G",
+    "G",
+    "F#m",
+    "F#m",
+    "Em",
+    "A",
+    "Dmaj7",
+    "Gmaj7"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Verse 2",
+   "groove": "country",
+   "bars": [
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Chorus 2",
+   "groove": "country",
+   "bars": [
+    "G",
+    "G",
+    "G",
+    "G",
+    "Dmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "G",
+    "G",
+    "F#m",
+    "F#m",
+    "Em",
+    "A",
+    "Dmaj7",
+    "Gmaj7"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Solo",
+   "groove": "country",
+   "bars": [
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7"
+   ],
+   "crash": true,
+   "fill": true
+  },
+  {
+   "name": "Verse 3",
+   "groove": "country",
+   "bars": [
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Gmaj7",
+    "Gmaj7",
+    "Dmaj7",
+    "Dmaj7"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Chorus 3",
+   "groove": "country",
+   "bars": [
+    "G",
+    "G",
+    "G",
+    "G",
+    "Dmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "G",
+    "G",
+    "F#m",
+    "F#m",
+    "Em",
+    "A",
+    "Dmaj7",
+    "Gmaj7"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Chorus 4",
+   "groove": "country",
+   "bars": [
+    "G",
+    "G",
+    "G",
+    "G",
+    "Dmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "Dmaj7",
+    "G",
+    "G",
+    "F#m",
+    "F#m",
+    "Em",
+    "A",
+    "Dmaj7",
+    "Gmaj7"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Ending",
+   "groove": "country",
+   "bars": [
+    "G",
+    "F#m",
+    "Em",
+    "A",
+    "Dmaj7"
+   ],
+   "fill": true
+  }
+ ],
+ "audio": {
+  "mix": {
+   "bass": 1,
+   "guitar": 1,
+   "piano": 1,
+   "other": 1,
+   "vocals": 0
+  },
+  "stems": {
+   "drums": "local/audio/marshall-tucker-this-ol-cowboy/drums.mp3",
+   "bass": "local/audio/marshall-tucker-this-ol-cowboy/bass.mp3",
+   "guitar": "local/audio/marshall-tucker-this-ol-cowboy/guitar.mp3",
+   "piano": "local/audio/marshall-tucker-this-ol-cowboy/piano.mp3",
+   "other": "local/audio/marshall-tucker-this-ol-cowboy/other.mp3",
+   "vocals": "local/audio/marshall-tucker-this-ol-cowboy/vocals.mp3"
+  },
+  "kit": {
+   "kick": "local/audio/marshall-tucker-this-ol-cowboy/kit/kick.mp3",
+   "snare": "local/audio/marshall-tucker-this-ol-cowboy/kit/snare.mp3",
+   "toms": "local/audio/marshall-tucker-this-ol-cowboy/kit/toms.mp3",
+   "cymbals": "local/audio/marshall-tucker-this-ol-cowboy/kit/cymbals.mp3"
+  },
+  "format": "vbr",
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+ }
+}

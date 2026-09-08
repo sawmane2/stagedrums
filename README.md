@@ -121,6 +121,8 @@ Synthesized drums never sound like the record, so the **Backing track** panel pl
 
 **Engine health** — the monospace line under the Backing panel: sample rate, decoded stems in memory, output latency, and dropouts per minute (the audio clock falling behind the wall clock — the thing a fanless laptop does when it throttles). It turns red when something's wrong. Decoded audio is capped at ~1.2 GB; older songs are evicted first.
 
+**From the iPad** — tap any song in the list and the computer loads it (the iPad never plays the backing itself); the sidebar scrolls vertically only, so a stray sideways swipe can't shove the panel around mid-set. **Paste lyrics** puts the words on the chart: pick the song, tap it, paste the chords-and-lyrics text with its `[Verse 1]` / `[Chorus]` headers, and the sheet view shows chords over lyrics with the current line highlighted.
+
 **Song list** — type to search; drag songs to set the running order (the pedal's "next song" follows it). Stems can now ship as **FLAC** (`tools/prepare_song.py --format=flac`, the default): lossless, ~4× the size of the old 160 kbps MP3s, and the real quality floor lifted.
 
 **Cues (in-ears).** On the iPad, click and voice cues play through whatever the iPad is plugged into, never the PA, with their own levels; the follower also gets a slider for the backing level on the computer.

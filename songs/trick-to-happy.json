@@ -1,0 +1,215 @@
+{
+ "id": "bahamas-trick-to-happy",
+ "title": "Trick To Happy",
+ "artist": "Bahamas",
+ "bpm": 92,
+ "time": "4/4",
+ "groove": "half-time",
+ "feel": "loose",
+ "rev": 1,
+ "band": {
+  "bass": "roots",
+  "keys": "off",
+  "gtr": "off"
+ },
+ "sections": [
+  {
+   "name": "Intro",
+   "groove": "hats-only",
+   "bars": [
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D"
+   ],
+   "crash": false
+  },
+  {
+   "name": "Verse 1",
+   "groove": "half-time",
+   "bars": [
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Verse 2",
+   "groove": "half-time",
+   "bars": [
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Pre-chorus",
+   "groove": "half-time",
+   "bars": [
+    "A7",
+    "A7",
+    "Em",
+    "Em"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4
+   ]
+  },
+  {
+   "name": "Chorus 1",
+   "groove": "rock",
+   "bars": [
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Interlude",
+   "groove": "half-time",
+   "bars": [
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D"
+   ]
+  },
+  {
+   "name": "Verse 3",
+   "groove": "half-time",
+   "bars": [
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Pre-chorus 2",
+   "groove": "half-time",
+   "bars": [
+    "A7",
+    "A7",
+    "Em",
+    "Em"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4
+   ]
+  },
+  {
+   "name": "Chorus 2",
+   "groove": "rock",
+   "bars": [
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D"
+   ],
+   "crash": true,
+   "fill": true,
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Tag",
+   "groove": "rock",
+   "bars": [
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D"
+   ],
+   "fill": true,
+   "sheetBars": [
+    2,
+    2
+   ]
+  },
+  {
+   "name": "Outro",
+   "groove": "rock",
+   "bars": [
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D",
+    "F#7 Bm",
+    "Em D"
+   ],
+   "fill": true
+  }
+ ]
+}
