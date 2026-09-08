@@ -6,7 +6,7 @@
  "time": "4/4",
  "groove": "ballad",
  "feel": "loose",
- "rev": 4,
+ "rev": 6,
  "band": {
   "bass": "roots",
   "keys": "off",
@@ -65,7 +65,19 @@
     "D D6",
     "Dmaj7"
    ],
-   "fill": true
+   "fill": true,
+   "sheet": "Em7\nCome a little bit closer\n                   | D D6 | Dmaj7 | D D6 | Dmaj7 |\nHear what I have to say\nEm7\nJust like children sleepin'\n                          | D D6 | Dmaj7 | D D6 | Dmaj7 |\nWe could dream this night away\nG6\nBut there's a full moon risin'\n                        | D D6 | Dmaj7 | D D6 | Dmaj7 |\nLet's go dancin' in the light\nG6\nWe know where the music's playin'\n                          | D D6 | Dmaj7 | D D6 | Dmaj7 |\nLet's go out and feel the night",
+   "lyrics": "Come a little bit closer\nHear what I have to say\nJust like children sleepin'\nWe could dream this night away\nBut there's a full moon risin'\nLet's go dancin' in the light\nWe know where the music's playin'\nLet's go out and feel the night",
+   "sheetBars": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+   ]
   },
   {
    "name": "Chorus 1",
@@ -83,7 +95,14 @@
     "D"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "        A7sus4                          A7\n        Because I'm still in love with you\n                                A7sus4\n        I wanna see you dance again\n                                       A\n        Because I'm still in love with you\n                        [ D ]\n        On this harvest moon",
+   "lyrics": "Because I'm still in love with you\nI wanna see you dance again\nBecause I'm still in love with you\n[ D ]\nOn this harvest moon",
+   "sheetBars": [
+    4,
+    3,
+    3
+   ]
   },
   {
    "name": "Turnaround",
@@ -134,7 +153,19 @@
     "D D6",
     "Dmaj7"
    ],
-   "fill": true
+   "fill": true,
+   "sheet": "Em7\nWhen we were strangers\n                   | D D6 | Dmaj7 | D D6 | Dmaj7 |\nI watched you from afar\nEm7\nAnd when we were lovers\n                         | D D6 | Dmaj7 | D D6 | Dmaj7 |\nI loved you with all my heart\nG6\nBut now it's gettin' late\n                          | D D6 | Dmaj7 | D D6 | Dmaj7 |\nAnd the moon is climbin' high\nG6\nI want to celebrate\n                      | D D6 | Dmaj7 | D D6 | Dmaj7 |\nSee it shinin' in your eye",
+   "lyrics": "When we were strangers\nI watched you from afar\nAnd when we were lovers\nI loved you with all my heart\nBut now it's gettin' late\nAnd the moon is climbin' high\nI want to celebrate\nSee it shinin' in your eye",
+   "sheetBars": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+   ]
   },
   {
    "name": "Chorus 2",
@@ -153,7 +184,14 @@
     "D"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "        A7sus4                          A7\n        Because I'm still in love with you\n                                A7sus4\n        I wanna see you dance again\n                                       A\n        Because I'm still in love with you\n                        [ D ]\n        On this harvest moon",
+   "lyrics": "Because I'm still in love with you\nI wanna see you dance again\nBecause I'm still in love with you\n[ D ]\nOn this harvest moon",
+   "sheetBars": [
+    4,
+    4,
+    3
+   ]
   },
   {
    "name": "Solo",
@@ -201,7 +239,14 @@
     "D"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "        A7                             A7\n        Because I'm still in love with you\n                                A7sus4\n        I wanna see you dance again\n                                       A\n        Because I'm still in love with you\n                        [ D ]\n        On this harvest moon",
+   "lyrics": "Because I'm still in love with you\nI wanna see you dance again\nBecause I'm still in love with you\n[ D ]\nOn this harvest moon",
+   "sheetBars": [
+    4,
+    4,
+    3
+   ]
   },
   {
    "name": "Outro",
@@ -400,6 +445,7 @@
    "other": 1,
    "vocals": 0
   },
-  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+  "format": "vbr"
  }
 }

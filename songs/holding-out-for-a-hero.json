@@ -52,11 +52,15 @@
    "crash": true,
    "fill": true,
    "sheetBars": [
-    4,
-    4,
-    4,
-    4
-   ]
+    3,
+    3,
+    3,
+    3,
+    2,
+    2
+   ],
+   "sheet": "         Am                          Em\nI need a hero, I'm holding out for a hero 'til the end of the night,\n     F\nHe's gotta be strong and he's gotta be fast,\n         C                        G\nAnd he's gotta be fresh from the fight.\n         Am                          Em\nI need a hero, I'm holding out for a hero 'til the morning light,\n     F                       Dm7\nHe's gotta be sure, and it's gotta be soon,\n         C                    G\nAnd he's gotta be larger than life...",
+   "lyrics": "I need a hero, I'm holding out for a hero 'til the end of the night,\nHe's gotta be strong and he's gotta be fast,\nAnd he's gotta be fresh from the fight.\nI need a hero, I'm holding out for a hero 'til the morning light,\nHe's gotta be sure, and it's gotta be soon,\nAnd he's gotta be larger than life..."
   },
   {
    "name": "Break",
@@ -91,10 +95,12 @@
    ],
    "fill": true,
    "sheetBars": [
-    4,
-    4,
-    8
-   ]
+    6,
+    5,
+    5
+   ],
+   "sheet": "Am\nUp where the mountains meet the heavens above,\nF\nout where the lightning splits the sea,\nDm                     E                 Am\nI could swear there is someone somewhere watching me.",
+   "lyrics": "Up where the mountains meet the heavens above,\nout where the lightning splits the sea,\nI could swear there is someone somewhere watching me."
   },
   {
    "name": "Bridge 2",
@@ -119,10 +125,12 @@
    ],
    "fill": true,
    "sheetBars": [
-    4,
-    4,
-    8
-   ]
+    6,
+    5,
+    5
+   ],
+   "sheet": "Am\nThrough the wind and the chill and the rain,\nF\nand the storm and the flood,\nDm                     E                 Am\nI can feel his approach like the fire in my blood",
+   "lyrics": "Through the wind and the chill and the rain,\nand the storm and the flood,\nI can feel his approach like the fire in my blood"
   },
   {
    "name": "Build",
@@ -142,7 +150,9 @@
    "sheetBars": [
     4,
     4
-   ]
+   ],
+   "sheet": "Cdim\nlike the fire in my blood, like the fire in my blood,\n                                               Esus4    E\nlike the fire in my blood, like the fire in my blood! Aaah!",
+   "lyrics": "like the fire in my blood, like the fire in my blood,\nlike the fire in my blood, like the fire in my blood! Aaah!"
   },
   {
    "name": "Chorus 2",
@@ -168,11 +178,15 @@
    "crash": true,
    "fill": true,
    "sheetBars": [
-    4,
-    4,
-    4,
-    4
-   ]
+    3,
+    3,
+    3,
+    3,
+    2,
+    2
+   ],
+   "sheet": "         Am                          Em\nI need a hero, I'm holding out for a hero 'til the end of the night,\n     F\nHe's gotta be strong and he's gotta be fast,\n         C                        G\nAnd he's gotta be fresh from the fight.\n         Am                          Em\nI need a hero, I'm holding out for a hero 'til the morning light,\n     F                       Dm7\nHe's gotta be sure, and it's gotta be soon,\n         C                    G\nAnd he's gotta be larger than life...",
+   "lyrics": "I need a hero, I'm holding out for a hero 'til the end of the night,\nHe's gotta be strong and he's gotta be fast,\nAnd he's gotta be fresh from the fight.\nI need a hero, I'm holding out for a hero 'til the morning light,\nHe's gotta be sure, and it's gotta be soon,\nAnd he's gotta be larger than life..."
   },
   {
    "name": "Chorus 3",
@@ -198,11 +212,15 @@
    "crash": true,
    "fill": true,
    "sheetBars": [
-    4,
-    4,
-    4,
-    4
-   ]
+    3,
+    3,
+    3,
+    3,
+    2,
+    2
+   ],
+   "sheet": "         Am                          Em\nI need a hero, I'm holding out for a hero 'til the end of the night,\n     F\nHe's gotta be strong and he's gotta be fast,\n         C                        G\nAnd he's gotta be fresh from the fight.\n         Am                          Em\nI need a hero, I'm holding out for a hero 'til the morning light,\n     F                       Dm7\nHe's gotta be sure, and it's gotta be soon,\n         C                    G\nAnd he's gotta be larger than life...",
+   "lyrics": "I need a hero, I'm holding out for a hero 'til the end of the night,\nHe's gotta be strong and he's gotta be fast,\nAnd he's gotta be fresh from the fight.\nI need a hero, I'm holding out for a hero 'til the morning light,\nHe's gotta be sure, and it's gotta be soon,\nAnd he's gotta be larger than life..."
   },
   {
    "name": "Outro",

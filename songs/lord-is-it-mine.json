@@ -6,7 +6,7 @@
  "time": "4/4",
  "groove": "ballad",
  "feel": "loose",
- "rev": 3,
+ "rev": 5,
  "band": {
   "bass": "whole",
   "keys": "epiano",
@@ -41,7 +41,14 @@
     "A6",
     "D Dmaj7"
    ],
-   "fill": false
+   "fill": false,
+   "sheet": "  Aadd9               A            Amaj7       A6\nI know that there's a reason why I need to be alone\n   Aadd9             A                 Amaj7         A6\nTo show me there's a silent place that I can call my own\n      D Dmaj7 D6 Dmaj7 D     Aadd9 A Amaj7 A6\nIs it mine?   Oh Lord! Is it mine?",
+   "lyrics": "I know that there's a reason why I need to be alone\nTo show me there's a silent place that I can call my own\nIs it mine?   Oh Lord! Is it mine?",
+   "sheetBars": [
+    3,
+    3,
+    3
+   ]
   },
   {
    "name": "Verse 2",
@@ -55,6 +62,13 @@
     "A",
     "Amaj7",
     "A6"
+   ],
+   "sheet": "    Aadd9         A              Amaj7           A6\nYou know I get so weary from the battles in this life\n       Aadd9         A                     Amaj7        A6\nAnd as many times it seems that you're the only hope in sight\n      D Dmaj7 D6 Dmaj7 D     Aadd9 A Amaj7\nIs it mine?   Oh Lord! Is it mine?",
+   "lyrics": "You know I get so weary from the battles in this life\nAnd as many times it seems that you're the only hope in sight\nIs it mine?   Oh Lord! Is it mine?",
+   "sheetBars": [
+    3,
+    3,
+    2
    ]
   },
   {
@@ -72,7 +86,15 @@
     "A6"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "     Amaj7 A A6   D Dmaj7 D6\nWhen everything's dark\n    D6 Dmaj7 D    Aadd9 A Amaj7\nAnd nothing seems right\n        Amaj7 A A6 D Dmaj7 D6\nThere's nothing to win\n            D6 Dmaj7 D Aadd9 A Amaj7 A6\nAnd there's no need to fight",
+   "lyrics": "When everything's dark\nAnd nothing seems right\nThere's nothing to win\nAnd there's no need to fight",
+   "sheetBars": [
+    3,
+    2,
+    2,
+    2
+   ]
   },
   {
    "name": "Verse 3",
@@ -88,7 +110,14 @@
     "A6",
     "D Dmaj7"
    ],
-   "fill": true
+   "fill": true,
+   "sheet": "  Aadd9          A             Amaj7           A6\nI never cease to wonder at the cruelty of this land\n       Aadd9           A            Amaj7        A6\nBut it seems a time of sadness is a time to understand\n      D Dmaj7 D6 Dmaj7 D     Aadd9 A Amaj7\nIs it mine?   Oh Lord! Is it mine?",
+   "lyrics": "I never cease to wonder at the cruelty of this land\nBut it seems a time of sadness is a time to understand\nIs it mine?   Oh Lord! Is it mine?",
+   "sheetBars": [
+    3,
+    3,
+    3
+   ]
   },
   {
    "name": "Chorus 2",
@@ -102,7 +131,15 @@
     "D"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "     Amaj7 A A6   D Dmaj7 D6\nWhen everything's dark\n    D6 Dmaj7 D    Aadd9 A Amaj7\nAnd nothing seems right\n    Amaj7 A    A6 D Dmaj7 D6\nYou don't have to win\n            D6 Dmaj7 D Aadd9 A Amaj7 A6\nAnd there's no need to fight",
+   "lyrics": "When everything's dark\nAnd nothing seems right\nYou don't have to win\nAnd there's no need to fight",
+   "sheetBars": [
+    2,
+    2,
+    1,
+    1
+   ]
   },
   {
    "name": "Instrumental",
@@ -139,7 +176,17 @@
     "F Am Dm"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "   C#m                        D                   Dmaj7\nIf only I could find a way to feel your sweetness through the day\n    B                                   A C#m\nThe love that shines around me could be mine\n   D                  E7\nSo give us an answer, won't you?\n   D                    E7\nWe know what we have to do\n      D                  E7\nThere must be a thousand voices\nF Am Dm       Aadd9 A Amaj7 A6\nTrying to get through",
+   "lyrics": "If only I could find a way to feel your sweetness through the day\nThe love that shines around me could be mine\nSo give us an answer, won't you?\nWe know what we have to do\nThere must be a thousand voices\nTrying to get through",
+   "sheetBars": [
+    3,
+    3,
+    3,
+    2,
+    2,
+    2
+   ]
   },
   {
    "name": "Ending",
@@ -268,6 +315,7 @@
    "other": 1,
    "vocals": 0
   },
-  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+  "format": "vbr"
  }
 }

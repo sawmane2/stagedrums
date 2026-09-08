@@ -65,10 +65,11 @@
     4,
     4,
     4,
-    2,
-    2,
+    4,
     4
-   ]
+   ],
+   "sheet": "E\n Mississippi Queen, if you know what I mean\n Mississippi Queen, she taught me everything\nA\n Way down around Vicksburg, around Louisiana way\nE\n Lived a Cajun lady, called the Mississippi Queen\nB                          A\n You know she was a dancer, she moved better on wine\n            E\n While the rest of those dudes where gettin their kicks\nB   A\n Boy I beg your pardon I was gettin mine",
+   "lyrics": "Mississippi Queen, if you know what I mean\nMississippi Queen, she taught me everything\nWay down around Vicksburg, around Louisiana way\nLived a Cajun lady, called the Mississippi Queen\nYou know she was a dancer, she moved better on wine\nWhile the rest of those dudes where gettin their kicks\nBoy I beg your pardon I was gettin mine"
   },
   {
    "name": "Verse 2",
@@ -105,10 +106,11 @@
     4,
     4,
     4,
-    2,
-    2,
+    4,
     4
-   ]
+   ],
+   "sheet": "E\n Mississippi Queen, if you know what I mean\n Mississippi Queen, she taught me everything\nA\n This lady she asked me, if I would be her man\nE\n You know that I told her, I'd do what I can\nB                          A\n To keep her lookin pretty, buy her dresses that shine\n            E\n While the rest of them dudes where makin their bread\nB   A\n Boy I beg your pardon I was losin mine",
+   "lyrics": "Mississippi Queen, if you know what I mean\nMississippi Queen, she taught me everything\nThis lady she asked me, if I would be her man\nYou know that I told her, I'd do what I can\nTo keep her lookin pretty, buy her dresses that shine\nWhile the rest of them dudes where makin their bread\nBoy I beg your pardon I was losin mine"
   },
   {
    "name": "Guitar Solo",
@@ -152,11 +154,12 @@
    "crash": true,
    "fill": true,
    "sheetBars": [
-    2,
-    2,
-    2,
+    3,
+    3,
     3
-   ]
+   ],
+   "sheet": "B                          A\n You know she was a dancer, she moved better on wine\n            E\n While the rest of those dudes where gettin their kicks\nB   A\n Boy I beg your pardon I was gettin mine\n Ohhhhh   Mississippi Queen",
+   "lyrics": "You know she was a dancer, she moved better on wine\nWhile the rest of those dudes where gettin their kicks\nBoy I beg your pardon I was gettin mine\nOhhhhh   Mississippi Queen"
   },
   {
    "name": "Outro",

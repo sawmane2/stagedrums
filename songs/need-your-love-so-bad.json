@@ -70,7 +70,9 @@
     4,
     4,
     4
-   ]
+   ],
+   "sheet": "                 A                 A7\nI need someone's hand, to lead me through the night\n                 D                  D#dim7\nI need someone's arms, to hold and squeeze me tight\n             A            F#m7  B7            E7\nNow when the night begins,      I'm at an end\n          A    D7              A    E7\nBecause I need    your love so bad",
+   "lyrics": "I need someone's hand, to lead me through the night\nI need someone's arms, to hold and squeeze me tight\nNow when the night begins,      I'm at an end\nBecause I need    your love so bad"
   },
   {
    "name": "Verse 2",
@@ -99,7 +101,9 @@
     4,
     4,
     4
-   ]
+   ],
+   "sheet": "            A                          A7\nI need some lips, to feel next to mine\n                  D                              D#dim7\nI need someone to stand up, and tell me when I'm lyin'\n             A              F#m7       B7         E7\nAnd when the lights are low,  and it's time to go\n              A    D7              A    A7\nThat's when I need    your love so bad",
+   "lyrics": "I need some lips, to feel next to mine\nI need someone to stand up, and tell me when I'm lyin'\nAnd when the lights are low,  and it's time to go\nThat's when I need    your love so bad"
   },
   {
    "name": "Solo",
@@ -149,11 +153,12 @@
    "crash": true,
    "fill": true,
    "sheetBars": [
-    4,
-    4,
-    4,
-    4
-   ]
+    6,
+    5,
+    5
+   ],
+   "sheet": "                 D                        D#dim7\nSo why don't you give it up, and bring it home to me\n                 A                   E             A          A7\nOr write it on a piece of paper baby, so it can be read to me\n                 B\nTell me that you love me, and stop driving me mad\n           E   F                  E      E7#5\nOh because I,    I need your love so bad",
+   "lyrics": "So why don't you give it up, and bring it home to me\nOr write it on a piece of paper baby, so it can be read to me\nTell me that you love me, and stop driving me mad\nE   F                  E      E7#5\nOh because I,    I need your love so bad"
   },
   {
    "name": "Verse 3",
@@ -182,7 +187,9 @@
     4,
     4,
     4
-   ]
+   ],
+   "sheet": "            A                                  A7\nI need your soft voice, to talk to me at night\n                    D                         D#dim7\nI don't want you to worry baby, I know we can make everything alright\nA                    F#m7  B7             E7\nListen to my plea, baby,      bring it to me\n          A    D7              A    E7\nBecause I need    your love so bad",
+   "lyrics": "I need your soft voice, to talk to me at night\nI don't want you to worry baby, I know we can make everything alright\nListen to my plea, baby,      bring it to me\nBecause I need    your love so bad"
   },
   {
    "name": "Outro",

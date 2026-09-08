@@ -55,15 +55,15 @@
    ],
    "fill": true,
    "sheetBars": [
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
+    3,
+    3,
+    3,
+    3,
     2,
     2
-   ]
+   ],
+   "sheet": "A      E\n This love\nB                  C#m\n Is getting kinda dangerous\nA       E                  B     Badd9   B\n Feels like it's a loaded gun\nA    E\n My mind,\nB                      C#m\n It's turning like a cloud of dust\nA    E                     B    Badd9   B\n My heart always wants to run",
+   "lyrics": "This love\nIs getting kinda dangerous\nFeels like it's a loaded gun\nMy mind,\nIt's turning like a cloud of dust\nMy heart always wants to run"
   },
   {
    "name": "Chorus 1",
@@ -93,8 +93,11 @@
     2,
     2,
     2,
-    2
-   ]
+    1,
+    1
+   ],
+   "sheet": "C#m\nOh-oh-oh-oh\nN.C.           B            C#5   A\nIf you want a cowboy on a white  horse\n E                   A     B\nRidin' off into the sun---set\n               B                    C#5   A\nIf that's the kinda love you wanna wait  for\n E                      A     E/G#  B\nHold on tight, girl, I ain't there yet\n                   B\nNo, I ain't there yet\n                   C#m\nNo, I ain't there yet\n       C#m\nWhite horse",
+   "lyrics": "Oh-oh-oh-oh\nIf you want a cowboy on a white  horse\nRidin' off into the sun---set\nIf that's the kinda love you wanna wait  for\nHold on tight, girl, I ain't there yet\nNo, I ain't there yet\nNo, I ain't there yet\nWhite horse"
   },
   {
    "name": "Verse 2",
@@ -119,15 +122,15 @@
    ],
    "fill": true,
    "sheetBars": [
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
+    3,
+    3,
+    3,
+    3,
     2,
     2
-   ]
+   ],
+   "sheet": "A     E\n Someday,\nB                 C#m\n Maybe you could have your way\nA       E                  B    Badd9   B\n Right now's just not the time\nA       E\n Some things\nB              C#m\n A man's just got to do\nA   E                      B     Badd9   B\n I wish you could change my mind",
+   "lyrics": "Someday,\nMaybe you could have your way\nRight now's just not the time\nSome things\nA man's just got to do\nI wish you could change my mind"
   },
   {
    "name": "Chorus 2",
@@ -157,8 +160,11 @@
     2,
     2,
     2,
-    2
-   ]
+    1,
+    1
+   ],
+   "sheet": "C#m\nOh-oh-oh-oh\nN.C.           B            C#5   A\nIf you want a cowboy on a white  horse\n E                   A     B\nRidin' off into the sun---set\n               B                    C#5   A\nIf that's the kinda love you wanna wait  for\n E                      A     E/G#  B\nHold on tight, girl, I ain't there yet\n                   B\nNo, I ain't there yet\n                   C#m\nNo, I ain't there yet\n       C#m\nWhite horse",
+   "lyrics": "Oh-oh-oh-oh\nIf you want a cowboy on a white  horse\nRidin' off into the sun---set\nIf that's the kinda love you wanna wait  for\nHold on tight, girl, I ain't there yet\nNo, I ain't there yet\nNo, I ain't there yet\nWhite horse"
   },
   {
    "name": "Bridge (double time)",
@@ -204,7 +210,22 @@
     "C#m"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "B              B            C#5   A\nIf you want a cowboy on a white  horse\n E                   A     B\nRidin' off into the sun---set\n               B                    C#5   A\nIf that's the kinda love you wanna wait  for\n E                      A     B\nHold on tight, girl, I ain't there\n               B            C#5   A\nIf you want a cowboy on a white  horse\n E                   A     B\nRidin' off into the sun---set\n               B                    C#5   A\nIf that's the kinda love you wanna wait  for\n E                      A     E/G#  B\nHold on tight, girl, I ain't there yet\n                   B\nNo, I ain't there yet\n                   C#m\nNo, I ain't there yet\n       C#m\nWhite horse",
+   "lyrics": "If you want a cowboy on a white  horse\nRidin' off into the sun---set\nIf that's the kinda love you wanna wait  for\nHold on tight, girl, I ain't there\nIf you want a cowboy on a white  horse\nRidin' off into the sun---set\nIf that's the kinda love you wanna wait  for\nHold on tight, girl, I ain't there yet\nNo, I ain't there yet\nNo, I ain't there yet\nWhite horse",
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ]
   },
   {
    "name": "Ending (double time)",

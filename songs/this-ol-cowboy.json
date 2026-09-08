@@ -51,11 +51,17 @@
    ],
    "fill": true,
    "sheetBars": [
-    4,
-    4,
-    4,
-    4
-   ]
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "sheet": "          Gmaj7\nWell, I'm sittin' down in San Anton'\n              Dmaj7\nWaiting on an eight o'clock train\n   Gmaj7\nMy woman left me here last night\n                  Dmaj7\nThings ain't been quite the same\n       Gmaj7\nI gotta get back to Dallas\n            Dmaj7\nAnd tie up a few loose ends\n          Gmaj7\nI'm gonna work a week, make a hundred dollars\n               Dmaj7\nAw and hit the road again",
+   "lyrics": "Well, I'm sittin' down in San Anton'\nWaiting on an eight o'clock train\nMy woman left me here last night\nThings ain't been quite the same\nI gotta get back to Dallas\nAnd tie up a few loose ends\nI'm gonna work a week, make a hundred dollars\nAw and hit the road again"
   },
   {
    "name": "Chorus 1",
@@ -81,11 +87,12 @@
    "crash": true,
    "fill": true,
    "sheetBars": [
-    4,
-    4,
-    4,
-    4
-   ]
+    6,
+    5,
+    5
+   ],
+   "sheet": "            G\nSo I don't want you to think\nThat you're the first one\n           Dmaj7\nTo leave me out here on my own\n           G                  F#m\nCause this ain't gonna be the first time\n     Em      A            Dmaj7      Gmaj7 + Main\nThis ol' cowboy spent the night alone",
+   "lyrics": "So I don't want you to think\nThat you're the first one\nTo leave me out here on my own\nCause this ain't gonna be the first time\nEm      A            Dmaj7      Gmaj7 + Main\nThis ol' cowboy spent the night alone"
   },
   {
    "name": "Verse 2",
@@ -110,11 +117,17 @@
    ],
    "fill": true,
    "sheetBars": [
-    4,
-    4,
-    4,
-    4
-   ]
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "sheet": "    Gmaj7\nNow honey I've been a fool but a bigger fool\n                 Dmaj7\nI can't remember when I've been\n       Gmaj7\nJust to open up my heart\n           Dmaj7\nAnd let you walk right in\n     Gmaj7\nNow there's one thing in this life\n      Dmaj7\nAin't hard for me to do\n         Gmaj7\nThat's as soon as I kiss the lips of another woman\n          Dmaj7\nI'm gonna forget all about you",
+   "lyrics": "Now honey I've been a fool but a bigger fool\nI can't remember when I've been\nJust to open up my heart\nAnd let you walk right in\nNow there's one thing in this life\nAin't hard for me to do\nThat's as soon as I kiss the lips of another woman\nI'm gonna forget all about you"
   },
   {
    "name": "Chorus 2",
@@ -140,11 +153,12 @@
    "crash": true,
    "fill": true,
    "sheetBars": [
-    4,
-    4,
-    4,
-    4
-   ]
+    6,
+    5,
+    5
+   ],
+   "sheet": "            G\nSo I don't want you to think\nThat you're the first one\n           Dmaj7\nTo leave me out here on my own\n         G                  F#m\nNo, this ain't gonna be the first time\n     Em      A            Dmaj7       Gmaj7 + Main\nThis ol' cowboy spent the night alone",
+   "lyrics": "So I don't want you to think\nThat you're the first one\nTo leave me out here on my own\nNo, this ain't gonna be the first time\nEm      A            Dmaj7       Gmaj7 + Main\nThis ol' cowboy spent the night alone"
   },
   {
    "name": "Solo",
@@ -193,9 +207,13 @@
    ],
    "fill": true,
    "sheetBars": [
-    4,
-    4
-   ]
+    2,
+    2,
+    2,
+    2
+   ],
+   "sheet": "       Gmaj7\nIf you wrote all the woman's names down I know\n           Dmaj7\nAnd let me pick one out\n        Gmaj7\nI don't think there'd be one in the whole bunch\n             Dmaj7\nAw I'd give a hoot about",
+   "lyrics": "If you wrote all the woman's names down I know\nAnd let me pick one out\nI don't think there'd be one in the whole bunch\nAw I'd give a hoot about"
   },
   {
    "name": "Chorus 3",
@@ -225,7 +243,9 @@
     4,
     4,
     4
-   ]
+   ],
+   "sheet": "            G\nSo I don't want you to think\nThat you're the first one\n               Dmaj7\nTo leave this ol' boy out here on his own\n           G                  F#m\nCause this ain't gonna be the first time\n     Em      A            Dmaj7\nThis ol' cowboy spent the night alone",
+   "lyrics": "So I don't want you to think\nThat you're the first one\nTo leave this ol' boy out here on his own\nCause this ain't gonna be the first time\nThis ol' cowboy spent the night alone"
   },
   {
    "name": "Chorus 4",
@@ -251,11 +271,10 @@
    "crash": true,
    "fill": true,
    "sheetBars": [
-    4,
-    4,
-    4,
-    4
-   ]
+    16
+   ],
+   "sheet": "         G                  F#m\nNo, this ain't gonna be the first time\n     Em      A            Dmaj7       Gmaj7 + Main\nThis ol' cowboy spent the night alone",
+   "lyrics": "No, this ain't gonna be the first time\nEm      A            Dmaj7       Gmaj7 + Main\nThis ol' cowboy spent the night alone"
   },
   {
    "name": "Ending",

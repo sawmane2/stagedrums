@@ -343,10 +343,11 @@
      4,
      4,
      4,
-     2,
-     2,
+     4,
      4
-    ]
+    ],
+    "sheet": "E\n Mississippi Queen, if you know what I mean\n Mississippi Queen, she taught me everything\nA\n Way down around Vicksburg, around Louisiana way\nE\n Lived a Cajun lady, called the Mississippi Queen\nB                          A\n You know she was a dancer, she moved better on wine\n            E\n While the rest of those dudes where gettin their kicks\nB   A\n Boy I beg your pardon I was gettin mine",
+    "lyrics": "Mississippi Queen, if you know what I mean\nMississippi Queen, she taught me everything\nWay down around Vicksburg, around Louisiana way\nLived a Cajun lady, called the Mississippi Queen\nYou know she was a dancer, she moved better on wine\nWhile the rest of those dudes where gettin their kicks\nBoy I beg your pardon I was gettin mine"
    },
    {
     "name": "Verse 2",
@@ -383,10 +384,11 @@
      4,
      4,
      4,
-     2,
-     2,
+     4,
      4
-    ]
+    ],
+    "sheet": "E\n Mississippi Queen, if you know what I mean\n Mississippi Queen, she taught me everything\nA\n This lady she asked me, if I would be her man\nE\n You know that I told her, I'd do what I can\nB                          A\n To keep her lookin pretty, buy her dresses that shine\n            E\n While the rest of them dudes where makin their bread\nB   A\n Boy I beg your pardon I was losin mine",
+    "lyrics": "Mississippi Queen, if you know what I mean\nMississippi Queen, she taught me everything\nThis lady she asked me, if I would be her man\nYou know that I told her, I'd do what I can\nTo keep her lookin pretty, buy her dresses that shine\nWhile the rest of them dudes where makin their bread\nBoy I beg your pardon I was losin mine"
    },
    {
     "name": "Guitar Solo",
@@ -430,11 +432,12 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
-     2,
-     2,
-     2,
+     3,
+     3,
      3
-    ]
+    ],
+    "sheet": "B                          A\n You know she was a dancer, she moved better on wine\n            E\n While the rest of those dudes where gettin their kicks\nB   A\n Boy I beg your pardon I was gettin mine\n Ohhhhh   Mississippi Queen",
+    "lyrics": "You know she was a dancer, she moved better on wine\nWhile the rest of those dudes where gettin their kicks\nBoy I beg your pardon I was gettin mine\nOhhhhh   Mississippi Queen"
    },
    {
     "name": "Outro",
@@ -1307,7 +1310,12 @@
      "G",
      "D"
     ],
-    "fill": true
+    "fill": true,
+    "sheet": "     D       C    D    A G F D  F \\ D\nIt's getting near dawn,\n     D                  C     D    F \\ D\nWhen lights close their tired eyes.\n     D            C      D    F \\ D\nI'll soon be with you my love,\n   D           C       D     F \\ D\nTo give you my dawn surprise.\n     G           F       G   F \\ G\nI'll be with you darling soon,\n     G           F        G               D\nI'll be with you when the stars start falling.",
+    "lyrics": "D       C    D    A G F D  F \\ D\nIt's getting near dawn,\nD                  C     D    F \\ D\nWhen lights close their tired eyes.\nD            C      D    F \\ D\nI'll soon be with you my love,\nD           C       D     F \\ D\nTo give you my dawn surprise.\nG           F       G   F \\ G\nI'll be with you darling soon,\nI'll be with you when the stars start falling.",
+    "sheetBars": [
+     12
+    ]
    },
    {
     "name": "Riff",
@@ -1333,7 +1341,14 @@
      "A"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "A         C       G       A\nI've been waiting so long\n      C         G     A\nTo be where I'm going\n       C        G       A\nIn the sunshine of your love.",
+    "lyrics": "I've been waiting so long\nTo be where I'm going\nIn the sunshine of your love.",
+    "sheetBars": [
+     3,
+     3,
+     2
+    ]
    },
    {
     "name": "Link",
@@ -1361,7 +1376,12 @@
      "G",
      "D"
     ],
-    "fill": true
+    "fill": true,
+    "sheet": "    D        C  D    A G F D  F \\ D\nI'm with you my love,\n    D               C          D   F \\ D\nThe light's shining through on you.\n    D        C  D    A G F D  F \\ D\nI'm with you my love,\n         D           C       D    F \\ D\nIt's the morning and just we two.\n     G             F       G   F \\ G\nI'll stay with you darling now,\n     G             F       G              D\nI'll stay with you till my seas are dried up.",
+    "lyrics": "D        C  D    A G F D  F \\ D\nI'm with you my love,\nD               C          D   F \\ D\nThe light's shining through on you.\nD        C  D    A G F D  F \\ D\nI'm with you my love,\nD           C       D    F \\ D\nIt's the morning and just we two.\nG             F       G   F \\ G\nI'll stay with you darling now,\nI'll stay with you till my seas are dried up.",
+    "sheetBars": [
+     14
+    ]
    },
    {
     "name": "Riff 2",
@@ -1386,7 +1406,14 @@
      "A"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "A         C       G       A\nI've been waiting so long\n      C         G     A\nTo be where I'm going\n       C        G       A\nIn the sunshine of your love.",
+    "lyrics": "I've been waiting so long\nTo be where I'm going\nIn the sunshine of your love.",
+    "sheetBars": [
+     3,
+     3,
+     2
+    ]
    },
    {
     "name": "Solo",
@@ -1442,7 +1469,12 @@
      "G",
      "D"
     ],
-    "fill": true
+    "fill": true,
+    "sheet": "    D        C  D    A G F D  F \\ D\nI'm with you my love,\n    D               C          D    F \\ D\nThe light's shining through on you.\n    D        C  D    A G F D  F \\ D\nI'm with you my love,\n         D           C       D    F \\ D\nIt's the morning and just we two.\n     G             F       G   F \\ G\nI'll stay with you darling now,\n     G             F       G              D\nI'll stay with you till my seas are dried up.",
+    "lyrics": "D        C  D    A G F D  F \\ D\nI'm with you my love,\nD               C          D    F \\ D\nThe light's shining through on you.\nD        C  D    A G F D  F \\ D\nI'm with you my love,\nD           C       D    F \\ D\nIt's the morning and just we two.\nG             F       G   F \\ G\nI'll stay with you darling now,\nI'll stay with you till my seas are dried up.",
+    "sheetBars": [
+     14
+    ]
    },
    {
     "name": "Riff 3",
@@ -1472,7 +1504,16 @@
      "A"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "A         C       G       A\nI've been waiting so long\n          C       G       A\nI've been waiting so long\n          C       G       A\nI've been waiting so long\n      C         G     A\nTo be where I'm going\n       C        G       A\nIn the sunshine of your looooooooove.. .",
+    "lyrics": "I've been waiting so long\nI've been waiting so long\nI've been waiting so long\nTo be where I'm going\nIn the sunshine of your looooooooove.. .",
+    "sheetBars": [
+     3,
+     3,
+     3,
+     2,
+     2
+    ]
    },
    {
     "name": "Outro (riff)",
@@ -1687,7 +1728,16 @@
      "B7",
      "E"
     ],
-    "fill": true
+    "fill": true,
+    "sheet": "E\nHelp me fellas\n    A              E\nI'm feelin' kind-a weak\n    A       E                 B7\nThe way I'm livin' just ain't right\n  E                A          E\nI need somebody t' watch over me\nA      B7        E\nAll my blue moon nights",
+    "lyrics": "Help me fellas\nI'm feelin' kind-a weak\nThe way I'm livin' just ain't right\nI need somebody t' watch over me\nAll my blue moon nights",
+    "sheetBars": [
+     3,
+     3,
+     2,
+     2,
+     2
+    ]
    },
    {
     "name": "Verse 2",
@@ -1706,7 +1756,15 @@
      "B7",
      "E"
     ],
-    "fill": true
+    "fill": true,
+    "sheet": "  E              A              E\nI want a girl to take me by the hand\nA       E                 B7\nFollow me right down the line\nE              A        E\nHold me gently while we dance\nA      B7        E\nAll my blue moon nights",
+    "lyrics": "I want a girl to take me by the hand\nFollow me right down the line\nHold me gently while we dance\nAll my blue moon nights",
+    "sheetBars": [
+     3,
+     3,
+     3,
+     3
+    ]
    },
    {
     "name": "Chorus 1",
@@ -1722,7 +1780,15 @@
      "E"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "A                         E\nHeaven only knows I don't want to be\nB7           E\nJust a fool, passin' through\nA                             E\nWon't you send me an angel to walk with me\nB7               E\nAll my blue moon nights",
+    "lyrics": "Heaven only knows I don't want to be\nJust a fool, passin' through\nWon't you send me an angel to walk with me\nAll my blue moon nights",
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2
+    ]
    },
    {
     "name": "Solo",
@@ -1758,7 +1824,16 @@
      "B7",
      "E"
     ],
-    "fill": true
+    "fill": true,
+    "sheet": "E\nHelp me fellas\n     A              E\nIt's gettin' kind-a late\nA              E        B7\nRunnin' out of precious time\nE                 A       E\nShe might pass me while I waste\nA      B7        E\nAll my blue moon nights",
+    "lyrics": "Help me fellas\nIt's gettin' kind-a late\nRunnin' out of precious time\nShe might pass me while I waste\nAll my blue moon nights",
+    "sheetBars": [
+     3,
+     3,
+     2,
+     2,
+     2
+    ]
    },
    {
     "name": "Chorus 2",
@@ -1776,7 +1851,15 @@
      "E"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "A                         E\nHeaven only knows I don't want to be\nB7           E\nJust a fool, passin' through\nA                             E\nWon't you send me an angel to walk with me\nB7               E\nAll my blue moon nights",
+    "lyrics": "Heaven only knows I don't want to be\nJust a fool, passin' through\nWon't you send me an angel to walk with me\nAll my blue moon nights",
+    "sheetBars": [
+     3,
+     3,
+     2,
+     2
+    ]
    },
    {
     "name": "Outro",
@@ -1960,7 +2043,19 @@
      "D D6",
      "Dmaj7"
     ],
-    "fill": true
+    "fill": true,
+    "sheet": "Em7\nCome a little bit closer\n                   | D D6 | Dmaj7 | D D6 | Dmaj7 |\nHear what I have to say\nEm7\nJust like children sleepin'\n                          | D D6 | Dmaj7 | D D6 | Dmaj7 |\nWe could dream this night away\nG6\nBut there's a full moon risin'\n                        | D D6 | Dmaj7 | D D6 | Dmaj7 |\nLet's go dancin' in the light\nG6\nWe know where the music's playin'\n                          | D D6 | Dmaj7 | D D6 | Dmaj7 |\nLet's go out and feel the night",
+    "lyrics": "Come a little bit closer\nHear what I have to say\nJust like children sleepin'\nWe could dream this night away\nBut there's a full moon risin'\nLet's go dancin' in the light\nWe know where the music's playin'\nLet's go out and feel the night",
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4,
+     4,
+     4,
+     4,
+     4
+    ]
    },
    {
     "name": "Chorus 1",
@@ -1978,7 +2073,14 @@
      "D"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "        A7sus4                          A7\n        Because I'm still in love with you\n                                A7sus4\n        I wanna see you dance again\n                                       A\n        Because I'm still in love with you\n                        [ D ]\n        On this harvest moon",
+    "lyrics": "Because I'm still in love with you\nI wanna see you dance again\nBecause I'm still in love with you\n[ D ]\nOn this harvest moon",
+    "sheetBars": [
+     4,
+     3,
+     3
+    ]
    },
    {
     "name": "Turnaround",
@@ -2029,7 +2131,19 @@
      "D D6",
      "Dmaj7"
     ],
-    "fill": true
+    "fill": true,
+    "sheet": "Em7\nWhen we were strangers\n                   | D D6 | Dmaj7 | D D6 | Dmaj7 |\nI watched you from afar\nEm7\nAnd when we were lovers\n                         | D D6 | Dmaj7 | D D6 | Dmaj7 |\nI loved you with all my heart\nG6\nBut now it's gettin' late\n                          | D D6 | Dmaj7 | D D6 | Dmaj7 |\nAnd the moon is climbin' high\nG6\nI want to celebrate\n                      | D D6 | Dmaj7 | D D6 | Dmaj7 |\nSee it shinin' in your eye",
+    "lyrics": "When we were strangers\nI watched you from afar\nAnd when we were lovers\nI loved you with all my heart\nBut now it's gettin' late\nAnd the moon is climbin' high\nI want to celebrate\nSee it shinin' in your eye",
+    "sheetBars": [
+     4,
+     4,
+     4,
+     4,
+     4,
+     4,
+     4,
+     4
+    ]
    },
    {
     "name": "Chorus 2",
@@ -2048,7 +2162,14 @@
      "D"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "        A7sus4                          A7\n        Because I'm still in love with you\n                                A7sus4\n        I wanna see you dance again\n                                       A\n        Because I'm still in love with you\n                        [ D ]\n        On this harvest moon",
+    "lyrics": "Because I'm still in love with you\nI wanna see you dance again\nBecause I'm still in love with you\n[ D ]\nOn this harvest moon",
+    "sheetBars": [
+     4,
+     4,
+     3
+    ]
    },
    {
     "name": "Solo",
@@ -2096,7 +2217,14 @@
      "D"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "        A7                             A7\n        Because I'm still in love with you\n                                A7sus4\n        I wanna see you dance again\n                                       A\n        Because I'm still in love with you\n                        [ D ]\n        On this harvest moon",
+    "lyrics": "Because I'm still in love with you\nI wanna see you dance again\nBecause I'm still in love with you\n[ D ]\nOn this harvest moon",
+    "sheetBars": [
+     4,
+     4,
+     3
+    ]
    },
    {
     "name": "Outro",
@@ -2342,7 +2470,14 @@
      "A6",
      "D Dmaj7"
     ],
-    "fill": false
+    "fill": false,
+    "sheet": "  Aadd9               A            Amaj7       A6\nI know that there's a reason why I need to be alone\n   Aadd9             A                 Amaj7         A6\nTo show me there's a silent place that I can call my own\n      D Dmaj7 D6 Dmaj7 D     Aadd9 A Amaj7 A6\nIs it mine?   Oh Lord! Is it mine?",
+    "lyrics": "I know that there's a reason why I need to be alone\nTo show me there's a silent place that I can call my own\nIs it mine?   Oh Lord! Is it mine?",
+    "sheetBars": [
+     3,
+     3,
+     3
+    ]
    },
    {
     "name": "Verse 2",
@@ -2356,6 +2491,13 @@
      "A",
      "Amaj7",
      "A6"
+    ],
+    "sheet": "    Aadd9         A              Amaj7           A6\nYou know I get so weary from the battles in this life\n       Aadd9         A                     Amaj7        A6\nAnd as many times it seems that you're the only hope in sight\n      D Dmaj7 D6 Dmaj7 D     Aadd9 A Amaj7\nIs it mine?   Oh Lord! Is it mine?",
+    "lyrics": "You know I get so weary from the battles in this life\nAnd as many times it seems that you're the only hope in sight\nIs it mine?   Oh Lord! Is it mine?",
+    "sheetBars": [
+     3,
+     3,
+     2
     ]
    },
    {
@@ -2373,7 +2515,15 @@
      "A6"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "     Amaj7 A A6   D Dmaj7 D6\nWhen everything's dark\n    D6 Dmaj7 D    Aadd9 A Amaj7\nAnd nothing seems right\n        Amaj7 A A6 D Dmaj7 D6\nThere's nothing to win\n            D6 Dmaj7 D Aadd9 A Amaj7 A6\nAnd there's no need to fight",
+    "lyrics": "When everything's dark\nAnd nothing seems right\nThere's nothing to win\nAnd there's no need to fight",
+    "sheetBars": [
+     3,
+     2,
+     2,
+     2
+    ]
    },
    {
     "name": "Verse 3",
@@ -2389,7 +2539,14 @@
      "A6",
      "D Dmaj7"
     ],
-    "fill": true
+    "fill": true,
+    "sheet": "  Aadd9          A             Amaj7           A6\nI never cease to wonder at the cruelty of this land\n       Aadd9           A            Amaj7        A6\nBut it seems a time of sadness is a time to understand\n      D Dmaj7 D6 Dmaj7 D     Aadd9 A Amaj7\nIs it mine?   Oh Lord! Is it mine?",
+    "lyrics": "I never cease to wonder at the cruelty of this land\nBut it seems a time of sadness is a time to understand\nIs it mine?   Oh Lord! Is it mine?",
+    "sheetBars": [
+     3,
+     3,
+     3
+    ]
    },
    {
     "name": "Chorus 2",
@@ -2403,7 +2560,15 @@
      "D"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "     Amaj7 A A6   D Dmaj7 D6\nWhen everything's dark\n    D6 Dmaj7 D    Aadd9 A Amaj7\nAnd nothing seems right\n    Amaj7 A    A6 D Dmaj7 D6\nYou don't have to win\n            D6 Dmaj7 D Aadd9 A Amaj7 A6\nAnd there's no need to fight",
+    "lyrics": "When everything's dark\nAnd nothing seems right\nYou don't have to win\nAnd there's no need to fight",
+    "sheetBars": [
+     2,
+     2,
+     1,
+     1
+    ]
    },
    {
     "name": "Instrumental",
@@ -2440,7 +2605,17 @@
      "F Am Dm"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "   C#m                        D                   Dmaj7\nIf only I could find a way to feel your sweetness through the day\n    B                                   A C#m\nThe love that shines around me could be mine\n   D                  E7\nSo give us an answer, won't you?\n   D                    E7\nWe know what we have to do\n      D                  E7\nThere must be a thousand voices\nF Am Dm       Aadd9 A Amaj7 A6\nTrying to get through",
+    "lyrics": "If only I could find a way to feel your sweetness through the day\nThe love that shines around me could be mine\nSo give us an answer, won't you?\nWe know what we have to do\nThere must be a thousand voices\nTrying to get through",
+    "sheetBars": [
+     3,
+     3,
+     3,
+     2,
+     2,
+     2
+    ]
    },
    {
     "name": "Ending",
@@ -2627,10 +2802,13 @@
     ],
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4
-    ]
+     3,
+     3,
+     3,
+     3
+    ],
+    "sheet": "                 Dm7\nMy baby gone and left me\nCrying by myself\n                 Gm7\nMy baby gone and left me\nCrying by myself\nDm7                A7\n   I loved another woman\n               Dm7\nI lost my best gal",
+    "lyrics": "My baby gone and left me\nCrying by myself\nMy baby gone and left me\nCrying by myself\nI loved another woman\nI lost my best gal"
    },
    {
     "name": "Verse 2",
@@ -2651,10 +2829,13 @@
     ],
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4
-    ]
+     3,
+     3,
+     3,
+     3
+    ],
+    "sheet": "                    Dm7\nShe was a real good woman\nShe didn't me no harm\nShe was a real good woman\nGm7                          Dm7\n   She wouldn't do me no harm\n                    A7\nBut I loved another woman\n                         Dm7\nNow she's up and she gone",
+    "lyrics": "She was a real good woman\nShe didn't me no harm\nShe was a real good woman\nShe wouldn't do me no harm\nBut I loved another woman\nNow she's up and she gone"
    },
    {
     "name": "Interlude",
@@ -2713,10 +2894,14 @@
     ],
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4
-    ]
+     3,
+     3,
+     2,
+     2,
+     2
+    ],
+    "sheet": "                Dm7\nWell, come back baby\nI know I treated you wrong\n                  Gm7\nWell, come back baby\n                          Dm7\nI know I treated you wrong\n                A7\nI loved another woman\n                           Dm7\nNow I won't do that no more",
+    "lyrics": "Well, come back baby\nI know I treated you wrong\nWell, come back baby\nI know I treated you wrong\nI loved another woman\nNow I won't do that no more"
    },
    {
     "name": "Outro",
@@ -2936,15 +3121,8 @@
      "Gm"
     ],
     "fill": true,
-    "sheetBars": [
-     2,
-     2,
-     2,
-     2,
-     2,
-     2,
-     2
-    ]
+    "sheet": "I see you walkin' after dark\nTradin' looks with other men\nBut I'm the only one you need\nAnd I know just where you've been\nOh, can't you see the tears I've cried?\nAnd soak them up like a towel\nFor now I'll be one step behind",
+    "lyrics": "I see you walkin' after dark\nTradin' looks with other men\nBut I'm the only one you need\nAnd I know just where you've been\nOh, can't you see the tears I've cried?\nAnd soak them up like a towel\nFor now I'll be one step behind"
    },
    {
     "name": "Refrain 1",
@@ -2960,12 +3138,8 @@
     ],
     "crash": true,
     "fill": true,
-    "sheetBars": [
-     2,
-     2,
-     2,
-     1
-    ]
+    "sheet": "Oh, girl you got me on the prowl\nOh girl\nOh girl\nOh girl",
+    "lyrics": "Oh, girl you got me on the prowl\nOh girl\nOh girl\nOh girl"
    },
    {
     "name": "Verse 2",
@@ -2987,15 +3161,8 @@
      "Gm"
     ],
     "fill": true,
-    "sheetBars": [
-     2,
-     2,
-     2,
-     2,
-     2,
-     2,
-     2
-    ]
+    "sheet": "I crawl around most every night\nAnd I'm all wrapped up in your spell\nI wish someone would understand\nBut you know I could never tell\nI'll just live on in the dark\nIf there's no harm, there's no foul\nWell now my love for you is strange",
+    "lyrics": "I crawl around most every night\nAnd I'm all wrapped up in your spell\nI wish someone would understand\nBut you know I could never tell\nI'll just live on in the dark\nIf there's no harm, there's no foul\nWell now my love for you is strange"
    },
    {
     "name": "Refrain 2",
@@ -3011,12 +3178,8 @@
     ],
     "crash": true,
     "fill": true,
-    "sheetBars": [
-     2,
-     2,
-     2,
-     1
-    ]
+    "sheet": "Oh, girl you got me on the prowl\nOh girl\nOh girl\nOh girl\nYeah",
+    "lyrics": "Oh, girl you got me on the prowl\nOh girl\nOh girl\nOh girl\nYeah"
    },
    {
     "name": "Outro (no drums)",
@@ -3256,7 +3419,9 @@
      4,
      4,
      4
-    ]
+    ],
+    "sheet": "                 A                 A7\nI need someone's hand, to lead me through the night\n                 D                  D#dim7\nI need someone's arms, to hold and squeeze me tight\n             A            F#m7  B7            E7\nNow when the night begins,      I'm at an end\n          A    D7              A    E7\nBecause I need    your love so bad",
+    "lyrics": "I need someone's hand, to lead me through the night\nI need someone's arms, to hold and squeeze me tight\nNow when the night begins,      I'm at an end\nBecause I need    your love so bad"
    },
    {
     "name": "Verse 2",
@@ -3285,7 +3450,9 @@
      4,
      4,
      4
-    ]
+    ],
+    "sheet": "            A                          A7\nI need some lips, to feel next to mine\n                  D                              D#dim7\nI need someone to stand up, and tell me when I'm lyin'\n             A              F#m7       B7         E7\nAnd when the lights are low,  and it's time to go\n              A    D7              A    A7\nThat's when I need    your love so bad",
+    "lyrics": "I need some lips, to feel next to mine\nI need someone to stand up, and tell me when I'm lyin'\nAnd when the lights are low,  and it's time to go\nThat's when I need    your love so bad"
    },
    {
     "name": "Solo",
@@ -3335,11 +3502,12 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4,
-     4
-    ]
+     6,
+     5,
+     5
+    ],
+    "sheet": "                 D                        D#dim7\nSo why don't you give it up, and bring it home to me\n                 A                   E             A          A7\nOr write it on a piece of paper baby, so it can be read to me\n                 B\nTell me that you love me, and stop driving me mad\n           E   F                  E      E7#5\nOh because I,    I need your love so bad",
+    "lyrics": "So why don't you give it up, and bring it home to me\nOr write it on a piece of paper baby, so it can be read to me\nTell me that you love me, and stop driving me mad\nE   F                  E      E7#5\nOh because I,    I need your love so bad"
    },
    {
     "name": "Verse 3",
@@ -3368,7 +3536,9 @@
      4,
      4,
      4
-    ]
+    ],
+    "sheet": "            A                                  A7\nI need your soft voice, to talk to me at night\n                    D                         D#dim7\nI don't want you to worry baby, I know we can make everything alright\nA                    F#m7  B7             E7\nListen to my plea, baby,      bring it to me\n          A    D7              A    E7\nBecause I need    your love so bad",
+    "lyrics": "I need your soft voice, to talk to me at night\nI don't want you to worry baby, I know we can make everything alright\nListen to my plea, baby,      bring it to me\nBecause I need    your love so bad"
    },
    {
     "name": "Outro",
@@ -3623,11 +3793,17 @@
     ],
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4,
-     4
-    ]
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "sheet": "          Gmaj7\nWell, I'm sittin' down in San Anton'\n              Dmaj7\nWaiting on an eight o'clock train\n   Gmaj7\nMy woman left me here last night\n                  Dmaj7\nThings ain't been quite the same\n       Gmaj7\nI gotta get back to Dallas\n            Dmaj7\nAnd tie up a few loose ends\n          Gmaj7\nI'm gonna work a week, make a hundred dollars\n               Dmaj7\nAw and hit the road again",
+    "lyrics": "Well, I'm sittin' down in San Anton'\nWaiting on an eight o'clock train\nMy woman left me here last night\nThings ain't been quite the same\nI gotta get back to Dallas\nAnd tie up a few loose ends\nI'm gonna work a week, make a hundred dollars\nAw and hit the road again"
    },
    {
     "name": "Chorus 1",
@@ -3653,11 +3829,12 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4,
-     4
-    ]
+     6,
+     5,
+     5
+    ],
+    "sheet": "            G\nSo I don't want you to think\nThat you're the first one\n           Dmaj7\nTo leave me out here on my own\n           G                  F#m\nCause this ain't gonna be the first time\n     Em      A            Dmaj7      Gmaj7 + Main\nThis ol' cowboy spent the night alone",
+    "lyrics": "So I don't want you to think\nThat you're the first one\nTo leave me out here on my own\nCause this ain't gonna be the first time\nEm      A            Dmaj7      Gmaj7 + Main\nThis ol' cowboy spent the night alone"
    },
    {
     "name": "Verse 2",
@@ -3682,11 +3859,17 @@
     ],
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4,
-     4
-    ]
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "sheet": "    Gmaj7\nNow honey I've been a fool but a bigger fool\n                 Dmaj7\nI can't remember when I've been\n       Gmaj7\nJust to open up my heart\n           Dmaj7\nAnd let you walk right in\n     Gmaj7\nNow there's one thing in this life\n      Dmaj7\nAin't hard for me to do\n         Gmaj7\nThat's as soon as I kiss the lips of another woman\n          Dmaj7\nI'm gonna forget all about you",
+    "lyrics": "Now honey I've been a fool but a bigger fool\nI can't remember when I've been\nJust to open up my heart\nAnd let you walk right in\nNow there's one thing in this life\nAin't hard for me to do\nThat's as soon as I kiss the lips of another woman\nI'm gonna forget all about you"
    },
    {
     "name": "Chorus 2",
@@ -3712,11 +3895,12 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4,
-     4
-    ]
+     6,
+     5,
+     5
+    ],
+    "sheet": "            G\nSo I don't want you to think\nThat you're the first one\n           Dmaj7\nTo leave me out here on my own\n         G                  F#m\nNo, this ain't gonna be the first time\n     Em      A            Dmaj7       Gmaj7 + Main\nThis ol' cowboy spent the night alone",
+    "lyrics": "So I don't want you to think\nThat you're the first one\nTo leave me out here on my own\nNo, this ain't gonna be the first time\nEm      A            Dmaj7       Gmaj7 + Main\nThis ol' cowboy spent the night alone"
    },
    {
     "name": "Solo",
@@ -3765,9 +3949,13 @@
     ],
     "fill": true,
     "sheetBars": [
-     4,
-     4
-    ]
+     2,
+     2,
+     2,
+     2
+    ],
+    "sheet": "       Gmaj7\nIf you wrote all the woman's names down I know\n           Dmaj7\nAnd let me pick one out\n        Gmaj7\nI don't think there'd be one in the whole bunch\n             Dmaj7\nAw I'd give a hoot about",
+    "lyrics": "If you wrote all the woman's names down I know\nAnd let me pick one out\nI don't think there'd be one in the whole bunch\nAw I'd give a hoot about"
    },
    {
     "name": "Chorus 3",
@@ -3797,7 +3985,9 @@
      4,
      4,
      4
-    ]
+    ],
+    "sheet": "            G\nSo I don't want you to think\nThat you're the first one\n               Dmaj7\nTo leave this ol' boy out here on his own\n           G                  F#m\nCause this ain't gonna be the first time\n     Em      A            Dmaj7\nThis ol' cowboy spent the night alone",
+    "lyrics": "So I don't want you to think\nThat you're the first one\nTo leave this ol' boy out here on his own\nCause this ain't gonna be the first time\nThis ol' cowboy spent the night alone"
    },
    {
     "name": "Chorus 4",
@@ -3823,11 +4013,10 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4,
-     4
-    ]
+     16
+    ],
+    "sheet": "         G                  F#m\nNo, this ain't gonna be the first time\n     Em      A            Dmaj7       Gmaj7 + Main\nThis ol' cowboy spent the night alone",
+    "lyrics": "No, this ain't gonna be the first time\nEm      A            Dmaj7       Gmaj7 + Main\nThis ol' cowboy spent the night alone"
    },
    {
     "name": "Ending",
@@ -3913,7 +4102,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "         Gm         Gm\nWell, he ran around late at night\nGm                Gm\nHolding hands and making light\nCm                   Cm\n  Of everything that came before\n    Gm              Gm\nBut there she was behind the door",
+    "lyrics": "Well, he ran around late at night\nHolding hands and making light\nOf everything that came before\nBut there she was behind the door"
    },
    {
     "name": "Chorus 1",
@@ -3933,11 +4124,13 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
+     3,
+     3,
      2,
-     2,
-     2,
-     4
-    ]
+     2
+    ],
+    "sheet": "    Gm                Gm\nShe hit them with her ten cent pistol\n  Gm                    Dm\nBecause they ruined her name\n          Gm                Gm\nWell, she hit them with her ten cent pistol\n            Dm    C        Gm   Gm   Gm\nAnd they've never been the same",
+    "lyrics": "She hit them with her ten cent pistol\nBecause they ruined her name\nWell, she hit them with her ten cent pistol\nAnd they've never been the same"
    },
    {
     "name": "Verse 2",
@@ -3958,7 +4151,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "         Gm           Gm\nThere is nothing worse in this world\n     Gm            Gm\nThan payback from a jealous girl\nCm                   Cm\n  The laws of man do not apply\n     Gm              Gm\nWhen blood gets in a woman's eye",
+    "lyrics": "There is nothing worse in this world\nThan payback from a jealous girl\nThe laws of man do not apply\nWhen blood gets in a woman's eye"
    },
    {
     "name": "Chorus 2",
@@ -3980,7 +4175,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "    Gm                Gm\nShe hit them with her ten cent pistol\n  Gm                    Dm\nBecause they ruined her name\n          Gm                Gm\nWell, she hit them with her ten cent pistol\n            Dm    C        Gm\nAnd they've never been the same",
+    "lyrics": "She hit them with her ten cent pistol\nBecause they ruined her name\nWell, she hit them with her ten cent pistol\nAnd they've never been the same"
    },
    {
     "name": "Instrumental",
@@ -4025,7 +4222,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "Gm             Gm\nStars did fall, thunder rolled\nGm                Gm\nBugs crawled back, in their holes\nCm                                Cm\n  The couple screamed, but it was far too late\nGm                Gm\n  A jealous heart, did retaliate",
+    "lyrics": "Stars did fall, thunder rolled\nBugs crawled back, in their holes\nThe couple screamed, but it was far too late\nA jealous heart, did retaliate"
    },
    {
     "name": "Chorus 3",
@@ -4047,7 +4246,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "    Gm                Gm\nShe hit them with her ten cent pistol\n  Gm                    Dm\nBecause they ruined her name\n          Gm                Gm\nWell, she hit them with her ten cent pistol\n            Dm    C        Gm\nAnd they've never been the same",
+    "lyrics": "She hit them with her ten cent pistol\nBecause they ruined her name\nWell, she hit them with her ten cent pistol\nAnd they've never been the same"
    },
    {
     "name": "Outro",
@@ -4128,15 +4329,15 @@
     ],
     "fill": true,
     "sheetBars": [
-     2,
-     2,
-     2,
-     2,
-     2,
-     2,
+     3,
+     3,
+     3,
+     3,
      2,
      2
-    ]
+    ],
+    "sheet": "A      E\n This love\nB                  C#m\n Is getting kinda dangerous\nA       E                  B     Badd9   B\n Feels like it's a loaded gun\nA    E\n My mind,\nB                      C#m\n It's turning like a cloud of dust\nA    E                     B    Badd9   B\n My heart always wants to run",
+    "lyrics": "This love\nIs getting kinda dangerous\nFeels like it's a loaded gun\nMy mind,\nIt's turning like a cloud of dust\nMy heart always wants to run"
    },
    {
     "name": "Chorus 1",
@@ -4166,8 +4367,11 @@
      2,
      2,
      2,
-     2
-    ]
+     1,
+     1
+    ],
+    "sheet": "C#m\nOh-oh-oh-oh\nN.C.           B            C#5   A\nIf you want a cowboy on a white  horse\n E                   A     B\nRidin' off into the sun---set\n               B                    C#5   A\nIf that's the kinda love you wanna wait  for\n E                      A     E/G#  B\nHold on tight, girl, I ain't there yet\n                   B\nNo, I ain't there yet\n                   C#m\nNo, I ain't there yet\n       C#m\nWhite horse",
+    "lyrics": "Oh-oh-oh-oh\nIf you want a cowboy on a white  horse\nRidin' off into the sun---set\nIf that's the kinda love you wanna wait  for\nHold on tight, girl, I ain't there yet\nNo, I ain't there yet\nNo, I ain't there yet\nWhite horse"
    },
    {
     "name": "Verse 2",
@@ -4192,15 +4396,15 @@
     ],
     "fill": true,
     "sheetBars": [
-     2,
-     2,
-     2,
-     2,
-     2,
-     2,
+     3,
+     3,
+     3,
+     3,
      2,
      2
-    ]
+    ],
+    "sheet": "A     E\n Someday,\nB                 C#m\n Maybe you could have your way\nA       E                  B    Badd9   B\n Right now's just not the time\nA       E\n Some things\nB              C#m\n A man's just got to do\nA   E                      B     Badd9   B\n I wish you could change my mind",
+    "lyrics": "Someday,\nMaybe you could have your way\nRight now's just not the time\nSome things\nA man's just got to do\nI wish you could change my mind"
    },
    {
     "name": "Chorus 2",
@@ -4230,8 +4434,11 @@
      2,
      2,
      2,
-     2
-    ]
+     1,
+     1
+    ],
+    "sheet": "C#m\nOh-oh-oh-oh\nN.C.           B            C#5   A\nIf you want a cowboy on a white  horse\n E                   A     B\nRidin' off into the sun---set\n               B                    C#5   A\nIf that's the kinda love you wanna wait  for\n E                      A     E/G#  B\nHold on tight, girl, I ain't there yet\n                   B\nNo, I ain't there yet\n                   C#m\nNo, I ain't there yet\n       C#m\nWhite horse",
+    "lyrics": "Oh-oh-oh-oh\nIf you want a cowboy on a white  horse\nRidin' off into the sun---set\nIf that's the kinda love you wanna wait  for\nHold on tight, girl, I ain't there yet\nNo, I ain't there yet\nNo, I ain't there yet\nWhite horse"
    },
    {
     "name": "Bridge (double time)",
@@ -4277,7 +4484,22 @@
      "C#m"
     ],
     "crash": true,
-    "fill": true
+    "fill": true,
+    "sheet": "B              B            C#5   A\nIf you want a cowboy on a white  horse\n E                   A     B\nRidin' off into the sun---set\n               B                    C#5   A\nIf that's the kinda love you wanna wait  for\n E                      A     B\nHold on tight, girl, I ain't there\n               B            C#5   A\nIf you want a cowboy on a white  horse\n E                   A     B\nRidin' off into the sun---set\n               B                    C#5   A\nIf that's the kinda love you wanna wait  for\n E                      A     E/G#  B\nHold on tight, girl, I ain't there yet\n                   B\nNo, I ain't there yet\n                   C#m\nNo, I ain't there yet\n       C#m\nWhite horse",
+    "lyrics": "If you want a cowboy on a white  horse\nRidin' off into the sun---set\nIf that's the kinda love you wanna wait  for\nHold on tight, girl, I ain't there\nIf you want a cowboy on a white  horse\nRidin' off into the sun---set\nIf that's the kinda love you wanna wait  for\nHold on tight, girl, I ain't there yet\nNo, I ain't there yet\nNo, I ain't there yet\nWhite horse",
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
    },
    {
     "name": "Ending (double time)",
@@ -4357,7 +4579,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "G           D       Am\nI know our days are heaven sent\n  G    D               Am\nlord knows I know not where they went\n  G       D           Am\nShake my head and I wonder how\n      G      D            Am\nI'll ever get to heaven now",
+    "lyrics": "I know our days are heaven sent\nlord knows I know not where they went\nShake my head and I wonder how\nI'll ever get to heaven now"
    },
    {
     "name": "Verse 1",
@@ -4378,7 +4602,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "G         D      Am\nAn angel came one winter dawn\nG            D        Am\nYou shoulda seen what she had on\nG            D      Am\nWind was whistlin' like a train\n     G         D      Am\nShe left again… just like she came",
+    "lyrics": "An angel came one winter dawn\nYou shoulda seen what she had on\nWind was whistlin' like a train\nShe left again… just like she came"
    },
    {
     "name": "Chorus 2",
@@ -4400,7 +4626,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "G           D       Am\nI know our days are heaven sent\n  G    D               Am\nlord knows I know not where they went\n  G       D           Am\nShake my head and I wonder how\n      G      D            Am\nI'll ever get to heaven now",
+    "lyrics": "I know our days are heaven sent\nlord knows I know not where they went\nShake my head and I wonder how\nI'll ever get to heaven now"
    },
    {
     "name": "Verse 2",
@@ -4421,7 +4649,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "G         D      Am\nI move around a lot these days\nG       D        Am\nHonky tonks and broad freeways\nG          D               Am\nThe same thing that I've always done\n          G       D            Am\nBut I'm older now… and I get tired some",
+    "lyrics": "I move around a lot these days\nHonky tonks and broad freeways\nThe same thing that I've always done\nBut I'm older now… and I get tired some"
    },
    {
     "name": "Solo",
@@ -4459,7 +4689,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "G           D       Am\nI know our days are heaven sent\n  G    D               Am\nlord knows I know not where they went\n  G       D           Am\nShake my head and I wonder how\n      G      D            Am\nI'll ever get to heaven now",
+    "lyrics": "I know our days are heaven sent\nlord knows I know not where they went\nShake my head and I wonder how\nI'll ever get to heaven now"
    },
    {
     "name": "Verse 3",
@@ -4480,7 +4712,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "G           D         Am\nThose who think they hold the cards\nG       D      Am\nI send out my kind regards\nG          D         Am\nThose who love, to those who care\n      G           D      Am\nI'll meet you down… the road somewhere",
+    "lyrics": "Those who think they hold the cards\nI send out my kind regards\nThose who love, to those who care\nI'll meet you down… the road somewhere"
    },
    {
     "name": "Chorus 4",
@@ -4502,7 +4736,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "G           D       Am\nI know our days are heaven sent\n  G    D               Am\nlord knows I know not where they went\n  G       D           Am\nShake my head and I wonder how\n      G      D            Am\nI'll ever get to heaven now",
+    "lyrics": "I know our days are heaven sent\nlord knows I know not where they went\nShake my head and I wonder how\nI'll ever get to heaven now"
    },
    {
     "name": "Chorus 5 (out)",
@@ -4524,7 +4760,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "G           D       Am\nI know our days are heaven sent\n  G    D               Am\nlord knows I know not where they went\n  G       D           Am\nShake my head and I wonder how\n      G      D            Am\nI'll ever get to heaven now",
+    "lyrics": "I know our days are heaven sent\nlord knows I know not where they went\nShake my head and I wonder how\nI'll ever get to heaven now"
    }
   ]
  },
@@ -4582,11 +4820,15 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4,
-     4
-    ]
+     3,
+     3,
+     3,
+     3,
+     2,
+     2
+    ],
+    "sheet": "         Am                          Em\nI need a hero, I'm holding out for a hero 'til the end of the night,\n     F\nHe's gotta be strong and he's gotta be fast,\n         C                        G\nAnd he's gotta be fresh from the fight.\n         Am                          Em\nI need a hero, I'm holding out for a hero 'til the morning light,\n     F                       Dm7\nHe's gotta be sure, and it's gotta be soon,\n         C                    G\nAnd he's gotta be larger than life...",
+    "lyrics": "I need a hero, I'm holding out for a hero 'til the end of the night,\nHe's gotta be strong and he's gotta be fast,\nAnd he's gotta be fresh from the fight.\nI need a hero, I'm holding out for a hero 'til the morning light,\nHe's gotta be sure, and it's gotta be soon,\nAnd he's gotta be larger than life..."
    },
    {
     "name": "Break",
@@ -4621,10 +4863,12 @@
     ],
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     8
-    ]
+     6,
+     5,
+     5
+    ],
+    "sheet": "Am\nUp where the mountains meet the heavens above,\nF\nout where the lightning splits the sea,\nDm                     E                 Am\nI could swear there is someone somewhere watching me.",
+    "lyrics": "Up where the mountains meet the heavens above,\nout where the lightning splits the sea,\nI could swear there is someone somewhere watching me."
    },
    {
     "name": "Bridge 2",
@@ -4649,10 +4893,12 @@
     ],
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     8
-    ]
+     6,
+     5,
+     5
+    ],
+    "sheet": "Am\nThrough the wind and the chill and the rain,\nF\nand the storm and the flood,\nDm                     E                 Am\nI can feel his approach like the fire in my blood",
+    "lyrics": "Through the wind and the chill and the rain,\nand the storm and the flood,\nI can feel his approach like the fire in my blood"
    },
    {
     "name": "Build",
@@ -4672,7 +4918,9 @@
     "sheetBars": [
      4,
      4
-    ]
+    ],
+    "sheet": "Cdim\nlike the fire in my blood, like the fire in my blood,\n                                               Esus4    E\nlike the fire in my blood, like the fire in my blood! Aaah!",
+    "lyrics": "like the fire in my blood, like the fire in my blood,\nlike the fire in my blood, like the fire in my blood! Aaah!"
    },
    {
     "name": "Chorus 2",
@@ -4698,11 +4946,15 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4,
-     4
-    ]
+     3,
+     3,
+     3,
+     3,
+     2,
+     2
+    ],
+    "sheet": "         Am                          Em\nI need a hero, I'm holding out for a hero 'til the end of the night,\n     F\nHe's gotta be strong and he's gotta be fast,\n         C                        G\nAnd he's gotta be fresh from the fight.\n         Am                          Em\nI need a hero, I'm holding out for a hero 'til the morning light,\n     F                       Dm7\nHe's gotta be sure, and it's gotta be soon,\n         C                    G\nAnd he's gotta be larger than life...",
+    "lyrics": "I need a hero, I'm holding out for a hero 'til the end of the night,\nHe's gotta be strong and he's gotta be fast,\nAnd he's gotta be fresh from the fight.\nI need a hero, I'm holding out for a hero 'til the morning light,\nHe's gotta be sure, and it's gotta be soon,\nAnd he's gotta be larger than life..."
    },
    {
     "name": "Chorus 3",
@@ -4728,11 +4980,15 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
-     4,
-     4,
-     4,
-     4
-    ]
+     3,
+     3,
+     3,
+     3,
+     2,
+     2
+    ],
+    "sheet": "         Am                          Em\nI need a hero, I'm holding out for a hero 'til the end of the night,\n     F\nHe's gotta be strong and he's gotta be fast,\n         C                        G\nAnd he's gotta be fresh from the fight.\n         Am                          Em\nI need a hero, I'm holding out for a hero 'til the morning light,\n     F                       Dm7\nHe's gotta be sure, and it's gotta be soon,\n         C                    G\nAnd he's gotta be larger than life...",
+    "lyrics": "I need a hero, I'm holding out for a hero 'til the end of the night,\nHe's gotta be strong and he's gotta be fast,\nAnd he's gotta be fresh from the fight.\nI need a hero, I'm holding out for a hero 'til the morning light,\nHe's gotta be sure, and it's gotta be soon,\nAnd he's gotta be larger than life..."
    },
    {
     "name": "Outro",
@@ -4800,7 +5056,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "F#7  Bm              Em           D\n        Was it going on behind my back?\nF#7  Bm           Em                    D\n        On second thought don't tell me that\nF#7  Bm         Em                   D\n        I don't need to know all the facts\n               F#7   Bm  Em  D\nI just need to know",
+    "lyrics": "Was it going on behind my back?\nOn second thought don't tell me that\nI don't need to know all the facts\nI just need to know"
    },
    {
     "name": "Verse 2",
@@ -4821,7 +5079,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "F#7  Bm            Em              D\n        Is there a price for doing well?\nF#7  Bm               Em                 D\n        Should I feel bad 'cause I can't tell?\nF#7  Bm        Em                 D\n        I felt guilty there for a spell\n                  F#7   Bm  Em  D\nBut now I need to know",
+    "lyrics": "Is there a price for doing well?\nShould I feel bad 'cause I can't tell?\nI felt guilty there for a spell\nBut now I need to know"
    },
    {
     "name": "Pre-chorus",
@@ -4835,7 +5095,9 @@
     "fill": true,
     "sheetBars": [
      4
-    ]
+    ],
+    "sheet": "A7                Em\n  Am I wasting my time?",
+    "lyrics": "Am I wasting my time?"
    },
    {
     "name": "Chorus 1",
@@ -4857,7 +5119,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "F#7  Bm               Em         D\n        Is there some trick to being happy?\nF#7  Bm               Em           D\n        Most days I'm feeling like a half me\nF#7  Bm               Em        D\n        And feel that life is moving past me\nF#7  Bm        Em                        D\n        I only told you 'cause you asked me",
+    "lyrics": "Is there some trick to being happy?\nMost days I'm feeling like a half me\nAnd feel that life is moving past me\nI only told you 'cause you asked me"
    },
    {
     "name": "Interlude",
@@ -4888,7 +5152,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "F#7  Bm             Em           D\n        What is the story of the hour?\nF#7  Bm           Em                D\n        One man's privilege and his power\nF#7  Bm                Em               D\n        How it turns a sweet love oh so sour\n        F#7            Bm  Em  D\nStill I need to know",
+    "lyrics": "What is the story of the hour?\nOne man's privilege and his power\nHow it turns a sweet love oh so sour\nStill I need to know"
    },
    {
     "name": "Pre-chorus 2",
@@ -4902,7 +5168,9 @@
     "fill": true,
     "sheetBars": [
      4
-    ]
+    ],
+    "sheet": "A7                Em\n  Am I wasting my time?",
+    "lyrics": "Am I wasting my time?"
    },
    {
     "name": "Chorus 2",
@@ -4924,7 +5192,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "F#7  Bm               Em         D\n        Is there some trick to being happy?\nF#7  Bm               Em           D\n        Most days I'm feeling like a half me\nF#7  Bm               Em        D\n        And feel that life is moving past me\nF#7  Bm        Em                        D\n        I only told you 'cause you asked me",
+    "lyrics": "Is there some trick to being happy?\nMost days I'm feeling like a half me\nAnd feel that life is moving past me\nI only told you 'cause you asked me"
    },
    {
     "name": "Tag",
@@ -4939,7 +5209,9 @@
     "sheetBars": [
      2,
      2
-    ]
+    ],
+    "sheet": "F#7  Bm               Em        D\n        And feel that life is moving past me\nF#7  Bm        Em                        D\n        I only told you 'cause you asked me",
+    "lyrics": "And feel that life is moving past me\nI only told you 'cause you asked me"
    },
    {
     "name": "Outro",
@@ -5012,7 +5284,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "  Bm           G       D\nI only want to look at you\n      B5              Emdim      G\nDon't make your beauty pay-per-view\n       G              D          E7\n'Cause daddy wouldn't know what to do\n                 A7\nAnd he'd just do nothing\n  Bm            G         D\nI'm always at a loss for words\n       B5             Emdim      G\nAlways struggling to understand hers\n        G           D      E7\nI always cut my love up into thirds\n                   A7\nAnd leave you with nothing",
+    "lyrics": "I only want to look at you\nDon't make your beauty pay-per-view\n'Cause daddy wouldn't know what to do\nAnd he'd just do nothing\nI'm always at a loss for words\nAlways struggling to understand hers\nI always cut my love up into thirds\nAnd leave you with nothing"
    },
    {
     "name": "Chorus 1",
@@ -5038,13 +5312,15 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
+     3,
+     3,
+     3,
+     3,
      2,
-     2,
-     4,
-     2,
-     2,
-     4
-    ]
+     2
+    ],
+    "sheet": "                G                 Dmaj7\nI don't want to wear no muzzle\n                G                 Dmaj7\nI don't want to cause no trouble\n                G             Dmaj7           G    Dmaj\nI don't want to have to struggle with the truth\n                G                 Dmaj7\nI don't want to cause no stress\n                G                 Dmaj7\nI don't want to make no mess\n                G                 Dmaj7\nI don't want to live with less than love",
+    "lyrics": "I don't want to wear no muzzle\nI don't want to cause no trouble\nI don't want to have to struggle with the truth\nI don't want to cause no stress\nI don't want to make no mess\nI don't want to live with less than love"
    },
    {
     "name": "Verse 2",
@@ -5077,7 +5353,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "    Bm              G          D\nAnd everything that's left unsaid\n         B5          Emdim       G\nAll the books I bought and never read\n      G                 D        E7\nThank God she can't see into my head\n                 A7\nShe'd see I know nothing\n   Bm              G         D\nI know you think I drink to much\n         B5           Emdim     G\nEvery bottle's just a broken crutch\n       G               D          E7\nIf I'm dreaming now of your sweet touch\n              A7\nThen I'm only dreaming",
+    "lyrics": "And everything that's left unsaid\nAll the books I bought and never read\nThank God she can't see into my head\nShe'd see I know nothing\nI know you think I drink to much\nEvery bottle's just a broken crutch\nIf I'm dreaming now of your sweet touch\nThen I'm only dreaming"
    },
    {
     "name": "Chorus 2",
@@ -5105,14 +5383,16 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
+     3,
+     3,
+     3,
+     3,
      2,
      2,
-     4,
-     2,
-     2,
-     4,
      2
-    ]
+    ],
+    "sheet": "                G                 Dmaj7\nI don't want to wear no muzzle\n                G                 Dmaj7\nI don't want to cause no trouble\n                G             Dmaj7           G    Dmaj\nI don't want to have to struggle with the truth\n                G                 Dmaj7\nI don't want to cause no stress\n                G                 Dmaj7\nI don't want to make no mess\n                G                 Dmaj7\nI don't want to live with less than love\n                G                 Dmaj7\nI don't want to live with less than love",
+    "lyrics": "I don't want to wear no muzzle\nI don't want to cause no trouble\nI don't want to have to struggle with the truth\nI don't want to cause no stress\nI don't want to make no mess\nI don't want to live with less than love\nI don't want to live with less than love"
    },
    {
     "name": "Bridge",
@@ -5130,11 +5410,12 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
-     2,
-     2,
-     2,
+     3,
+     3,
      2
-    ]
+    ],
+    "sheet": "F#m                        B\nI'm looking to the heavens above\nD7\nAnd feeling that a part of you is moving on to something new\n                        A\nEvery tender part of me rough",
+    "lyrics": "I'm looking to the heavens above\nAnd feeling that a part of you is moving on to something new\nEvery tender part of me rough"
    },
    {
     "name": "Verse 3",
@@ -5167,7 +5448,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "   Bm             G           D\nI work so hard to keep it all hid\n         B5                     Emdim    G\nAlright, you don't want to have another kid\n       G                   D                      E7\nIf you change your mind sometime and wish that we did\n               A7\nWe'd just keep trying\n    Bm            G          D\nI'm only hanging on for dear life\n         B5         Emdim       G\nEvery day another twist of the knife\n        G             D       E7\nI'm not looking for a second wife\n                A7\nJust looking at you babe",
+    "lyrics": "I work so hard to keep it all hid\nAlright, you don't want to have another kid\nIf you change your mind sometime and wish that we did\nWe'd just keep trying\nI'm only hanging on for dear life\nEvery day another twist of the knife\nI'm not looking for a second wife\nJust looking at you babe"
    },
    {
     "name": "Chorus 3",
@@ -5195,14 +5478,16 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
+     3,
+     3,
+     3,
+     3,
      2,
      2,
-     4,
-     2,
-     2,
-     4,
      2
-    ]
+    ],
+    "sheet": "                G                 Dmaj7\nI don't want to wear no muzzle\n                G                 Dmaj7\nI don't want to cause no trouble\n                G             Dmaj7           G    Dmaj\nI don't want to have to struggle with the truth\n                G                 Dmaj7\nI don't want to cause no stress\n                G                 Dmaj7\nI don't want to make no mess\n                G                 Dmaj7\nI don't want to live with less than love\n                G                 Dmaj7\nI don't want to live with less than love",
+    "lyrics": "I don't want to wear no muzzle\nI don't want to cause no trouble\nI don't want to have to struggle with the truth\nI don't want to cause no stress\nI don't want to make no mess\nI don't want to live with less than love\nI don't want to live with less than love"
    },
    {
     "name": "Outro",
@@ -5280,7 +5565,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "     C\nI'm lonesome but happy\n F            C\nRich but I'm broke\n        F                       C\nAnd the good Lord knows the reason\n   F           C\nI'm just a cowpoke\n     C\nFrom Cheyenne to Douglas\n        F         C\nAll the ranges I know\n          F             C\n'Cause I drift with the wind\n       Am\nNo one cares where I go",
+    "lyrics": "I'm lonesome but happy\nRich but I'm broke\nAnd the good Lord knows the reason\nI'm just a cowpoke\nFrom Cheyenne to Douglas\nAll the ranges I know\n'Cause I drift with the wind\nNo one cares where I go"
    },
    {
     "name": "Bridge 1",
@@ -5327,7 +5614,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "  C\nI ain't got a dime\n          F            C\nIn these old worn out jeans\n         F          C\nSo I'll stop eatin' steak\n    F           C\nAnd go back to beans\n     C\nI'll pick up a ten spot\n   F          C\nIn Prescot I know\n F         C\nRidin' the broncs\n      Am\nIn the big rodeo",
+    "lyrics": "I ain't got a dime\nIn these old worn out jeans\nSo I'll stop eatin' steak\nAnd go back to beans\nI'll pick up a ten spot\nIn Prescot I know\nRidin' the broncs\nIn the big rodeo"
    },
    {
     "name": "Bridge 2",
@@ -5378,7 +5667,9 @@
      2,
      2,
      2
-    ]
+    ],
+    "sheet": "     C\nSome evening springtime\n  F           C\nA filly I'll find\n      F                   C\nAnd I might spend all the summer\n      F         C\nWith her on my mind\n         C\nBut I'll never be branded\n    F         C\nAnd never be broke\n       F            C\nI'm a carefree range ridin'\n  Am\nDriftin' cowpoke",
+    "lyrics": "Some evening springtime\nA filly I'll find\nAnd I might spend all the summer\nWith her on my mind\nBut I'll never be branded\nAnd never be broke\nI'm a carefree range ridin'\nDriftin' cowpoke"
    },
    {
     "name": "Outro",

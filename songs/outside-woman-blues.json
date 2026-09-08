@@ -170,7 +170,7 @@
    "lyrics": "Hmm Hmmm Hmm"
   }
  ],
- "rev": 5,
+ "rev": 7,
  "audio": {
   "stems": {
    "drums": "local/audio/cream-outside-woman-blues/drums.mp3",
@@ -271,6 +271,7 @@
    49,
    53,
    61
-  ]
+  ],
+  "format": "vbr"
  }
 }

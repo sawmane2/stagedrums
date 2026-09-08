@@ -155,7 +155,7 @@
    "fill": true
   }
  ],
- "rev": 5,
+ "rev": 7,
  "audio": {
   "barTimes": [
    1.091,
@@ -257,6 +257,7 @@
    "other": 1,
    "vocals": 0
   },
-  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+  "format": "vbr"
  }
 }

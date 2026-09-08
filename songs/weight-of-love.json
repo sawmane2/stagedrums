@@ -1,6 +1,6 @@
 {
  "id": "black-keys-weight-of-love",
- "rev": 6,
+ "rev": 8,
  "title": "Weight of Love",
  "artist": "The Black Keys (Turn Blue, 2014)",
  "bpm": 76,
@@ -410,6 +410,7 @@
    101,
    103,
    111
-  ]
+  ],
+  "format": "vbr"
  }
 }

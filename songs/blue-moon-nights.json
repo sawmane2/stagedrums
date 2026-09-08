@@ -7,7 +7,7 @@
  "groove": "train",
  "feel": "push",
  "swing": 0.14,
- "rev": 3,
+ "rev": 5,
  "band": {
   "bass": "boogie",
   "keys": "off",
@@ -40,7 +40,16 @@
     "B7",
     "E"
    ],
-   "fill": true
+   "fill": true,
+   "sheet": "E\nHelp me fellas\n    A              E\nI'm feelin' kind-a weak\n    A       E                 B7\nThe way I'm livin' just ain't right\n  E                A          E\nI need somebody t' watch over me\nA      B7        E\nAll my blue moon nights",
+   "lyrics": "Help me fellas\nI'm feelin' kind-a weak\nThe way I'm livin' just ain't right\nI need somebody t' watch over me\nAll my blue moon nights",
+   "sheetBars": [
+    3,
+    3,
+    2,
+    2,
+    2
+   ]
   },
   {
    "name": "Verse 2",
@@ -59,7 +68,15 @@
     "B7",
     "E"
    ],
-   "fill": true
+   "fill": true,
+   "sheet": "  E              A              E\nI want a girl to take me by the hand\nA       E                 B7\nFollow me right down the line\nE              A        E\nHold me gently while we dance\nA      B7        E\nAll my blue moon nights",
+   "lyrics": "I want a girl to take me by the hand\nFollow me right down the line\nHold me gently while we dance\nAll my blue moon nights",
+   "sheetBars": [
+    3,
+    3,
+    3,
+    3
+   ]
   },
   {
    "name": "Chorus 1",
@@ -75,7 +92,15 @@
     "E"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "A                         E\nHeaven only knows I don't want to be\nB7           E\nJust a fool, passin' through\nA                             E\nWon't you send me an angel to walk with me\nB7               E\nAll my blue moon nights",
+   "lyrics": "Heaven only knows I don't want to be\nJust a fool, passin' through\nWon't you send me an angel to walk with me\nAll my blue moon nights",
+   "sheetBars": [
+    2,
+    2,
+    2,
+    2
+   ]
   },
   {
    "name": "Solo",
@@ -111,7 +136,16 @@
     "B7",
     "E"
    ],
-   "fill": true
+   "fill": true,
+   "sheet": "E\nHelp me fellas\n     A              E\nIt's gettin' kind-a late\nA              E        B7\nRunnin' out of precious time\nE                 A       E\nShe might pass me while I waste\nA      B7        E\nAll my blue moon nights",
+   "lyrics": "Help me fellas\nIt's gettin' kind-a late\nRunnin' out of precious time\nShe might pass me while I waste\nAll my blue moon nights",
+   "sheetBars": [
+    3,
+    3,
+    2,
+    2,
+    2
+   ]
   },
   {
    "name": "Chorus 2",
@@ -129,7 +163,15 @@
     "E"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "A                         E\nHeaven only knows I don't want to be\nB7           E\nJust a fool, passin' through\nA                             E\nWon't you send me an angel to walk with me\nB7               E\nAll my blue moon nights",
+   "lyrics": "Heaven only knows I don't want to be\nJust a fool, passin' through\nWon't you send me an angel to walk with me\nAll my blue moon nights",
+   "sheetBars": [
+    3,
+    3,
+    2,
+    2
+   ]
   },
   {
    "name": "Outro",
@@ -242,6 +284,7 @@
    "guitar": 1,
    "vocals": 0
   },
-  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+  "format": "vbr"
  }
 }

@@ -6,7 +6,7 @@
  "time": "4/4",
  "groove": "laing-heavy",
  "feel": "loose",
- "rev": 3,
+ "rev": 5,
  "band": {
   "bass": "roots",
   "keys": "off",
@@ -45,7 +45,12 @@
     "G",
     "D"
    ],
-   "fill": true
+   "fill": true,
+   "sheet": "     D       C    D    A G F D  F \\ D\nIt's getting near dawn,\n     D                  C     D    F \\ D\nWhen lights close their tired eyes.\n     D            C      D    F \\ D\nI'll soon be with you my love,\n   D           C       D     F \\ D\nTo give you my dawn surprise.\n     G           F       G   F \\ G\nI'll be with you darling soon,\n     G           F        G               D\nI'll be with you when the stars start falling.",
+   "lyrics": "D       C    D    A G F D  F \\ D\nIt's getting near dawn,\nD                  C     D    F \\ D\nWhen lights close their tired eyes.\nD            C      D    F \\ D\nI'll soon be with you my love,\nD           C       D     F \\ D\nTo give you my dawn surprise.\nG           F       G   F \\ G\nI'll be with you darling soon,\nI'll be with you when the stars start falling.",
+   "sheetBars": [
+    12
+   ]
   },
   {
    "name": "Riff",
@@ -71,7 +76,14 @@
     "A"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "A         C       G       A\nI've been waiting so long\n      C         G     A\nTo be where I'm going\n       C        G       A\nIn the sunshine of your love.",
+   "lyrics": "I've been waiting so long\nTo be where I'm going\nIn the sunshine of your love.",
+   "sheetBars": [
+    3,
+    3,
+    2
+   ]
   },
   {
    "name": "Link",
@@ -99,7 +111,12 @@
     "G",
     "D"
    ],
-   "fill": true
+   "fill": true,
+   "sheet": "    D        C  D    A G F D  F \\ D\nI'm with you my love,\n    D               C          D   F \\ D\nThe light's shining through on you.\n    D        C  D    A G F D  F \\ D\nI'm with you my love,\n         D           C       D    F \\ D\nIt's the morning and just we two.\n     G             F       G   F \\ G\nI'll stay with you darling now,\n     G             F       G              D\nI'll stay with you till my seas are dried up.",
+   "lyrics": "D        C  D    A G F D  F \\ D\nI'm with you my love,\nD               C          D   F \\ D\nThe light's shining through on you.\nD        C  D    A G F D  F \\ D\nI'm with you my love,\nD           C       D    F \\ D\nIt's the morning and just we two.\nG             F       G   F \\ G\nI'll stay with you darling now,\nI'll stay with you till my seas are dried up.",
+   "sheetBars": [
+    14
+   ]
   },
   {
    "name": "Riff 2",
@@ -124,7 +141,14 @@
     "A"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "A         C       G       A\nI've been waiting so long\n      C         G     A\nTo be where I'm going\n       C        G       A\nIn the sunshine of your love.",
+   "lyrics": "I've been waiting so long\nTo be where I'm going\nIn the sunshine of your love.",
+   "sheetBars": [
+    3,
+    3,
+    2
+   ]
   },
   {
    "name": "Solo",
@@ -180,7 +204,12 @@
     "G",
     "D"
    ],
-   "fill": true
+   "fill": true,
+   "sheet": "    D        C  D    A G F D  F \\ D\nI'm with you my love,\n    D               C          D    F \\ D\nThe light's shining through on you.\n    D        C  D    A G F D  F \\ D\nI'm with you my love,\n         D           C       D    F \\ D\nIt's the morning and just we two.\n     G             F       G   F \\ G\nI'll stay with you darling now,\n     G             F       G              D\nI'll stay with you till my seas are dried up.",
+   "lyrics": "D        C  D    A G F D  F \\ D\nI'm with you my love,\nD               C          D    F \\ D\nThe light's shining through on you.\nD        C  D    A G F D  F \\ D\nI'm with you my love,\nD           C       D    F \\ D\nIt's the morning and just we two.\nG             F       G   F \\ G\nI'll stay with you darling now,\nI'll stay with you till my seas are dried up.",
+   "sheetBars": [
+    14
+   ]
   },
   {
    "name": "Riff 3",
@@ -210,7 +239,16 @@
     "A"
    ],
    "crash": true,
-   "fill": true
+   "fill": true,
+   "sheet": "A         C       G       A\nI've been waiting so long\n          C       G       A\nI've been waiting so long\n          C       G       A\nI've been waiting so long\n      C         G     A\nTo be where I'm going\n       C        G       A\nIn the sunshine of your looooooooove.. .",
+   "lyrics": "I've been waiting so long\nI've been waiting so long\nI've been waiting so long\nTo be where I'm going\nIn the sunshine of your looooooooove.. .",
+   "sheetBars": [
+    3,
+    3,
+    3,
+    2,
+    2
+   ]
   },
   {
    "name": "Outro (riff)",
@@ -379,6 +417,7 @@
    "guitar": 1,
    "vocals": 0
   },
-  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+  "format": "vbr"
  }
 }

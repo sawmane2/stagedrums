@@ -20,7 +20,7 @@
   let songs = [], song = null, tl = null;
   let role = 'solo', sync = null;
   let prefs = Object.assign({ voice: true, countIn: true, followerAudio: false, syncUrl: '' }, JSON.parse(localStorage.getItem(LS_PREFS) || '{}'));
-  let currentBarEl = null, currentSectionIdx = -1, lastSpokenBar = null;
+  let currentBarEl = null, currentSectionIdx = -1, lastSpokenBar = null, lastSheetBar = -1;
   let wakeLock = null;
 
   function savePrefs() { localStorage.setItem(LS_PREFS, JSON.stringify(prefs)); }
@@ -129,13 +129,27 @@
         l.tokens.forEach((t, i) => { t.bar = sec.start + Math.min(perRepeat - 1, n > lb ? start + Math.floor(i * lb / n) : b); b += base + (i === 0 ? rem : 0); });
         start += lb; });
     }
+    // every row gets a bar, not just the ones with chords over them: a chord row starts at its first token,
+    // and rows of words alone are spread between their neighbours — that's what makes the highlight walk down
+    // the page line by line and the page scroll itself
+    const last = sec.start + perRepeat - 1;
+    lines.forEach(l => { if (l.tokens.length) l.bar = l.tokens[0].bar; });
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].bar != null) continue;
+      let p = i - 1; while (p >= 0 && lines[p].bar == null) p--;
+      let n = i + 1; while (n < lines.length && lines[n].bar == null) n++;
+      const from = p >= 0 ? lines[p].bar : sec.start, to = n < lines.length ? lines[n].bar : last + 1;
+      const gapRows = (n < lines.length ? n : lines.length) - (p >= 0 ? p : -1);
+      const k = i - (p >= 0 ? p : -1);
+      lines[i].bar = Math.min(last, Math.round(from + (to - from) * k / gapRows));
+    }
     return lines;
   }
   function renderSheetSection(sec, div) {
     const lines = sheetLines(sec.index);
     const wrap = document.createElement('div'); wrap.className = 'sheet';
     for (const l of lines) {
-      const row = document.createElement('div'); row.className = 'sl';
+      const row = document.createElement('div'); row.className = 'sl'; if (l.bar != null) row.dataset.bar = l.bar;
       if (l.tokens.length) {
         const ch = document.createElement('div'); ch.className = 'sl-ch'; let pos = 0;
         for (const t of l.tokens) {
@@ -157,8 +171,15 @@
     // active chord token = last token whose bar <= current (within this section)
     let best = null; secEl.querySelectorAll('.chd').forEach(c => { const b = +c.dataset.bar; if (b <= barIdx && (!best || b >= +best.dataset.bar)) best = c; });
     document.querySelectorAll('.chd.on').forEach(c => { if (c !== best) c.classList.remove('on'); });
-    document.querySelectorAll('.sl.now').forEach(r => r.classList.remove('now'));
-    if (best) { best.classList.add('on'); const row = best.closest('.sl'); if (row) { row.classList.add('now'); const ch = $('chart'); const top = row.offsetTop - ch.offsetTop; if (top < ch.scrollTop + 60 || top > ch.scrollTop + ch.clientHeight - 140) ch.scrollTo({ top: top - ch.clientHeight * 0.35, behavior: 'smooth' }); } }
+    if (best) best.classList.add('on');
+    // the lit line is the last row that has started, chords or words alike
+    let row = null; secEl.querySelectorAll('.sl[data-bar]').forEach(r => { const b = +r.dataset.bar; if (b <= barIdx && (!row || b >= +row.dataset.bar)) row = r; });
+    document.querySelectorAll('.sl.now').forEach(r => { if (r !== row) r.classList.remove('now'); });
+    if (row) {
+      row.classList.add('now');
+      const ch = $('chart'); const top = row.offsetTop - ch.offsetTop;
+      if (top < ch.scrollTop + 60 || top > ch.scrollTop + ch.clientHeight - 140) ch.scrollTo({ top: top - ch.clientHeight * 0.35, behavior: 'smooth' });
+    }
   }
   $('btnView').onclick = () => { prefs.view = viewMode() === 'sheet' ? 'grid' : 'sheet'; savePrefs(); renderChart(); updateNow(transport.currentBar(), true); };
 
@@ -252,7 +273,9 @@
     const [lyr, lyrNext] = lyricForBar(barIdx);
     if ($('nowLyric').textContent !== lyr) $('nowLyric').textContent = lyr;
     if ($('nextLyric').textContent !== lyrNext) $('nextLyric').textContent = lyrNext;
-    // bar highlighting
+    // the sheet has no per-bar elements, so its highlight follows the bar number itself
+    if (barIdx !== lastSheetBar || force) { lastSheetBar = barIdx; updateSheetHighlight(barIdx); }
+    // bar highlighting (grid view)
     const el = document.querySelector(`.bar[data-bar="${barIdx}"]`);
     if (el !== currentBarEl || force) {
       if (currentBarEl) currentBarEl.classList.remove('now');
@@ -260,7 +283,6 @@
       for (let i = 0; i < barIdx; i++) { const d = document.querySelector(`.bar[data-bar="${i}"]`); if (d && tl.bars[i].section === bar.section) d.classList.add('done'); }
       if (currentBarEl) currentBarEl.querySelectorAll('.chord.on').forEach(c => c.classList.remove('on'));
       currentBarEl = el; if (el) el.classList.add('now');
-      updateSheetHighlight(barIdx);
     }
     if (el) el.querySelectorAll('.chord').forEach((c, i) => c.classList.toggle('on', bar.chords[i] === chord));
   }

@@ -59,15 +59,8 @@
     "Gm"
    ],
    "fill": true,
-   "sheetBars": [
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2
-   ]
+   "sheet": "I see you walkin' after dark\nTradin' looks with other men\nBut I'm the only one you need\nAnd I know just where you've been\nOh, can't you see the tears I've cried?\nAnd soak them up like a towel\nFor now I'll be one step behind",
+   "lyrics": "I see you walkin' after dark\nTradin' looks with other men\nBut I'm the only one you need\nAnd I know just where you've been\nOh, can't you see the tears I've cried?\nAnd soak them up like a towel\nFor now I'll be one step behind"
   },
   {
    "name": "Refrain 1",
@@ -83,12 +76,8 @@
    ],
    "crash": true,
    "fill": true,
-   "sheetBars": [
-    2,
-    2,
-    2,
-    1
-   ]
+   "sheet": "Oh, girl you got me on the prowl\nOh girl\nOh girl\nOh girl",
+   "lyrics": "Oh, girl you got me on the prowl\nOh girl\nOh girl\nOh girl"
   },
   {
    "name": "Verse 2",
@@ -110,15 +99,8 @@
     "Gm"
    ],
    "fill": true,
-   "sheetBars": [
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2
-   ]
+   "sheet": "I crawl around most every night\nAnd I'm all wrapped up in your spell\nI wish someone would understand\nBut you know I could never tell\nI'll just live on in the dark\nIf there's no harm, there's no foul\nWell now my love for you is strange",
+   "lyrics": "I crawl around most every night\nAnd I'm all wrapped up in your spell\nI wish someone would understand\nBut you know I could never tell\nI'll just live on in the dark\nIf there's no harm, there's no foul\nWell now my love for you is strange"
   },
   {
    "name": "Refrain 2",
@@ -134,12 +116,8 @@
    ],
    "crash": true,
    "fill": true,
-   "sheetBars": [
-    2,
-    2,
-    2,
-    1
-   ]
+   "sheet": "Oh, girl you got me on the prowl\nOh girl\nOh girl\nOh girl\nYeah",
+   "lyrics": "Oh, girl you got me on the prowl\nOh girl\nOh girl\nOh girl\nYeah"
   },
   {
    "name": "Outro (no drums)",
