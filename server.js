@@ -49,6 +49,17 @@ async function api(req, res, p) {
     } catch (e) { updating = false; json(res, 500, { error: e.message, log }); }
     return;
   }
+  // Stop the server from the app's own Quit button. Only from this computer — the iPad must never
+  // be able to kill the PA. Every connected device is told first, so the iPad shows "offline" rather
+  // than a silent dead socket.
+  if (p === '/api/quit' && req.method === 'POST') {
+    if (!isLocal(req)) return json(res, 403, { error: 'The server can only be stopped from the computer running it.' });
+    json(res, 200, { stopping: true });
+    broadcast({ type: 'serverQuit' });
+    console.log('\nQuit requested from the app. Stopping.');
+    setTimeout(() => { try { server.close(); } catch {} process.exit(0); }, 250);
+    return;
+  }
   // Backing-track audio lives in local/audio/ (not in git). List: GET /api/audio  Save: POST /api/audio/<songId>.<ext> (raw body)
   if (p === '/api/audio') {
     const dir = path.join(ROOT, 'local', 'audio'); const files = [];

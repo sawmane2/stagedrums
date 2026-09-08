@@ -1,5 +1,5 @@
 {
-  "version": "0.25.0",
-  "date": "2026-09-08",
-  "notes": "iPad control: tap a song on the iPad and the computer loads it; sidebar scrolls vertically only; Paste lyrics button puts words on the chart. Stems re-encoded VBR/mono (library 450 MB -> 177 MB), kit parts loaded only when split. Songs: The Prowl, Mississippi Queen, Need Your Love So Bad, This Ol' Cowboy fitted to their recordings; Ten Cent Pistol, White Horse, Heaven Sent, Holding Out For A Hero, Trick To Happy, Less Than Love, Cowpoke charted."
+ "version": "0.26.0",
+ "date": "2026-09-08",
+ "notes": "Double-click StageDrums.app to start; a Stop the server button on the computer; words reach the iPad and the chart scrolls itself; Desert Skies."
 }

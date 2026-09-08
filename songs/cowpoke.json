@@ -2,11 +2,11 @@
  "id": "colter-wall-cowpoke",
  "title": "Cowpoke",
  "artist": "Colter Wall",
- "bpm": 96,
+ "bpm": 91,
  "time": "3/4",
  "groove": "waltz",
  "feel": "loose",
- "rev": 2,
+ "rev": 4,
  "band": {
   "bass": "roots",
   "keys": "off",
@@ -15,8 +15,14 @@
  "sections": [
   {
    "name": "Intro",
-   "groove": "hats-only",
+   "groove": "waltz",
    "bars": [
+    "C",
+    "Am",
+    "C",
+    "Am",
+    "C",
+    "Am",
     "C",
     "Am",
     "C",
@@ -44,36 +50,14 @@
     "C",
     "F",
     "C",
-    "Am",
-    "Am"
+    "F",
+    "C",
+    "C",
+    "C",
+    "F",
+    "C"
    ],
-   "fill": true,
-   "sheetBars": [
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2
-   ],
-   "sheet": "     C\nI'm lonesome but happy\n F            C\nRich but I'm broke\n        F                       C\nAnd the good Lord knows the reason\n   F           C\nI'm just a cowpoke\n     C\nFrom Cheyenne to Douglas\n        F         C\nAll the ranges I know\n          F             C\n'Cause I drift with the wind\n       Am\nNo one cares where I go",
-   "lyrics": "I'm lonesome but happy\nRich but I'm broke\nAnd the good Lord knows the reason\nI'm just a cowpoke\nFrom Cheyenne to Douglas\nAll the ranges I know\n'Cause I drift with the wind\nNo one cares where I go"
-  },
-  {
-   "name": "Bridge 1",
-   "groove": "waltz",
-   "bars": [
-    "C",
-    "Am",
-    "C",
-    "Am",
-    "C",
-    "Am",
-    "Am",
-    "Am"
-   ]
+   "fill": true
   },
   {
    "name": "Verse 2",
@@ -92,26 +76,23 @@
     "F",
     "C",
     "F",
-    "C",
-    "Am",
-    "Am"
+    "C"
    ],
-   "fill": true,
-   "sheetBars": [
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2
-   ],
-   "sheet": "  C\nI ain't got a dime\n          F            C\nIn these old worn out jeans\n         F          C\nSo I'll stop eatin' steak\n    F           C\nAnd go back to beans\n     C\nI'll pick up a ten spot\n   F          C\nIn Prescot I know\n F         C\nRidin' the broncs\n      Am\nIn the big rodeo",
-   "lyrics": "I ain't got a dime\nIn these old worn out jeans\nSo I'll stop eatin' steak\nAnd go back to beans\nI'll pick up a ten spot\nIn Prescot I know\nRidin' the broncs\nIn the big rodeo"
+   "fill": true
   },
   {
-   "name": "Bridge 2",
+   "name": "Bridge",
+   "groove": "waltz",
+   "bars": [
+    "C",
+    "Am",
+    "C",
+    "Am",
+    "C"
+   ]
+  },
+  {
+   "name": "Instrumental",
    "groove": "waltz",
    "bars": [
     "C",
@@ -123,10 +104,14 @@
     "C",
     "F",
     "C",
-    "F",
+    "Am",
     "C",
-    "Am"
-   ]
+    "Am",
+    "C",
+    "Am",
+    "C"
+   ],
+   "fill": true
   },
   {
    "name": "Verse 3",
@@ -144,24 +129,35 @@
     "C",
     "F",
     "C",
+    "F"
+   ],
+   "fill": true
+  },
+  {
+   "name": "Break",
+   "groove": "waltz",
+   "bars": [
+    "C",
+    "Am"
+   ]
+  },
+  {
+   "name": "Verse 4",
+   "groove": "waltz",
+   "bars": [
+    "C",
+    "C",
     "F",
     "C",
-    "Am",
-    "Am"
+    "F",
+    "C",
+    "F",
+    "C",
+    "C",
+    "C",
+    "F"
    ],
-   "fill": true,
-   "sheetBars": [
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2
-   ],
-   "sheet": "     C\nSome evening springtime\n  F           C\nA filly I'll find\n      F                   C\nAnd I might spend all the summer\n      F         C\nWith her on my mind\n         C\nBut I'll never be branded\n    F         C\nAnd never be broke\n       F            C\nI'm a carefree range ridin'\n  Am\nDriftin' cowpoke",
-   "lyrics": "Some evening springtime\nA filly I'll find\nAnd I might spend all the summer\nWith her on my mind\nBut I'll never be branded\nAnd never be broke\nI'm a carefree range ridin'\nDriftin' cowpoke"
+   "fill": true
   },
   {
    "name": "Outro",
@@ -171,15 +167,140 @@
     "Am",
     "C",
     "Am",
-    "C",
-    "Am"
-   ],
-   "fill": true
+    "C"
+   ]
   }
  ],
  "audio": {
   "mix": {
+   "drums": 1,
+   "bass": 1,
+   "guitar": 1,
+   "other": 1,
    "vocals": 0
-  }
+  },
+  "stems": {
+   "drums": "local/audio/colter-wall-cowpoke/drums.mp3",
+   "bass": "local/audio/colter-wall-cowpoke/bass.mp3",
+   "guitar": "local/audio/colter-wall-cowpoke/guitar.mp3",
+   "other": "local/audio/colter-wall-cowpoke/other.mp3",
+   "vocals": "local/audio/colter-wall-cowpoke/vocals.mp3"
+  },
+  "kit": {
+   "kick": "local/audio/colter-wall-cowpoke/kit/kick.mp3",
+   "snare": "local/audio/colter-wall-cowpoke/kit/snare.mp3",
+   "toms": "local/audio/colter-wall-cowpoke/kit/toms.mp3",
+   "cymbals": "local/audio/colter-wall-cowpoke/kit/cymbals.mp3"
+  },
+  "format": "vbr",
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+  "barTimes": [
+   0.673,
+   2.624,
+   4.598,
+   6.577,
+   8.475,
+   10.449,
+   12.417,
+   14.454,
+   16.469,
+   18.448,
+   20.451,
+   22.483,
+   24.474,
+   26.471,
+   28.415,
+   30.383,
+   32.369,
+   34.319,
+   36.299,
+   38.272,
+   40.246,
+   42.214,
+   44.17,
+   46.15,
+   48.123,
+   50.161,
+   52.106,
+   54.079,
+   56.094,
+   58.038,
+   59.989,
+   61.928,
+   63.89,
+   65.823,
+   67.767,
+   69.73,
+   71.68,
+   73.7,
+   75.662,
+   77.636,
+   79.679,
+   81.711,
+   83.627,
+   85.577,
+   87.574,
+   89.559,
+   91.55,
+   93.472,
+   95.428,
+   97.437,
+   99.381,
+   101.326,
+   103.3,
+   105.268,
+   107.23,
+   109.232,
+   111.166,
+   113.116,
+   115.055,
+   117.034,
+   118.991,
+   120.976,
+   122.926,
+   124.889,
+   126.891,
+   128.911,
+   130.868,
+   132.853,
+   134.792,
+   136.713,
+   138.67,
+   140.666,
+   142.64,
+   144.585,
+   146.582,
+   148.538,
+   150.599,
+   152.538,
+   154.535,
+   156.595,
+   158.586,
+   160.549,
+   162.598,
+   164.595,
+   166.597,
+   168.594,
+   170.597,
+   172.594,
+   174.637,
+   176.617,
+   178.579,
+   180.576,
+   182.637,
+   184.808,
+   186.921,
+   189.034,
+   191.147,
+   193.26
+  ],
+  "fills": [
+   25,
+   45,
+   57,
+   59,
+   70,
+   72
+  ]
  }
 }

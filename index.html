@@ -199,7 +199,9 @@
       <button id="updCheck" type="button" class="small">Check again</button>
       <button id="updApply" type="button" class="primary" hidden>Install update</button>
       <button id="updReload" type="button" class="primary" hidden>Reload now</button>
+      <button id="updQuit" type="button" class="small danger" hidden>Stop the server</button>
     </div>
+    <p class="hint" id="quitHint" hidden>Stopping shuts down the backing track for every device. Start it again by opening StageDrums.</p>
     <p class="hint">Updates come from the GitHub repository set in <code>update.config.json</code>. Installing pulls the new version onto this computer, restarts the server, and every connected device is told to reload. Your songs and mixer settings live in the browser and are kept.</p>
   </form>
 </dialog>

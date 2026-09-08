@@ -6,7 +6,7 @@
  "time": "4/4",
  "groove": "rock-heavy",
  "feel": "loose",
- "rev": 2,
+ "rev": 3,
  "band": {
   "bass": "roots",
   "keys": "off",
@@ -255,7 +255,28 @@
  ],
  "audio": {
   "mix": {
+   "drums": 1,
+   "bass": 1,
+   "guitar": 1,
+   "piano": 1,
+   "other": 1,
    "vocals": 0
-  }
+  },
+  "stems": {
+   "drums": "local/audio/chris-stapleton-white-horse/drums.mp3",
+   "bass": "local/audio/chris-stapleton-white-horse/bass.mp3",
+   "guitar": "local/audio/chris-stapleton-white-horse/guitar.mp3",
+   "piano": "local/audio/chris-stapleton-white-horse/piano.mp3",
+   "other": "local/audio/chris-stapleton-white-horse/other.mp3",
+   "vocals": "local/audio/chris-stapleton-white-horse/vocals.mp3"
+  },
+  "kit": {
+   "kick": "local/audio/chris-stapleton-white-horse/kit/kick.mp3",
+   "snare": "local/audio/chris-stapleton-white-horse/kit/snare.mp3",
+   "toms": "local/audio/chris-stapleton-white-horse/kit/toms.mp3",
+   "cymbals": "local/audio/chris-stapleton-white-horse/kit/cymbals.mp3"
+  },
+  "format": "vbr",
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
  }
 }

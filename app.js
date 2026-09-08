@@ -3,7 +3,50 @@
   'use strict';
   const SD = window.StageDrums;
   const $ = (id) => document.getElementById(id);
-  const LS_SONGS = 'stagedrums.songs', LS_PREFS = 'stagedrums.prefs';
+  const LS_SONGS = 'stagedrums.songs', LS_PREFS = 'stagedrums.prefs', LS_MIX = 'stagedrums.mix';
+
+  // ---------- your mixer settings ----------
+  // These live in their own store, keyed by song id, NOT inside the song. A shipped song update
+  // replaces the song object wholesale, and anything kept in there — faders, mutes, effects, the
+  // key, the fade — went with it. Sections are keyed by name so re-cutting an arrangement doesn't
+  // scramble them. Nothing here is ever written by an update.
+  const MIX_KEYS = ['mix', 'mute', 'fx', 'key', 'fade', 'splitDrums', 'offset'];
+  let mixStore = {};
+  try { mixStore = JSON.parse(localStorage.getItem(LS_MIX) || '{}') || {}; } catch { mixStore = {}; }
+  function saveMix() {
+    if (!song) return;
+    if (!song.audio) { // the recording was removed: drop the settings rather than leaving them to reappear
+      if (mixStore[song.id]) { delete mixStore[song.id]; try { localStorage.setItem(LS_MIX, JSON.stringify(mixStore)); } catch {} }
+      return;
+    }
+    const a = song.audio, e = {};
+    for (const k of MIX_KEYS) if (a[k] != null) e[k] = JSON.parse(JSON.stringify(a[k]));
+    const secs = {};
+    for (const s of song.sections) if (s.stems && Object.keys(s.stems).length) secs[s.name] = JSON.parse(JSON.stringify(s.stems));
+    if (Object.keys(secs).length) e.sections = secs;
+    mixStore[song.id] = e;
+    try { localStorage.setItem(LS_MIX, JSON.stringify(mixStore)); } catch {}
+  }
+  /** Lay your saved settings back over a song, whether it came from storage or a fresh update. */
+  function applyMixStore(s) {
+    const e = s && s.audio && mixStore[s.id]; if (!e) return s;
+    for (const k of MIX_KEYS) if (e[k] != null) s.audio[k] = JSON.parse(JSON.stringify(e[k]));
+    if (e.sections) for (const sec of s.sections) if (e.sections[sec.name]) sec.stems = JSON.parse(JSON.stringify(e.sections[sec.name]));
+    return s;
+  }
+  /** One-time lift of whatever is already sitting in the saved songs, so nothing in flight is lost. */
+  function seedMixStore(list) {
+    if (localStorage.getItem(LS_MIX)) return;
+    for (const s of list || []) {
+      if (!s.audio) continue;
+      const e = {};
+      for (const k of MIX_KEYS) if (s.audio[k] != null) e[k] = s.audio[k];
+      const secs = {}; for (const sec of s.sections) if (sec.stems && Object.keys(sec.stems).length) secs[sec.name] = sec.stems;
+      if (Object.keys(secs).length) e.sections = secs;
+      if (Object.keys(e).length) mixStore[s.id] = e;
+    }
+    try { localStorage.setItem(LS_MIX, JSON.stringify(mixStore)); } catch {}
+  }
 
   // ---------- audio ----------
   // 44.1 kHz on purpose: the stems are 44.1 kHz files, and decodeAudioData resamples everything to the
@@ -31,6 +74,7 @@
     let shipped = []; try { shipped = await (await fetch('songs/index.json', { cache: 'no-store' })).json(); } catch {}
     if (local && local.length) {
       songs = local;
+      seedMixStore(local); // rescue any settings still living inside the saved songs, once
       // an update may ship a newer revision of a built-in song: take it, but keep any lyrics/sheet the user attached
       for (const sh of shipped) {
         const i = songs.findIndex(s => s.id === sh.id);
@@ -41,8 +85,7 @@
           merged.sections.forEach((sec, k) => { const o = old.sections.find(x => x.name === sec.name) || old.sections[k];
             if (o) { if (o.sheet && !sec.sheet) sec.sheet = o.sheet; if (o.lyrics && !sec.lyrics) sec.lyrics = o.lyrics; } });
           if (old.audio && !merged.audio) merged.audio = old.audio; // keep a recording the user attached
-          else if (old.audio && merged.audio) for (const k of ['fx', 'key', 'fade', 'mix', 'mute', 'splitDrums']) if (old.audio[k] != null && merged.audio[k] == null) merged.audio[k] = old.audio[k];
-          songs[i] = merged;
+          songs[i] = applyMixStore(merged); // your faders, mutes and effects go back on top of the new copy
         } else {
           // words are a pure addition: take a shipped sheet even at the same revision, so lyrics added
           // to a song you already have on this device still reach it. Never overwrite words you typed.
@@ -52,13 +95,15 @@
           });
         }
       }
-    } else songs = shipped;
+    } else songs = shipped.map(applyMixStore); // a cleared library still gets your mixes back
     persistSongs();
     renderSongList();
     const lastId = prefs.lastSong;
     selectSong(songs.find(s => s.id === lastId) || songs[0]);
   }
-  function persistSongs() { localStorage.setItem(LS_SONGS, JSON.stringify(songs)); }
+  // every fader, mute, effect and key change already routes through here, so this is the one place
+  // that needs to also write the settings to their own store
+  function persistSongs() { localStorage.setItem(LS_SONGS, JSON.stringify(songs)); saveMix(); }
   /** Chord as shown on stage: transposed when the song is playing in a different key than it was charted in. */
   const keySemis = () => (song && song.audio && song.audio.key && song.audio.key.semitones) || 0;
   const disp = name => keySemis() ? SD.transposeLine(name, keySemis()) : name;
@@ -110,8 +155,9 @@
   function hasSheet() { return !!(song && song.sections.some(s => s.sheet)); }
   function viewMode() { return prefs.view === 'grid' || !hasSheet() ? 'grid' : 'sheet'; }
   /** Build sheet lines for a section with each chord token mapped to a timeline bar index. */
-  function sheetLines(secIdx) {
-    const secDef = song.sections[secIdx], sec = tl.sections[secIdx];
+  function sheetLines(secIdx, synth) {
+    const secDef = synth ? Object.assign({}, song.sections[secIdx], synth) : song.sections[secIdx];
+    const sec = tl.sections[secIdx];
     const raw = String(secDef.sheet || '').split('\n');
     const lines = []; // {chordLine, text, tokens:[{col,name}]}
     for (let i = 0; i < raw.length; i++) {
@@ -153,8 +199,8 @@
     }
     return lines;
   }
-  function renderSheetSection(sec, div) {
-    const lines = sheetLines(sec.index);
+  function renderSheetSection(sec, div, synth) {
+    const lines = sheetLines(sec.index, synth);
     const wrap = document.createElement('div'); wrap.className = 'sheet';
     for (const l of lines) {
       const row = document.createElement('div'); row.className = 'sl'; if (l.bar != null) row.dataset.bar = l.bar;
@@ -173,6 +219,40 @@
     }
     div.appendChild(wrap);
   }
+  /** Keep what's playing on screen. Scrolls only once whatever is lit drifts out of a comfortable band,
+      so the page doesn't crawl under you on every bar — and never while you're scrolling it by hand.
+      Uses rects rather than offsetTop because bars sit inside a positioned section and rows don't. */
+  let scrollUntil = 0, handUntil = 0;
+  function keepInView(el, padTop, padBottom, ahead) {
+    if (!el) return;
+    const now = performance.now(); if (now < scrollUntil || now < handUntil) return;
+    const ch = $('chart'), r = el.getBoundingClientRect(), c = ch.getBoundingClientRect();
+    // `ahead` is what must stay on screen — the line you'll be singing shortly, not the one you're on.
+    // `el` is still what gets positioned, so the lit line never scrolls off the top to chase it.
+    const w = (ahead || el).getBoundingClientRect();
+    const top = padTop || 72, bottom = padBottom || 120;
+    if (r.top >= c.top + top && w.bottom <= c.bottom - bottom) return;
+    // sit the lit line higher when we're reading ahead, so there is room below for what's coming
+    ch.scrollTo({ top: Math.max(0, ch.scrollTop + (r.top - c.top) - ch.clientHeight * (ahead && ahead !== el ? 0.24 : 0.32)), behavior: 'smooth' });
+    scrollUntil = now + 450; // let the smooth scroll land before measuring again
+  }
+  // a hand on the chart wins for a few seconds — you looked ahead on purpose
+  ['pointerdown', 'wheel', 'touchmove'].forEach(ev =>
+    document.addEventListener(ev, e => { if ($('chart').contains(e.target)) handUntil = performance.now() + 4000; }, { passive: true, capture: true }));
+
+  /** A readable chord line for a section that has no words: its bars, four to a row, with the bars
+      each row covers so the highlight walks it at the same pace as a sung line. */
+  function instrumentalSheet(sec, secDef) {
+    const per = secDef.bars.length, rows = [], bars = [];
+    for (let i = 0; i < per; i += 4) {
+      const run = [];
+      for (let j = i; j < Math.min(i + 4, per); j++) run.push(String(secDef.bars[j]).split(/\s+/)[0]);
+      rows.push(run.map(c => c.padEnd(8)).join('').trimEnd());
+      bars.push(Math.min(4, per - i));
+    }
+    const label = /solo|lead/i.test(sec.name) ? '(solo)' : /intro|interlude|break|riff|outro|ending|fade/i.test(sec.name) ? '(' + sec.name.toLowerCase() + ')' : '';
+    return { sheet: rows.join('\n') + (label ? '\n ' + label : ''), sheetBars: bars };
+  }
   function updateSheetHighlight(barIdx) {
     if (viewMode() !== 'sheet') return;
     const secIdx = tl.bars[barIdx].section; const secEl = document.querySelector(`.section[data-section="${secIdx}"]`); if (!secEl) return;
@@ -183,11 +263,18 @@
     // the lit line is the last row that has started, chords or words alike
     let row = null; secEl.querySelectorAll('.sl[data-bar]').forEach(r => { const b = +r.dataset.bar; if (b <= barIdx && (!row || b >= +row.dataset.bar)) row = r; });
     document.querySelectorAll('.sl.now').forEach(r => { if (r !== row) r.classList.remove('now'); });
-    if (row) {
-      row.classList.add('now');
-      const ch = $('chart'); const top = row.offsetTop - ch.offsetTop;
-      if (top < ch.scrollTop + 60 || top > ch.scrollTop + ch.clientHeight - 140) ch.scrollTo({ top: top - ch.clientHeight * 0.35, behavior: 'smooth' });
-    }
+    if (!row) return;
+    row.classList.add('now');
+    // Lead the singer, don't chase them. Scrolling only when the lit line is about to leave the screen
+    // puts the next verse under your chin exactly when you need to have already read it. So the line
+    // that has to stay visible is the one LEAD rows ahead — across the section break, which is where
+    // it matters most — and when the page does move, the lit line lands high enough to leave room
+    // for what's coming. Rows are in document order, so this crosses into the next section by itself.
+    const LEAD = 2;
+    const all = [...document.querySelectorAll('.sl[data-bar]')];
+    const i = all.indexOf(row);
+    const ahead = i >= 0 ? all[Math.min(all.length - 1, i + LEAD)] : row;
+    keepInView(row, 60, 140, ahead);
   }
   // the same toggle sits in the header, because on the iPad the sidebar is closed while you play
   const toggleView = () => { prefs.view = viewMode() === 'sheet' ? 'grid' : 'sheet'; savePrefs(); renderChart(); updateNow(transport.currentBar(), true); };
@@ -208,7 +295,14 @@
         <span class="meta">${sec.count} bars${rep} · ${esc(secDef.groove || song.groove || 'rock')}</span>
         <span class="jump">tap to jump</span></div>`;
       div.querySelector('.section-head').onclick = () => transport.playing ? queueSection(sec.index, false) : jumpTo(sec.start);
-      if (viewMode() === 'sheet' && secDef.sheet) { renderSheetSection(sec, div); if (secDef.notes) { const nt = document.createElement('div'); nt.className = 'notes'; nt.textContent = secDef.notes; div.appendChild(nt); } chart.appendChild(div); return; }
+      if (sheetOn && (secDef.sheet || sec.count)) {
+        // An intro, interlude or solo usually has no words. Left as a grid it gave the sheet nothing to
+        // light and nothing to scroll to, so the iPad sat still through the whole interlude. Sections
+        // without words get a chord line built from their own bars instead, four to a row.
+        renderSheetSection(sec, div, secDef.sheet ? null : instrumentalSheet(sec, secDef));
+        if (secDef.notes) { const nt = document.createElement('div'); nt.className = 'notes'; nt.textContent = secDef.notes; div.appendChild(nt); }
+        chart.appendChild(div); return;
+      }
       const bars = document.createElement('div'); bars.className = 'bars';
       bars.style.gridTemplateColumns = `repeat(${Math.min(4, Math.max(2, secDef.bars.length >= 4 ? 4 : secDef.bars.length))}, 1fr)`;
       for (let i = sec.start; i < sec.end; i++) {
@@ -277,7 +371,9 @@
       $('nowSection').textContent = sec.name;
       document.querySelectorAll('.section.current').forEach(e => e.classList.remove('current'));
       const se = document.querySelector(`.section[data-section="${bar.section}"]`);
-      if (se) { se.classList.add('current'); if (viewMode() !== 'sheet') { const ch = $('chart'); ch.scrollTo({ top: se.offsetTop - ch.offsetTop - 8, behavior: 'smooth' }); } }
+      if (se) { se.classList.add('current');
+        if (viewMode() !== 'sheet') { const ch = $('chart'), r = se.getBoundingClientRect(), c = ch.getBoundingClientRect();
+          ch.scrollTo({ top: Math.max(0, ch.scrollTop + (r.top - c.top) - 8), behavior: 'smooth' }); scrollUntil = performance.now() + 450; } }
       renderLive();
       if ($('stemScope').value === 'live') renderStemMix(); // faders follow the section that's playing
     }
@@ -297,6 +393,7 @@
       for (let i = 0; i < barIdx; i++) { const d = document.querySelector(`.bar[data-bar="${i}"]`); if (d && tl.bars[i].section === bar.section) d.classList.add('done'); }
       if (currentBarEl) currentBarEl.querySelectorAll('.chord.on').forEach(c => c.classList.remove('on'));
       currentBarEl = el; if (el) el.classList.add('now');
+      keepInView(el); // a 24-bar verse is taller than the screen: follow the bar, not just the section
     }
     if (el) el.querySelectorAll('.chord').forEach((c, i) => c.classList.toggle('on', bar.chords[i] === chord));
   }
@@ -584,7 +681,13 @@
   $('btnMidiClear').onclick = () => { if (song && song.midiBars) { delete song.midiBars; persistSongs(); transport.stop(); selectSong(song); broadcastSong(); } };
 
   // ---------- sync roles ----------
-  function setSyncStatus(text, cls) { const p = $('syncStatus'); p.textContent = text; p.className = 'pill ' + (cls || ''); }
+  // "server stopped" outranks the reconnect chatter that follows it: the socket is about to die on
+  // purpose, and on stage the useful thing to read is why, not that we're still trying.
+  let quitUntil = 0;
+  function setSyncStatus(text, cls) {
+    if (performance.now() < quitUntil && text !== 'server stopped') return;
+    const p = $('syncStatus'); p.textContent = text; p.className = 'pill ' + (cls || '');
+  }
   function defaultWsUrl() {
     if (location.protocol.startsWith('http') && location.hostname && location.hostname !== '' && !/github\.io|pages\.dev|netlify/.test(location.hostname))
       return (location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host;
@@ -613,6 +716,9 @@
   };
   function onSyncMessage(m) {
     if (m.type === 'updated') { showBanner(m.version); return; }
+    // the computer stopped the server on purpose: say so on the iPad rather than leaving it
+    // guessing at a dead socket while it retries forever
+    if (m.type === 'serverQuit') { quitUntil = performance.now() + 10000; setSyncStatus('server stopped', 'warn'); return; }
     if (role === 'host' && m.type === 'cmd') {
       switch (m.cmd) {
         case 'play': if (!transport.playing) play(); break;
@@ -1079,11 +1185,12 @@
   })();
 
   // ---------- version & updates ----------
-  let localVersion = null, hasServer = false, updateInfo = null;
+  let localVersion = null, hasServer = false, updateInfo = null, canQuit = false;
   async function loadVersion() {
     try { localVersion = await (await fetch('version.json?t=' + Date.now(), { cache: 'no-store' })).json(); } catch { localVersion = { version: '?' }; }
     $('btnVersion').textContent = 'v' + localVersion.version;
-    try { const r = await fetch('/api/version', { cache: 'no-store' }); hasServer = r.ok && (await r.json()).server === true; } catch { hasServer = false; }
+    try { const r = await fetch('/api/version', { cache: 'no-store' }); const v = r.ok ? await r.json() : {};
+      hasServer = v.server === true; canQuit = !!v.canUpdate; } catch { hasServer = false; canQuit = false; }
     if (hasServer && role !== 'follower') checkUpdates(true);
   }
   async function checkUpdates(quiet) {
@@ -1091,6 +1198,7 @@
     $('updNotes').textContent = localVersion && localVersion.notes ? localVersion.notes : '';
     $('updApply').hidden = true; $('updReload').hidden = true;
     if (!quiet) $('updStatus').textContent = 'Checking for updates…';
+    $('updQuit').hidden = $('quitHint').hidden = !(hasServer && canQuit);
     try {
       if (hasServer) {
         updateInfo = await (await fetch('/api/update/check', { cache: 'no-store' })).json();
@@ -1127,6 +1235,18 @@
   $('btnVersion').onclick = () => { $('dlgUpdate').showModal(); checkUpdates(); };
   $('updCheck').onclick = () => checkUpdates();
   $('updApply').onclick = applyUpdate;
+  // Stop the server. Offered only on the computer running it: the server refuses the call from
+  // anywhere else, so the iPad can never kill the PA mid-set.
+  async function quitServer() {
+    if (transport.playing && !confirm('The backing track is playing. Stop the server anyway?')) return;
+    $('updQuit').disabled = true; $('updStatus').textContent = 'Stopping the server…';
+    try { const r = await (await fetch('/api/quit', { method: 'POST' })).json();
+      if (r.error) { $('updStatus').textContent = r.error; $('updQuit').disabled = false; return; }
+    } catch { /* the socket dying on us is the expected outcome */ }
+    try { transport.stop(); } catch {}
+    $('updStatus').textContent = 'Server stopped. Open StageDrums again to start it.';
+  }
+  $('updQuit').onclick = quitServer;
   $('updReload').onclick = hardReload; $('updBannerReload').onclick = hardReload; $('updBannerClose').onclick = () => { $('updBanner').hidden = true; };
   loadVersion();
 
