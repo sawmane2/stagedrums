@@ -16,7 +16,12 @@
     "A5",
     "A5"
    ],
-   "crash": false
+   "crash": false,
+   "sheet": "A5\n (main riff)",
+   "lyrics": "(main riff)",
+   "sheetBars": [
+    5
+   ]
   },
   {
    "name": "Verse 1",
@@ -33,9 +38,13 @@
    ],
    "fill": true,
    "sheetBars": [
-    4,
-    4
-   ]
+    2,
+    2,
+    2,
+    2
+   ],
+   "sheet": "A\n Sittin' on a rainbow,\n Looking at the world.\nA5\n (main riff)\nA\n Standin' by the roadside,\n Waiting for my girl.\nA5\n (main riff)",
+   "lyrics": "Sittin' on a rainbow,\nLooking at the world.\n(main riff)\nStandin' by the roadside,\nWaiting for my girl.\n(main riff)"
   },
   {
    "name": "Chorus 1",
@@ -54,10 +63,13 @@
    "crash": true,
    "fill": true,
    "sheetBars": [
-    4,
-    3,
-    2
-   ]
+    2,
+    2,
+    2,
+    3
+   ],
+   "sheet": "G     D    G     D\n Any time, any day,\nA5\n (main riff)\nG         D         A\n When the sun shines on its way,\nG         D          A\n This is what you'll hear me say",
+   "lyrics": "Any time, any day,\n(main riff)\nWhen the sun shines on its way,\nThis is what you'll hear me say"
   },
   {
    "name": "Lead",
@@ -71,6 +83,11 @@
     "A5",
     "A5",
     "A5"
+   ],
+   "sheet": "A5\n (lead)",
+   "lyrics": "(lead)",
+   "sheetBars": [
+    8
    ]
   },
   {
@@ -82,7 +99,12 @@
     "A5",
     "A5"
    ],
-   "fill": true
+   "fill": true,
+   "sheet": "A5\n (main riff, x2)",
+   "lyrics": "(main riff, x2)",
+   "sheetBars": [
+    4
+   ]
   },
   {
    "name": "Verse 2",
@@ -99,9 +121,13 @@
    ],
    "fill": true,
    "sheetBars": [
-    4,
-    4
-   ]
+    2,
+    2,
+    2,
+    2
+   ],
+   "sheet": "A\n Ridin' on a jet plane,\n Higher than a bird\nA5\n (main riff)\nA\n Looking out the window,\n Don't believe a word\nA5\n (main riff)",
+   "lyrics": "Ridin' on a jet plane,\nHigher than a bird\n(main riff)\nLooking out the window,\nDon't believe a word\n(main riff)"
   },
   {
    "name": "Chorus 2",
@@ -120,10 +146,13 @@
    "crash": true,
    "fill": true,
    "sheetBars": [
-    4,
-    3,
-    2
-   ]
+    2,
+    2,
+    2,
+    3
+   ],
+   "sheet": "G     D    G     D\n Any time, any day,\nA5\n (main riff)\nG         D         A\n When the sun shines on its way,\nG         D          A\n This is what you'll hear me say",
+   "lyrics": "Any time, any day,\n(main riff)\nWhen the sun shines on its way,\nThis is what you'll hear me say"
   },
   {
    "name": "Lead 2",
@@ -137,6 +166,11 @@
     "A5",
     "A5",
     "A5"
+   ],
+   "sheet": "A5\n (lead)",
+   "lyrics": "(lead)",
+   "sheetBars": [
+    8
    ]
   },
   {
@@ -152,7 +186,12 @@
     "A5",
     "A5"
    ],
-   "fill": true
+   "fill": true,
+   "sheet": "A5\n (main riff, to the fade)",
+   "lyrics": "(main riff, to the fade)",
+   "sheetBars": [
+    8
+   ]
   }
  ],
  "rev": 7,

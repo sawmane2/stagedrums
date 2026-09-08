@@ -602,7 +602,12 @@
      "A5",
      "A5"
     ],
-    "crash": false
+    "crash": false,
+    "sheet": "A5\n (main riff)",
+    "lyrics": "(main riff)",
+    "sheetBars": [
+     5
+    ]
    },
    {
     "name": "Verse 1",
@@ -619,9 +624,13 @@
     ],
     "fill": true,
     "sheetBars": [
-     4,
-     4
-    ]
+     2,
+     2,
+     2,
+     2
+    ],
+    "sheet": "A\n Sittin' on a rainbow,\n Looking at the world.\nA5\n (main riff)\nA\n Standin' by the roadside,\n Waiting for my girl.\nA5\n (main riff)",
+    "lyrics": "Sittin' on a rainbow,\nLooking at the world.\n(main riff)\nStandin' by the roadside,\nWaiting for my girl.\n(main riff)"
    },
    {
     "name": "Chorus 1",
@@ -640,10 +649,13 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
-     4,
-     3,
-     2
-    ]
+     2,
+     2,
+     2,
+     3
+    ],
+    "sheet": "G     D    G     D\n Any time, any day,\nA5\n (main riff)\nG         D         A\n When the sun shines on its way,\nG         D          A\n This is what you'll hear me say",
+    "lyrics": "Any time, any day,\n(main riff)\nWhen the sun shines on its way,\nThis is what you'll hear me say"
    },
    {
     "name": "Lead",
@@ -657,6 +669,11 @@
      "A5",
      "A5",
      "A5"
+    ],
+    "sheet": "A5\n (lead)",
+    "lyrics": "(lead)",
+    "sheetBars": [
+     8
     ]
    },
    {
@@ -668,7 +685,12 @@
      "A5",
      "A5"
     ],
-    "fill": true
+    "fill": true,
+    "sheet": "A5\n (main riff, x2)",
+    "lyrics": "(main riff, x2)",
+    "sheetBars": [
+     4
+    ]
    },
    {
     "name": "Verse 2",
@@ -685,9 +707,13 @@
     ],
     "fill": true,
     "sheetBars": [
-     4,
-     4
-    ]
+     2,
+     2,
+     2,
+     2
+    ],
+    "sheet": "A\n Ridin' on a jet plane,\n Higher than a bird\nA5\n (main riff)\nA\n Looking out the window,\n Don't believe a word\nA5\n (main riff)",
+    "lyrics": "Ridin' on a jet plane,\nHigher than a bird\n(main riff)\nLooking out the window,\nDon't believe a word\n(main riff)"
    },
    {
     "name": "Chorus 2",
@@ -706,10 +732,13 @@
     "crash": true,
     "fill": true,
     "sheetBars": [
-     4,
-     3,
-     2
-    ]
+     2,
+     2,
+     2,
+     3
+    ],
+    "sheet": "G     D    G     D\n Any time, any day,\nA5\n (main riff)\nG         D         A\n When the sun shines on its way,\nG         D          A\n This is what you'll hear me say",
+    "lyrics": "Any time, any day,\n(main riff)\nWhen the sun shines on its way,\nThis is what you'll hear me say"
    },
    {
     "name": "Lead 2",
@@ -723,6 +752,11 @@
      "A5",
      "A5",
      "A5"
+    ],
+    "sheet": "A5\n (lead)",
+    "lyrics": "(lead)",
+    "sheetBars": [
+     8
     ]
    },
    {
@@ -738,7 +772,12 @@
      "A5",
      "A5"
     ],
-    "fill": true
+    "fill": true,
+    "sheet": "A5\n (main riff, to the fade)",
+    "lyrics": "(main riff, to the fade)",
+    "sheetBars": [
+     8
+    ]
    }
   ],
   "rev": 7,
@@ -886,7 +925,12 @@
      "keys": "off",
      "gtr": "arp"
     },
-    "notes": "Acoustic arpeggio, Em - A, no drums. ~0:00-0:38"
+    "notes": "Acoustic arpeggio, Em - A, no drums. ~0:00-0:38",
+    "sheet": "Em  A  Asus4  A\n (acoustic)",
+    "lyrics": "(acoustic)",
+    "sheetBars": [
+     12
+    ]
    },
    {
     "name": "Lead intro",
@@ -916,7 +960,12 @@
      "keys": "organ",
      "gtr": "strum8"
     },
-    "notes": "Band in, lead guitar over Em - A. ~0:38-1:32"
+    "notes": "Band in, lead guitar over Em - A. ~0:38-1:32",
+    "sheet": "Em  A  Asus4  A\n (lead)",
+    "lyrics": "(lead)",
+    "sheetBars": [
+     16
+    ]
    },
    {
     "name": "Verse 1",
@@ -946,7 +995,17 @@
      "keys": "pad",
      "gtr": "folk"
     },
-    "notes": "~1:32-2:24. Chords auto-detected from the recording - check against your ears."
+    "notes": "~1:32-2:24. Chords auto-detected from the recording - check against your ears.",
+    "sheet": "Asus2                                   G\n I used to think, darlin', you never did nothin'\n                                   D\n But you were always up to somethin'\n                  C\n Always had a run in\nAsus2                                   G\n I got to think those days are comin' to get ya\n                           D\n Now nobody want to protect yah\n                         C\n They only want to forget yah",
+    "lyrics": "I used to think, darlin', you never did nothin'\nBut you were always up to somethin'\nAlways had a run in\nI got to think those days are comin' to get ya\nNow nobody want to protect yah\nThey only want to forget yah",
+    "sheetBars": [
+     4,
+     2,
+     2,
+     4,
+     2,
+     2
+    ]
    },
    {
     "name": "Chorus 1",
@@ -972,7 +1031,17 @@
      "keys": "organ",
      "gtr": "strum8"
     },
-    "notes": "~2:24-3:00"
+    "notes": "~2:24-3:00",
+    "sheet": "Em                   D\n You'll be on my mind\n               A\n Don't give yourself away\n       G            D\n To the weight of love\nEm                      D\n You'll be on your side\n               C\n Don't give yourself away\n    B\n The weight of, weight of love",
+    "lyrics": "You'll be on my mind\nDon't give yourself away\nTo the weight of love\nYou'll be on your side\nDon't give yourself away\nThe weight of, weight of love",
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
    },
    {
     "name": "Solo",
@@ -998,7 +1067,12 @@
      "keys": "organ",
      "gtr": "strum8"
     },
-    "notes": "Lead over Em - A. ~3:00-3:38"
+    "notes": "Lead over Em - A. ~3:00-3:38",
+    "sheet": "Em  A  Asus4  A\n (solo)",
+    "lyrics": "(solo)",
+    "sheetBars": [
+     12
+    ]
    },
    {
     "name": "Verse 2",
@@ -1024,7 +1098,17 @@
      "keys": "pad",
      "gtr": "folk"
     },
-    "notes": "~3:38-4:16"
+    "notes": "~3:38-4:16",
+    "sheet": "Asus2                                             G\n Dance all night cause people, they don't wanna be lonely\n                    D\n Never wanna be lonely\n                          C\n They don't wanna be an only, one\nAsus2                                G\n You had a thing no one could ever be sure of\n                          D\n Never ever had a pure love\n                       C\n And never no cure from",
+    "lyrics": "Dance all night cause people, they don't wanna be lonely\nNever wanna be lonely\nThey don't wanna be an only, one\nYou had a thing no one could ever be sure of\nNever ever had a pure love\nAnd never no cure from",
+    "sheetBars": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ]
    },
    {
     "name": "Chorus / outro solo",
@@ -1047,7 +1131,17 @@
      "keys": "organ",
      "gtr": "strum8"
     },
-    "notes": "8-bar cycle x4 (~4:16-6:00). Hold it as long as the solo needs."
+    "notes": "8-bar cycle x4 (~4:16-6:00). Hold it as long as the solo needs.",
+    "sheet": "Em                   D\n You'll be on my mind\n               A\n Don't give yourself away\n       G            D\n To the weight of love\nEm                      D\n You'll be on your side\n               C\n Don't give yourself away\n    B\n The weight of, weight of love",
+    "lyrics": "You'll be on my mind\nDon't give yourself away\nTo the weight of love\nYou'll be on your side\nDon't give yourself away\nThe weight of, weight of love",
+    "sheetBars": [
+     2,
+     1,
+     1,
+     2,
+     1,
+     1
+    ]
    },
    {
     "name": "Outro",
@@ -1077,7 +1171,13 @@
      "keys": "pad",
      "gtr": "arp"
     },
-    "notes": "Drops back to the acoustic figure and fades. ~6:00-6:50"
+    "notes": "Drops back to the acoustic figure and fades. ~6:00-6:50",
+    "sheet": "Em  D  A  G  D\nEm  D  C  B\n (solo, to the break)",
+    "lyrics": "(solo, to the break)",
+    "sheetBars": [
+     8,
+     8
+    ]
    },
    {
     "name": "Ending",
@@ -1091,7 +1191,12 @@
      "bass": "whole",
      "keys": "off",
      "gtr": "whole"
-    }
+    },
+    "sheet": "C  Ab  E  Ab\n (single strums)",
+    "lyrics": "(single strums)",
+    "sheetBars": [
+     1
+    ]
    }
   ],
   "audio": {
