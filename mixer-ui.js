@@ -56,7 +56,7 @@
     }
     const FMT = { trim: v => `${(+v).toFixed(0)} dB`, fader: v => v <= -60 ? '−∞' : `${(+v).toFixed(0)} dB`, pan: v => Math.abs(v) < 0.05 ? 'C' : v < 0 ? `L${Math.round(-v * 100)}` : `R${Math.round(v * 100)}`,
       hpf: v => `${Math.round(v)} Hz`, low: v => `${(+v).toFixed(0)} dB`, mid: v => `${(+v).toFixed(0)} dB`, midHz: v => v >= 1000 ? `${(v / 1000).toFixed(1)}k` : `${Math.round(v)} Hz`, high: v => `${(+v).toFixed(0)} dB`,
-      gateThr: v => `${(+v).toFixed(0)} dB`, gateRel: v => `${Math.round(v * 1000)} ms`, compThr: v => `${(+v).toFixed(0)} dB`, ratio: v => `${(+v).toFixed(1)}:1`, attack: v => `${Math.round(v * 1000)} ms`, release: v => `${Math.round(v * 1000)} ms`, makeup: v => `+${(+v).toFixed(0)} dB`, rev: v => `${Math.round(v * 100)}%` };
+      pitchAmount: v => `${Math.round(v * 100)}%`, pitchRetune: v => `${Math.round(v * 1000)} ms`, gateThr: v => `${(+v).toFixed(0)} dB`, gateRel: v => `${Math.round(v * 1000)} ms`, compThr: v => `${(+v).toFixed(0)} dB`, ratio: v => `${(+v).toFixed(1)}:1`, attack: v => `${Math.round(v * 1000)} ms`, release: v => `${Math.round(v * 1000)} ms`, makeup: v => `+${(+v).toFixed(0)} dB`, rev: v => `${Math.round(v * 100)}%` };
     function stripHtml(ch, i) {
       const inputs = Array.from({ length: Math.max(2, mixer.inputCount || 2) }, (_, n) => `<option value="${n}" ${ch.s.input === n ? 'selected' : ''}>In ${n + 1}</option>`).join('');
       const presets = Object.entries(SD.MixerPresets).map(([k, p]) => `<option value="${k}" ${ch.s.preset === k ? 'selected' : ''}>${p.label}</option>`).join('');
@@ -67,6 +67,9 @@
         <div class="grp"><div class="grp-title">Input</div>${slider('Trim', 'trim', -20, 20, 1)}${slider('HPF', 'hpf', 20, 400, 5)}</div>
         <div class="grp"><div class="grp-title">EQ</div>${slider('Low', 'low', -12, 12, 1)}${slider('Mid', 'mid', -12, 12, 1)}${slider('Mid Hz', 'midHz', 200, 8000, 50)}${slider('High', 'high', -12, 12, 1)}</div>
         <div class="grp"><div class="grp-title"><label class="chk"><input type="checkbox" data-k="gateOn"> Gate</label></div>${slider('Thresh', 'gateThr', -80, -10, 1)}${slider('Release', 'gateRel', 0.02, 1, 0.01)}</div>
+        <div class="grp"><div class="grp-title"><label class="chk" title="Real-time pitch correction toward the song's key. Slow retune keeps vibrato and slides; fast is the hard-tune sound."><input type="checkbox" data-k="pitchOn"> Pitch fix</label> <span class="pfx-read" title="detected pitch, how far it is being moved, and this corrector's share of the audio thread"></span></div>
+          <div class="strip-row"><select class="skey" title="Key to tune to"><option value="-1">follow song</option>${[...'C C# D D# E F F# G G# A A# B'.split(' ')].map((k, n) => `<option value="${n}" ${ch.s.pitchRoot === n ? 'selected' : ''}>${k}</option>`).join('')}</select><select class="sscale" title="Scale"><option value="0" ${ch.s.pitchScale === 0 ? 'selected' : ''}>chromatic</option><option value="1" ${ch.s.pitchScale === 1 ? 'selected' : ''}>major</option><option value="2" ${ch.s.pitchScale === 2 ? 'selected' : ''}>minor</option></select></div>
+          ${slider('Amount', 'pitchAmount', 0, 1, 0.05)}${slider('Retune', 'pitchRetune', 0.01, 0.5, 0.01)}</div>
         <div class="grp"><div class="grp-title"><label class="chk" title="The browser compressor adds automatic makeup gain; Makeup here is extra."><input type="checkbox" data-k="compOn"> Comp</label></div>${slider('Thresh', 'compThr', -50, 0, 1)}${slider('Ratio', 'ratio', 1, 12, 0.5)}${slider('Attack', 'attack', 0.001, 0.1, 0.001)}${slider('Release', 'release', 0.03, 1, 0.01)}${slider('Makeup', 'makeup', 0, 18, 1)}</div>
         <div class="grp"><div class="grp-title">Send / out</div>${slider('Reverb', 'rev', 0, 1, 0.01)}${slider('Pan', 'pan', -1, 1, 0.05)}${slider('Fader', 'fader', -60, 10, 1)}
           <button class="small smute ${ch.s.mute ? 'on' : ''}">Mute</button></div>
@@ -86,6 +89,8 @@
         el.querySelector('.sname').onchange = e => { ch.s.name = e.target.value; save(); };
         el.querySelector('.sinput').onchange = e => { mixer.setInput(ch, +e.target.value); save(); };
         el.querySelector('.spreset').onchange = e => { ch.setPreset(e.target.value); sync(); save(); };
+        el.querySelector('.skey').onchange = e => { ch.s.pitchRoot = +e.target.value; ch.apply(); save(); };
+        el.querySelector('.sscale').onchange = e => { ch.s.pitchScale = +e.target.value; ch.apply(); save(); };
         el.querySelector('.smute').onclick = e => { ch.s.mute = !ch.s.mute; ch.apply(); e.target.classList.toggle('on', ch.s.mute); save(); };
         el.querySelector('.srem').onclick = () => { if (confirm(`Remove ${ch.s.name}?`)) { mixer.removeChannel(ch); renderStrips(); save(); } };
       });
@@ -105,6 +110,8 @@
           el.querySelector('.lvl').classList.toggle('hot', m.level > -3);
           el.querySelector('.gr').style.width = `${Math.max(0, Math.min(100, -m.reduction / 24 * 100))}%`;
           el.querySelector('.gate-led').classList.toggle('open', !ch.s.gateOn || m.gateOpen);
+          const ps = ch.pitchState, pr = el.querySelector('.pfx-read');
+          if (pr) pr.textContent = ch.s.pitchOn ? (ps.pitch ? `${ps.pitch.toFixed(0)} Hz ${ps.cents >= 0 ? '+' : ''}${ps.cents.toFixed(0)}¢ · ${Math.round(ps.latency * 1000)} ms` : `— · ${Math.round(ps.latency * 1000)} ms`) : '';
         });
         const mm = mixer.readMaster();
         $('masterLvl').style.width = `${Math.max(0, Math.min(100, (mm.level + 60) / 60 * 100))}%`;

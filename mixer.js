@@ -21,6 +21,7 @@
   const CHANNEL_DEFAULTS = { name: 'Channel', input: 0, trim: 0, pan: 0, fader: 0, mute: false, preset: 'flat',
     hpf: 20, low: 0, mid: 0, midHz: 1000, high: 0,
     gateOn: false, gateThr: -45, gateAtk: 0.005, gateHold: 0.06, gateRel: 0.12, gateRange: -80,
+    pitchOn: false, pitchAmount: 1, pitchRetune: 0.12, pitchRoot: -1, pitchScale: 0, // -1 root = follow the song's key
     compOn: false, compThr: -24, ratio: 2, attack: 0.01, release: 0.15, knee: 6, makeup: 0, rev: 0 };
 
   class Channel {
@@ -35,6 +36,10 @@
       this.gate = mixer.workletOk ? new AudioWorkletNode(ctx, 'stagedrums-gate', { numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [1] }) : ctx.createGain();
       this.gateState = { open: true, gain: 1 };
       if (this.gate.port) this.gate.port.onmessage = e => { this.gateState = e.data; };
+      // real-time pitch correction (pitch-worklet.js) sits after the gate so it never chases room noise
+      this.pitch = mixer.pitchOk ? new AudioWorkletNode(ctx, 'stagedrums-pitchfix', { numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [1] }) : ctx.createGain();
+      this.pitchState = { pitch: 0, cents: 0, voiced: 0, cpu: 0, latency: 0 };
+      if (this.pitch.port) this.pitch.port.onmessage = e => { this.pitchState = e.data; };
       this.comp = ctx.createDynamicsCompressor();
       this.makeup = ctx.createGain();
       this.meter = ctx.createAnalyser(); this.meter.fftSize = 512;
@@ -42,7 +47,7 @@
       this.fader = ctx.createGain();
       this.revSend = ctx.createGain();
       this.trim.connect(this.hpf); this.hpf.connect(this.low); this.low.connect(this.mid); this.mid.connect(this.high);
-      this.high.connect(this.gate); this.gate.connect(this.comp); this.comp.connect(this.makeup);
+      this.high.connect(this.gate); this.gate.connect(this.pitch); this.pitch.connect(this.comp); this.comp.connect(this.makeup);
       this.makeup.connect(this.meter); this.makeup.connect(this.pan); this.pan.connect(this.fader);
       this.fader.connect(mixer.master); this.fader.connect(this.revSend); this.revSend.connect(mixer.reverbBus);
       this._buf = new Float32Array(this.meter.fftSize);
@@ -57,6 +62,11 @@
         const gp = this.gate.parameters;
         gp.get('bypass').value = s.gateOn ? 0 : 1; gp.get('threshold').value = s.gateThr; gp.get('attack').value = s.gateAtk;
         gp.get('hold').value = s.gateHold; gp.get('release').value = s.gateRel; gp.get('range').value = s.gateRange;
+      }
+      if (this.pitch.parameters) {
+        const pp = this.pitch.parameters, key = this.mixer.songKey || { root: 0, scale: 0 };
+        pp.get('bypass').value = s.pitchOn ? 0 : 1; pp.get('amount').value = s.pitchAmount; pp.get('retune').value = s.pitchRetune;
+        pp.get('root').value = s.pitchRoot >= 0 ? s.pitchRoot : key.root; pp.get('scale').value = s.pitchRoot >= 0 ? s.pitchScale : (s.pitchScale || key.scale);
       }
       // compressor "off" = threshold 0 dB, ratio 1
       set(this.comp.threshold, s.compOn ? s.compThr : 0); set(this.comp.ratio, s.compOn ? s.ratio : 1);
@@ -74,7 +84,7 @@
       let pk = 0; for (let i = 0; i < this._buf.length; i++) { const a = Math.abs(this._buf[i]); if (a > pk) pk = a; }
       return { level: toDb(pk), reduction: this.comp.reduction, gateOpen: this.gateState.open };
     }
-    dispose() { for (const n of [this.trim, this.hpf, this.low, this.mid, this.high, this.gate, this.comp, this.makeup, this.meter, this.pan, this.fader, this.revSend]) { try { n.disconnect(); } catch {} } }
+    dispose() { for (const n of [this.trim, this.hpf, this.low, this.mid, this.high, this.gate, this.pitch, this.comp, this.makeup, this.meter, this.pan, this.fader, this.revSend]) { try { n.disconnect(); } catch {} } }
   }
 
   class Mixer {
@@ -99,7 +109,11 @@
     async init() {
       try { await this.ctx.audioWorklet.addModule('gate-worklet.js'); this.workletOk = true; }
       catch (e) { console.warn('Gate worklet unavailable, gates bypassed:', e); this.workletOk = false; }
+      try { await this.ctx.audioWorklet.addModule('pitch-worklet.js'); this.pitchOk = true; }
+      catch (e) { console.warn('Pitch worklet unavailable:', e); this.pitchOk = false; }
     }
+    /** The song's key (root 0-11, scale 1 major / 2 minor) so "follow the song" pitch correction knows the notes. */
+    setSongKey(root, scale) { this.songKey = { root, scale }; for (const ch of this.channels) if (ch.s.pitchRoot < 0) ch.apply(); }
     /** Route the drum kit's output through the mixer master/limiter. */
     attachDrums(kit) {
       try { kit.comp.disconnect(); } catch {}

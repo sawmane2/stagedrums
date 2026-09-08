@@ -395,8 +395,11 @@ real-time pitch shifter, and garbage collection from allocating in a hot path.
 > design change from the text below: instead of shifting stems independently, the worker does a *guided*
 > pass — the WSOLA offsets are recorded on the sum of all stems and replayed for each one (a ~6-line
 > modification to the vendored SoundTouch), which keeps the stems sample-aligned; measured, an
-> unguided per-stem shift drifted kick against bass by up to ~7 ms. Still open: §1b FLAC encoding, recorded
-> cue words (§7 option b), and everything in §12.
+> unguided per-stem shift drifted kick against bass by up to ~7 ms. 
+> **v0.24.0:** §1b (FLAC default in the pipeline), §9 (cache budget + health line), and all of §12 except
+> recorded cue words are built: live pitch correction (`pitch-worklet.js`, YIN + TD-PSOLA, in the mixer
+> strip), drum punch (`punch-worklet.js`), reverb IR kinds + `local/ir/`, song search, drag ordering.
+> Still open: recorded cue words (§7 option b).
 
 Each step is releasable on its own and testable before the next.
 

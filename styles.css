@@ -199,3 +199,10 @@ button.live.armed { background: var(--green); color: #000; border-color: var(--g
 
 .taprow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 4px 0; font-size: .85rem; }
 #btnTap:active { background: var(--accent); color: #111; }
+
+.search { width: 100%; box-sizing: border-box; margin: 4px 0 6px; padding: 6px 8px; font: inherit; font-size: .85rem; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+.songlist li.dragging { opacity: .5; }
+.songlist li.over { border-top: 2px solid var(--accent); }
+
+.health { display: block; margin-top: 4px; font-family: ui-monospace, Menlo, monospace; font-size: .75rem; }
+.health.bad { color: var(--danger); }

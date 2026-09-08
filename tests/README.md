@@ -22,6 +22,9 @@ node test-all.js                      # play every song, print bar/section/chord
 | `test-key.js` | chord transposition; key change renders all stems, keeps duration and bar times, chart shows the new chords, back to original restores |
 | `test-tempo.js` | tap tempo: ratio applied, stem length and bar times scale by the same ratio, drum hits still sit on bar lines, reset restores |
 | `test-guided-shift.js` | two stems shifted together keep a constant relative lag (the guided WSOLA modification works) |
+| `test-pitchfix.js` | pitch correction offline: a 224 Hz "voice" with vibrato lands on 220 Hz in chromatic and in-key modes, timbre (spectral centroid) preserved, render cost measured |
+| `test-mixer-pitch.js` | worklet loads in the live mixer, song key reaches the strip, enabling un-bypasses |
+| `test-misc.js` | health line, song search, drag reorder, punch preset, reverb kinds incl. hall |
 | `test-cue.js` | follower click independent of drums; follower moves the host's backing level, effects and song |
 
 Each script hardcodes `http://localhost:8099` and the Chromium path

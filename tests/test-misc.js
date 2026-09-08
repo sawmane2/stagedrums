@@ -1,0 +1,26 @@
+const { chromium } = require('playwright');
+(async () => {
+  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--autoplay-policy=no-user-gesture-required'] });
+  const p = await b.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
+  await p.goto('http://localhost:8099/?t=' + Date.now()); await p.waitForTimeout(800);
+  await p.evaluate(() => localStorage.clear()); await p.reload(); await p.waitForTimeout(2500);
+  console.log('health:', await p.evaluate(() => document.getElementById('health').textContent), '| punch worklet', await p.evaluate(() => window.StageDrums.FX.punchOk));
+  await p.fill('#songSearch', 'cream'); await p.waitForTimeout(200);
+  console.log('search "cream":', await p.evaluate(() => [...document.querySelectorAll('#songList li div:first-child')].map(d => d.textContent)));
+  await p.fill('#songSearch', ''); await p.waitForTimeout(200);
+  const order = await p.evaluate(() => { const lis = [...document.querySelectorAll('#songList li')]; const dt = new DataTransfer(); lis[2].dispatchEvent(new DragEvent('dragstart', { dataTransfer: dt, bubbles: true })); lis[0].dispatchEvent(new DragEvent('drop', { dataTransfer: dt, bubbles: true })); return [...document.querySelectorAll('#songList li div:first-child')].slice(0, 3).map(d => d.textContent); });
+  console.log('after drag 3→1:', order);
+  await p.evaluate(() => { const li = [...document.querySelectorAll('#songList li')].find(l => /Outside/.test(l.textContent)); li.click(); });
+  await p.waitForFunction(() => window.stagedrums.transport.audio, null, { timeout: 120000 });
+  await p.evaluate(() => { [...document.querySelectorAll('#stemMix .stem')].find(r => /Drums/.test(r.textContent)).querySelector('.fxbtn').click(); });
+  await p.waitForTimeout(200); await p.selectOption('#fxPreset', 'punch-kit'); await p.waitForTimeout(300);
+  console.log('drums chain:', await p.evaluate(() => window.stagedrums.transport.audio.fx.drums && window.stagedrums.transport.audio.fx.drums.shape));
+  await p.selectOption('#fxAdd', 'verb'); await p.waitForTimeout(300);
+  console.log('reverb kinds offered:', await p.evaluate(() => [...document.querySelectorAll('#fxChain select')].map(s => [...s.options].map(o => o.value).join('/'))));
+  await p.evaluate(() => { const sel = document.querySelector('#fxChain .fxeff:nth-child(2) select'); sel.value = 'hall'; sel.dispatchEvent(new Event('change')); });
+  await p.waitForTimeout(400);
+  console.log('after picking hall:', await p.evaluate(() => JSON.stringify(window.stagedrums.song.audio.fx.drums.chain[1])));
+  console.log('health:', await p.evaluate(() => document.getElementById('health').textContent));
+  console.log('errors:', errs.length ? errs : 'none');
+  await b.close();
+})().catch(e => { console.error('TEST FAILED', e); process.exit(1); });

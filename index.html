@@ -46,6 +46,7 @@
       <h2>Songs</h2>
       <button id="btnNewSong" class="small">+ Import</button>
     </div>
+    <input id="songSearch" class="search" placeholder="Search songs… (drag to set the running order)">
     <ul id="songList" class="songlist"></ul>
     <div class="sidebar-foot">
       <button id="btnView" class="small">View: Sheet</button>
@@ -78,6 +79,7 @@
       <input type="file" id="audioFile" accept=".mp3,.wav,.m4a,.ogg,.flac,audio/*" hidden>
       <input type="file" id="stemFiles" accept=".mp3,.wav,.m4a,.ogg,.flac,audio/*" multiple hidden>
       <span id="audioStatus" class="hint">No recording for this song — using synth drums + band.</span>
+      <span id="health" class="hint health" title="Audio engine health: sample rate · decoded stems in memory · output latency · dropouts (audio clock falling behind the wall clock) in the last minute"></span>
     </div>
     <h3>Drum kit</h3>
     <select id="kitSelect" title="Drum sound"></select>

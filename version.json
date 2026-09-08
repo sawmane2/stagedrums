@@ -1,5 +1,5 @@
 {
-  "version": "0.23.0",
+  "version": "0.24.0",
   "date": "2026-09-08",
-  "notes": "Live key change: every stem re-rendered offline through one guided pass so the band stays sample-aligned, chart transposes with it. Tap tempo (experimental) with rescaled bar lines and one-click reset."
+  "notes": "Real-time vocal pitch correction on the mic (formant-preserving, natural retune), drum punch transient shaper, room/plate/hall/spring reverbs plus your own IR files, FLAC stems, memory cap and engine-health line, song search and drag-to-order setlist. New song: I Loved Another Woman."
 }

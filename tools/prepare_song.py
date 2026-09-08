@@ -11,10 +11,11 @@ Pipeline (all local, all free):
   4. GRID       beat-track the drum stem for bar times, and score every bar for "the drummer filled here".
   5. ENCODE     write MP3s into the app's local/audio/<song-id>/ and update the song JSON.
 
-usage: prepare_song.py <song-json> <work-dir> [--bars auto|keep] [--bpm N]
+usage: prepare_song.py <song-json> <work-dir> [name] [--format flac|mp3-320|mp3-160]
+       --format flac (default) is lossless — the stems are the quality floor, not the effects.
        work-dir holds  ens/htdemucs_ft/<n>/  ens/hdemucs_mmi/<n>/  out/htdemucs_6s/<n>/  (from demucs)
 """
-import sys, os, json, subprocess, glob, numpy as np, soundfile as sf
+import sys, os, re, json, subprocess, glob, numpy as np, soundfile as sf
 
 ROOT = '/home/claude/drum-daw'
 DRUMSEP = {'bombo': 'kick', 'redoblante': 'snare', 'toms': 'toms', 'platillos': 'cymbals'}
@@ -43,13 +44,23 @@ def ensemble(work, name, out):
 def run(cmd):
     print('  $', ' '.join(cmd)); subprocess.run(cmd, check=True)
 
-def encode(src, dst, kbps='160k'):
+FORMAT = 'flac'
+def encode(src, dst):
     os.makedirs(os.path.dirname(dst), exist_ok=True)
-    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-codec:a', 'libmp3lame', '-b:a', kbps, dst], check=True)
+    if FORMAT == 'flac':
+        dst = re.sub(r'\.mp3$', '.flac', dst)
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-codec:a', 'flac', '-compression_level', '5', dst], check=True)
+    else:
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-codec:a', 'libmp3lame', '-b:a', FORMAT.split('-')[1] + 'k', dst], check=True)
+    return os.path.basename(dst)
 
 def main():
-    song_path, work = sys.argv[1], sys.argv[2].rstrip('/')
-    name = sys.argv[3] if len(sys.argv) > 3 else os.path.basename(work)
+    global FORMAT
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    for a in sys.argv[1:]:
+        if a.startswith('--format='): FORMAT = a.split('=', 1)[1]
+    song_path, work = args[0], args[1].rstrip('/')
+    name = args[2] if len(args) > 2 else os.path.basename(work)
     song = json.load(open(song_path))
     sid = song['id']
     print(f"== {song['title']} ({sid})")
@@ -77,18 +88,20 @@ def main():
         print(f'  {p}: {db:.1f} dB')
 
     base = f'local/audio/{sid}/'
-    for p, f in stems.items(): encode(f, f'{ROOT}/{base}{p}.mp3')
+    files = {}
+    for p, f in stems.items(): files[p] = base + encode(f, f'{ROOT}/{base}{p}.mp3')
     kit = {}
     for esp, en in DRUMSEP.items():
         f = f'{work}/ds/drumsep/drums/{esp}.wav'
-        if os.path.exists(f): encode(f, f'{ROOT}/{base}kit/{en}.mp3'); kit[en] = base + 'kit/' + en + '.mp3'
+        if os.path.exists(f): kit[en] = base + 'kit/' + encode(f, f'{ROOT}/{base}kit/{en}.mp3')
 
     a = song.get('audio', {}) or {}
-    a['stems'] = {p: base + p + '.mp3' for p in stems}
+    a['stems'] = files
     if kit: a['kit'] = kit
     mix = a.get('mix', {}) or {}
     for p in stems: mix.setdefault(p, 0 if p == 'vocals' else 1)
     a['mix'] = {p: mix[p] for p in stems}
+    a['format'] = FORMAT
     a['note'] = ("Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the "
                  "6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. "
                  "local/audio/ is not in git.")

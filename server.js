@@ -25,7 +25,7 @@ if (process.argv.includes('--update')) {
 }
 const ROOT = __dirname;
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
-  '.svg': 'image/svg+xml', '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.png': 'image/png', '.webmanifest': 'application/manifest+json' };
+  '.svg': 'image/svg+xml', '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.flac': 'audio/flac', '.m4a': 'audio/mp4', '.png': 'image/png', '.webmanifest': 'application/manifest+json' };
 
 function isLocal(req) { const a = req.socket.remoteAddress || ''; return /^(::1|127\.0\.0\.1|::ffff:127\.0\.0\.1)$/.test(a); }
 function json(res, code, obj) { res.writeHead(code, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(obj)); }
@@ -56,6 +56,7 @@ async function api(req, res, p) {
     walk(dir, 'local/audio/');
     return json(res, 200, { files, canUpload: isLocal(req) });
   }
+  if (p === '/api/ir') { const dir = path.join(ROOT, 'local', 'ir'); const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => /\.(wav|flac|mp3|aif|aiff)$/i.test(f)).map(f => 'local/ir/' + f) : []; return json(res, 200, { files }); }
   const m = p.match(/^\/api\/audio\/((?:[\w-]+\/)?[\w.-]+\.(mp3|wav|m4a|ogg|flac))$/i); // <songId>.mp3 or <songId>/<stem>.mp3
   if (m && req.method === 'POST') {
     if (!isLocal(req)) return json(res, 403, { error: 'Audio files can only be added from the computer running the server.' });

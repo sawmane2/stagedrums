@@ -1,0 +1,302 @@
+{
+ "id": "fleetwood-mac-i-loved-another-woman",
+ "title": "I Loved Another Woman",
+ "artist": "Fleetwood Mac",
+ "bpm": 117,
+ "time": "4/4",
+ "groove": "half-time",
+ "feel": "loose",
+ "swing": 0.1,
+ "rev": 4,
+ "band": {
+  "bass": "roots",
+  "keys": "off",
+  "gtr": "off"
+ },
+ "sections": [
+  {
+   "name": "Intro",
+   "groove": "half-time",
+   "bars": [
+    "Dm7",
+    "Gm7",
+    "Dm7",
+    "A7",
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Gm7",
+    "Dm7",
+    "A7",
+    "Dm7",
+    "Dm7"
+   ],
+   "crash": false
+  },
+  {
+   "name": "Verse 1",
+   "groove": "half-time",
+   "bars": [
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Gm7",
+    "Gm7",
+    "Dm7",
+    "Dm7",
+    "A7",
+    "A7",
+    "Dm7",
+    "Dm7"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Verse 2",
+   "groove": "half-time",
+   "bars": [
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Gm7",
+    "Gm7",
+    "Dm7",
+    "Dm7",
+    "A7",
+    "A7",
+    "Dm7",
+    "Dm7"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Interlude",
+   "groove": "half-time",
+   "bars": [
+    "Dm7",
+    "Gm7",
+    "Dm7",
+    "A7",
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Gm7",
+    "Dm7",
+    "A7",
+    "Dm7",
+    "Dm7"
+   ]
+  },
+  {
+   "name": "Solo",
+   "groove": "rock-heavy",
+   "bars": [
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Gm7",
+    "Gm7",
+    "Dm7",
+    "Dm7",
+    "A7",
+    "A7",
+    "Dm7",
+    "Dm7"
+   ],
+   "crash": true,
+   "fill": true
+  },
+  {
+   "name": "Verse 3",
+   "groove": "half-time",
+   "bars": [
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Gm7",
+    "Gm7",
+    "Dm7",
+    "Dm7",
+    "A7",
+    "A7",
+    "Dm7",
+    "Dm7"
+   ],
+   "fill": true,
+   "sheetBars": [
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Outro",
+   "groove": "half-time",
+   "bars": [
+    "Dm7",
+    "Gm7",
+    "Dm7",
+    "A7",
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Gm7",
+    "Dm7",
+    "A7",
+    "Dm7",
+    "Dm7"
+   ],
+   "fill": true
+  },
+  {
+   "name": "Fade out",
+   "groove": "half-time",
+   "bars": [
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Dm7"
+   ]
+  }
+ ],
+ "audio": {
+  "mix": {
+   "drums": 1,
+   "bass": 1,
+   "guitar": 1,
+   "vocals": 0
+  },
+  "fade": {
+   "out": 8
+  },
+  "barTimes": [
+   0.093,
+   2.235,
+   4.209,
+   6.177,
+   8.127,
+   10.083,
+   12.051,
+   14.019,
+   15.987,
+   17.961,
+   19.934,
+   21.902,
+   23.882,
+   25.884,
+   27.852,
+   29.838,
+   31.806,
+   33.808,
+   35.788,
+   37.773,
+   39.758,
+   41.749,
+   43.723,
+   45.697,
+   47.653,
+   49.691,
+   51.659,
+   53.638,
+   55.583,
+   57.58,
+   59.553,
+   61.533,
+   63.501,
+   65.469,
+   67.437,
+   69.462,
+   71.436,
+   73.509,
+   75.5,
+   77.502,
+   79.488,
+   81.479,
+   83.453,
+   85.444,
+   87.435,
+   89.426,
+   91.434,
+   93.42,
+   95.428,
+   97.489,
+   99.498,
+   101.471,
+   103.48,
+   105.424,
+   107.404,
+   109.378,
+   111.351,
+   113.354,
+   115.334,
+   117.325,
+   119.333,
+   121.284,
+   123.275,
+   125.272,
+   127.234,
+   129.202,
+   131.17,
+   133.155,
+   135.123,
+   137.125,
+   139.111,
+   141.108,
+   143.076,
+   145.101,
+   147.098,
+   149.09,
+   151.052,
+   153.02,
+   154.993,
+   156.99,
+   158.97,
+   160.967,
+   162.94,
+   164.908,
+   166.87,
+   168.914,
+   170.905,
+   172.907,
+   174.916
+  ],
+  "fills": [
+   3,
+   8,
+   11,
+   15,
+   28,
+   30,
+   37,
+   41
+  ],
+  "stems": {
+   "drums": "local/audio/fleetwood-mac-i-loved-another-woman/drums.flac",
+   "bass": "local/audio/fleetwood-mac-i-loved-another-woman/bass.flac",
+   "guitar": "local/audio/fleetwood-mac-i-loved-another-woman/guitar.flac",
+   "vocals": "local/audio/fleetwood-mac-i-loved-another-woman/vocals.flac"
+  },
+  "kit": {
+   "kick": "local/audio/fleetwood-mac-i-loved-another-woman/kit/kick.flac",
+   "snare": "local/audio/fleetwood-mac-i-loved-another-woman/kit/snare.flac",
+   "toms": "local/audio/fleetwood-mac-i-loved-another-woman/kit/toms.flac",
+   "cymbals": "local/audio/fleetwood-mac-i-loved-another-woman/kit/cymbals.flac"
+  },
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git.",
+  "format": "flac"
+ }
+}

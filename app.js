@@ -56,14 +56,23 @@
   const disp = name => keySemis() ? SD.transposeLine(name, keySemis()) : name;
   function renderSongList() {
     const ul = $('songList'); ul.innerHTML = '';
-    for (const s of songs) {
-      const li = document.createElement('li');
-      li.innerHTML = `<div>${esc(s.title)}</div><div class="artist">${esc(s.artist || '')} · ${s.bpm} bpm · ${s.time || '4/4'}</div>`;
+    const q = ($('songSearch').value || '').trim().toLowerCase();
+    songs.forEach((s, idx) => {
+      if (q && !(`${s.title} ${s.artist || ''} ${(s.tags || []).join(' ')}`.toLowerCase().includes(q))) return;
+      const li = document.createElement('li'); li.draggable = !q;
+      li.innerHTML = `<div>${esc(s.title)}</div><div class="artist">${esc(s.artist || '')} · ${s.bpm} bpm · ${s.time || '4/4'}${s.audio && (s.audio.stems || s.audio.file) ? ' · ♪' : ''}</div>`;
       li.className = song && s.id === song.id ? 'active' : '';
       li.onclick = () => { if (role === 'follower') return; transport.stop(); selectSong(s); broadcastSong(); };
+      // drag to set the running order (the pedal's "next song" follows this order)
+      li.ondragstart = e => { e.dataTransfer.setData('text/plain', String(idx)); li.classList.add('dragging'); };
+      li.ondragend = () => li.classList.remove('dragging');
+      li.ondragover = e => { e.preventDefault(); li.classList.add('over'); };
+      li.ondragleave = () => li.classList.remove('over');
+      li.ondrop = e => { e.preventDefault(); li.classList.remove('over'); const from = +e.dataTransfer.getData('text/plain'); if (isNaN(from) || from === idx) return; const [m] = songs.splice(from, 1); songs.splice(idx, 0, m); persistSongs(); renderSongList(); };
       ul.appendChild(li);
-    }
+    });
   }
+  $('songSearch').oninput = () => renderSongList();
   function selectSong(s) {
     if (!s) { song = null; tl = null; $('chart').innerHTML = '<p class="hint" style="padding:20px">Import a song to get started.</p>'; return; }
     song = s; transport.setSong(s); tl = transport.tl;
@@ -71,7 +80,17 @@
     $('bpm').value = transport.bpm;
     renderSongList(); renderChart(); renderBeats(); renderPads(); syncBandUI();
     updateNow(0, true);
-    applyBacking();
+    applyBacking(); pushSongKey();
+  }
+  /** Tell the live mixer what key we're in so "follow song" pitch correction tunes to the right notes. */
+  function pushSongKey() {
+    if (!song || !mixer || !mixer.setSongKey) return;
+    const first = song.sections.map(sc => (sc.bars || []).find(b => /^[A-G]/.test(String(b).trim()))).find(Boolean) || 'C';
+    const tok = String(first).trim().split(/\s+/)[0];
+    const m = tok.match(/^([A-G](?:#|b)?)(m(?!aj)|min|dim)?/);
+    if (!m) return;
+    const root = ({ C: 0, 'C#': 1, Db: 1, D: 2, 'D#': 3, Eb: 3, E: 4, F: 5, 'F#': 6, Gb: 6, G: 7, 'G#': 8, Ab: 8, A: 9, 'A#': 10, Bb: 10, B: 11 })[m[1]] ?? 0;
+    mixer.setSongKey((((root + keySemis()) % 12) + 12) % 12, m[2] ? 2 : 1);
   }
 
   // ---------- chart ----------
@@ -619,7 +638,17 @@
   for (const [id, k] of [['volBass', 'bass'], ['volKeys', 'keys'], ['volGtr', 'gtr']]) { const el = $(id); if (prefs[id] != null) el.value = prefs[id]; band.setLevel(k, +el.value); el.oninput = () => { band.setLevel(k, +el.value); prefs[id] = +el.value; savePrefs(); }; }
 
   // ---------- backing track: a real recording (e.g. the record with the vocals removed) instead of synth drums + band ----------
+  // decoded stems, capped: a stereo minute at 44.1 kHz is ~21 MB, so a 5-minute 9-stem song is ~1 GB; keep ~1.2 GB max
   const audioCache = {}; let audioLoadToken = 0;
+  const CACHE_BUDGET = 1.2e9;
+  function cachePut(url, buf) { audioCache[url] = buf; cacheTrim(); }
+  function cacheTrim(keep = []) {
+    const size = b => b.length * b.numberOfChannels * 4;
+    let total = Object.values(audioCache).reduce((s, b) => s + size(b), 0);
+    if (total <= CACHE_BUDGET) return;
+    const cur = song && song.audio ? Object.values(audioFiles(song.audio)) : [];
+    for (const url of Object.keys(audioCache)) { if (cur.includes(url) || keep.includes(url)) continue; total -= size(audioCache[url]); delete audioCache[url]; if (total <= CACHE_BUDGET) break; }
+  }
   const shifter = new SD.Shifter(); let shiftCache = null; // one alternate key/tempo render at a time
   const STEM_LABELS = { drums: 'Drums', bass: 'Bass', other: 'Other', guitar: 'Guitar', rhythm: 'Rhythm guitar', lead: 'Lead guitar', acoustic: 'Acoustic guitar',
     piano: 'Piano', keys: 'Keys', organ: 'Organ', vocals: 'Vocals', backing: 'Backing vocals', mix: 'Recording',
@@ -749,7 +778,7 @@
       const stems = {};
       await Promise.all(Object.entries(files).map(async ([k, url]) => {
         let buf = audioCache[url];
-        if (!buf) { try { const r = await fetch(url); if (!r.ok) throw new Error('missing'); buf = await ctx.decodeAudioData(await r.arrayBuffer()); audioCache[url] = buf; } catch { missing.push(url.split('/').pop()); return; } }
+        if (!buf) { try { const r = await fetch(url); if (!r.ok) throw new Error('missing'); buf = await ctx.decodeAudioData(await r.arrayBuffer()); cachePut(url, buf); } catch { missing.push(url.split('/').pop()); return; } }
         stems[k] = buf;
       }));
       if (token !== audioLoadToken) return;
@@ -804,7 +833,7 @@
       const keep = song.audio && song.audio.barTimes && song.audio.file === file; // re-loading the same file keeps hand-fitted bar times
       song.audio = Object.assign({}, song.audio || {}, { file, offset: keep ? song.audio.offset : firstOnset(buf) });
       delete song.audio.stems; if (!keep) delete song.audio.barTimes;
-      audioCache[file] = buf;
+      cachePut(file, buf);
       const saved = await saveAudio(file, bytes);
       persistSongs(); broadcastSong(); prefs.backing = 'audio'; savePrefs();
       await applyBacking();
@@ -822,7 +851,7 @@
       for (const f of list) {
         const ext = (f.name.match(/\.(\w+)$/) || [, 'mp3'])[1].toLowerCase(), k = stemNameFor(f.name), file = dir + k + '.' + ext;
         const bytes = await f.arrayBuffer(); const buf = await ctx.decodeAudioData(bytes.slice(0));
-        audioCache[file] = buf; a.stems[k] = file; if (!longest || buf.duration > longest.duration) longest = buf;
+        cachePut(file, buf); a.stems[k] = file; if (!longest || buf.duration > longest.duration) longest = buf;
         if (!await saveAudio(file, bytes)) unsaved++;
       }
       if (!a.barTimes && longest) a.offset = firstOnset(longest);
@@ -861,7 +890,7 @@
   function setKey(n) {
     song.audio.key = n ? { semitones: n } : undefined; if (!n) delete song.audio.key;
     persistSongs(); broadcastSong(); transport.stop(true); setPlayUI();
-    renderChart(); updateNow(transport._pausedPos || 0, true); applyBacking();
+    renderChart(); updateNow(transport._pausedPos || 0, true); applyBacking(); pushSongKey();
   }
   // ---------- tap tempo (experimental): same engine, time instead of pitch; bar times scale with it ----------
   const tap = { times: [] };
@@ -890,6 +919,26 @@
     if (Math.abs(r - 1) < 1e-4) delete song.audio.tempo; else song.audio.tempo = { ratio: +r.toFixed(4) };
     persistSongs(); broadcastSong(); transport.stop(true); setPlayUI(); applyBacking();
   }
+
+  SD.FX.init(ctx);
+  // user impulse responses: drop .wav files in local/ir/ and they appear in the reverb's list
+  (async () => { try { const r = await (await fetch('/api/ir', { cache: 'no-store' })).json(); for (const f of r.files || []) { const name = f.split('/').pop().replace(/\.\w+$/, ''); await SD.FX.loadIR(ctx, f, name); } } catch {} })();
+  // ---------- engine health: dropouts, memory, latency (the numbers that matter on a fanless laptop) ----------
+  const health = { drops: [], lastA: 0, lastW: 0 };
+  setInterval(() => {
+    const a = ctx.currentTime, w = performance.now() / 1000;
+    if (health.lastW && ctx.state === 'running') {
+      const dA = a - health.lastA, dW = w - health.lastW;
+      if (dW > 0.5 && dA < dW - 0.03) health.drops.push(w); // the audio clock fell behind: an underrun / stall
+    }
+    health.lastA = a; health.lastW = w;
+    health.drops = health.drops.filter(t => w - t < 60);
+    const mb = Object.values(audioCache).reduce((s, b) => s + b.length * b.numberOfChannels * 4, 0) / 1e6 + (shiftCache ? Object.values(shiftCache.stems).reduce((s, b) => s + b.length * b.numberOfChannels * 4, 0) / 1e6 : 0);
+    const lat = (ctx.outputLatency || ctx.baseLatency || 0) * 1000;
+    const el = $('health');
+    el.textContent = `${(ctx.sampleRate / 1000).toFixed(1)} kHz · ${mb >= 1000 ? (mb / 1000).toFixed(2) + ' GB' : Math.round(mb) + ' MB'} stems in memory · out ${lat.toFixed(0)} ms · ${health.drops.length} dropout${health.drops.length === 1 ? '' : 's'}/min${ctx.sampleRate !== 44100 ? ' · not 44.1k!' : ''}`;
+    el.classList.toggle('bad', health.drops.length > 0 || ctx.sampleRate !== 44100);
+  }, 1000);
 
   // ---------- stem effects (effects.js) ----------
   function applyAllFx() {
@@ -922,6 +971,11 @@
       const div = document.createElement('div'); div.className = 'fxeff';
       div.innerHTML = `<div class="fxtitle"><span>${i + 1}. ${esc(T.label)}</span><span><button type="button" class="small" data-up title="Move earlier">▲</button> <button type="button" class="small" data-down title="Move later">▼</button> <button type="button" class="small danger" data-del>remove</button></span></div><div class="fxparams"></div>`;
       const params = div.querySelector('.fxparams');
+      for (const [key, opts] of Object.entries(T.choices || {})) {
+        const l = document.createElement('label'); l.innerHTML = `<span>${esc(key)}</span><select>${Object.entries(Object.assign({}, opts, Object.fromEntries(Object.keys(SD.FX.userIRs).map(n => [n, n + ' (file)'])))).map(([v, lab]) => `<option value="${esc(v)}" ${(e[key] ?? T.defaults[key]) === v ? 'selected' : ''}>${esc(lab)}</option>`).join('')}</select>`;
+        l.querySelector('select').onchange = ev => { const sp = fxSpec(); sp.chain[i][key] = ev.target.value; setFx(fxStem, sp); };
+        params.appendChild(l);
+      }
       for (const [key, [min, max, label]] of Object.entries(T.params)) {
         const v = e[key] ?? T.defaults[key]; const step = (max - min) > 50 ? 1 : (max - min) > 5 ? 0.1 : 0.001;
         const l = document.createElement('label'); l.innerHTML = `<span>${esc(label)}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${v}"><b>${fmt(v)}</b>`;
