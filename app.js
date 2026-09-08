@@ -35,13 +35,21 @@
       for (const sh of shipped) {
         const i = songs.findIndex(s => s.id === sh.id);
         if (i < 0) { songs.push(sh); continue; }
-        if ((sh.rev || 0) > (songs[i].rev || 0)) {
-          const old = songs[i]; const merged = JSON.parse(JSON.stringify(sh));
+        const old = songs[i];
+        if ((sh.rev || 0) > (old.rev || 0)) {
+          const merged = JSON.parse(JSON.stringify(sh));
           merged.sections.forEach((sec, k) => { const o = old.sections.find(x => x.name === sec.name) || old.sections[k];
             if (o) { if (o.sheet && !sec.sheet) sec.sheet = o.sheet; if (o.lyrics && !sec.lyrics) sec.lyrics = o.lyrics; } });
           if (old.audio && !merged.audio) merged.audio = old.audio; // keep a recording the user attached
           else if (old.audio && merged.audio) for (const k of ['fx', 'key', 'fade', 'mix', 'mute', 'splitDrums']) if (old.audio[k] != null && merged.audio[k] == null) merged.audio[k] = old.audio[k];
           songs[i] = merged;
+        } else {
+          // words are a pure addition: take a shipped sheet even at the same revision, so lyrics added
+          // to a song you already have on this device still reach it. Never overwrite words you typed.
+          sh.sections.forEach((sec, k) => { const o = old.sections.find(x => x.name === sec.name) || old.sections[k];
+            if (!o || !sec.sheet || o.sheet) return;
+            o.sheet = sec.sheet; if (sec.lyrics) o.lyrics = sec.lyrics; if (sec.sheetBars) o.sheetBars = sec.sheetBars;
+          });
         }
       }
     } else songs = shipped;
@@ -181,11 +189,17 @@
       if (top < ch.scrollTop + 60 || top > ch.scrollTop + ch.clientHeight - 140) ch.scrollTo({ top: top - ch.clientHeight * 0.35, behavior: 'smooth' });
     }
   }
-  $('btnView').onclick = () => { prefs.view = viewMode() === 'sheet' ? 'grid' : 'sheet'; savePrefs(); renderChart(); updateNow(transport.currentBar(), true); };
+  // the same toggle sits in the header, because on the iPad the sidebar is closed while you play
+  const toggleView = () => { prefs.view = viewMode() === 'sheet' ? 'grid' : 'sheet'; savePrefs(); renderChart(); updateNow(transport.currentBar(), true); };
+  $('btnView').onclick = toggleView; $('btnViewTop').onclick = toggleView;
 
   function renderChart() {
     const chart = $('chart'); chart.innerHTML = '';
-    $('btnView').textContent = viewMode() === 'sheet' ? 'View: Sheet' : 'View: Grid'; $('btnView').hidden = !hasSheet();
+    const sheetOn = viewMode() === 'sheet';
+    $('btnView').textContent = sheetOn ? 'View: Sheet' : 'View: Grid'; $('btnView').hidden = !hasSheet();
+    $('btnViewTop').textContent = sheetOn ? '▦ Chords' : '📄 Words';
+    $('btnViewTop').title = sheetOn ? 'Show the chord grid' : 'Show the words';
+    $('btnViewTop').hidden = !hasSheet();
     tl.sections.forEach(sec => {
       const secDef = song.sections[sec.index];
       const div = document.createElement('div'); div.className = 'section'; div.dataset.section = sec.index;

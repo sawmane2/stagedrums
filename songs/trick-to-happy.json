@@ -6,7 +6,7 @@
  "time": "4/4",
  "groove": "half-time",
  "feel": "loose",
- "rev": 1,
+ "rev": 3,
  "band": {
   "bass": "roots",
   "keys": "off",
@@ -227,5 +227,29 @@
    ],
    "fill": true
   }
- ]
+ ],
+ "audio": {
+  "stems": {
+   "drums": "local/audio/bahamas-trick-to-happy/drums.mp3",
+   "bass": "local/audio/bahamas-trick-to-happy/bass.mp3",
+   "guitar": "local/audio/bahamas-trick-to-happy/guitar.mp3",
+   "other": "local/audio/bahamas-trick-to-happy/other.mp3",
+   "vocals": "local/audio/bahamas-trick-to-happy/vocals.mp3"
+  },
+  "kit": {
+   "kick": "local/audio/bahamas-trick-to-happy/kit/kick.mp3",
+   "snare": "local/audio/bahamas-trick-to-happy/kit/snare.mp3",
+   "toms": "local/audio/bahamas-trick-to-happy/kit/toms.mp3",
+   "cymbals": "local/audio/bahamas-trick-to-happy/kit/cymbals.mp3"
+  },
+  "mix": {
+   "drums": 1,
+   "bass": 1,
+   "guitar": 1,
+   "other": 1,
+   "vocals": 0
+  },
+  "format": "vbr",
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+ }
 }

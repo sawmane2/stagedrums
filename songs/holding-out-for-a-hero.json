@@ -6,7 +6,7 @@
  "time": "4/4",
  "groove": "four-floor",
  "feel": "push",
- "rev": 1,
+ "rev": 3,
  "band": {
   "bass": "eighths",
   "keys": "pad",
@@ -237,5 +237,31 @@
    ],
    "fill": true
   }
- ]
+ ],
+ "audio": {
+  "stems": {
+   "drums": "local/audio/bonnie-tyler-holding-out-for-a-hero/drums.mp3",
+   "bass": "local/audio/bonnie-tyler-holding-out-for-a-hero/bass.mp3",
+   "guitar": "local/audio/bonnie-tyler-holding-out-for-a-hero/guitar.mp3",
+   "piano": "local/audio/bonnie-tyler-holding-out-for-a-hero/piano.mp3",
+   "other": "local/audio/bonnie-tyler-holding-out-for-a-hero/other.mp3",
+   "vocals": "local/audio/bonnie-tyler-holding-out-for-a-hero/vocals.mp3"
+  },
+  "kit": {
+   "kick": "local/audio/bonnie-tyler-holding-out-for-a-hero/kit/kick.mp3",
+   "snare": "local/audio/bonnie-tyler-holding-out-for-a-hero/kit/snare.mp3",
+   "toms": "local/audio/bonnie-tyler-holding-out-for-a-hero/kit/toms.mp3",
+   "cymbals": "local/audio/bonnie-tyler-holding-out-for-a-hero/kit/cymbals.mp3"
+  },
+  "mix": {
+   "drums": 1,
+   "bass": 1,
+   "guitar": 1,
+   "piano": 1,
+   "other": 1,
+   "vocals": 0
+  },
+  "format": "vbr",
+  "note": "Demucs ensemble (htdemucs_ft + hdemucs_mmi, time-shift averaged); guitar/piano split from the 6-source model's ratios; kit parts from DrumSep. barTimes and fills measured from the drum stem. local/audio/ is not in git."
+ }
 }

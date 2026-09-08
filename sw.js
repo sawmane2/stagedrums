@@ -1,4 +1,4 @@
-const CACHE = 'stagedrums-v17';
+const CACHE = 'stagedrums-v18';
 const ASSETS = ['./', './index.html', './styles.css', './app.js', './drums.js', './parser.js', './sync.js', './midi.js', './instruments.js', './mixer.js', './mixer-ui.js', './gate-worklet.js', './pitch-worklet.js', './punch-worklet.js', './effects.js', './pitch.js', './keyshift-worker.js', './vendor/soundtouch.js', './manifest.json', './icon.svg', './songs/index.json', './version.json', './kits/index.json'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(async c => {
